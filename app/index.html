@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Analog4All Client</title>
+        <style>
+
+            button {
+                float: right;
+            }
+
+            registry {
+                display: block;
+                overflow: auto;
+            }
+
+            registry > button {
+                margin: 7px 0 0 7px;
+            }
+
+            registry > h2 {
+                margin: 0;
+            }
+
+            slot {
+                display: block;
+                clear: both;
+                float: none;
+                margin: 20px 0;
+                overflow: auto;
+            }
+
+            slot > button {
+                margin: 3px 0 0 3px;
+            }
+
+            slot > div {
+                border: 2px dashed #CCC;
+                margin: 10px 0 0;
+                padding: 20px;
+                text-align: center;
+            }
+
+            slot > div.dragover {
+                background-color: #CCC;
+            }
+
+            slot > h3 {
+                margin: 0;
+            }
+
+        </style>
+    </head>
+    <body ng-app="client" ng-csp>
+        <h1>Analog4All Client</h1>
+        <hr>
+        <registry></registry>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+        <script src="scripts/recorder.js"></script>
+        <script src="scripts/bundle.js"></script>
+    </body>
+</html>
