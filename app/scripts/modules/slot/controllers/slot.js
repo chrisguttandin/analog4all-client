@@ -2,8 +2,9 @@
 
 class SlotController {
 
-    constructor (generatorsService, renderingService, $scope) {
+    constructor (channelBrokerFactoryService, generatorsService, renderingService, $scope) {
         this._channel = null;
+        this._channelBrokerFactoryService = channelBrokerFactoryService;
         this.connectionState = 'disconnected';
         this._generatorsService = generatorsService;
         this._renderingService = renderingService;
@@ -42,17 +43,20 @@ class SlotController {
     }
 
     send (file) {
-        var renderer = this._renderingService.render(file, this._channel);
-
-        renderer.on('statechange', (state) => {
-            this.renderState = state;
-
-            this._$scope.$evalAsync();
-
-            if (state === 'unknown') {
-                this.disconnect();
-            }
-        });
+        this._renderingService.render(file, this._channelBrokerFactoryService.create({
+            channel: this._channel
+        }));
+        // var renderer = this._renderingService.render(file, this._channel);
+        //
+        // renderer.on('statechange', (state) => {
+        //     this.renderState = state;
+        //
+        //     this._$scope.$evalAsync();
+        //
+        //     if (state === 'unknown') {
+        //         this.disconnect();
+        //     }
+        // });
     }
 
 }

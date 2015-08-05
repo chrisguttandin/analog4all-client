@@ -5,46 +5,43 @@ var EventEmitter = require('events').EventEmitter,
 
 class RenderingService {
 
-    constructor (receivingService) {
-        this._receivingService = receivingService;
+    constructor (fileReceivingService, fileSendingService) {
+        this._fileReceivingService = fileReceivingService;
+        this._fileSendingService = fileSendingService;
     }
 
-    render (file, channel) {
-        var fileReader = new FileReader(),
-            renderer = new EventEmitter();
+    async render (midiFile, channelBroker) {
 
-        fileReader.onload = () => {
-            channel.onmessage = (event) => {
-                try {
-                    let data = JSON.parse(event.data);
+        // renderer.emit('statechange', 'sending');
 
-                    if (data.type === 'bof') {
-                        renderer.emit('statechange', 'receiving');
-                        this._receivingService
-                            .receive(data.byteLength, channel)
-                            .then((arrayBuffer) => {
-                                var blob = new Blob([arrayBuffer]),
-                                    name = file.name.replace('.mid', '.wav');
+        try {
+            await this._fileSendingService.send(channelBroker, midiFile);
+        } catch (err) {
+            console.log('error while sending', err);
 
-                                Recorder.forceDownload(blob, name);
-                                renderer.emit('statechange', 'unknown');
-                            });
-                    }
-                } catch (err) {
-                    // shit happens
-                }
-            };
-
-            channel.send(fileReader.result);
-            renderer.emit('statechange', 'sending');
+            return;
         }
 
-        setTimeout(function () {
-            fileReader.readAsArrayBuffer(file);
-            renderer.emit('statechange', 'reading');
-        });
+        // try {
+        //     await monitoringService.monitor(channelBroker);
+        // } catch (err) {
+        //     // error while processing
+        //
+        //     return;
+        // }
 
-        return renderer;
+        // renderer.emit('statechange', 'receiving');
+
+        try {
+            let name = midiFile.name.replace('.mid', '.wav'),
+                waveFile = await this._fileReceivingService.receive(channelBroker);
+
+            Recorder.forceDownload(new Blob([waveFile]), name);
+        } catch (err) {
+            console.log('error while receiving', err);
+        }
+
+        // renderer.emit('statechange', 'unknown');
     }
 
 }
