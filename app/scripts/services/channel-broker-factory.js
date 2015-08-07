@@ -8,6 +8,8 @@ class ChannelBroker {
         this._channel = channel;
         this._errorHandlers = new Set();
         this._messageHandlers = new Set();
+        // A set can contain only unique values. The usage of an array allows the queue to contain
+        // the same message multiple times.
         this._queue = [];
 
         channel.addEventListener('error', (errorEvent) => this._callErrorHandlers(errorEvent));
