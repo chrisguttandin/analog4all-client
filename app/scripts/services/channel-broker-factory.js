@@ -81,6 +81,10 @@ class ChannelBroker {
         throw new Error();
     }
 
+    async _parseMessage (message) {
+        return (new Response(message)).json();
+    }
+
     send (message) {
         if (this._channel.readyState === 0) {
             this._queue.push(message);
@@ -102,10 +106,6 @@ class ChannelBroker {
         while (this._queue.length > 0) {
             this.send(this._queue.shift());
         }
-    }
-
-    async _parseMessage (message) {
-        return (new Response(message)).json();
     }
 
 }
