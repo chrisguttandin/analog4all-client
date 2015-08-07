@@ -6,4 +6,4 @@ var angular = require('angular'),
 module.exports = angular
     .module('generators', [])
 
-    .service('generatorsService', ['$http', GeneratorsService]);
+    .service('generatorsService', ['channelBrokerFactoryService', '$http', 'peerConnectingService', GeneratorsService]);

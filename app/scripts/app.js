@@ -9,6 +9,8 @@ var angular = require('angular'),
     fileSendingService = require('./services/file-sending.js'),
     generators = require('./modules/generators/module.js'),
     instruments = require('./modules/instruments/module.js'),
+    peerConnectingService = require('./services/peer-connecting.js'),
+    peerConnectorFactoryService = require('./services/peer-connector-factory.js'),
     registry = require('./modules/registry/module.js'),
     renderingService = require('./services/rendering.js'),
     slot = require('./modules/slot/module.js');
@@ -27,4 +29,6 @@ module.exports = angular
     .service('fileReceivingService', ['fileReceiverFactoryService', fileReceivingService])
     .service('fileSenderFactoryService', [fileSenderFactoryService])
     .service('fileSendingService', ['fileSenderFactoryService', fileSendingService])
+    .service('peerConnectingService', ['peerConnectorFactoryService', peerConnectingService])
+    .service('peerConnectorFactoryService', [peerConnectorFactoryService])
     .service('renderingService', ['fileReceivingService', 'fileSendingService', renderingService]);
