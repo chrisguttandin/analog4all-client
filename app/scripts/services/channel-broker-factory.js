@@ -8,9 +8,14 @@ class ChannelBroker {
         this._channel = channel;
         this._errorHandlers = new Set();
         this._messageHandlers = new Set();
+        this._queue = [];
 
         channel.addEventListener('error', (errorEvent) => this._callErrorHandlers(errorEvent));
         channel.addEventListener('message', (messageEvent) => this._callMessageHandlers(messageEvent));
+
+        if (channel.readyState === 0) {
+            channel.addEventListener('open', ::this._sendQueue);
+        }
     }
 
     addErrorHandler (handler) {
@@ -75,6 +80,12 @@ class ChannelBroker {
     }
 
     send (message) {
+        if (this._channel.readyState === 0) {
+            this._queue.push(message);
+
+            return;
+        }
+
         if (typeof message === 'object' &&
                 !(message instanceof ArrayBuffer) &&
                 // !(message instanceof ArrayBufferView) &&
@@ -83,6 +94,12 @@ class ChannelBroker {
         }
 
         this._channel.send(message);
+    }
+
+    _sendQueue () {
+        while (this._queue.length > 0) {
+            this.send(this._queue.shift());
+        }
     }
 
     async _parseMessage (message) {
