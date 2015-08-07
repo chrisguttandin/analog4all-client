@@ -28,7 +28,7 @@ class SlotController {
 
                 this._$scope.$evalAsync();
             })
-            .catch((err) => {
+            .catch(() => {
                 this.connectionState = 'disconnected';
 
                 this._$scope.$evalAsync();

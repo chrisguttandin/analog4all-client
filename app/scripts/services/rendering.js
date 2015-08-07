@@ -1,7 +1,6 @@
 'use strict';
 
-var EventEmitter = require('events').EventEmitter,
-    Recorder = require('recorderjs');
+var Recorder = require('recorderjs');
 
 class RenderingService {
 

@@ -9,7 +9,7 @@ module.exports = function ($http) {
         }
 
         fetch () {
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve) => {
                 this._$http
                     .get('http://analog4all-registry.elasticbeanstalk.com/instruments')
                     .success((data) => resolve(data))

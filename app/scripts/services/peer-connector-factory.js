@@ -17,7 +17,7 @@ const ICE_SERVERS = [{
 class PeerConnector extends EventEmitter {
 
     constructor (options) {
-        var peerConnection = new webkitRTCPeerConnection({
+        var peerConnection = new webkitRTCPeerConnection({ // eslint-disable-line new-cap, no-undef
                 iceServers: ICE_SERVERS
             });
 
@@ -66,7 +66,7 @@ class PeerConnector extends EventEmitter {
         if (message.type === 'candidate') {
             let candidate = new RTCIceCandidate(message.candidate);
 
-            this._peerConnection.addIceCandidate(candidate, function () {}, function (err) {
+            this._peerConnection.addIceCandidate(candidate, function () {}, function () {
                 // shit happens
             });
         } else if (message.type === 'description') {
