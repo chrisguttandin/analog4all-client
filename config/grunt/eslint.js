@@ -6,7 +6,8 @@ module.exports = {
             configFile: 'config/eslint/app.json'
         },
         src: [
-            'app/scripts/**/*.js'
+            'app/scripts/**/*.js',
+            '!app/scripts/bundle.js'
         ]
     },
     config: {
