@@ -9,8 +9,8 @@ class Generators {
     }
 
     async connect (generator) {
-        var dataChannel,
-            channelBroker,
+        var channelBroker,
+            dataChannel,
             socket;
 
         socket = new WebSocket('ws://analog4all-registry.elasticbeanstalk.com/instruments/' + generator.instrument.id + '/generators/' + generator.id);
