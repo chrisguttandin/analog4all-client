@@ -2,24 +2,28 @@
 
 var EventEmitter = require('events').EventEmitter;
 
+/* eslint-disable indent */
 const ICE_SERVERS = [{
-        url: 'stun:stun.l.google.com:19302'
-    }, {
-        url: 'stun:stun1.l.google.com:19302'
-    }, {
-        url: 'stun:stun2.l.google.com:19302'
-    }, {
-        url: 'stun:stun3.l.google.com:19302'
-    }, {
-        url: 'stun:stun4.l.google.com:19302'
-    }];
+          url: 'stun:stun.l.google.com:19302'
+      }, {
+          url: 'stun:stun1.l.google.com:19302'
+      }, {
+          url: 'stun:stun2.l.google.com:19302'
+      }, {
+          url: 'stun:stun3.l.google.com:19302'
+      }, {
+          url: 'stun:stun4.l.google.com:19302'
+      }];
+/* eslint-enable indent */
 
 class PeerConnector extends EventEmitter {
 
     constructor (options) {
+        /* eslint-disable indent */
         var peerConnection = new webkitRTCPeerConnection({ // eslint-disable-line new-cap, no-undef
                 iceServers: ICE_SERVERS
             });
+        /* eslint-enable indent */
 
         super();
 
