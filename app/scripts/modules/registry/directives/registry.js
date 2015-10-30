@@ -7,7 +7,13 @@ module.exports = function () {
         bindToController: true,
         controller: 'RegistryController',
         controllerAs: 'registry',
+        require: [
+            'instruments'
+        ],
         restrict: 'E',
+        scope: {
+            instruments: '='
+        },
         template: fs.readFileSync(__dirname + '/../views/registry.html', 'utf8')
     };
 };

@@ -3,11 +3,8 @@
 class RegistryController {
 
     constructor (instrumentsService, $scope) {
-        this.instruments = [];
         this._instrumentsService = instrumentsService;
         this._$scope = $scope;
-
-        this.refresh();
     }
 
     refresh () {
