@@ -6,4 +6,4 @@ var angular = require('angular'),
 module.exports = angular
     .module('instruments', [])
 
-    .service('instrumentsService', ['$http', instrumentsService]);
+    .service('instrumentsService', ['$http', '$sce', instrumentsService]);

@@ -1,6 +1,6 @@
 <button ng-click="slot.connect()" ng-disabled="slot.connectionState == 'connecting'" ng-if="slot.connectionState != 'connected'">connect</button>
 <button ng-click="slot.disconnect()" ng-if="slot.connectionState == 'connected'">disconnect</button>
-<h3>{{slot.instrument.name}}</h3>
+<h2>{{slot.instrument.name}}</h2>
 <audio controls ng-if="slot.instrument.sample">
     <source ng-src="{{slot.instrument.sample.url}}" type="audio/wav">
 </audio>

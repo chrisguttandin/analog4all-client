@@ -1,5 +1,8 @@
 {
   "author": "Christoph Guttandin",
+  "browser": {
+    "angular-route": "./app/scripts/angular-route-shim.js"
+  },
   "browserify": {
     "transform": [
       [
@@ -20,6 +23,7 @@
   },
   "dependencies": {
     "angular": "^1.4.7",
+    "angular-route": "^1.4.7",
     "babel-runtime": "^5.8.20",
     "babelify": "^6.1.3",
     "brfs-htmlmin": "^2.0.0",

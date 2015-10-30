@@ -1,27 +1,52 @@
 'use strict';
 
-module.exports = function ($http) {
+class Instruments {
 
-    class Instruments {
-
-        constructor ($http) {
-            this._$http = $http;
-        }
-
-        fetch () {
-            return new Promise((resolve) => {
-                this._$http
-                    .get('http://analog4all-registry.elasticbeanstalk.com/instruments')
-                    .success((data) => resolve(data))
-                    .error((data, status, headers, config) => {
-                        console.log('error while fetching instruments', data, status, headers, config);
-
-                        resolve([]);
-                    });
-            });
-        }
-
+    constructor ($http, $sce) {
+        this._$http = $http;
+        this._$sce = $sce;
     }
 
-    return new Instruments($http);
+    fetch () {
+        return new Promise((resolve) => {
+            this._$http
+                .get('http://analog4all-registry.elasticbeanstalk.com/instruments')
+                .success((instruments) => {
+                    instruments.forEach((instrument) => {
+                        if (instrument.sample) {
+                            instrument.sample.url = this._$sce.trustAsResourceUrl(`http://analog4all-registry.elasticbeanstalk.com/samples/${instrument.sample.id}.wav`);
+                        }
+                    });
+
+                    resolve(instruments);
+                })
+                .error((data, status, headers, config) => {
+                    console.log('error while fetching instruments', data, status, headers, config);
+
+                    resolve([]);
+                });
+        });
+    }
+
+    get (id) {
+        return new Promise((resolve, reject) => {
+            this._$http
+                .get('http://analog4all-registry.elasticbeanstalk.com/instruments/' + id)
+                .success((instrument) => {
+                    if (instrument.sample) {
+                        instrument.sample.url = this._$sce.trustAsResourceUrl(`http://analog4all-registry.elasticbeanstalk.com/samples/${instrument.sample.id}.wav`);
+                    }
+
+                    resolve(instrument);
+                })
+                .error((data, status, headers, config) => {
+                    console.log('error while fetching instruments', data, status, headers, config);
+
+                    reject();
+                });
+        });
+    }
+
 }
+
+module.exports = Instruments;

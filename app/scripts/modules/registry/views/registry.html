@@ -1,4 +1,10 @@
 <button ng-click="registry.refresh()">refresh</button>
 <h2 ng-if="registry.instruments.length === 0">There is currently no instrument available</h2>
 <h2 ng-if="registry.instruments.length > 0">Currently available instruments</h2>
-<slot instrument="instrument" ng-repeat="instrument in registry.instruments track by instrument.id"></slot>
+<ul>
+    <li ng-repeat="instrument in registry.instruments track by instrument.id">
+        <h3>
+            <a href="#/instruments/{{instrument.id}}">{{instrument.name}}</a>
+        </h3>
+    </li>
+</ul>

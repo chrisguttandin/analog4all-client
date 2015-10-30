@@ -23,14 +23,15 @@
 
             slot {
                 display: block;
-                clear: both;
-                float: none;
-                margin: 20px 0;
                 overflow: auto;
             }
 
             slot > button {
-                margin: 3px 0 0 3px;
+                margin: 7px 0 0 7px;
+            }
+
+            slot > h2 {
+                margin: 0;
             }
 
             slot > div {
@@ -53,8 +54,9 @@
     <body ng-app="client" ng-csp>
         <h1>Analog4All Client</h1>
         <hr>
-        <registry></registry>
+        <ng-view></ng-view>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.min.js"></script>
         <script src="scripts/bundle.js"></script>
     </body>
 </html>
