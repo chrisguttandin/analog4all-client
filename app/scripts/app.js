@@ -2,6 +2,7 @@
 
 var angular = require('angular'),
     angularRoute = require('angular-route'),
+    browser = require('./modules/browser/module.js'),
     channelBrokerFactoryService = require('./services/channel-broker-factory.js'),
     dropped = require('./modules/dropped/module.js'),
     fileReceiverFactoryService = require('./services/file-receiver-factory.js'),
@@ -20,6 +21,7 @@ var angular = require('angular'),
 module.exports = angular
     .module('client', [
         angularRoute,
+        browser.name,
         dropped.name,
         generators.name,
         instruments.name,

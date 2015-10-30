@@ -1,9 +1,9 @@
 'use strict';
 
 var angular = require('angular'),
-    GeneratorsService = require('./services/generators.js');
+    generatorsServiceProvider = require('./providers/generators.js');
 
 module.exports = angular
     .module('generators', [])
 
-    .service('generatorsService', ['channelBrokerFactoryService', '$http', 'peerConnectingService', GeneratorsService]);
+    .provider('generatorsService', generatorsServiceProvider);
