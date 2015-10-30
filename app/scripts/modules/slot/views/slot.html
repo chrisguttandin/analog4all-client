@@ -1,9 +1,12 @@
 <button ng-click="slot.connect()" ng-disabled="slot.connectionState == 'connecting'" ng-if="slot.connectionState != 'connected'">connect</button>
 <button ng-click="slot.disconnect()" ng-if="slot.connectionState == 'connected'">disconnect</button>
 <h2>{{slot.instrument.name}}</h2>
+<hr>
+<p>Listen to a prerecorded sample of this instrument. It's a recording of a middle c (#60/C3).</p>
 <audio controls ng-if="slot.instrument.sample">
     <source ng-src="{{slot.instrument.sample.url}}" type="audio/wav">
 </audio>
+<hr>
 <div dragenter="slot.dragover = true" dragleave="slot.dragover = false" drop="slot.send(file)" ng-class="{ dragover: slot.dragover }" ng-if="slot.connectionState == 'connected'">
     <span ng-if="slot.renderState == 'unknown'">drop a MIDI file here to render it on {{slot.instrument.name}}</span>
     <span ng-if="slot.renderState == 'reading'">reading your MIDI file</span>
