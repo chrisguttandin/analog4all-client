@@ -7,6 +7,6 @@ var angular = require('angular'),
 module.exports = angular
     .module('registry', [])
 
-    .controller('RegistryController', ['instrumentsService', '$scope', RegistryController])
+    .controller('RegistryController', ['instrumentsService', '$sce', '$scope', RegistryController])
 
     .directive('registry', registry);
