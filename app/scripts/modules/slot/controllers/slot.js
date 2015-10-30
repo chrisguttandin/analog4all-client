@@ -1,51 +1,57 @@
 'use strict';
 
+var  midiJsonParser = require('midi-json-parser');
+
 class SlotController {
 
     constructor (channelBrokerFactoryService, generatorsService, renderingService, $scope) {
-        this._channel = null;
+        // this._channel = null;
         this._channelBrokerFactoryService = channelBrokerFactoryService;
-        this.connectionState = 'disconnected';
+        // this.connectionState = 'disconnected';
         this._generatorsService = generatorsService;
+        this.hasValidMidiFile = false;
+        this.isRendering = false;
         this._renderingService = renderingService;
-        this.renderState = 'unknown';
+        // this.renderState = 'unknown';
         this._$scope = $scope;
     }
 
-    connect () {
-        this.connectionState = 'connecting';
+    async render () {
+        var channel,
+            generator;
 
-        this._generatorsService
-            .create({
+        this.isRendering = true;
+
+        // this.connectionState = 'connecting';
+
+        try {
+            generator = await this._generatorsService.create({
                 instrument: {
                     id: this.instrument.id
                 }
-            })
-            .then((generator) => this._generatorsService.connect(generator))
-            .then((channel) => {
-                this._channel = channel;
-                this.connectionState = 'connected';
-
-                this._$scope.$evalAsync();
-            })
-            .catch(() => {
-                this.connectionState = 'disconnected';
-
-                this._$scope.$evalAsync();
             });
-    }
 
-    disconnect () {
-        this._channel.close();
+            channel = await this._generatorsService.connect(generator);
 
-        this._channel = null;
-        this.connectionState = 'disconnected';
-    }
+            // this.connectionState = 'connected';
+            // this._$scope.$evalAsync();
 
-    send (file) {
-        this._renderingService.render(file, this._channelBrokerFactoryService.create({
-            channel: this._channel
-        }));
+            await this._renderingService.render(this._midiFile, this._channelBrokerFactoryService.create({ channel }));
+        } catch (err) {
+            console.log(err);
+        }
+
+        this.isRendering = false;
+
+        if (channel) {
+            channel.close();
+        }
+
+        this._$scope.$evalAsync();
+
+        // this.connectionState = 'disconnected';
+        // this._$scope.$evalAsync();
+
         // var renderer = this._renderingService.render(file, this._channel);
         //
         // renderer.on('statechange', (state) => {
@@ -57,6 +63,26 @@ class SlotController {
         //         this.disconnect();
         //     }
         // });
+    }
+
+    async validate (file) {
+        var fileReader = new FileReader();
+
+        fileReader.onload = () => {
+            midiJsonParser
+                .parseArrayBuffer(fileReader.result)
+                .then(() => {
+                    this._midiFile = file;
+                    this.hasValidMidiFile = true;
+
+                    this._$scope.$evalAsync();
+                })
+                .catch(() => {
+                    // @todo
+                });
+        }
+
+        fileReader.readAsArrayBuffer(file);
     }
 
 }
