@@ -1,9 +1,9 @@
 <h2>{{slot.instrument.name}}</h2>
-<hr>
+<hr ng-if="slot.instrument.sample">
 <audio controls ng-if="slot.instrument.sample">
     <source ng-src="{{slot.instrument.sample.url}}" type="audio/wav">
 </audio>
-<p>Listen to a prerecorded sample of this instrument. It's a recording of a middle c (#60/C3).</p>
+<p ng-if="slot.instrument.sample">Listen to a prerecorded sample of this instrument. It's a recording of a middle c (#60/C3).</p>
 <hr>
 <div dragenter="slot.dragover = true" dragleave="slot.dragover = false" drop="slot.validate(file)" ng-class="{ dragover: slot.dragover }" ng-if="!(slot.hasValidMidiFile)">
     <span>drop a MIDI file here to render it on {{slot.instrument.name}}</span>
