@@ -35,6 +35,7 @@
   "devDependencies": {
     "babel-eslint": "^4.0.10",
     "browserify-shim": "^3.8.10",
+    "eslint-config-holy-grail": "^1.0.0",
     "grunt": "^0.4.5",
     "grunt-browserify": "^4.0.0",
     "grunt-build-gh-pages": "^1.0.4",
