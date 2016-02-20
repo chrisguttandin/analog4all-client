@@ -13,7 +13,7 @@ class Generators {
             dataChannel,
             socket;
 
-        socket = new WebSocket('ws://analog4all-registry.elasticbeanstalk.com/instruments/' + generator.instrument.id + '/generators/' + generator.id);
+        socket = new WebSocket('ws://analog4all-registry.eu-west-1.elasticbeanstalk.com/instruments/' + generator.instrument.id + '/generators/' + generator.id);
         channelBroker = this._channelBrokerFactoryService.create({
             channel: socket
         });
