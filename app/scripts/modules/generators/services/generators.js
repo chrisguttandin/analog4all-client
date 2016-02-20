@@ -28,7 +28,7 @@ class Generators {
     create (data) {
         return new Promise((resolve, reject) => {
             this._$http
-                .post('http://analog4all-registry.elasticbeanstalk.com/instruments/' + data.instrument.id + '/generators')
+                .post('http://analog4all-registry.eu-west-1.elasticbeanstalk.com/instruments/' + data.instrument.id + '/generators')
                 .success((data) => resolve(data))
                 .error((data, status, headers, config) => {
                     console.log('error while creating a generator', data, status, headers, config);
