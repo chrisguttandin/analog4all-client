@@ -1,5 +1,3 @@
-'use strict';
-
 var angular = require('angular'),
     slot = require('./directives/slot.js'),
     SlotController = require('./controllers/slot.js');

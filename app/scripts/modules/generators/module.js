@@ -1,5 +1,3 @@
-'use strict';
-
 var angular = require('angular'),
     generatorsServiceProvider = require('./providers/generators.js');
 

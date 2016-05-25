@@ -1,5 +1,3 @@
-'use strict';
-
 var angular = require('angular'),
     registry = require('./directives/registry.js'),
     RegistryController = require('./controllers/registry.js')

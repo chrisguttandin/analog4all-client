@@ -1,5 +1,3 @@
-'use strict';
-
 var Recorder = require('recorderjs');
 
 class RenderingService {
@@ -16,7 +14,7 @@ class RenderingService {
         try {
             await this._fileSendingService.send(channelBroker, midiFile);
         } catch (err) {
-            console.log('error while sending', err);
+            console.log('error while sending', err); // eslint-disable-line no-console
 
             return;
         }
@@ -37,7 +35,7 @@ class RenderingService {
 
             Recorder.forceDownload(new Blob([waveFile]), name);
         } catch (err) {
-            console.log('error while receiving', err);
+            console.log('error while receiving', err); // eslint-disable-line no-console
         }
 
         // renderer.emit('statechange', 'unknown');

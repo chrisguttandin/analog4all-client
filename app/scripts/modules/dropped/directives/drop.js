@@ -1,7 +1,4 @@
-'use strict';
-
 function inject ($parse) {
-
     return function compile (element, attrs) {
         var fn = $parse(attrs.drop, null, true);
 
@@ -22,7 +19,7 @@ function inject ($parse) {
 
                     scope.$evalAsync(function() {
                         fn(scope, {
-                            file: file
+                            file
                         });
                     });
                 }

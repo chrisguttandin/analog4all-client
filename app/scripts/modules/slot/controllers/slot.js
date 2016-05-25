@@ -1,5 +1,3 @@
-'use strict';
-
 var  midiJsonParser = require('midi-json-parser');
 
 class SlotController {
@@ -38,7 +36,7 @@ class SlotController {
 
             await this._renderingService.render(this._midiFile, this._channelBrokerFactoryService.create({ channel }));
         } catch (err) {
-            console.log(err);
+            console.log(err); // eslint-disable-line no-console
         }
 
         this.isRendering = false;

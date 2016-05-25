@@ -1,5 +1,3 @@
-'use strict';
-
 class Instruments {
 
     constructor ($http, $sce) {
@@ -14,14 +12,14 @@ class Instruments {
                 .success((instruments) => {
                     instruments.forEach((instrument) => {
                         if (instrument.sample) {
-                            instrument.sample.url = this._$sce.trustAsResourceUrl(`http://analog4all-registry.eu-west-1.elasticbeanstalk.com/samples/${instrument.sample.id}.wav`);
+                            instrument.sample.url = this._$sce.trustAsResourceUrl(`http://analog4all-registry.eu-west-1.elasticbeanstalk.com/samples/${ instrument.sample.id }.wav`);
                         }
                     });
 
                     resolve(instruments);
                 })
                 .error((data, status, headers, config) => {
-                    console.log('error while fetching instruments', data, status, headers, config);
+                    console.log('error while fetching instruments', data, status, headers, config); // eslint-disable-line no-console
 
                     resolve([]);
                 });
@@ -34,13 +32,13 @@ class Instruments {
                 .get('http://analog4all-registry.eu-west-1.elasticbeanstalk.com/instruments/' + id)
                 .success((instrument) => {
                     if (instrument.sample) {
-                        instrument.sample.url = this._$sce.trustAsResourceUrl(`http://analog4all-registry.eu-west-1.elasticbeanstalk.com/samples/${instrument.sample.id}.wav`);
+                        instrument.sample.url = this._$sce.trustAsResourceUrl(`http://analog4all-registry.eu-west-1.elasticbeanstalk.com/samples/${ instrument.sample.id }.wav`);
                     }
 
                     resolve(instrument);
                 })
                 .error((data, status, headers, config) => {
-                    console.log('error while fetching instruments', data, status, headers, config);
+                    console.log('error while fetching instruments', data, status, headers, config); // eslint-disable-line no-console
 
                     reject();
                 });

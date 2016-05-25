@@ -1,5 +1,3 @@
-'use strict';
-
 var angular = require('angular'),
     dragenter = require('./directives/dragenter.js'),
     dragleave = require('./directives/dragleave.js'),

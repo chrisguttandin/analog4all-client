@@ -1,5 +1,3 @@
-'use strict';
-
 class Generators {
 
     constructor (channelBrokerFactoryService, $http, peerConnectingService) {
@@ -31,7 +29,7 @@ class Generators {
                 .post('http://analog4all-registry.eu-west-1.elasticbeanstalk.com/instruments/' + data.instrument.id + '/generators')
                 .success((data) => resolve(data))
                 .error((data, status, headers, config) => {
-                    console.log('error while creating a generator', data, status, headers, config);
+                    console.log('error while creating a generator', data, status, headers, config); // eslint-disable-line no-console
 
                     reject();
                 });

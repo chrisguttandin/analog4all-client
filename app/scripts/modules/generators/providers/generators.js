@@ -1,5 +1,3 @@
-'use strict';
-
 var GeneratorsService = require('../services/generators.js');
 
 class GeneratorsServiceProvider {

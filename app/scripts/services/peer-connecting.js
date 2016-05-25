@@ -1,5 +1,3 @@
-'use strict';
-
 class PeerConnectingService {
 
     constructor (peerConnectorFactoryService) {
@@ -12,7 +10,7 @@ class PeerConnectingService {
             peerConnector;
 
         peerConnector = this._peerConnectorFactoryService.create({
-            channelBroker: channelBroker
+            channelBroker
         });
 
         errorSubscription = channelBroker.addErrorHandler(::peerConnector.fail);

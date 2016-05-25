@@ -1,5 +1,3 @@
-'use strict';
-
 var angular = require('angular'),
     angularRoute = require('angular-route'),
     browser = require('./modules/browser/module.js'),
