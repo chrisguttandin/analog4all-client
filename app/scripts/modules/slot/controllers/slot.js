@@ -1,4 +1,5 @@
-var  midiJsonParser = require('midi-json-parser');
+var jsonMidiEncoder = require('json-midi-encoder'),
+    midiJsonParser = require('midi-json-parser');
 
 class SlotController {
 
@@ -39,6 +40,8 @@ class SlotController {
         // this.connectionState = 'connecting';
 
         try {
+            let midiFile;
+
             generator = await this._generatorsService.create({
                 instrument: {
                     id: this.instrument.id
@@ -50,7 +53,12 @@ class SlotController {
             // this.connectionState = 'connected';
             // this._$scope.$evalAsync();
 
-            await this._renderingService.render(this._midiFile, this._channelBrokerFactoryService.create({ channel }));
+            this._writeMicrosecondsPerBeat(this._midiFileAsJson, 60000000 / this.bpm);
+
+            midiFile = await jsonMidiEncoder.encodeJSON(this._midiFileAsJson);
+            midiFile = new File([ midiFile ], this._midiFileName, { type: 'audio/midi' });
+
+            await this._renderingService.render(midiFile, this._channelBrokerFactoryService.create({ channel }));
         } catch (err) {
             console.log(err); // eslint-disable-line no-console
         }
@@ -92,7 +100,8 @@ class SlotController {
                         this.bpm = 60000000 / microsecondsPerBeat;
                     }
 
-                    this._midiFile = file;
+                    this._midiFileAsJson = json;
+                    this._midiFileName = file.name;
                     this.hasValidMidiFile = true;
 
                     this._$scope.$evalAsync();
@@ -103,6 +112,29 @@ class SlotController {
         }
 
         fileReader.readAsArrayBuffer(file);
+    }
+
+    _writeMicrosecondsPerBeat (json, microsecondsPerBeat) {
+        for (let i = 0, length = json.tracks.length; i < length; i += 1) {
+            let track = json.tracks[i];
+
+            for (let j = 0, length = track.length; j < length; j += 1) {
+                let event = track[j];
+
+                if (event.setTempo !== undefined) {
+                    event.setTempo.microsecondsPerBeat = microsecondsPerBeat;
+
+                    return;
+                }
+            }
+        }
+
+        json.tracks[0].unshift({
+            delta: 0,
+            setTempo: {
+                microsecondsPerBeat
+            }
+        });
     }
 
 }
