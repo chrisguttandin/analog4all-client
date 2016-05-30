@@ -3,6 +3,7 @@ var  midiJsonParser = require('midi-json-parser');
 class SlotController {
 
     constructor (channelBrokerFactoryService, generatorsService, renderingService, $scope) {
+        this.bpm = 120;
         // this._channel = null;
         this._channelBrokerFactoryService = channelBrokerFactoryService;
         // this.connectionState = 'disconnected';
@@ -12,6 +13,21 @@ class SlotController {
         this._renderingService = renderingService;
         // this.renderState = 'unknown';
         this._$scope = $scope;
+    }
+
+    // @todo A very similar function exists in the midi-file-slicer module.
+    _readMicrosecondsPerBeat (json) {
+        for (let i = 0, length = json.tracks.length; i < length; i += 1) {
+            let track = json.tracks[i];
+
+            for (let j = 0, length = track.length; j < length; j += 1) {
+                let event = track[j];
+
+                if (event.setTempo !== undefined) {
+                    return event.setTempo.microsecondsPerBeat;
+                }
+            }
+        }
     }
 
     async render () {
@@ -69,7 +85,13 @@ class SlotController {
         fileReader.onload = () => {
             midiJsonParser
                 .parseArrayBuffer(fileReader.result)
-                .then(() => {
+                .then((json) => {
+                    let microsecondsPerBeat = this._readMicrosecondsPerBeat(json);
+
+                    if (microsecondsPerBeat) {
+                        this.bpm = 60000000 / microsecondsPerBeat;
+                    }
+
                     this._midiFile = file;
                     this.hasValidMidiFile = true;
 

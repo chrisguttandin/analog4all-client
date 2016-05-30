@@ -10,6 +10,9 @@
 </div>
 <div ng-if="slot.hasValidMidiFile">
     <span>the MIDI file is valid</span>
+    <br>
+    <label>BPM</label>
+    <input ng-model="slot.bpm" type="number">
 </div>
 <hr>
 <button ng-click="slot.render()" ng-disabled="!(slot.hasValidMidiFile) || slot.isRendering">render</button>
