@@ -1,16 +1,12 @@
 var angular = require('angular'),
     angularRoute = require('angular-route'),
     browser = require('./modules/browser/module.js'),
-    channelBrokerFactoryService = require('./services/channel-broker-factory.js'),
     dropped = require('./modules/dropped/module.js'),
-    fileReceiverFactoryService = require('./services/file-receiver-factory.js'),
     fileReceivingService = require('./services/file-receiving.js'),
-    fileSenderFactoryService = require('./services/file-sender-factory.js'),
     fileSendingService = require('./services/file-sending.js'),
     generators = require('./modules/generators/module.js'),
     instruments = require('./modules/instruments/module.js'),
     peerConnectingService = require('./services/peer-connecting.js'),
-    peerConnectorFactoryService = require('./services/peer-connector-factory.js'),
     readFileSync = require('fs').readFileSync,
     registry = require('./modules/registry/module.js'),
     renderingService = require('./services/rendering.js'),
@@ -60,11 +56,7 @@ module.exports = angular
             });
     }])
 
-    .service('channelBrokerFactoryService', [channelBrokerFactoryService])
-    .service('fileReceiverFactoryService', [fileReceiverFactoryService])
-    .service('fileReceivingService', ['fileReceiverFactoryService', fileReceivingService])
-    .service('fileSenderFactoryService', [fileSenderFactoryService])
-    .service('fileSendingService', ['fileSenderFactoryService', fileSendingService])
-    .service('peerConnectingService', ['peerConnectorFactoryService', peerConnectingService])
-    .service('peerConnectorFactoryService', [peerConnectorFactoryService])
+    .service('fileReceivingService', [fileReceivingService])
+    .service('fileSendingService', [fileSendingService])
+    .service('peerConnectingService', [peerConnectingService])
     .service('renderingService', ['fileReceivingService', 'fileSendingService', renderingService]);

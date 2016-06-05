@@ -32,7 +32,8 @@
     "browserify-shim": "^3.8.12",
     "json-midi-encoder": "0.0.1",
     "midi-json-parser": "^0.3.0",
-    "recorderjs": "git+https://github.com/chrisguttandin/Recorderjs.git"
+    "recorderjs": "git+https://github.com/chrisguttandin/Recorderjs.git",
+    "rxjs-broker": "^0.1.0"
   },
   "description": "This is the client for analog4all.",
   "devDependencies": {

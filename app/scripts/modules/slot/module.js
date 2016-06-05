@@ -5,6 +5,6 @@ var angular = require('angular'),
 module.exports = angular
     .module('slot', [])
 
-    .controller('SlotController', ['channelBrokerFactoryService', 'generatorsService', 'renderingService', '$scope', SlotController])
+    .controller('SlotController', ['generatorsService', 'renderingService', '$scope', SlotController])
 
     .directive('slot', slot);

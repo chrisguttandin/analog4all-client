@@ -1,24 +1,21 @@
+var connect = require('rxjs-broker').connect;
+
 class Generators {
 
-    constructor (channelBrokerFactoryService, $http, peerConnectingService) {
-        this._channelBrokerFactoryService = channelBrokerFactoryService;
+    constructor ($http, peerConnectingService) {
         this._$http = $http;
         this._peerConnectingService = peerConnectingService;
     }
 
     async connect (generator) {
-        var channelBroker,
-            dataChannel,
-            socket;
+        var dataChannel,
+            webSocketSubject;
 
-        socket = new WebSocket('ws://analog4all-registry.eu-west-1.elasticbeanstalk.com/instruments/' + generator.instrument.id + '/generators/' + generator.id);
-        channelBroker = this._channelBrokerFactoryService.create({
-            channel: socket
-        });
+        webSocketSubject = await connect('ws://analog4all-registry.eu-west-1.elasticbeanstalk.com/instruments/' + generator.instrument.id + '/generators/' + generator.id);
 
-        dataChannel = await this._peerConnectingService.connect(channelBroker);
+        dataChannel = await this._peerConnectingService.connect(webSocketSubject);
 
-        socket.close();
+        webSocketSubject.close();
 
         return dataChannel;
     }

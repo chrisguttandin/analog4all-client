@@ -1,12 +1,12 @@
 var jsonMidiEncoder = require('json-midi-encoder'),
-    midiJsonParser = require('midi-json-parser');
+    midiJsonParser = require('midi-json-parser'),
+    wrap = require('rxjs-broker').wrap;
 
 class SlotController {
 
-    constructor (channelBrokerFactoryService, generatorsService, renderingService, $scope) {
+    constructor (generatorsService, renderingService, $scope) {
         this.bpm = 120;
         // this._channel = null;
-        this._channelBrokerFactoryService = channelBrokerFactoryService;
         // this.connectionState = 'disconnected';
         this._generatorsService = generatorsService;
         this.hasValidMidiFile = false;
@@ -58,7 +58,7 @@ class SlotController {
             midiFile = await jsonMidiEncoder.encodeJSON(this._midiFileAsJson);
             midiFile = new File([ midiFile ], this._midiFileName, { type: 'audio/midi' });
 
-            await this._renderingService.render(midiFile, this._channelBrokerFactoryService.create({ channel }));
+            await this._renderingService.render(wrap(channel), midiFile);
         } catch (err) {
             console.log(err); // eslint-disable-line no-console
         }

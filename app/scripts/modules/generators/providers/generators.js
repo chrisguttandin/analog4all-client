@@ -22,8 +22,8 @@ class GeneratorsServiceProvider {
     }
 
     get $get () {
-        return ['channelBrokerFactoryService', '$http', 'peerConnectingService', function (channelBrokerFactoryService, $http, peerConnectingService) {
-            return new GeneratorsService(channelBrokerFactoryService, $http, peerConnectingService);
+        return ['$http', 'peerConnectingService', function ($http, peerConnectingService) {
+            return new GeneratorsService($http, peerConnectingService);
         }];
     }
 

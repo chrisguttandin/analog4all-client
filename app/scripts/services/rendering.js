@@ -7,38 +7,23 @@ class RenderingService {
         this._fileSendingService = fileSendingService;
     }
 
-    async render (midiFile, channelBroker) {
-
-        // renderer.emit('statechange', 'sending');
-
+    async render (dataChannelSubject, midiFile) {
         try {
-            await this._fileSendingService.send(channelBroker, midiFile);
+            await this._fileSendingService.send(dataChannelSubject, midiFile);
         } catch (err) {
             console.log('error while sending', err); // eslint-disable-line no-console
 
             return;
         }
 
-        // try {
-        //     await monitoringService.monitor(channelBroker);
-        // } catch (err) {
-        //     // error while processing
-        //
-        //     return;
-        // }
-
-        // renderer.emit('statechange', 'receiving');
-
         try {
             let name = midiFile.name.replace('.mid', '.wav'),
-                waveFile = await this._fileReceivingService.receive(channelBroker);
+                waveFile = await this._fileReceivingService.receive(dataChannelSubject);
 
             Recorder.forceDownload(new Blob([waveFile]), name);
         } catch (err) {
             console.log('error while receiving', err); // eslint-disable-line no-console
         }
-
-        // renderer.emit('statechange', 'unknown');
     }
 
 }
