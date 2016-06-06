@@ -6,12 +6,7 @@
 <p ng-if="slot.instrument.sample">Listen to a prerecorded sample of this instrument. It's a recording of a middle c (#60/C3).</p>
 <hr>
 <file-input instrument-name="slot.instrument.name" ng-if="!(slot.hasValidMidiFile)" on-change="slot.updateInput(json, fileName)"></file-input>
-<div ng-if="slot.hasValidMidiFile">
-    <span>the MIDI file is valid</span>
-    <br>
-    <label>BPM</label>
-    <input ng-model="slot.bpm" type="number">
-</div>
+<bpm-modifier json="slot.json" ng-if="slot.hasValidMidiFile" on-change="slot.updateJson(json)"></bpm-modifier>
 <hr>
 <button ng-click="slot.render()" ng-disabled="!(slot.hasValidMidiFile) || slot.isRendering">render</button>
 <a class="back" href="#/instruments">&laquo; go back to the list of all instruments</a>

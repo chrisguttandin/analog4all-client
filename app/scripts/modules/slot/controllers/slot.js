@@ -15,21 +15,6 @@ class SlotController {
         this._$scope = $scope;
     }
 
-    // @todo A very similar function exists in the midi-file-slicer module.
-    _readMicrosecondsPerBeat (json) {
-        for (let i = 0, length = json.tracks.length; i < length; i += 1) {
-            let track = json.tracks[i];
-
-            for (let j = 0, length = track.length; j < length; j += 1) {
-                let event = track[j];
-
-                if (event.setTempo !== undefined) {
-                    return event.setTempo.microsecondsPerBeat;
-                }
-            }
-        }
-    }
-
     async render () {
         var channel,
             generator;
@@ -52,9 +37,7 @@ class SlotController {
             // this.connectionState = 'connected';
             // this._$scope.$evalAsync();
 
-            this._writeMicrosecondsPerBeat(this._midiFileAsJson, 60000000 / this.bpm);
-
-            midiFile = await jsonMidiEncoder.encodeJSON(this._midiFileAsJson);
+            midiFile = await jsonMidiEncoder.encodeJSON(this.json);
             midiFile = new File([ midiFile ], this._midiFileName, { type: 'audio/midi' });
 
             await this._renderingService.render(wrap(channel), midiFile);
@@ -87,40 +70,17 @@ class SlotController {
     }
 
     updateInput (json, fileName) {
-        var microsecondsPerBeat = this._readMicrosecondsPerBeat(json);
-
-        if (microsecondsPerBeat) {
-            this.bpm = 60000000 / microsecondsPerBeat;
-        }
-
-        this._midiFileAsJson = json;
+        this.json = json;
         this._midiFileName = fileName;
         this.hasValidMidiFile = true;
 
         this._$scope.$evalAsync();
     }
 
-    _writeMicrosecondsPerBeat (json, microsecondsPerBeat) {
-        for (let i = 0, length = json.tracks.length; i < length; i += 1) {
-            let track = json.tracks[i];
+    updateJson (json) {
+        this.json = json;
 
-            for (let j = 0, length = track.length; j < length; j += 1) {
-                let event = track[j];
-
-                if (event.setTempo !== undefined) {
-                    event.setTempo.microsecondsPerBeat = microsecondsPerBeat;
-
-                    return;
-                }
-            }
-        }
-
-        json.tracks[0].unshift({
-            delta: 0,
-            setTempo: {
-                microsecondsPerBeat
-            }
-        });
+        this._$scope.$evalAsync();
     }
 
 }
