@@ -1,10 +1,15 @@
 var angular = require('angular'),
-    registry = require('./directives/registry.js'),
+    angularRoute = require('angular-route'),
+    instruments = require('../instruments/module.js'),
+    registry = require('./route/registry.js'),
     RegistryController = require('./controllers/registry.js')
 
 module.exports = angular
-    .module('registry', [])
+    .module('registry', [
+        angularRoute,
+        instruments.name,
+    ])
 
-    .controller('RegistryController', ['instrumentsService', '$scope', RegistryController])
+    .config([ '$routeProvider', ($routeProvider) => $routeProvider.when('/instruments', registry) ])
 
-    .directive('registry', registry);
+    .controller('RegistryController', [ 'instruments', 'instrumentsService', '$scope', RegistryController ]);

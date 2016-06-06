@@ -1,6 +1,7 @@
 class RegistryController {
 
-    constructor (instrumentsService, $scope) {
+    constructor (instruments, instrumentsService, $scope) {
+        this.instruments = instruments;
         this._instrumentsService = instrumentsService;
         this._$scope = $scope;
     }

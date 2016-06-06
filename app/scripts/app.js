@@ -25,20 +25,6 @@ module.exports = angular
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider
-            .when('/instruments', {
-                controller: ['instruments', function (instruments) {
-                    this.instruments = instruments;
-                }],
-                controllerAs: 'vm',
-                resolve: {
-                    instruments: ['instrumentsService', function (instrumentsService) {
-                        return instrumentsService
-                            .fetch()
-                            .then((instruments) => instruments.filter((instrument) => instrument.isAvailable));
-                    }]
-                },
-                template: readFileSync(__dirname + '/../views/instruments.html', 'utf8')
-            })
             .when('/instruments/:instrumentId', {
                 controller: ['instrument', function (instrument) {
                     this.instrument = instrument;
