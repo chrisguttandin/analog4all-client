@@ -3,10 +3,11 @@ var jsonMidiEncoder = require('json-midi-encoder'),
 
 class SlotController {
 
-    constructor (generatorsService, renderingService, $scope) {
+    constructor (generatorsService, instrument, renderingService, $scope) {
         this.bpm = 120;
         this._generatorsService = generatorsService;
         this.hasValidMidiFile = false;
+        this.instrument = instrument;
         this.isRendering = false;
         this._renderingService = renderingService;
         this._$scope = $scope;

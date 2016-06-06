@@ -1,12 +1,12 @@
-<h2>{{slot.instrument.name}}</h2>
-<hr ng-if="slot.instrument.sample">
-<audio controls ng-if="slot.instrument.sample">
-    <source ng-src="{{slot.instrument.sample.url}}" type="audio/wav">
+<h2>{{vm.instrument.name}}</h2>
+<hr ng-if="vm.instrument.sample">
+<audio controls ng-if="vm.instrument.sample">
+    <source ng-src="{{vm.instrument.sample.url}}" type="audio/wav">
 </audio>
-<p ng-if="slot.instrument.sample">Listen to a prerecorded sample of this instrument. It's a recording of a middle c (#60/C3).</p>
+<p ng-if="vm.instrument.sample">Listen to a prerecorded sample of this instrument. It's a recording of a middle c (#60/C3).</p>
 <hr>
-<file-input instrument-name="slot.instrument.name" ng-if="!(slot.hasValidMidiFile)" on-change="slot.updateInput(json, fileName)"></file-input>
-<bpm-modifier json="slot.json" ng-if="slot.hasValidMidiFile" on-change="slot.updateJson(json)"></bpm-modifier>
+<file-input instrument-name="vm.instrument.name" ng-if="!(vm.hasValidMidiFile)" on-change="vm.updateInput(json, fileName)"></file-input>
+<bpm-modifier json="vm.json" ng-if="vm.hasValidMidiFile" on-change="vm.updateJson(json)"></bpm-modifier>
 <hr>
-<button ng-click="slot.render()" ng-disabled="!(slot.hasValidMidiFile) || slot.isRendering">render</button>
+<button ng-click="vm.render()" ng-disabled="!(vm.hasValidMidiFile) || vm.isRendering">render</button>
 <a class="back" href="#/instruments">&laquo; go back to the list of all instruments</a>
