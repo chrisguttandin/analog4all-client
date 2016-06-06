@@ -1,5 +1,4 @@
 var jsonMidiEncoder = require('json-midi-encoder'),
-    midiJsonParser = require('midi-json-parser'),
     wrap = require('rxjs-broker').wrap;
 
 class SlotController {
@@ -87,31 +86,18 @@ class SlotController {
         // });
     }
 
-    async validate (file) {
-        var fileReader = new FileReader();
+    updateInput (json, fileName) {
+        var microsecondsPerBeat = this._readMicrosecondsPerBeat(json);
 
-        fileReader.onload = () => {
-            midiJsonParser
-                .parseArrayBuffer(fileReader.result)
-                .then((json) => {
-                    let microsecondsPerBeat = this._readMicrosecondsPerBeat(json);
-
-                    if (microsecondsPerBeat) {
-                        this.bpm = 60000000 / microsecondsPerBeat;
-                    }
-
-                    this._midiFileAsJson = json;
-                    this._midiFileName = file.name;
-                    this.hasValidMidiFile = true;
-
-                    this._$scope.$evalAsync();
-                })
-                .catch(() => {
-                    // @todo
-                });
+        if (microsecondsPerBeat) {
+            this.bpm = 60000000 / microsecondsPerBeat;
         }
 
-        fileReader.readAsArrayBuffer(file);
+        this._midiFileAsJson = json;
+        this._midiFileName = fileName;
+        this.hasValidMidiFile = true;
+
+        this._$scope.$evalAsync();
     }
 
     _writeMicrosecondsPerBeat (json, microsecondsPerBeat) {

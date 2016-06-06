@@ -1,0 +1,5 @@
+<div dragenter="vm.dragover = true" dragleave="vm.dragover = false" drop="vm.validate(file)" ng-class="{ dragover: vm.dragover }">
+    <span ng-if="vm.isParsing">the given file gets parsed, please wait</span>
+    <span ng-if="vm.isWaitingForFirstFile">drop a MIDI file here to render it on {{ vm.instrumentName }}</span>
+    <span ng-if="vm.isWaitingForRetry">the given file could not be parsed, please try another one</span>
+</div>
