@@ -8,11 +8,11 @@ class Instruments {
     fetch () {
         return new Promise((resolve) => {
             this._$http
-                .get('http://analog4all-registry.eu-west-1.elasticbeanstalk.com/instruments')
+                .get('https://analog4all-registry.eu-west-1.elasticbeanstalk.com/instruments')
                 .success((instruments) => {
                     instruments.forEach((instrument) => {
                         if (instrument.sample) {
-                            instrument.sample.url = this._$sce.trustAsResourceUrl(`http://analog4all-registry.eu-west-1.elasticbeanstalk.com/samples/${ instrument.sample.id }.wav`);
+                            instrument.sample.url = this._$sce.trustAsResourceUrl(`https://analog4all-registry.eu-west-1.elasticbeanstalk.com/samples/${ instrument.sample.id }.wav`);
                         }
                     });
 
@@ -29,10 +29,10 @@ class Instruments {
     get (id) {
         return new Promise((resolve, reject) => {
             this._$http
-                .get('http://analog4all-registry.eu-west-1.elasticbeanstalk.com/instruments/' + id)
+                .get('https://analog4all-registry.eu-west-1.elasticbeanstalk.com/instruments/' + id)
                 .success((instrument) => {
                     if (instrument.sample) {
-                        instrument.sample.url = this._$sce.trustAsResourceUrl(`http://analog4all-registry.eu-west-1.elasticbeanstalk.com/samples/${ instrument.sample.id }.wav`);
+                        instrument.sample.url = this._$sce.trustAsResourceUrl(`https://analog4all-registry.eu-west-1.elasticbeanstalk.com/samples/${ instrument.sample.id }.wav`);
                     }
 
                     resolve(instrument);

@@ -56,7 +56,7 @@
     "load-grunt-config": "^0.19.2",
     "uglify-js": "github:mishoo/UglifyJS2#harmony"
   },
-  "homepage": "http://chrisguttandin.github.io/analog4all-client/",
+  "homepage": "https://chrisguttandin.github.io/analog4all-client/",
   "license": "MIT",
   "main": "app/index.html",
   "name": "analog4all-client",
