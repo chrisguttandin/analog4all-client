@@ -1,10 +1,9 @@
-import { GeneratorsServiceProvider } from './providers/generators';
+import { GeneratorsService } from './services/generators';
 import { PeerConnectingService } from './services/peer-connecting';
 import angular from 'angular';
 
 export default angular
     .module('generators', [])
 
-    .provider('generatorsService', GeneratorsServiceProvider)
-
+    .service('generatorsService', GeneratorsService)
     .service('peerConnectingService', [ PeerConnectingService ]);

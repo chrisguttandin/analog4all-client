@@ -7,8 +7,4 @@ export default angular
         generators.name
     ])
 
-    .config(['generatorsServiceProvider', '$provide', function (generatorsServiceProvider, $provide) {
-        $provide.constant('isSupported', generatorsServiceProvider.isSupported);
-    }])
-
-    .service('browserService', [ 'isSupported', BrowserService ]);
+    .service('browserService', [ 'generatorsService', BrowserService ]);
