@@ -1,17 +1,11 @@
 var angular = require('angular'),
     angularRoute = require('angular-route'),
-    browser = require('./modules/browser/module.js'),
-    dropped = require('./modules/dropped/module.js'),
-    registry = require('./modules/registry/module.js'),
-    slot = require('./modules/slot/module.js');
+    client = require('./modules/client/module.js');
 
 module.exports = angular
-    .module('client', [
+    .module('app', [
         angularRoute,
-        browser.name,
-        dropped.name,
-        registry.name,
-        slot.name
+        client.name
     ])
 
     .config([ '$routeProvider', ($routeProvider) => $routeProvider.otherwise({ redirectTo: '/instruments' }) ]);

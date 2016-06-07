@@ -68,11 +68,10 @@
 
         </style>
     </head>
-    <body browser ng-app="client" ng-csp>
+    <body ng-app="app" ng-csp>
         <h1>Analog4All Client</h1>
         <hr>
-        <p ng-if="!(browser.isSupported)">Sorry, your browser is not supported. :-(</p>
-        <ng-view ng-if="browser.isSupported"></ng-view>
+        <client>Loading ...</client>
         <script src="https://code.angularjs.org/1.5.6/angular.min.js"></script>
         <script src="https://code.angularjs.org/1.5.6/angular-route.min.js"></script>
         <script src="scripts/bundle.js"></script>

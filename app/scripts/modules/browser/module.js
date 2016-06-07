@@ -1,6 +1,5 @@
 var angular = require('angular'),
-    browser = require('./directives/browser.js'),
-    BrowserController = require('./controllers/browser.js'),
+    browserService = require('./services/browser.js'),
     generators = require('../generators/module.js');
 
 module.exports = angular
@@ -12,6 +11,4 @@ module.exports = angular
         $provide.constant('isSupported', generatorsServiceProvider.isSupported);
     }])
 
-    .controller('BrowserController', ['isSupported', BrowserController])
-
-    .directive('browser', browser);
+    .service('browserService', [ 'isSupported', browserService ]);
