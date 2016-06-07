@@ -1,4 +1,5 @@
 var angular = require('angular'),
+    angularRoute = require('angular-route'),
     bpmModifier = require('../bpm-modifier/module.js'),
     fileInput = require('../file-input/module.js'),
     fileReceivingService = require('./services/file-receiving.js'),
@@ -11,6 +12,7 @@ var angular = require('angular'),
 
 module.exports = angular
     .module('slot', [
+        angularRoute,
         bpmModifier.name,
         fileInput.name,
         generators.name,
