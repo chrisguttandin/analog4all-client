@@ -1,11 +1,11 @@
-var angular = require('angular'),
-    angularRoute = require('angular-route'),
-    client = require('./modules/client/module.js');
+import angular from 'angular';
+import angularRoute from 'angular-route';
+import client from './modules/client/module';
 
-module.exports = angular
+export const app = angular
     .module('app', [
         angularRoute,
-        client.name
+        client.name,
     ])
 
     .config([ '$routeProvider', ($routeProvider) => $routeProvider.otherwise({ redirectTo: '/instruments' }) ]);

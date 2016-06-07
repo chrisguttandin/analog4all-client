@@ -1,17 +1,17 @@
-var angular = require('angular'),
-    angularRoute = require('angular-route'),
-    bpmModifier = require('../bpm-modifier/module.js'),
-    fileInput = require('../file-input/module.js'),
-    fileReceivingService = require('./services/file-receiving.js'),
-    fileSendingService = require('./services/file-sending.js'),
-    generators = require('../generators/module.js'),
-    instruments = require('../instruments/module.js'),
-    renderingService = require('./services/rendering.js'),
-    slot = require('./routes/slot.js'),
-    SlotController = require('./controllers/slot.js'),
-    waitingService = require('./services/waiting.js');
+import { FileReceivingService } from './services/file-receiving';
+import { FileSendingService } from './services/file-sending';
+import { RenderingService } from './services/rendering';
+import { SlotController } from './controllers/slot';
+import { WaitingService } from './services/waiting';
+import angular from 'angular';
+import angularRoute from 'angular-route';
+import bpmModifier from '../bpm-modifier/module';
+import fileInput from '../file-input/module';
+import generators from '../generators/module';
+import instruments from '../instruments/module';
+import { slot } from './routes/slot';
 
-module.exports = angular
+export default angular
     .module('slot', [
         angularRoute,
         bpmModifier.name,
@@ -24,7 +24,7 @@ module.exports = angular
 
     .controller('SlotController', [ 'generatorsService', 'instrument', 'renderingService', '$scope', SlotController ])
 
-    .service('fileReceivingService', [ fileReceivingService ])
-    .service('fileSendingService', [ fileSendingService ])
-    .service('renderingService', [ 'fileReceivingService', 'fileSendingService', 'waitingService', renderingService ])
-    .service('waitingService', [ waitingService ]);
+    .service('fileReceivingService', [ FileReceivingService ])
+    .service('fileSendingService', [ FileSendingService ])
+    .service('renderingService', [ 'fileReceivingService', 'fileSendingService', 'waitingService', RenderingService ])
+    .service('waitingService', [ WaitingService ]);

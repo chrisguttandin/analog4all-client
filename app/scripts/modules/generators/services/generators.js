@@ -1,6 +1,6 @@
-var connect = require('rxjs-broker').connect;
+import { connect } from 'rxjs-broker';
 
-class Generators {
+export class GeneratorsService {
 
     constructor ($http, peerConnectingService) {
         this._$http = $http;
@@ -34,5 +34,3 @@ class Generators {
     }
 
 }
-
-module.exports = Generators;

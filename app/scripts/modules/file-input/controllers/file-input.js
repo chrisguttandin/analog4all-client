@@ -1,6 +1,6 @@
-var midiJsonParser = require('midi-json-parser');
+import { parseArrayBuffer } from 'midi-json-parser';
 
-class FileInputController {
+export class FileInputController {
 
     constructor ($scope) {
         this._$scope = $scope;
@@ -24,8 +24,7 @@ class FileInputController {
         this.isWaitingForRetry = false;
 
         fileReader.onload = () => {
-            midiJsonParser
-                .parseArrayBuffer(fileReader.result)
+            parseArrayBuffer(fileReader.result)
                 .then((json) => this.onChange({ fileName: file.name, json }))
                 .catch(() => {
                     this.isParsing = false;
@@ -39,5 +38,3 @@ class FileInputController {
     }
 
 }
-
-module.exports = FileInputController;

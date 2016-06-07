@@ -1,6 +1,6 @@
 var fs = require('fs');
 
-module.exports = {
+export const slot = {
     controller: 'SlotController as vm',
     resolve: {
         instrument: [ 'instrumentsService', '$route', (instrumentsService, $route) => instrumentsService

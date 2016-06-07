@@ -14,7 +14,7 @@ function inject ($parse) {
     };
 }
 
-module.exports = function ($parse) {
+export const dragenter = ($parse) => {
     return {
         compile: inject($parse),
         restrict: 'A'

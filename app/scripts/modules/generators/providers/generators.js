@@ -1,6 +1,6 @@
-var GeneratorsService = require('../services/generators.js');
+import { GeneratorsService } from '../services/generators';
 
-class GeneratorsServiceProvider {
+export class GeneratorsServiceProvider {
 
     /**
      * This property is true if the browser supports all the required APIs to use the
@@ -28,5 +28,3 @@ class GeneratorsServiceProvider {
     }
 
 }
-
-module.exports = GeneratorsServiceProvider;

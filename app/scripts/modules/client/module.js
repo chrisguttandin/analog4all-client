@@ -1,11 +1,11 @@
-var angular = require('angular'),
-    browser = require('../browser/module.js'),
-    client = require('./components/client.js'),
-    ClientController = require('./controllers/client.js'),
-    registry = require('../registry/module.js'),
-    slot = require('../slot/module.js');
+import { ClientController } from './controllers/client';
+import angular from 'angular';
+import browser from '../browser/module';
+import { client } from './components/client';
+import registry from '../registry/module';
+import slot from '../slot/module';
 
-module.exports = angular
+export default angular
     .module('client', [
         browser.name,
         registry.name,

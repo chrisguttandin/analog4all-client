@@ -1,6 +1,6 @@
 var fs = require('fs');
 
-module.exports = {
+export const fileInput = {
     bindings: {
         instrumentName: '<',
         onChange: '&'

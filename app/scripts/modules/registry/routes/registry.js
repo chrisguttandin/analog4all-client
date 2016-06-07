@@ -1,6 +1,6 @@
 var fs = require('fs');
 
-module.exports = {
+export const registry = {
     controller: 'RegistryController as vm',
     resolve: {
         instruments: [ 'instrumentsService', (instrumentsService) => instrumentsService

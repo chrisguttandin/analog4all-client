@@ -1,8 +1,8 @@
-var angular = require('angular'),
-    browserService = require('./services/browser.js'),
-    generators = require('../generators/module.js');
+import { BrowserService } from './services/browser';
+import angular from 'angular';
+import generators from '../generators/module';
 
-module.exports = angular
+export default angular
     .module('browser', [
         generators.name
     ])
@@ -11,4 +11,4 @@ module.exports = angular
         $provide.constant('isSupported', generatorsServiceProvider.isSupported);
     }])
 
-    .service('browserService', [ 'isSupported', browserService ]);
+    .service('browserService', [ 'isSupported', BrowserService ]);

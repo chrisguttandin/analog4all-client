@@ -1,10 +1,10 @@
-var angular = require('angular'),
-    angularRoute = require('angular-route'),
-    instruments = require('../instruments/module.js'),
-    registry = require('./routes/registry.js'),
-    RegistryController = require('./controllers/registry.js')
+import { RegistryController } from './controllers/registry';
+import angular from 'angular';
+import angularRoute from 'angular-route';
+import instruments from '../instruments/module';
+import { registry } from './routes/registry';
 
-module.exports = angular
+export default angular
     .module('registry', [
         angularRoute,
         instruments.name,

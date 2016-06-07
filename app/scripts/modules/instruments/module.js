@@ -1,7 +1,7 @@
-var angular = require('angular'),
-    instrumentsService = require('./services/instruments.js');
+import { InstrumentsService } from './services/instruments';
+import angular from 'angular';
 
-module.exports = angular
+export default angular
     .module('instruments', [])
 
-    .service('instrumentsService', ['$http', '$sce', instrumentsService]);
+    .service('instrumentsService', [ '$http', '$sce', InstrumentsService ]);

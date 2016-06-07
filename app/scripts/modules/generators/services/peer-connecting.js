@@ -12,7 +12,7 @@ const ICE_SERVERS = [{
       }];
 /* eslint-enable indent */
 
-class PeerConnectingService {
+export class PeerConnectingService {
 
     connect (webSocketSubject) {
         return new Promise((resolve, reject) => {
@@ -85,5 +85,3 @@ class PeerConnectingService {
     }
 
 }
-
-module.exports = PeerConnectingService;

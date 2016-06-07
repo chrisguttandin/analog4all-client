@@ -1,11 +1,11 @@
-var angular = require('angular'),
-    dragenter = require('./directives/dragenter.js'),
-    dragleave = require('./directives/dragleave.js'),
-    drop = require('./directives/drop.js');
+import angular from 'angular';
+import { dragenter } from './directives/dragenter';
+import { dragleave } from './directives/dragleave';
+import { drop } from './directives/drop';
 
-module.exports = angular
+export default angular
     .module('dropped', [])
 
-    .directive('dragenter', ['$parse', dragenter])
-    .directive('dragleave', ['$parse', dragleave])
-    .directive('drop', ['$parse', drop]);
+    .directive('dragenter', [ '$parse', dragenter ])
+    .directive('dragleave', [ '$parse', dragleave ])
+    .directive('drop', [ '$parse', drop ]);

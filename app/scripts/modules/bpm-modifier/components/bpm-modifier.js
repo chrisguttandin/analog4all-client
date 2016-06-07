@@ -1,6 +1,6 @@
 var fs = require('fs');
 
-module.exports = {
+export const bpmModifier = {
     bindings: {
         json: '<',
         onChange: '&'

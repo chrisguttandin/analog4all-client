@@ -1,10 +1,10 @@
-var angular = require('angular'),
-    generatorsServiceProvider = require('./providers/generators.js'),
-    peerConnectingService = require('./services/peer-connecting.js');
+import { GeneratorsServiceProvider } from './providers/generators';
+import { PeerConnectingService } from './services/peer-connecting';
+import angular from 'angular';
 
-module.exports = angular
+export default angular
     .module('generators', [])
 
-    .provider('generatorsService', generatorsServiceProvider)
+    .provider('generatorsService', GeneratorsServiceProvider)
 
-    .service('peerConnectingService', [ peerConnectingService ]);
+    .service('peerConnectingService', [ PeerConnectingService ]);

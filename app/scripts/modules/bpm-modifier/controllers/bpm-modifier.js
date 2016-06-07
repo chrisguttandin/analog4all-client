@@ -1,4 +1,4 @@
-class BpmModifierController {
+export class BpmModifierController {
 
     constructor ($scope) {
         this._$scope = $scope;
@@ -68,5 +68,3 @@ class BpmModifierController {
     }
 
 }
-
-module.exports = BpmModifierController;

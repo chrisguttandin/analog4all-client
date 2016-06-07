@@ -1,6 +1,6 @@
-var Recorder = require('recorderjs');
+import Recorder from 'recorderjs';
 
-class RenderingService {
+export class RenderingService {
 
     constructor (fileReceivingService, fileSendingService, waitingService) {
         this._fileReceivingService = fileReceivingService;
@@ -30,5 +30,3 @@ class RenderingService {
     }
 
 }
-
-module.exports = RenderingService;

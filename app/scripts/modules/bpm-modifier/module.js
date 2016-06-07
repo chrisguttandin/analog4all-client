@@ -1,8 +1,8 @@
-var angular = require('angular'),
-    bpmModifier = require('./components/bpm-modifier.js'),
-    BpmModifierController = require('./controllers/bpm-modifier.js');
+import { BpmModifierController } from './controllers/bpm-modifier';
+import angular from 'angular';
+import { bpmModifier } from './components/bpm-modifier';
 
-module.exports = angular
+export default angular
     .module('bpmModifier', [])
 
     .component('bpmModifier', bpmModifier)

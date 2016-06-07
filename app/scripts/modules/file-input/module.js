@@ -1,9 +1,9 @@
-var angular = require('angular'),
-    dropped = require('../dropped/module.js'),
-    fileInput = require('./components/file-input.js'),
-    FileInputController = require('./controllers/file-input.js');
+import { FileInputController } from './controllers/file-input';
+import angular from 'angular';
+import dropped from '../dropped/module';
+import { fileInput } from './components/file-input';
 
-module.exports = angular
+export default angular
     .module('fileInput', [
         dropped.name
     ])

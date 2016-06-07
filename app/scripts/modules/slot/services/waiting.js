@@ -1,4 +1,4 @@
-var first = require('rxjs/operator/first').first;
+import { first } from 'rxjs/operator/first';
 
 /**
  * This service sends a waiting message to the data channel. It waits for the data channel to emit a
@@ -6,7 +6,7 @@ var first = require('rxjs/operator/first').first;
  * while it was listening to the socket. It then waits for a ready event to finally resolve the
  * promise.
  */
-class WaitingService {
+export class WaitingService {
 
     wait (dataChannelSubject) {
         return new Promise((resolve, reject) => {
@@ -61,5 +61,3 @@ class WaitingService {
     }
 
 }
-
-module.exports = WaitingService;

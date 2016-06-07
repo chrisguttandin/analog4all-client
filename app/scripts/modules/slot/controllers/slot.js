@@ -1,7 +1,7 @@
-var jsonMidiEncoder = require('json-midi-encoder'),
-    wrap = require('rxjs-broker').wrap;
+import { encodeJSON } from 'json-midi-encoder';
+import { wrap } from 'rxjs-broker';
 
-class SlotController {
+export class SlotController {
 
     constructor (generatorsService, instrument, renderingService, $scope) {
         this.bpm = 120;
@@ -30,7 +30,7 @@ class SlotController {
 
             channel = await this._generatorsService.connect(generator);
 
-            midiFile = await jsonMidiEncoder.encodeJSON(this.json);
+            midiFile = await encodeJSON(this.json);
             midiFile = new File([ midiFile ], this._midiFileName, { type: 'audio/midi' });
 
             await this._renderingService.render(wrap(channel), midiFile);
@@ -62,5 +62,3 @@ class SlotController {
     }
 
 }
-
-module.exports = SlotController;

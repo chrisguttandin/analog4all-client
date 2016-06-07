@@ -1,4 +1,4 @@
-class RegistryController {
+export class RegistryController {
 
     constructor (instruments, instrumentsService, $scope) {
         this.instruments = instruments;
@@ -17,5 +17,3 @@ class RegistryController {
     }
 
 }
-
-module.exports = RegistryController;

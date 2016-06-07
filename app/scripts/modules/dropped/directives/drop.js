@@ -28,7 +28,7 @@ function inject ($parse) {
     };
 }
 
-module.exports = function ($parse) {
+export const drop = ($parse) => {
     return {
         compile: inject($parse),
         restrict: 'A'

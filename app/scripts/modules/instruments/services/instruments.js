@@ -1,4 +1,4 @@
-class Instruments {
+export class InstrumentsService {
 
     constructor ($http, $sce) {
         this._$http = $http;
@@ -46,5 +46,3 @@ class Instruments {
     }
 
 }
-
-module.exports = Instruments;
