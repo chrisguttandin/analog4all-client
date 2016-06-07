@@ -8,7 +8,8 @@ var angular = require('angular'),
     instruments = require('../instruments/module.js'),
     renderingService = require('./services/rendering.js'),
     slot = require('./routes/slot.js'),
-    SlotController = require('./controllers/slot.js');
+    SlotController = require('./controllers/slot.js'),
+    waitingService = require('./services/waiting.js');
 
 module.exports = angular
     .module('slot', [
@@ -25,4 +26,5 @@ module.exports = angular
 
     .service('fileReceivingService', [ fileReceivingService ])
     .service('fileSendingService', [ fileSendingService ])
-    .service('renderingService', [ 'fileReceivingService', 'fileSendingService', renderingService ]);
+    .service('renderingService', [ 'fileReceivingService', 'fileSendingService', 'waitingService', renderingService ])
+    .service('waitingService', [ waitingService ]);

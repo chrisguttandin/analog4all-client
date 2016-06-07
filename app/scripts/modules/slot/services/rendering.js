@@ -2,12 +2,15 @@ var Recorder = require('recorderjs');
 
 class RenderingService {
 
-    constructor (fileReceivingService, fileSendingService) {
+    constructor (fileReceivingService, fileSendingService, waitingService) {
         this._fileReceivingService = fileReceivingService;
         this._fileSendingService = fileSendingService;
+        this._waitingService = waitingService;
     }
 
     async render (dataChannelSubject, midiFile) {
+        await this._waitingService.wait(dataChannelSubject);
+
         try {
             await this._fileSendingService.send(dataChannelSubject, midiFile);
         } catch (err) {
