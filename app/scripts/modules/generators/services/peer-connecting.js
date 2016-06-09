@@ -64,7 +64,7 @@ export class PeerConnectingService {
                                 // shit happens
                             });
                         peerConnection
-                            .createAnswer((description))
+                            .createAnswer()
                             .then((description) => {
                                 peerConnection
                                     .setLocalDescription(description)
