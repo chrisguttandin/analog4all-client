@@ -41,9 +41,11 @@ export class PeerConnectingService {
                         reject(err);
                     },
                     next ({ candidate }) {
-                        peerConnection.addIceCandidate(new RTCIceCandidate(candidate), () => {}, () => {
-                            // shit happens
-                        });
+                        peerConnection
+                            .addIceCandidate(new RTCIceCandidate(candidate))
+                            .catch(() => {
+                                // shit happens
+                            });
                     }
                 });
 
@@ -56,14 +58,25 @@ export class PeerConnectingService {
                         reject(err);
                     },
                     next ({ description }) {
-                        peerConnection.setRemoteDescription(new RTCSessionDescription(description));
-                        peerConnection.createAnswer((description) => {
-                            peerConnection.setLocalDescription(description);
+                        peerConnection
+                            .setRemoteDescription(new RTCSessionDescription(description))
+                            .catch(() => {
+                                // shit happens
+                            });
+                        peerConnection
+                            .createAnswer((description))
+                            .then((description) => {
+                                peerConnection
+                                    .setLocalDescription(description)
+                                    .catch(() => {
+                                        // shit happens
+                                    });
 
-                            descriptionChannel.send({ description: description.toJSON() });
-                        }, () => {
-                            // shit happens
-                        });
+                                descriptionChannel.send({ description: description.toJSON() });
+                            })
+                            .catch(() => {
+                                // shit happens
+                            });
                     }
                 });
 
