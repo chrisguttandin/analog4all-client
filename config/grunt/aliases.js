@@ -6,6 +6,7 @@ module.exports = {
         'js',
         'htmlmin',
         'replace',
+        'copy',
         // 'uglify',
         'buildGhPages'
     ],
