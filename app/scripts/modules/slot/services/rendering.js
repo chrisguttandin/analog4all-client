@@ -20,7 +20,7 @@ export class RenderingService {
         }
 
         try {
-            let name = midiFile.name.replace('.mid', '.wav'),
+            let name = midiFile.name.replace(/\.[a-z][a-z0-9]+$/i, '.wav'),
                 waveFile = await this._fileReceivingService.receive(dataChannelSubject);
 
             Recorder.forceDownload(new Blob([waveFile]), name);
