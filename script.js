@@ -435,7 +435,7 @@ class FileInputController {
 }
 exports.FileInputController = FileInputController;
 
-},{"midi-json-parser":206}],17:[function(require,module,exports){
+},{"midi-json-parser":218}],17:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -548,7 +548,7 @@ class GeneratorsService {
 }
 exports.GeneratorsService = GeneratorsService;
 
-},{"rxjs-broker":231}],20:[function(require,module,exports){
+},{"rxjs-broker":243}],20:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -848,7 +848,7 @@ class SlotController {
 }
 exports.SlotController = SlotController;
 
-},{"json-midi-encoder":202,"rxjs-broker":231}],27:[function(require,module,exports){
+},{"json-midi-encoder":214,"rxjs-broker":243}],27:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -1070,7 +1070,7 @@ class RenderingService {
 }
 exports.RenderingService = RenderingService;
 
-},{"recorderjs":225}],32:[function(require,module,exports){
+},{"recorderjs":237}],32:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1141,16 +1141,16 @@ class WaitingService {
 }
 exports.WaitingService = WaitingService;
 
-},{"rxjs/operator/first":244}],33:[function(require,module,exports){
+},{"rxjs/operator/first":256}],33:[function(require,module,exports){
 "use strict";
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 /**
-* @module
-* @description
-* Starting point to import all public core APIs.
-*/
+ * @module
+ * @description
+ * Starting point to import all public core APIs.
+ */
 __export(require('./src/metadata'));
 __export(require('./src/util'));
 __export(require('./src/di'));
@@ -1182,46 +1182,57 @@ __export(require('./src/change_detection'));
 __export(require('./src/platform_directives_and_pipes'));
 __export(require('./src/platform_common_providers'));
 __export(require('./src/application_common_providers'));
-__export(require('./src/reflection/reflection'));
 var profile_1 = require('./src/profile/profile');
 exports.wtfCreateScope = profile_1.wtfCreateScope;
 exports.wtfLeave = profile_1.wtfLeave;
 exports.wtfStartTimeRange = profile_1.wtfStartTimeRange;
 exports.wtfEndTimeRange = profile_1.wtfEndTimeRange;
-var lang_1 = require("./src/facade/lang");
+var lang_1 = require('./src/facade/lang');
 exports.Type = lang_1.Type;
 exports.enableProdMode = lang_1.enableProdMode;
-var async_1 = require("./src/facade/async");
+var async_1 = require('./src/facade/async');
 exports.EventEmitter = async_1.EventEmitter;
-var exceptions_1 = require("./src/facade/exceptions");
+var exceptions_1 = require('./src/facade/exceptions');
 exports.ExceptionHandler = exceptions_1.ExceptionHandler;
 exports.WrappedException = exceptions_1.WrappedException;
 exports.BaseException = exceptions_1.BaseException;
 __export(require('./private_export'));
+__export(require('./src/animation/metadata'));
+var animation_player_1 = require('./src/animation/animation_player');
+exports.AnimationPlayer = animation_player_1.AnimationPlayer;
 
-},{"./private_export":34,"./src/application_common_providers":35,"./src/application_ref":36,"./src/application_tokens":37,"./src/change_detection":38,"./src/debug/debug_node":48,"./src/di":50,"./src/facade/async":62,"./src/facade/exceptions":66,"./src/facade/lang":67,"./src/linker":69,"./src/metadata":85,"./src/platform_common_providers":90,"./src/platform_directives_and_pipes":91,"./src/profile/profile":92,"./src/reflection/reflection":95,"./src/render":99,"./src/testability/testability":102,"./src/util":103,"./src/zone":105}],34:[function(require,module,exports){
+},{"./private_export":34,"./src/animation/animation_player":40,"./src/animation/metadata":44,"./src/application_common_providers":45,"./src/application_ref":46,"./src/application_tokens":47,"./src/change_detection":48,"./src/debug/debug_node":58,"./src/di":60,"./src/facade/async":72,"./src/facade/exceptions":76,"./src/facade/lang":77,"./src/linker":80,"./src/metadata":97,"./src/platform_common_providers":102,"./src/platform_directives_and_pipes":103,"./src/profile/profile":104,"./src/render":111,"./src/testability/testability":114,"./src/util":115,"./src/zone":117}],34:[function(require,module,exports){
 "use strict";
+var animation_constants_1 = require('./src/animation/animation_constants');
+var animation_driver_1 = require('./src/animation/animation_driver');
+var animation_group_player_1 = require('./src/animation/animation_group_player');
+var animation_keyframe_1 = require('./src/animation/animation_keyframe');
+var animation_player_1 = require('./src/animation/animation_player');
+var animation_sequence_player_1 = require('./src/animation/animation_sequence_player');
+var animationUtils = require('./src/animation/animation_style_util');
+var animation_styles_1 = require('./src/animation/animation_styles');
+var change_detection_util = require('./src/change_detection/change_detection_util');
 var constants = require('./src/change_detection/constants');
-var security = require('./src/security');
+var console = require('./src/console');
+var debug = require('./src/debug/debug_renderer');
+var provider_util = require('./src/di/provider_util');
 var reflective_provider = require('./src/di/reflective_provider');
-var lifecycle_hooks = require('./src/metadata/lifecycle_hooks');
-var reflector_reader = require('./src/reflection/reflector_reader');
 var component_resolver = require('./src/linker/component_resolver');
+var debug_context = require('./src/linker/debug_context');
 var element = require('./src/linker/element');
+var template_ref = require('./src/linker/template_ref');
 var view = require('./src/linker/view');
 var view_type = require('./src/linker/view_type');
 var view_utils = require('./src/linker/view_utils');
+var lifecycle_hooks = require('./src/metadata/lifecycle_hooks');
 var metadata_view = require('./src/metadata/view');
-var debug_context = require('./src/linker/debug_context');
-var change_detection_util = require('./src/change_detection/change_detection_util');
-var api = require('./src/render/api');
-var template_ref = require('./src/linker/template_ref');
 var wtf_init = require('./src/profile/wtf_init');
+var reflection = require('./src/reflection/reflection');
 var reflection_capabilities = require('./src/reflection/reflection_capabilities');
+var reflector_reader = require('./src/reflection/reflector_reader');
+var api = require('./src/render/api');
+var security = require('./src/security');
 var decorators = require('./src/util/decorators');
-var debug = require('./src/debug/debug_renderer');
-var provider_util = require('./src/di/provider_util');
-var console = require('./src/console');
 exports.__core_private__ = {
     isDefaultChangeDetectionStrategy: constants.isDefaultChangeDetectionStrategy,
     ChangeDetectorState: constants.ChangeDetectorState,
@@ -1270,20 +1281,1056 @@ exports.__core_private__ = {
     pureProxy10: view_utils.pureProxy10,
     castByValue: view_utils.castByValue,
     Console: console.Console,
+    reflector: reflection.reflector,
+    Reflector: reflection.Reflector,
+    NoOpAnimationPlayer: animation_player_1.NoOpAnimationPlayer,
+    AnimationPlayer: animation_player_1.AnimationPlayer,
+    NoOpAnimationDriver: animation_driver_1.NoOpAnimationDriver,
+    AnimationDriver: animation_driver_1.AnimationDriver,
+    AnimationSequencePlayer: animation_sequence_player_1.AnimationSequencePlayer,
+    AnimationGroupPlayer: animation_group_player_1.AnimationGroupPlayer,
+    AnimationKeyframe: animation_keyframe_1.AnimationKeyframe,
+    prepareFinalAnimationStyles: animationUtils.prepareFinalAnimationStyles,
+    balanceAnimationKeyframes: animationUtils.balanceAnimationKeyframes,
+    flattenStyles: animationUtils.flattenStyles,
+    clearStyles: animationUtils.clearStyles,
+    renderStyles: animationUtils.renderStyles,
+    collectAndResolveStyles: animationUtils.collectAndResolveStyles,
+    AnimationStyles: animation_styles_1.AnimationStyles,
+    ANY_STATE: animation_constants_1.ANY_STATE,
+    DEFAULT_STATE: animation_constants_1.DEFAULT_STATE,
+    EMPTY_STATE: animation_constants_1.EMPTY_STATE,
+    FILL_STYLE_FLAG: animation_constants_1.FILL_STYLE_FLAG
 };
 
-},{"./src/change_detection/change_detection_util":40,"./src/change_detection/constants":42,"./src/console":47,"./src/debug/debug_renderer":49,"./src/di/provider_util":57,"./src/di/reflective_provider":61,"./src/linker/component_resolver":71,"./src/linker/debug_context":72,"./src/linker/element":74,"./src/linker/template_ref":79,"./src/linker/view":80,"./src/linker/view_type":83,"./src/linker/view_utils":84,"./src/metadata/lifecycle_hooks":88,"./src/metadata/view":89,"./src/profile/wtf_init":94,"./src/reflection/reflection_capabilities":96,"./src/reflection/reflector_reader":98,"./src/render/api":100,"./src/security":101,"./src/util/decorators":104}],35:[function(require,module,exports){
+},{"./src/animation/animation_constants":36,"./src/animation/animation_driver":37,"./src/animation/animation_group_player":38,"./src/animation/animation_keyframe":39,"./src/animation/animation_player":40,"./src/animation/animation_sequence_player":41,"./src/animation/animation_style_util":42,"./src/animation/animation_styles":43,"./src/change_detection/change_detection_util":50,"./src/change_detection/constants":52,"./src/console":57,"./src/debug/debug_renderer":59,"./src/di/provider_util":67,"./src/di/reflective_provider":71,"./src/linker/component_resolver":82,"./src/linker/debug_context":83,"./src/linker/element":85,"./src/linker/template_ref":91,"./src/linker/view":92,"./src/linker/view_type":95,"./src/linker/view_utils":96,"./src/metadata/lifecycle_hooks":100,"./src/metadata/view":101,"./src/profile/wtf_init":106,"./src/reflection/reflection":107,"./src/reflection/reflection_capabilities":108,"./src/reflection/reflector_reader":110,"./src/render/api":112,"./src/security":113,"./src/util/decorators":116}],35:[function(require,module,exports){
 "use strict";
-var application_tokens_1 = require('./application_tokens');
+var collection_1 = require('../facade/collection');
+var lang_1 = require('../facade/lang');
+var ActiveAnimationPlayersMap = (function () {
+    function ActiveAnimationPlayersMap() {
+        this._map = new collection_1.Map();
+        this._allPlayers = [];
+    }
+    Object.defineProperty(ActiveAnimationPlayersMap.prototype, "length", {
+        get: function () { return this.getAllPlayers().length; },
+        enumerable: true,
+        configurable: true
+    });
+    ActiveAnimationPlayersMap.prototype.find = function (element, animationName) {
+        var playersByAnimation = this._map.get(element);
+        if (lang_1.isPresent(playersByAnimation)) {
+            return playersByAnimation[animationName];
+        }
+    };
+    ActiveAnimationPlayersMap.prototype.findAllPlayersByElement = function (element) {
+        var players = [];
+        collection_1.StringMapWrapper.forEach(this._map.get(element), function (player /** TODO #9100 */) { return players.push(player); });
+        return players;
+    };
+    ActiveAnimationPlayersMap.prototype.set = function (element, animationName, player) {
+        var playersByAnimation = this._map.get(element);
+        if (!lang_1.isPresent(playersByAnimation)) {
+            playersByAnimation = {};
+        }
+        var existingEntry = playersByAnimation[animationName];
+        if (lang_1.isPresent(existingEntry)) {
+            this.remove(element, animationName);
+        }
+        playersByAnimation[animationName] = player;
+        this._allPlayers.push(player);
+        this._map.set(element, playersByAnimation);
+    };
+    ActiveAnimationPlayersMap.prototype.getAllPlayers = function () { return this._allPlayers; };
+    ActiveAnimationPlayersMap.prototype.remove = function (element, animationName) {
+        var playersByAnimation = this._map.get(element);
+        if (lang_1.isPresent(playersByAnimation)) {
+            var player = playersByAnimation[animationName];
+            delete playersByAnimation[animationName];
+            var index = this._allPlayers.indexOf(player);
+            collection_1.ListWrapper.removeAt(this._allPlayers, index);
+            if (collection_1.StringMapWrapper.isEmpty(playersByAnimation)) {
+                this._map.delete(element);
+            }
+        }
+    };
+    return ActiveAnimationPlayersMap;
+}());
+exports.ActiveAnimationPlayersMap = ActiveAnimationPlayersMap;
+
+},{"../facade/collection":74,"../facade/lang":77}],36:[function(require,module,exports){
+"use strict";
+exports.FILL_STYLE_FLAG = 'true'; // TODO (matsko): change to boolean
+exports.ANY_STATE = '*';
+exports.DEFAULT_STATE = '*';
+exports.EMPTY_STATE = 'void';
+
+},{}],37:[function(require,module,exports){
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var animation_player_1 = require('./animation_player');
+var AnimationDriver = (function () {
+    function AnimationDriver() {
+    }
+    return AnimationDriver;
+}());
+exports.AnimationDriver = AnimationDriver;
+var NoOpAnimationDriver = (function (_super) {
+    __extends(NoOpAnimationDriver, _super);
+    function NoOpAnimationDriver() {
+        _super.apply(this, arguments);
+    }
+    NoOpAnimationDriver.prototype.animate = function (element, startingStyles, keyframes, duration, delay, easing) {
+        return new animation_player_1.NoOpAnimationPlayer();
+    };
+    return NoOpAnimationDriver;
+}(AnimationDriver));
+exports.NoOpAnimationDriver = NoOpAnimationDriver;
+
+},{"./animation_player":40}],38:[function(require,module,exports){
+"use strict";
+var lang_1 = require('../facade/lang');
+var math_1 = require('../facade/math');
+var AnimationGroupPlayer = (function () {
+    function AnimationGroupPlayer(_players) {
+        var _this = this;
+        this._players = _players;
+        this._subscriptions = [];
+        this._finished = false;
+        this.parentPlayer = null;
+        var count = 0;
+        var total = this._players.length;
+        if (total == 0) {
+            lang_1.scheduleMicroTask(function () { return _this._onFinish(); });
+        }
+        else {
+            this._players.forEach(function (player) {
+                player.parentPlayer = _this;
+                player.onDone(function () {
+                    if (++count >= total) {
+                        _this._onFinish();
+                    }
+                });
+            });
+        }
+    }
+    AnimationGroupPlayer.prototype._onFinish = function () {
+        if (!this._finished) {
+            this._finished = true;
+            if (!lang_1.isPresent(this.parentPlayer)) {
+                this.destroy();
+            }
+            this._subscriptions.forEach(function (subscription) { return subscription(); });
+            this._subscriptions = [];
+        }
+    };
+    AnimationGroupPlayer.prototype.onDone = function (fn) { this._subscriptions.push(fn); };
+    AnimationGroupPlayer.prototype.play = function () { this._players.forEach(function (player) { return player.play(); }); };
+    AnimationGroupPlayer.prototype.pause = function () { this._players.forEach(function (player) { return player.pause(); }); };
+    AnimationGroupPlayer.prototype.restart = function () { this._players.forEach(function (player) { return player.restart(); }); };
+    AnimationGroupPlayer.prototype.finish = function () {
+        this._onFinish();
+        this._players.forEach(function (player) { return player.finish(); });
+    };
+    AnimationGroupPlayer.prototype.destroy = function () {
+        this._onFinish();
+        this._players.forEach(function (player) { return player.destroy(); });
+    };
+    AnimationGroupPlayer.prototype.reset = function () { this._players.forEach(function (player) { return player.reset(); }); };
+    AnimationGroupPlayer.prototype.setPosition = function (p /** TODO #9100 */) {
+        this._players.forEach(function (player) { player.setPosition(p); });
+    };
+    AnimationGroupPlayer.prototype.getPosition = function () {
+        var min = 0;
+        this._players.forEach(function (player) {
+            var p = player.getPosition();
+            min = math_1.Math.min(p, min);
+        });
+        return min;
+    };
+    return AnimationGroupPlayer;
+}());
+exports.AnimationGroupPlayer = AnimationGroupPlayer;
+
+},{"../facade/lang":77,"../facade/math":78}],39:[function(require,module,exports){
+"use strict";
+var AnimationKeyframe = (function () {
+    function AnimationKeyframe(offset, styles) {
+        this.offset = offset;
+        this.styles = styles;
+    }
+    return AnimationKeyframe;
+}());
+exports.AnimationKeyframe = AnimationKeyframe;
+
+},{}],40:[function(require,module,exports){
+"use strict";
+var exceptions_1 = require('../facade/exceptions');
+var lang_1 = require('../facade/lang');
+var AnimationPlayer = (function () {
+    function AnimationPlayer() {
+    }
+    Object.defineProperty(AnimationPlayer.prototype, "parentPlayer", {
+        get: function () { throw new exceptions_1.BaseException('NOT IMPLEMENTED: Base Class'); },
+        set: function (player) {
+            throw new exceptions_1.BaseException('NOT IMPLEMENTED: Base Class');
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return AnimationPlayer;
+}());
+exports.AnimationPlayer = AnimationPlayer;
+var NoOpAnimationPlayer = (function () {
+    function NoOpAnimationPlayer() {
+        var _this = this;
+        this._subscriptions = [];
+        this.parentPlayer = null;
+        lang_1.scheduleMicroTask(function () { return _this._onFinish(); });
+    }
+    /** @internal */
+    NoOpAnimationPlayer.prototype._onFinish = function () {
+        this._subscriptions.forEach(function (entry) { entry(); });
+        this._subscriptions = [];
+    };
+    NoOpAnimationPlayer.prototype.onDone = function (fn) { this._subscriptions.push(fn); };
+    NoOpAnimationPlayer.prototype.play = function () { };
+    NoOpAnimationPlayer.prototype.pause = function () { };
+    NoOpAnimationPlayer.prototype.restart = function () { };
+    NoOpAnimationPlayer.prototype.finish = function () { this._onFinish(); };
+    NoOpAnimationPlayer.prototype.destroy = function () { };
+    NoOpAnimationPlayer.prototype.reset = function () { };
+    NoOpAnimationPlayer.prototype.setPosition = function (p /** TODO #9100 */) { };
+    NoOpAnimationPlayer.prototype.getPosition = function () { return 0; };
+    return NoOpAnimationPlayer;
+}());
+exports.NoOpAnimationPlayer = NoOpAnimationPlayer;
+
+},{"../facade/exceptions":76,"../facade/lang":77}],41:[function(require,module,exports){
+"use strict";
+var lang_1 = require('../facade/lang');
+var animation_player_1 = require('./animation_player');
+var AnimationSequencePlayer = (function () {
+    function AnimationSequencePlayer(_players) {
+        var _this = this;
+        this._players = _players;
+        this._currentIndex = 0;
+        this._subscriptions = [];
+        this._finished = false;
+        this.parentPlayer = null;
+        this._players.forEach(function (player) { player.parentPlayer = _this; });
+        this._onNext(false);
+    }
+    AnimationSequencePlayer.prototype._onNext = function (start) {
+        var _this = this;
+        if (this._finished)
+            return;
+        if (this._players.length == 0) {
+            this._activePlayer = new animation_player_1.NoOpAnimationPlayer();
+            lang_1.scheduleMicroTask(function () { return _this._onFinish(); });
+        }
+        else if (this._currentIndex >= this._players.length) {
+            this._activePlayer = new animation_player_1.NoOpAnimationPlayer();
+            this._onFinish();
+        }
+        else {
+            var player = this._players[this._currentIndex++];
+            player.onDone(function () { return _this._onNext(true); });
+            this._activePlayer = player;
+            if (start) {
+                player.play();
+            }
+        }
+    };
+    AnimationSequencePlayer.prototype._onFinish = function () {
+        if (!this._finished) {
+            this._finished = true;
+            if (!lang_1.isPresent(this.parentPlayer)) {
+                this.destroy();
+            }
+            this._subscriptions.forEach(function (subscription) { return subscription(); });
+            this._subscriptions = [];
+        }
+    };
+    AnimationSequencePlayer.prototype.onDone = function (fn) { this._subscriptions.push(fn); };
+    AnimationSequencePlayer.prototype.play = function () { this._activePlayer.play(); };
+    AnimationSequencePlayer.prototype.pause = function () { this._activePlayer.pause(); };
+    AnimationSequencePlayer.prototype.restart = function () {
+        if (this._players.length > 0) {
+            this.reset();
+            this._players[0].restart();
+        }
+    };
+    AnimationSequencePlayer.prototype.reset = function () { this._players.forEach(function (player) { return player.reset(); }); };
+    AnimationSequencePlayer.prototype.finish = function () {
+        this._onFinish();
+        this._players.forEach(function (player) { return player.finish(); });
+    };
+    AnimationSequencePlayer.prototype.destroy = function () {
+        this._onFinish();
+        this._players.forEach(function (player) { return player.destroy(); });
+    };
+    AnimationSequencePlayer.prototype.setPosition = function (p /** TODO #9100 */) { this._players[0].setPosition(p); };
+    AnimationSequencePlayer.prototype.getPosition = function () { return this._players[0].getPosition(); };
+    return AnimationSequencePlayer;
+}());
+exports.AnimationSequencePlayer = AnimationSequencePlayer;
+
+},{"../facade/lang":77,"./animation_player":40}],42:[function(require,module,exports){
+"use strict";
+var collection_1 = require('../facade/collection');
+var lang_1 = require('../facade/lang');
+var animation_constants_1 = require('./animation_constants');
+var metadata_1 = require('./metadata');
+function prepareFinalAnimationStyles(previousStyles, newStyles, nullValue) {
+    if (nullValue === void 0) { nullValue = null; }
+    var finalStyles = {};
+    collection_1.StringMapWrapper.forEach(newStyles, function (value, prop) {
+        finalStyles[prop] = value == metadata_1.AUTO_STYLE ? nullValue : value.toString();
+    });
+    collection_1.StringMapWrapper.forEach(previousStyles, function (value, prop) {
+        if (!lang_1.isPresent(finalStyles[prop])) {
+            finalStyles[prop] = nullValue;
+        }
+    });
+    return finalStyles;
+}
+exports.prepareFinalAnimationStyles = prepareFinalAnimationStyles;
+function balanceAnimationKeyframes(collectedStyles, finalStateStyles, keyframes) {
+    var limit = keyframes.length - 1;
+    var firstKeyframe = keyframes[0];
+    // phase 1: copy all the styles from the first keyframe into the lookup map
+    var flatenedFirstKeyframeStyles = flattenStyles(firstKeyframe.styles.styles);
+    var extraFirstKeyframeStyles = {};
+    var hasExtraFirstStyles = false;
+    collection_1.StringMapWrapper.forEach(collectedStyles, function (value, prop) {
+        // if the style is already defined in the first keyframe then
+        // we do not replace it.
+        if (!flatenedFirstKeyframeStyles[prop]) {
+            flatenedFirstKeyframeStyles[prop] = value;
+            extraFirstKeyframeStyles[prop] = value;
+            hasExtraFirstStyles = true;
+        }
+    });
+    var keyframeCollectedStyles = collection_1.StringMapWrapper.merge({}, flatenedFirstKeyframeStyles);
+    // phase 2: normalize the final keyframe
+    var finalKeyframe = keyframes[limit];
+    collection_1.ListWrapper.insert(finalKeyframe.styles.styles, 0, finalStateStyles);
+    var flatenedFinalKeyframeStyles = flattenStyles(finalKeyframe.styles.styles);
+    var extraFinalKeyframeStyles = {};
+    var hasExtraFinalStyles = false;
+    collection_1.StringMapWrapper.forEach(keyframeCollectedStyles, function (value, prop) {
+        if (!lang_1.isPresent(flatenedFinalKeyframeStyles[prop])) {
+            extraFinalKeyframeStyles[prop] = metadata_1.AUTO_STYLE;
+            hasExtraFinalStyles = true;
+        }
+    });
+    if (hasExtraFinalStyles) {
+        finalKeyframe.styles.styles.push(extraFinalKeyframeStyles);
+    }
+    collection_1.StringMapWrapper.forEach(flatenedFinalKeyframeStyles, function (value, prop) {
+        if (!lang_1.isPresent(flatenedFirstKeyframeStyles[prop])) {
+            extraFirstKeyframeStyles[prop] = metadata_1.AUTO_STYLE;
+            hasExtraFirstStyles = true;
+        }
+    });
+    if (hasExtraFirstStyles) {
+        firstKeyframe.styles.styles.push(extraFirstKeyframeStyles);
+    }
+    return keyframes;
+}
+exports.balanceAnimationKeyframes = balanceAnimationKeyframes;
+function clearStyles(styles) {
+    var finalStyles = {};
+    collection_1.StringMapWrapper.keys(styles).forEach(function (key) { finalStyles[key] = null; });
+    return finalStyles;
+}
+exports.clearStyles = clearStyles;
+function collectAndResolveStyles(collection, styles) {
+    return styles.map(function (entry) {
+        var stylesObj = {};
+        collection_1.StringMapWrapper.forEach(entry, function (value, prop) {
+            if (value == animation_constants_1.FILL_STYLE_FLAG) {
+                value = collection[prop];
+                if (!lang_1.isPresent(value)) {
+                    value = metadata_1.AUTO_STYLE;
+                }
+            }
+            collection[prop] = value;
+            stylesObj[prop] = value;
+        });
+        return stylesObj;
+    });
+}
+exports.collectAndResolveStyles = collectAndResolveStyles;
+function renderStyles(element, renderer, styles) {
+    collection_1.StringMapWrapper.forEach(styles, function (value, prop) { renderer.setElementStyle(element, prop, value); });
+}
+exports.renderStyles = renderStyles;
+function flattenStyles(styles) {
+    var finalStyles = {};
+    styles.forEach(function (entry) {
+        collection_1.StringMapWrapper.forEach(entry, function (value, prop) { finalStyles[prop] = value; });
+    });
+    return finalStyles;
+}
+exports.flattenStyles = flattenStyles;
+
+},{"../facade/collection":74,"../facade/lang":77,"./animation_constants":36,"./metadata":44}],43:[function(require,module,exports){
+"use strict";
+var AnimationStyles = (function () {
+    function AnimationStyles(styles) {
+        this.styles = styles;
+    }
+    return AnimationStyles;
+}());
+exports.AnimationStyles = AnimationStyles;
+
+},{}],44:[function(require,module,exports){
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var exceptions_1 = require('../facade/exceptions');
+var lang_1 = require('../facade/lang');
+exports.AUTO_STYLE = '*';
+/**
+ * Metadata representing the entry of animations.
+ * Instances of this class are provided via the animation DSL when the {@link trigger trigger
+ * animation function} is called.
+ */
+var AnimationEntryMetadata = (function () {
+    function AnimationEntryMetadata(name, definitions) {
+        this.name = name;
+        this.definitions = definitions;
+    }
+    return AnimationEntryMetadata;
+}());
+exports.AnimationEntryMetadata = AnimationEntryMetadata;
+var AnimationStateMetadata = (function () {
+    function AnimationStateMetadata() {
+    }
+    return AnimationStateMetadata;
+}());
+exports.AnimationStateMetadata = AnimationStateMetadata;
+/**
+ * Metadata representing the entry of animations.
+ * Instances of this class are provided via the animation DSL when the {@link state state animation
+ * function} is called.
+ */
+var AnimationStateDeclarationMetadata = (function (_super) {
+    __extends(AnimationStateDeclarationMetadata, _super);
+    function AnimationStateDeclarationMetadata(stateNameExpr, styles) {
+        _super.call(this);
+        this.stateNameExpr = stateNameExpr;
+        this.styles = styles;
+    }
+    return AnimationStateDeclarationMetadata;
+}(AnimationStateMetadata));
+exports.AnimationStateDeclarationMetadata = AnimationStateDeclarationMetadata;
+/**
+ * Metadata representing the entry of animations.
+ * Instances of this class are provided via the animation DSL when the
+ * {@link transition transition animation function} is called.
+ */
+var AnimationStateTransitionMetadata = (function (_super) {
+    __extends(AnimationStateTransitionMetadata, _super);
+    function AnimationStateTransitionMetadata(stateChangeExpr, steps) {
+        _super.call(this);
+        this.stateChangeExpr = stateChangeExpr;
+        this.steps = steps;
+    }
+    return AnimationStateTransitionMetadata;
+}(AnimationStateMetadata));
+exports.AnimationStateTransitionMetadata = AnimationStateTransitionMetadata;
+var AnimationMetadata = (function () {
+    function AnimationMetadata() {
+    }
+    return AnimationMetadata;
+}());
+exports.AnimationMetadata = AnimationMetadata;
+/**
+ * Metadata representing the entry of animations.
+ * Instances of this class are provided via the animation DSL when the {@link keyframes keyframes
+ * animation function} is called.
+ */
+var AnimationKeyframesSequenceMetadata = (function (_super) {
+    __extends(AnimationKeyframesSequenceMetadata, _super);
+    function AnimationKeyframesSequenceMetadata(steps) {
+        _super.call(this);
+        this.steps = steps;
+    }
+    return AnimationKeyframesSequenceMetadata;
+}(AnimationMetadata));
+exports.AnimationKeyframesSequenceMetadata = AnimationKeyframesSequenceMetadata;
+/**
+ * Metadata representing the entry of animations.
+ * Instances of this class are provided via the animation DSL when the {@link style style animation
+ * function} is called.
+ */
+var AnimationStyleMetadata = (function (_super) {
+    __extends(AnimationStyleMetadata, _super);
+    function AnimationStyleMetadata(styles, offset) {
+        if (offset === void 0) { offset = null; }
+        _super.call(this);
+        this.styles = styles;
+        this.offset = offset;
+    }
+    return AnimationStyleMetadata;
+}(AnimationMetadata));
+exports.AnimationStyleMetadata = AnimationStyleMetadata;
+/**
+ * Metadata representing the entry of animations.
+ * Instances of this class are provided via the animation DSL when the {@link animate animate
+ * animation function} is called.
+ */
+var AnimationAnimateMetadata = (function (_super) {
+    __extends(AnimationAnimateMetadata, _super);
+    function AnimationAnimateMetadata(timings, styles) {
+        _super.call(this);
+        this.timings = timings;
+        this.styles = styles;
+    }
+    return AnimationAnimateMetadata;
+}(AnimationMetadata));
+exports.AnimationAnimateMetadata = AnimationAnimateMetadata;
+var AnimationWithStepsMetadata = (function (_super) {
+    __extends(AnimationWithStepsMetadata, _super);
+    function AnimationWithStepsMetadata() {
+        _super.call(this);
+    }
+    Object.defineProperty(AnimationWithStepsMetadata.prototype, "steps", {
+        get: function () { throw new exceptions_1.BaseException('NOT IMPLEMENTED: Base Class'); },
+        enumerable: true,
+        configurable: true
+    });
+    return AnimationWithStepsMetadata;
+}(AnimationMetadata));
+exports.AnimationWithStepsMetadata = AnimationWithStepsMetadata;
+/**
+ * Metadata representing the entry of animations.
+ * Instances of this class are provided via the animation DSL when the {@link sequence sequence
+ * animation function} is called.
+ */
+var AnimationSequenceMetadata = (function (_super) {
+    __extends(AnimationSequenceMetadata, _super);
+    function AnimationSequenceMetadata(_steps) {
+        _super.call(this);
+        this._steps = _steps;
+    }
+    Object.defineProperty(AnimationSequenceMetadata.prototype, "steps", {
+        get: function () { return this._steps; },
+        enumerable: true,
+        configurable: true
+    });
+    return AnimationSequenceMetadata;
+}(AnimationWithStepsMetadata));
+exports.AnimationSequenceMetadata = AnimationSequenceMetadata;
+/**
+ * Metadata representing the entry of animations.
+ * Instances of this class are provided via the animation DSL when the {@link group group animation
+ * function} is called.
+ */
+var AnimationGroupMetadata = (function (_super) {
+    __extends(AnimationGroupMetadata, _super);
+    function AnimationGroupMetadata(_steps) {
+        _super.call(this);
+        this._steps = _steps;
+    }
+    Object.defineProperty(AnimationGroupMetadata.prototype, "steps", {
+        get: function () { return this._steps; },
+        enumerable: true,
+        configurable: true
+    });
+    return AnimationGroupMetadata;
+}(AnimationWithStepsMetadata));
+exports.AnimationGroupMetadata = AnimationGroupMetadata;
+/**
+ * `animate` is an animation-specific function that is designed to be used inside of Angular2's
+ * animation
+ * DSL language. If this information is new, please navigate to the
+ * {@link ComponentMetadata#animations-anchor component animations metadata
+ * page} to gain a better understanding of how animations in Angular2 are used.
+ *
+ * `animate` specifies an animation step that will apply the provided `styles` data for a given
+ * amount of
+ * time based on the provided `timing` expression value. Calls to `animate` are expected to be
+ * used within {@link sequence an animation sequence}, {@link group group}, or {@link transition
+ * transition}.
+ *
+ * ### Usage
+ *
+ * The `animate` function accepts two input parameters: `timing` and `styles`:
+ *
+ * - `timing` is a string based value that can be a combination of a duration with optional
+ * delay and easing values. The format for the expression breaks down to `duration delay easing`
+ * (therefore a value such as `1s 100ms ease-out` will be parse itself into `duration=1000,
+ * delay=100, easing=ease-out`.
+ * If a numeric value is provided then that will be used as the `duration` value in millisecond
+ * form.
+ * - `styles` is the style input data which can either be a call to {@link style style} or {@link
+ * keyframes keyframes}.
+ * If left empty then the styles from the destination state will be collected and used (this is
+ * useful when
+ * describing an animation step that will complete an animation by {@link
+ * transition#the-final-animate-call animating to the final state}).
+ *
+ * ```typescript
+ * // various functions for specifying timing data
+ * animate(500, style(...))
+ * animate("1s", style(...))
+ * animate("100ms 0.5s", style(...))
+ * animate("5s ease", style(...))
+ * animate("5s 10ms cubic-bezier(.17,.67,.88,.1)", style(...))
+ *
+ * // either style() of keyframes() can be used
+ * animate(500, style({ background: "red" }))
+ * animate(500, keyframes([
+ *   style({ background: "blue" })),
+ *   style({ background: "red" }))
+ * ])
+ * ```
+ *
+ * ### Example ([live demo](http://plnkr.co/edit/Kez8XGWBxWue7qP7nNvF?p=preview))
+ *
+ * {@example core/animation/ts/dsl/animation_example.ts region='Component'}
+ */
+function animate(timing, styles) {
+    if (styles === void 0) { styles = null; }
+    var stylesEntry = styles;
+    if (!lang_1.isPresent(stylesEntry)) {
+        var EMPTY_STYLE = {};
+        stylesEntry = new AnimationStyleMetadata([EMPTY_STYLE], 1);
+    }
+    return new AnimationAnimateMetadata(timing, stylesEntry);
+}
+exports.animate = animate;
+/**
+ * `group` is an animation-specific function that is designed to be used inside of Angular2's
+ * animation
+ * DSL language. If this information is new, please navigate to the
+ * {@link ComponentMetadata#animations-anchor component animations metadata
+ * page} to gain a better understanding of how animations in Angular2 are used.
+ *
+ * `group` specifies a list of animation steps that are all run in parallel. Grouped animations
+ * are useful when a series of styles must be animated/closed off
+ * at different statrting/ending times.
+ *
+ * The `group` function can either be used within a {@link sequence sequence} or a {@link transition
+ * transition}
+ * and it will only continue to the next instruction once all of the inner animation steps
+ * have completed.
+ *
+ * ### Usage
+ *
+ * The `steps` data that is passed into the `group` animation function can either consist
+ * of {@link style style} or {@link animate animate} function calls. Each call to `style()` or
+ * `animate()`
+ * within a group will be executed instantly (use {@link keyframes keyframes} or a
+ * {@link animate#usage animate() with a delay value} to offset styles to be applied at a later
+ * time).
+ *
+ * ```typescript
+ * group([
+ *   animate("1s", { background: "black" }))
+ *   animate("2s", { color: "white" }))
+ * ])
+ * ```
+ *
+ * ### Example ([live demo](http://plnkr.co/edit/Kez8XGWBxWue7qP7nNvF?p=preview))
+ *
+ * {@example core/animation/ts/dsl/animation_example.ts region='Component'}
+ */
+function group(steps) {
+    return new AnimationGroupMetadata(steps);
+}
+exports.group = group;
+/**
+ * `sequence` is an animation-specific function that is designed to be used inside of Angular2's
+ * animation
+ * DSL language. If this information is new, please navigate to the
+ * {@link ComponentMetadata#animations-anchor component animations metadata
+ * page} to gain a better understanding of how animations in Angular2 are used.
+ *
+ * `sequence` Specifies a list of animation steps that are run one by one. (`sequence` is used
+ * by default when an array is passed as animation data into {@link transition transition}.)
+ *
+ * The `sequence` function can either be used within a {@link group group} or a {@link transition
+ * transition}
+ * and it will only continue to the next instruction once each of the inner animation steps
+ * have completed.
+ *
+ * To perform animation styling in parallel with other animation steps then
+ * have a look at the {@link group group} animation function.
+ *
+ * ### Usage
+ *
+ * The `steps` data that is passed into the `sequence` animation function can either consist
+ * of {@link style style} or {@link animate animate} function calls. A call to `style()` will apply
+ * the
+ * provided styling data immediately while a call to `animate()` will apply its styling
+ * data over a given time depending on its timing data.
+ *
+ * ```typescript
+ * sequence([
+ *   style({ opacity: 0 })),
+ *   animate("1s", { opacity: 1 }))
+ * ])
+ * ```
+ *
+ * ### Example ([live demo](http://plnkr.co/edit/Kez8XGWBxWue7qP7nNvF?p=preview))
+ *
+ * {@example core/animation/ts/dsl/animation_example.ts region='Component'}
+ */
+function sequence(steps) {
+    return new AnimationSequenceMetadata(steps);
+}
+exports.sequence = sequence;
+/**
+ * `style` is an animation-specific function that is designed to be used inside of Angular2's
+ * animation
+ * DSL language. If this information is new, please navigate to the
+ * {@link ComponentMetadata#animations-anchor component animations metadata
+ * page} to gain a better understanding of how animations in Angular2 are used.
+ *
+ * `style` declares a key/value object containing CSS properties/styles that can then
+ * be used for {@link state animation states}, within an {@link sequence animation sequence}, or as
+ * styling data for both {@link animate animate} and {@link keyframes keyframes}.
+ *
+ * ### Usage
+ *
+ * `style` takes in a key/value string map as data and expects one or more CSS property/value
+ * pairs to be defined.
+ *
+ * ```typescript
+ * // string values are used for css properties
+ * style({ background: "red", color: "blue" })
+ *
+ * // numerical (pixel) values are also supported
+ * style({ width: 100, height: 0 })
+ * ```
+ *
+ * #### Auto-styles (using `*`)
+ *
+ * When an asterix (`*`) character is used as a value then it will be detected from the element
+ * being animated
+ * and applied as animation data when the animation starts.
+ *
+ * This feature proves useful for a state depending on layout and/or environment factors; in such
+ * cases
+ * the styles are calculated just before the animation starts.
+ *
+ * ```typescript
+ * // the steps below will animate from 0 to the
+ * // actual height of the element
+ * style({ height: 0 }),
+ * animate("1s", style({ height: "*" }))
+ * ```
+ *
+ * ### Example ([live demo](http://plnkr.co/edit/Kez8XGWBxWue7qP7nNvF?p=preview))
+ *
+ * {@example core/animation/ts/dsl/animation_example.ts region='Component'}
+ */
+function style(tokens) {
+    var input;
+    var offset = null;
+    if (lang_1.isString(tokens)) {
+        input = [tokens];
+    }
+    else {
+        if (lang_1.isArray(tokens)) {
+            input = tokens;
+        }
+        else {
+            input = [tokens];
+        }
+        input.forEach(function (entry) {
+            var entryOffset = entry['offset'];
+            if (lang_1.isPresent(entryOffset)) {
+                offset = offset == null ? lang_1.NumberWrapper.parseFloat(entryOffset) : offset;
+            }
+        });
+    }
+    return new AnimationStyleMetadata(input, offset);
+}
+exports.style = style;
+/**
+ * `state` is an animation-specific function that is designed to be used inside of Angular2's
+ * animation
+ * DSL language. If this information is new, please navigate to the
+ * {@link ComponentMetadata#animations-anchor component animations metadata
+ * page} to gain a better understanding of how animations in Angular2 are used.
+ *
+ * `state` declares an animation state within the given trigger. When a state is
+ * active within a component then its associated styles will persist on
+ * the element that the trigger is attached to (even when the animation ends).
+ *
+ * To animate between states, have a look at the animation {@link transition transition}
+ * DSL function. To register states to an animation trigger please have a look
+ * at the {@link trigger trigger} function.
+ *
+ * #### The `void` state
+ *
+ * The `void` state value is a reserved word that angular uses to determine when the element is not
+ * apart
+ * of the application anymore (e.g. when an `ngIf` evaluates to false then the state of the
+ * associated element
+ * is void).
+ *
+ * #### The `*` (default) state
+ *
+ * The `*` state (when styled) is a fallback state that will be used if
+ * the state that is being animated is not declared within the trigger.
+ *
+ * ### Usage
+ *
+ * `state` will declare an animation state with its associated styles
+ * within the given trigger.
+ *
+ * - `stateNameExpr` can be one or more state names separated by commas.
+ * - `styles` refers to the {@link style styling data} that will be persisted on the element once
+ * the state
+ * has been reached.
+ *
+ * ```typescript
+ * // "void" is a reserved name for a state and is used to represent
+ * // the state in which an element is detached from from the application.
+ * state("void", style({ height: 0 }))
+ *
+ * // user-defined states
+ * state("closed", style({ height: 0 }))
+ * state("open, visible", style({ height: "*" }))
+ * ```
+ *
+ * ### Example ([live demo](http://plnkr.co/edit/Kez8XGWBxWue7qP7nNvF?p=preview))
+ *
+ * {@example core/animation/ts/dsl/animation_example.ts region='Component'}
+ */
+function state(stateNameExpr, styles) {
+    return new AnimationStateDeclarationMetadata(stateNameExpr, styles);
+}
+exports.state = state;
+/**
+ * `keyframes` is an animation-specific function that is designed to be used inside of Angular2's
+ * animation
+ * DSL language. If this information is new, please navigate to the
+ * {@link ComponentMetadata#animations-anchor component animations metadata
+ * page} to gain a better understanding of how animations in Angular2 are used.
+ *
+ * `keyframes` specifies a collection of {@link style style} entries each optionally characterized
+ * by an `offset` value.
+ *
+ * ### Usage
+ *
+ * The `keyframes` animation function is designed to be used alongside the {@link animate animate}
+ * animation function. Instead of applying animations from where they are
+ * currently to their destination, keyframes can describe how each style entry is applied
+ * and at what point within the animation arc (much like CSS Keyframe Animations do).
+ *
+ * For each `style()` entry an `offset` value can be set. Doing so allows to specifiy at
+ * what percentage of the animate time the styles will be applied.
+ *
+ * ```typescript
+ * // the provided offset values describe when each backgroundColor value is applied.
+ * animate("5s", keyframes([
+ *   style({ backgroundColor: "red", offset: 0 }),
+ *   style({ backgroundColor: "blue", offset: 0.2 }),
+ *   style({ backgroundColor: "orange", offset: 0.3 }),
+ *   style({ backgroundColor: "black", offset: 1 })
+ * ]))
+ * ```
+ *
+ * Alternatively, if there are no `offset` values used within the style entries then the offsets
+ * will
+ * be calculated automatically.
+ *
+ * ```typescript
+ * animate("5s", keyframes([
+ *   style({ backgroundColor: "red" }) // offset = 0
+ *   style({ backgroundColor: "blue" }) // offset = 0.33
+ *   style({ backgroundColor: "orange" }) // offset = 0.66
+ *   style({ backgroundColor: "black" }) // offset = 1
+ * ]))
+ * ```
+ *
+ * ### Example ([live demo](http://plnkr.co/edit/Kez8XGWBxWue7qP7nNvF?p=preview))
+ *
+ * {@example core/animation/ts/dsl/animation_example.ts region='Component'}
+ */
+function keyframes(steps) {
+    return new AnimationKeyframesSequenceMetadata(steps);
+}
+exports.keyframes = keyframes;
+/**
+ * `transition` is an animation-specific function that is designed to be used inside of Angular2's
+ * animation
+ * DSL language. If this information is new, please navigate to the
+ * {@link ComponentMetadata#animations-anchor component animations metadata
+ * page} to gain a better understanding of how animations in Angular2 are used.
+ *
+ * `transition` declares the {@link sequence sequence of animation steps} that will be run when the
+ * provided
+ * `stateChangeExpr` value is satisfied. The `stateChangeExpr` consists of a `state1 => state2`
+ * which consists
+ * of two known states (use an asterix (`*`) to refer to a dynamic starting and/or ending state).
+ *
+ * Animation transitions are placed within an {@link trigger animation trigger}. For an transition
+ * to animate to
+ * a state value and persist its styles then one or more {@link state animation states} is expected
+ * to be defined.
+ *
+ * ### Usage
+ *
+ * An animation transition is kicked off the `stateChangeExpr` predicate evaluates to true based on
+ * what the
+ * previous state is and what the current state has become. In other words, if a transition is
+ * defined that
+ * matches the old/current state criteria then the associated animation will be triggered.
+ *
+ * ```typescript
+ * // all transition/state changes are defined within an animation trigger
+ * trigger("myAnimationTrigger", [
+ *   // if a state is defined then its styles will be persisted when the
+ *   // animation has fully completed itself
+ *   state("on", style({ background: "green" })),
+ *   state("off", style({ background: "grey" })),
+ *
+ *   // a transition animation that will be kicked off when the state value
+ *   // bound to "myAnimationTrigger" changes from "on" to "off"
+ *   transition("on => off", animate(500)),
+ *
+ *   // it is also possible to do run the same animation for both directions
+ *   transition("on <=> off", animate(500)),
+ *
+ *   // or to define multiple states pairs separated by commas
+ *   transition("on => off, off => void", animate(500)),
+ *
+ *   // this is a catch-all state change for when an element is inserted into
+ *   // the page and the destination state is unknown
+ *   transition("void => *", [
+ *     style({ opacity: 0 }),
+ *     animate(500)
+ *   ]),
+ *
+ *   // this will capture a state change between any states
+ *   transition("* => *", animate("1s 0s")),
+ * ])
+ * ```
+ *
+ * The template associated with this component will make use of the `myAnimationTrigger`
+ * animation trigger by binding to an element within its template code.
+ *
+ * ```html
+ * <!-- somewhere inside of my-component-tpl.html -->
+ * <div @myAnimationTrigger="myStatusExp">...</div>
+ * ```
+ *
+ * #### The final `animate` call
+ *
+ * If the final step within the transition steps is a call to `animate()` that **only**
+ * uses a timing value with **no style data** then it will be automatically used as the final
+ * animation
+ * arc for the element to animate itself to the final state. This involves an automatic mix of
+ * adding/removing CSS styles so that the element will be in the exact state it should be for the
+ * applied state to be presented correctly.
+ *
+ * ```
+ * // start off by hiding the element, but make sure that it animates properly to whatever state
+ * // is currently active for "myAnimationTrigger"
+ * transition("void => *", [
+ *   style({ opacity: 0 }),
+ *   animate(500)
+ * ])
+ * ```
+ *
+ * ### Example ([live demo](http://plnkr.co/edit/Kez8XGWBxWue7qP7nNvF?p=preview))
+ *
+ * {@example core/animation/ts/dsl/animation_example.ts region='Component'}
+ */
+function transition(stateChangeExpr, steps) {
+    var animationData = lang_1.isArray(steps) ? new AnimationSequenceMetadata(steps) :
+        steps;
+    return new AnimationStateTransitionMetadata(stateChangeExpr, animationData);
+}
+exports.transition = transition;
+/**
+ * `trigger` is an animation-specific function that is designed to be used inside of Angular2's
+ * animation
+ * DSL language. If this information is new, please navigate to the
+ * {@link ComponentMetadata#animations-anchor component animations metadata
+ * page} to gain a better understanding of how animations in Angular2 are used.
+ *
+ * `trigger` Creates an animation trigger which will a list of {@link state state} and {@link
+ * transition transition}
+ * entries that will be evaluated when the expression bound to the trigger changes.
+ *
+ * Triggers are registered within the component annotation data under the
+ * {@link ComponentMetadata#animations-anchor animations section}. An animation trigger can
+ * be placed on an element within a template by referencing the name of the
+ * trigger followed by the expression value that the trigger is bound to
+ * (in the form of `@triggerName="expression"`.
+ *
+ * ### Usage
+ *
+ * `trigger` will create an animation trigger reference based on the provided `name` value.
+ * The provided `animation` value is expected to be an array consisting of {@link state state} and
+ * {@link transition transition}
+ * declarations.
+ *
+ * ```typescript
+ * @Component({
+ *   selector: 'my-component',
+ *   templateUrl: 'my-component-tpl.html',
+ *   animations: [
+ *     trigger("myAnimationTrigger", [
+ *       state(...),
+ *       state(...),
+ *       transition(...),
+ *       transition(...)
+ *     ])
+ *   ]
+ * })
+ * class MyComponent {
+ *   myStatusExp = "something";
+ * }
+ * ```
+ *
+ * The template associated with this component will make use of the `myAnimationTrigger`
+ * animation trigger by binding to an element within its template code.
+ *
+ * ```html
+ * <!-- somewhere inside of my-component-tpl.html -->
+ * <div @myAnimationTrigger="myStatusExp">...</div>
+ * ```
+ *
+ * ### Example ([live demo](http://plnkr.co/edit/Kez8XGWBxWue7qP7nNvF?p=preview))
+ *
+ * {@example core/animation/ts/dsl/animation_example.ts region='Component'}
+ */
+function trigger(name, animation) {
+    return new AnimationEntryMetadata(name, animation);
+}
+exports.trigger = trigger;
+
+},{"../facade/exceptions":76,"../facade/lang":77}],45:[function(require,module,exports){
+"use strict";
 var application_ref_1 = require('./application_ref');
+var application_tokens_1 = require('./application_tokens');
 var change_detection_1 = require('./change_detection/change_detection');
-var view_utils_1 = require('./linker/view_utils');
 var component_resolver_1 = require('./linker/component_resolver');
 var dynamic_component_loader_1 = require('./linker/dynamic_component_loader');
+var view_utils_1 = require('./linker/view_utils');
 var __unused; // avoid unused import when Type union types are erased
 /**
  * A default set of providers which should be included in any Angular
  * application, regardless of the platform it runs onto.
+ * @stable
  */
 exports.APPLICATION_COMMON_PROVIDERS = 
 /*@ts2dart_const*/ [
@@ -1293,29 +2340,30 @@ exports.APPLICATION_COMMON_PROVIDERS =
     view_utils_1.ViewUtils,
     /* @ts2dart_Provider */ { provide: change_detection_1.IterableDiffers, useValue: change_detection_1.defaultIterableDiffers },
     /* @ts2dart_Provider */ { provide: change_detection_1.KeyValueDiffers, useValue: change_detection_1.defaultKeyValueDiffers },
-    /* @ts2dart_Provider */ { provide: dynamic_component_loader_1.DynamicComponentLoader, useClass: dynamic_component_loader_1.DynamicComponentLoader_ }
+    /* @ts2dart_Provider */ { provide: dynamic_component_loader_1.DynamicComponentLoader, useClass: dynamic_component_loader_1.DynamicComponentLoader_ },
 ];
 
-},{"./application_ref":36,"./application_tokens":37,"./change_detection/change_detection":39,"./linker/component_resolver":71,"./linker/dynamic_component_loader":73,"./linker/view_utils":84}],36:[function(require,module,exports){
+},{"./application_ref":46,"./application_tokens":47,"./change_detection/change_detection":49,"./linker/component_resolver":82,"./linker/dynamic_component_loader":84,"./linker/view_utils":96}],46:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var ng_zone_1 = require('./zone/ng_zone');
-var lang_1 = require('../src/facade/lang');
-var di_1 = require('./di');
-var application_tokens_1 = require('./application_tokens');
 var async_1 = require('../src/facade/async');
 var collection_1 = require('../src/facade/collection');
-var testability_1 = require('./testability/testability');
-var component_resolver_1 = require('./linker/component_resolver');
 var exceptions_1 = require('../src/facade/exceptions');
+var lang_1 = require('../src/facade/lang');
+var application_tokens_1 = require('./application_tokens');
 var console_1 = require('./console');
+var di_1 = require('./di');
+var component_resolver_1 = require('./linker/component_resolver');
 var profile_1 = require('./profile/profile');
+var testability_1 = require('./testability/testability');
+var ng_zone_1 = require('./zone/ng_zone');
 /**
  * Create an Angular zone.
+ * @experimental
  */
 function createNgZone() {
     return new ng_zone_1.NgZone({ enableLongStackTrace: lang_1.assertionsEnabled() });
@@ -1326,13 +2374,14 @@ var _inPlatformCreate = false;
 /**
  * Creates a platform.
  * Platforms have to be eagerly created via this function.
+ * @experimental
  */
 function createPlatform(injector) {
     if (_inPlatformCreate) {
         throw new exceptions_1.BaseException('Already creating a platform...');
     }
     if (lang_1.isPresent(_platform) && !_platform.disposed) {
-        throw new exceptions_1.BaseException("There can be only one platform. Destroy the previous one to create a new one.");
+        throw new exceptions_1.BaseException('There can be only one platform. Destroy the previous one to create a new one.');
     }
     lang_1.lockMode();
     _inPlatformCreate = true;
@@ -1348,11 +2397,12 @@ exports.createPlatform = createPlatform;
 /**
  * Checks that there currently is a platform
  * which contains the given token as a provider.
+ * @experimental
  */
 function assertPlatform(requiredToken) {
     var platform = getPlatform();
     if (lang_1.isBlank(platform)) {
-        throw new exceptions_1.BaseException('Not platform exists!');
+        throw new exceptions_1.BaseException('No platform exists!');
     }
     if (lang_1.isPresent(platform) && lang_1.isBlank(platform.injector.get(requiredToken, null))) {
         throw new exceptions_1.BaseException('A platform with a different configuration has been created. Please destroy it first.');
@@ -1362,6 +2412,7 @@ function assertPlatform(requiredToken) {
 exports.assertPlatform = assertPlatform;
 /**
  * Dispose the existing platform.
+ * @experimental
  */
 function disposePlatform() {
     if (lang_1.isPresent(_platform) && !_platform.disposed) {
@@ -1371,6 +2422,7 @@ function disposePlatform() {
 exports.disposePlatform = disposePlatform;
 /**
  * Returns the current platform.
+ * @experimental
  */
 function getPlatform() {
     return lang_1.isPresent(_platform) && !_platform.disposed ? _platform : null;
@@ -1378,9 +2430,10 @@ function getPlatform() {
 exports.getPlatform = getPlatform;
 /**
  * Shortcut for ApplicationRef.bootstrap.
- * Requires a platform the be created first.
+ * Requires a platform to be created first.
+ * @experimental
  */
-function coreBootstrap(injector, componentFactory) {
+function coreBootstrap(componentFactory, injector) {
     var appRef = injector.get(ApplicationRef);
     return appRef.bootstrap(componentFactory);
 }
@@ -1388,9 +2441,10 @@ exports.coreBootstrap = coreBootstrap;
 /**
  * Resolves the componentFactory for the given component,
  * waits for asynchronous initializers and bootstraps the component.
- * Requires a platform the be created first.
+ * Requires a platform to be created first.
+ * @experimental
  */
-function coreLoadAndBootstrap(injector, componentType) {
+function coreLoadAndBootstrap(componentType, injector) {
     var appRef = injector.get(ApplicationRef);
     return appRef.run(function () {
         var componentResolver = injector.get(component_resolver_1.ComponentResolver);
@@ -1407,6 +2461,7 @@ exports.coreLoadAndBootstrap = coreLoadAndBootstrap;
  *
  * A page's platform is initialized implicitly when {@link bootstrap}() is called, or
  * explicitly by calling {@link createPlatform}().
+ * @stable
  */
 var PlatformRef = (function () {
     function PlatformRef() {
@@ -1465,9 +2520,11 @@ var PlatformRef_ = (function (_super) {
     };
     /** @internal */
     PlatformRef_.prototype._applicationDisposed = function (app) { collection_1.ListWrapper.remove(this._applications, app); };
+    /** @nocollapse */
     PlatformRef_.decorators = [
         { type: di_1.Injectable },
     ];
+    /** @nocollapse */
     PlatformRef_.ctorParameters = [
         { type: di_1.Injector, },
     ];
@@ -1478,6 +2535,7 @@ exports.PlatformRef_ = PlatformRef_;
  * A reference to an Angular application running on a page.
  *
  * For more about Angular applications, see the documentation for {@link bootstrap}.
+ * @stable
  */
 var ApplicationRef = (function () {
     function ApplicationRef() {
@@ -1620,7 +2678,9 @@ var ApplicationRef_ = (function (_super) {
             _this._loadComponent(compRef);
             var c = _this._injector.get(console_1.Console);
             if (lang_1.assertionsEnabled()) {
-                c.log("Angular 2 is running in the development mode. Call enableProdMode() to enable the production mode.");
+                var prodDescription = lang_1.IS_DART ? 'Production mode is disabled in Dart.' :
+                    'Call enableProdMode() to enable the production mode.';
+                c.log("Angular 2 is running in the development mode. " + prodDescription);
             }
             return compRef;
         });
@@ -1652,7 +2712,7 @@ var ApplicationRef_ = (function (_super) {
     });
     ApplicationRef_.prototype.tick = function () {
         if (this._runningTick) {
-            throw new exceptions_1.BaseException("ApplicationRef.tick is called recursively");
+            throw new exceptions_1.BaseException('ApplicationRef.tick is called recursively');
         }
         var s = ApplicationRef_._tickScope();
         try {
@@ -1680,9 +2740,11 @@ var ApplicationRef_ = (function (_super) {
     });
     /** @internal */
     ApplicationRef_._tickScope = profile_1.wtfCreateScope('ApplicationRef#tick()');
+    /** @nocollapse */
     ApplicationRef_.decorators = [
         { type: di_1.Injectable },
     ];
+    /** @nocollapse */
     ApplicationRef_.ctorParameters = [
         { type: PlatformRef_, },
         { type: ng_zone_1.NgZone, },
@@ -1691,28 +2753,22 @@ var ApplicationRef_ = (function (_super) {
     return ApplicationRef_;
 }(ApplicationRef));
 exports.ApplicationRef_ = ApplicationRef_;
-/**
- * @internal
- */
 exports.PLATFORM_CORE_PROVIDERS = 
 /*@ts2dart_const*/ [
     PlatformRef_,
     /*@ts2dart_const*/ (
     /* @ts2dart_Provider */ { provide: PlatformRef, useExisting: PlatformRef_ })
 ];
-/**
- * @internal
- */
 exports.APPLICATION_CORE_PROVIDERS = [
     /* @ts2dart_Provider */ { provide: ng_zone_1.NgZone, useFactory: createNgZone, deps: [] },
     ApplicationRef_,
-    /* @ts2dart_Provider */ { provide: ApplicationRef, useExisting: ApplicationRef_ }
+    /* @ts2dart_Provider */ { provide: ApplicationRef, useExisting: ApplicationRef_ },
 ];
 
-},{"../src/facade/async":62,"../src/facade/collection":64,"../src/facade/exceptions":66,"../src/facade/lang":67,"./application_tokens":37,"./console":47,"./di":50,"./linker/component_resolver":71,"./profile/profile":92,"./testability/testability":102,"./zone/ng_zone":106}],37:[function(require,module,exports){
+},{"../src/facade/async":72,"../src/facade/collection":74,"../src/facade/exceptions":76,"../src/facade/lang":77,"./application_tokens":47,"./console":57,"./di":60,"./linker/component_resolver":82,"./profile/profile":104,"./testability/testability":114,"./zone/ng_zone":118}],47:[function(require,module,exports){
 "use strict";
-var di_1 = require('./di');
 var lang_1 = require('../src/facade/lang');
+var di_1 = require('./di');
 /**
  * A DI Token representing a unique string id assigned to the application by Angular and used
  * primarily for prefixing application attributes and CSS styles when
@@ -1721,6 +2777,7 @@ var lang_1 = require('../src/facade/lang');
  * If you need to avoid randomly generated value to be used as an application id, you can provide
  * a custom value via a DI provider <!-- TODO: provider --> configuring the root {@link Injector}
  * using this token.
+ * @experimental
  */
 exports.APP_ID = new di_1.OpaqueToken('AppId');
 function _appIdRandomProviderFactory() {
@@ -1728,6 +2785,7 @@ function _appIdRandomProviderFactory() {
 }
 /**
  * Providers that will generate a random APP_ID_TOKEN.
+ * @experimental
  */
 exports.APP_ID_RANDOM_PROVIDER = 
 /*@ts2dart_const*/ /* @ts2dart_Provider */ {
@@ -1740,71 +2798,74 @@ function _randomChar() {
 }
 /**
  * A function that will be executed when a platform is initialized.
+ * @experimental
  */
 exports.PLATFORM_INITIALIZER = 
-/*@ts2dart_const*/ new di_1.OpaqueToken("Platform Initializer");
+/*@ts2dart_const*/ new di_1.OpaqueToken('Platform Initializer');
 /**
  * A function that will be executed when an application is initialized.
+ * @experimental
  */
 exports.APP_INITIALIZER = 
-/*@ts2dart_const*/ new di_1.OpaqueToken("Application Initializer");
+/*@ts2dart_const*/ new di_1.OpaqueToken('Application Initializer');
 /**
  * A token which indicates the root directory of the application
+ * @experimental
  */
 exports.PACKAGE_ROOT_URL = 
-/*@ts2dart_const*/ new di_1.OpaqueToken("Application Packages Root URL");
+/*@ts2dart_const*/ new di_1.OpaqueToken('Application Packages Root URL');
 
-},{"../src/facade/lang":67,"./di":50}],38:[function(require,module,exports){
-"use strict";
+},{"../src/facade/lang":77,"./di":60}],48:[function(require,module,exports){
 /**
-* @module
-* @description
-* Change detection enables data binding in Angular.
-*/
+ * @module
+ * @description
+ * Change detection enables data binding in Angular.
+ */
+"use strict";
 var change_detection_1 = require('./change_detection/change_detection');
 exports.ChangeDetectionStrategy = change_detection_1.ChangeDetectionStrategy;
 exports.ChangeDetectorRef = change_detection_1.ChangeDetectorRef;
-exports.WrappedValue = change_detection_1.WrappedValue;
-exports.SimpleChange = change_detection_1.SimpleChange;
+exports.CollectionChangeRecord = change_detection_1.CollectionChangeRecord;
 exports.DefaultIterableDiffer = change_detection_1.DefaultIterableDiffer;
 exports.IterableDiffers = change_detection_1.IterableDiffers;
-exports.KeyValueDiffers = change_detection_1.KeyValueDiffers;
-exports.CollectionChangeRecord = change_detection_1.CollectionChangeRecord;
 exports.KeyValueChangeRecord = change_detection_1.KeyValueChangeRecord;
+exports.KeyValueDiffers = change_detection_1.KeyValueDiffers;
+exports.SimpleChange = change_detection_1.SimpleChange;
+exports.WrappedValue = change_detection_1.WrappedValue;
 
-},{"./change_detection/change_detection":39}],39:[function(require,module,exports){
+},{"./change_detection/change_detection":49}],49:[function(require,module,exports){
 "use strict";
-var iterable_differs_1 = require('./differs/iterable_differs');
 var default_iterable_differ_1 = require('./differs/default_iterable_differ');
-var keyvalue_differs_1 = require('./differs/keyvalue_differs');
 var default_keyvalue_differ_1 = require('./differs/default_keyvalue_differ');
+var iterable_differs_1 = require('./differs/iterable_differs');
+var keyvalue_differs_1 = require('./differs/keyvalue_differs');
+var change_detection_util_1 = require('./change_detection_util');
+exports.SimpleChange = change_detection_util_1.SimpleChange;
+exports.ValueUnwrapper = change_detection_util_1.ValueUnwrapper;
+exports.WrappedValue = change_detection_util_1.WrappedValue;
+exports.devModeEqual = change_detection_util_1.devModeEqual;
+exports.looseIdentical = change_detection_util_1.looseIdentical;
+exports.uninitialized = change_detection_util_1.uninitialized;
+var change_detector_ref_1 = require('./change_detector_ref');
+exports.ChangeDetectorRef = change_detector_ref_1.ChangeDetectorRef;
+var constants_1 = require('./constants');
+exports.CHANGE_DETECTION_STRATEGY_VALUES = constants_1.CHANGE_DETECTION_STRATEGY_VALUES;
+exports.CHANGE_DETECTOR_STATE_VALUES = constants_1.CHANGE_DETECTOR_STATE_VALUES;
+exports.ChangeDetectionStrategy = constants_1.ChangeDetectionStrategy;
+exports.ChangeDetectorState = constants_1.ChangeDetectorState;
+exports.isDefaultChangeDetectionStrategy = constants_1.isDefaultChangeDetectionStrategy;
+var default_iterable_differ_2 = require('./differs/default_iterable_differ');
+exports.CollectionChangeRecord = default_iterable_differ_2.CollectionChangeRecord;
+exports.DefaultIterableDifferFactory = default_iterable_differ_2.DefaultIterableDifferFactory;
+var default_iterable_differ_3 = require('./differs/default_iterable_differ');
+exports.DefaultIterableDiffer = default_iterable_differ_3.DefaultIterableDiffer;
 var default_keyvalue_differ_2 = require('./differs/default_keyvalue_differ');
 exports.DefaultKeyValueDifferFactory = default_keyvalue_differ_2.DefaultKeyValueDifferFactory;
 exports.KeyValueChangeRecord = default_keyvalue_differ_2.KeyValueChangeRecord;
-var default_iterable_differ_2 = require('./differs/default_iterable_differ');
-exports.DefaultIterableDifferFactory = default_iterable_differ_2.DefaultIterableDifferFactory;
-exports.CollectionChangeRecord = default_iterable_differ_2.CollectionChangeRecord;
-var constants_1 = require('./constants');
-exports.ChangeDetectionStrategy = constants_1.ChangeDetectionStrategy;
-exports.CHANGE_DETECTION_STRATEGY_VALUES = constants_1.CHANGE_DETECTION_STRATEGY_VALUES;
-exports.ChangeDetectorState = constants_1.ChangeDetectorState;
-exports.CHANGE_DETECTOR_STATE_VALUES = constants_1.CHANGE_DETECTOR_STATE_VALUES;
-exports.isDefaultChangeDetectionStrategy = constants_1.isDefaultChangeDetectionStrategy;
-var change_detector_ref_1 = require('./change_detector_ref');
-exports.ChangeDetectorRef = change_detector_ref_1.ChangeDetectorRef;
 var iterable_differs_2 = require('./differs/iterable_differs');
 exports.IterableDiffers = iterable_differs_2.IterableDiffers;
 var keyvalue_differs_2 = require('./differs/keyvalue_differs');
 exports.KeyValueDiffers = keyvalue_differs_2.KeyValueDiffers;
-var default_iterable_differ_3 = require('./differs/default_iterable_differ');
-exports.DefaultIterableDiffer = default_iterable_differ_3.DefaultIterableDiffer;
-var change_detection_util_1 = require('./change_detection_util');
-exports.WrappedValue = change_detection_util_1.WrappedValue;
-exports.ValueUnwrapper = change_detection_util_1.ValueUnwrapper;
-exports.SimpleChange = change_detection_util_1.SimpleChange;
-exports.devModeEqual = change_detection_util_1.devModeEqual;
-exports.looseIdentical = change_detection_util_1.looseIdentical;
-exports.uninitialized = change_detection_util_1.uninitialized;
 /**
  * Structural diffing for `Object`s and `Map`s.
  */
@@ -1818,19 +2879,18 @@ exports.iterableDiff =
 exports.defaultIterableDiffers = new iterable_differs_1.IterableDiffers(exports.iterableDiff);
 exports.defaultKeyValueDiffers = new keyvalue_differs_1.KeyValueDiffers(exports.keyValDiff);
 
-},{"./change_detection_util":40,"./change_detector_ref":41,"./constants":42,"./differs/default_iterable_differ":43,"./differs/default_keyvalue_differ":44,"./differs/iterable_differs":45,"./differs/keyvalue_differs":46}],40:[function(require,module,exports){
+},{"./change_detection_util":50,"./change_detector_ref":51,"./constants":52,"./differs/default_iterable_differ":53,"./differs/default_keyvalue_differ":54,"./differs/iterable_differs":55,"./differs/keyvalue_differs":56}],50:[function(require,module,exports){
 "use strict";
-var lang_1 = require('../../src/facade/lang');
-var collection_1 = require('../../src/facade/collection');
-var lang_2 = require('../../src/facade/lang');
+var collection_1 = require('../facade/collection');
+var lang_1 = require('../facade/lang');
+var lang_2 = require('../facade/lang');
 exports.looseIdentical = lang_2.looseIdentical;
 exports.uninitialized = new Object();
 function devModeEqual(a, b) {
     if (collection_1.isListLikeIterable(a) && collection_1.isListLikeIterable(b)) {
         return collection_1.areIterablesEqual(a, b, devModeEqual);
     }
-    else if (!collection_1.isListLikeIterable(a) && !lang_1.isPrimitive(a) && !collection_1.isListLikeIterable(b) &&
-        !lang_1.isPrimitive(b)) {
+    else if (!collection_1.isListLikeIterable(a) && !lang_1.isPrimitive(a) && !collection_1.isListLikeIterable(b) && !lang_1.isPrimitive(b)) {
         return true;
     }
     else {
@@ -1855,6 +2915,7 @@ exports.devModeEqual = devModeEqual;
  *    return WrappedValue.wrap(this._latestValue); // this will force update
  *  }
  * ```
+ * @stable
  */
 var WrappedValue = (function () {
     function WrappedValue(wrapped) {
@@ -1884,6 +2945,7 @@ var ValueUnwrapper = (function () {
 exports.ValueUnwrapper = ValueUnwrapper;
 /**
  * Represents a basic change from a previous to a new value.
+ * @stable
  */
 var SimpleChange = (function () {
     function SimpleChange(previousValue, currentValue) {
@@ -1898,8 +2960,11 @@ var SimpleChange = (function () {
 }());
 exports.SimpleChange = SimpleChange;
 
-},{"../../src/facade/collection":64,"../../src/facade/lang":67}],41:[function(require,module,exports){
+},{"../facade/collection":74,"../facade/lang":77}],51:[function(require,module,exports){
 "use strict";
+/**
+ * @stable
+ */
 var ChangeDetectorRef = (function () {
     function ChangeDetectorRef() {
     }
@@ -1907,9 +2972,9 @@ var ChangeDetectorRef = (function () {
 }());
 exports.ChangeDetectorRef = ChangeDetectorRef;
 
-},{}],42:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 "use strict";
-var lang_1 = require('../../src/facade/lang');
+var lang_1 = require('../facade/lang');
 /**
  * Describes the current state of the change detector.
  */
@@ -1935,6 +3000,7 @@ var ChangeDetectorState = exports.ChangeDetectorState;
 /**
  * Describes within the change detector which strategy will be used the next time change
  * detection is triggered.
+ * @stable
  */
 (function (ChangeDetectionStrategy) {
     /**
@@ -1976,7 +3042,7 @@ exports.CHANGE_DETECTION_STRATEGY_VALUES = [
     ChangeDetectionStrategy.CheckAlways,
     ChangeDetectionStrategy.Detached,
     ChangeDetectionStrategy.OnPush,
-    ChangeDetectionStrategy.Default
+    ChangeDetectionStrategy.Default,
 ];
 /**
  * List of possible {@link ChangeDetectorState} values.
@@ -1984,7 +3050,7 @@ exports.CHANGE_DETECTION_STRATEGY_VALUES = [
 exports.CHANGE_DETECTOR_STATE_VALUES = [
     ChangeDetectorState.NeverChecked,
     ChangeDetectorState.CheckedBefore,
-    ChangeDetectorState.Errored
+    ChangeDetectorState.Errored,
 ];
 function isDefaultChangeDetectionStrategy(changeDetectionStrategy) {
     return lang_1.isBlank(changeDetectionStrategy) ||
@@ -1992,11 +3058,11 @@ function isDefaultChangeDetectionStrategy(changeDetectionStrategy) {
 }
 exports.isDefaultChangeDetectionStrategy = isDefaultChangeDetectionStrategy;
 
-},{"../../src/facade/lang":67}],43:[function(require,module,exports){
+},{"../facade/lang":77}],53:[function(require,module,exports){
 "use strict";
-var exceptions_1 = require('../../../src/facade/exceptions');
-var collection_1 = require('../../../src/facade/collection');
-var lang_1 = require('../../../src/facade/lang');
+var collection_1 = require('../../facade/collection');
+var exceptions_1 = require('../../facade/exceptions');
+var lang_1 = require('../../facade/lang');
 /* @ts2dart_const */
 var DefaultIterableDifferFactory = (function () {
     function DefaultIterableDifferFactory() {
@@ -2009,6 +3075,9 @@ var DefaultIterableDifferFactory = (function () {
 }());
 exports.DefaultIterableDifferFactory = DefaultIterableDifferFactory;
 var trackByIdentity = function (index, item) { return item; };
+/**
+ * @stable
+ */
 var DefaultIterableDiffer = (function () {
     function DefaultIterableDiffer(_trackByFn) {
         this._trackByFn = _trackByFn;
@@ -2124,7 +3193,7 @@ var DefaultIterableDiffer = (function () {
         }
         else {
             index = 0;
-            collection_1.iterateListLike(collection, function (item) {
+            collection_1.iterateListLike(collection, function (item /** TODO #9100 */) {
                 itemTrackBy = _this._trackByFn(index, item);
                 if (record === null || !lang_1.looseIdentical(record.trackById, itemTrackBy)) {
                     record = _this._mismatch(record, item, itemTrackBy, index);
@@ -2465,25 +3534,30 @@ var DefaultIterableDiffer = (function () {
     };
     DefaultIterableDiffer.prototype.toString = function () {
         var list = [];
-        this.forEachItem(function (record) { return list.push(record); });
+        this.forEachItem(function (record /** TODO #9100 */) { return list.push(record); });
         var previous = [];
-        this.forEachPreviousItem(function (record) { return previous.push(record); });
+        this.forEachPreviousItem(function (record /** TODO #9100 */) { return previous.push(record); });
         var additions = [];
-        this.forEachAddedItem(function (record) { return additions.push(record); });
+        this.forEachAddedItem(function (record /** TODO #9100 */) { return additions.push(record); });
         var moves = [];
-        this.forEachMovedItem(function (record) { return moves.push(record); });
+        this.forEachMovedItem(function (record /** TODO #9100 */) { return moves.push(record); });
         var removals = [];
-        this.forEachRemovedItem(function (record) { return removals.push(record); });
+        this.forEachRemovedItem(function (record /** TODO #9100 */) { return removals.push(record); });
         var identityChanges = [];
-        this.forEachIdentityChange(function (record) { return identityChanges.push(record); });
-        return "collection: " + list.join(', ') + "\n" + "previous: " + previous.join(', ') + "\n" +
-            "additions: " + additions.join(', ') + "\n" + "moves: " + moves.join(', ') + "\n" +
-            "removals: " + removals.join(', ') + "\n" + "identityChanges: " +
-            identityChanges.join(', ') + "\n";
+        this.forEachIdentityChange(function (record /** TODO #9100 */) { return identityChanges.push(record); });
+        return 'collection: ' + list.join(', ') + '\n' +
+            'previous: ' + previous.join(', ') + '\n' +
+            'additions: ' + additions.join(', ') + '\n' +
+            'moves: ' + moves.join(', ') + '\n' +
+            'removals: ' + removals.join(', ') + '\n' +
+            'identityChanges: ' + identityChanges.join(', ') + '\n';
     };
     return DefaultIterableDiffer;
 }());
 exports.DefaultIterableDiffer = DefaultIterableDiffer;
+/**
+ * @stable
+ */
 var CollectionChangeRecord = (function () {
     function CollectionChangeRecord(item, trackById) {
         this.item = item;
@@ -2512,10 +3586,9 @@ var CollectionChangeRecord = (function () {
         this._nextIdentityChange = null;
     }
     CollectionChangeRecord.prototype.toString = function () {
-        return this.previousIndex === this.currentIndex ?
-            lang_1.stringify(this.item) :
-            lang_1.stringify(this.item) + '[' + lang_1.stringify(this.previousIndex) + '->' +
-                lang_1.stringify(this.currentIndex) + ']';
+        return this.previousIndex === this.currentIndex ? lang_1.stringify(this.item) :
+            lang_1.stringify(this.item) + '[' +
+                lang_1.stringify(this.previousIndex) + '->' + lang_1.stringify(this.currentIndex) + ']';
     };
     return CollectionChangeRecord;
 }());
@@ -2646,11 +3719,11 @@ var _DuplicateMap = (function () {
     return _DuplicateMap;
 }());
 
-},{"../../../src/facade/collection":64,"../../../src/facade/exceptions":66,"../../../src/facade/lang":67}],44:[function(require,module,exports){
+},{"../../facade/collection":74,"../../facade/exceptions":76,"../../facade/lang":77}],54:[function(require,module,exports){
 "use strict";
-var collection_1 = require('../../../src/facade/collection');
-var lang_1 = require('../../../src/facade/lang');
-var exceptions_1 = require('../../../src/facade/exceptions');
+var collection_1 = require('../../facade/collection');
+var exceptions_1 = require('../../facade/exceptions');
+var lang_1 = require('../../facade/lang');
 /* @ts2dart_const */
 var DefaultKeyValueDifferFactory = (function () {
     function DefaultKeyValueDifferFactory() {
@@ -2732,7 +3805,7 @@ var DefaultKeyValueDiffer = (function () {
         var lastOldSeqRecord = null;
         var lastNewSeqRecord = null;
         var seqChanged = false;
-        this._forEach(map, function (value, key) {
+        this._forEach(map, function (value /** TODO #9100 */, key /** TODO #9100 */) {
             var newSeqRecord;
             if (oldSeqRecord !== null && key === oldSeqRecord.key) {
                 newSeqRecord = oldSeqRecord;
@@ -2958,12 +4031,14 @@ var DefaultKeyValueDiffer = (function () {
         for (record = this._removalsHead; record !== null; record = record._nextRemoved) {
             removals.push(lang_1.stringify(record));
         }
-        return "map: " + items.join(', ') + "\n" + "previous: " + previous.join(', ') + "\n" +
-            "additions: " + additions.join(', ') + "\n" + "changes: " + changes.join(', ') + "\n" +
-            "removals: " + removals.join(', ') + "\n";
+        return 'map: ' + items.join(', ') + '\n' +
+            'previous: ' + previous.join(', ') + '\n' +
+            'additions: ' + additions.join(', ') + '\n' +
+            'changes: ' + changes.join(', ') + '\n' +
+            'removals: ' + removals.join(', ') + '\n';
     };
     /** @internal */
-    DefaultKeyValueDiffer.prototype._forEach = function (obj, fn) {
+    DefaultKeyValueDiffer.prototype._forEach = function (obj /** TODO #9100 */, fn) {
         if (obj instanceof Map) {
             obj.forEach(fn);
         }
@@ -2974,6 +4049,9 @@ var DefaultKeyValueDiffer = (function () {
     return DefaultKeyValueDiffer;
 }());
 exports.DefaultKeyValueDiffer = DefaultKeyValueDiffer;
+/**
+ * @stable
+ */
 var KeyValueChangeRecord = (function () {
     function KeyValueChangeRecord(key) {
         this.key = key;
@@ -3002,15 +4080,16 @@ var KeyValueChangeRecord = (function () {
 }());
 exports.KeyValueChangeRecord = KeyValueChangeRecord;
 
-},{"../../../src/facade/collection":64,"../../../src/facade/exceptions":66,"../../../src/facade/lang":67}],45:[function(require,module,exports){
+},{"../../facade/collection":74,"../../facade/exceptions":76,"../../facade/lang":77}],55:[function(require,module,exports){
 "use strict";
-var lang_1 = require('../../../src/facade/lang');
-var exceptions_1 = require('../../../src/facade/exceptions');
-var collection_1 = require('../../../src/facade/collection');
 var di_1 = require('../../di');
+var collection_1 = require('../../facade/collection');
+var exceptions_1 = require('../../facade/exceptions');
+var lang_1 = require('../../facade/lang');
 /**
  * A repository of different iterable diffing strategies used by NgFor, NgClass, and others.
  * @ts2dart_const
+ * @stable
  */
 var IterableDiffers = (function () {
     /*@ts2dart_const*/
@@ -3074,15 +4153,16 @@ var IterableDiffers = (function () {
 }());
 exports.IterableDiffers = IterableDiffers;
 
-},{"../../../src/facade/collection":64,"../../../src/facade/exceptions":66,"../../../src/facade/lang":67,"../../di":50}],46:[function(require,module,exports){
+},{"../../di":60,"../../facade/collection":74,"../../facade/exceptions":76,"../../facade/lang":77}],56:[function(require,module,exports){
 "use strict";
-var lang_1 = require('../../../src/facade/lang');
-var exceptions_1 = require('../../../src/facade/exceptions');
-var collection_1 = require('../../../src/facade/collection');
 var di_1 = require('../../di');
+var collection_1 = require('../../facade/collection');
+var exceptions_1 = require('../../facade/exceptions');
+var lang_1 = require('../../facade/lang');
 /**
  * A repository of different Map diffing strategies used by NgClass, NgStyle, and others.
  * @ts2dart_const
+ * @stable
  */
 var KeyValueDiffers = (function () {
     /*@ts2dart_const*/
@@ -3146,10 +4226,10 @@ var KeyValueDiffers = (function () {
 }());
 exports.KeyValueDiffers = KeyValueDiffers;
 
-},{"../../../src/facade/collection":64,"../../../src/facade/exceptions":66,"../../../src/facade/lang":67,"../../di":50}],47:[function(require,module,exports){
+},{"../../di":60,"../../facade/collection":74,"../../facade/exceptions":76,"../../facade/lang":77}],57:[function(require,module,exports){
 "use strict";
-var lang_1 = require('./facade/lang');
 var decorators_1 = require('./di/decorators');
+var lang_1 = require('./facade/lang');
 // Note: Need to rename warn as in Dart
 // class members and imports can't use the same name.
 var _warnImpl = lang_1.warn;
@@ -3159,6 +4239,7 @@ var Console = (function () {
     Console.prototype.log = function (message) { lang_1.print(message); };
     // Note: for reporting errors use `DOM.logError()` as it is platform specific
     Console.prototype.warn = function (message) { _warnImpl(message); };
+    /** @nocollapse */
     Console.decorators = [
         { type: decorators_1.Injectable },
     ];
@@ -3166,15 +4247,15 @@ var Console = (function () {
 }());
 exports.Console = Console;
 
-},{"./di/decorators":51,"./facade/lang":67}],48:[function(require,module,exports){
+},{"./di/decorators":61,"./facade/lang":77}],58:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var lang_1 = require('../../src/facade/lang');
-var collection_1 = require('../../src/facade/collection');
+var collection_1 = require('../facade/collection');
+var lang_1 = require('../facade/lang');
 var EventListener = (function () {
     function EventListener(name, callback) {
         this.name = name;
@@ -3184,6 +4265,9 @@ var EventListener = (function () {
     return EventListener;
 }());
 exports.EventListener = EventListener;
+/**
+ * @experimental
+ */
 var DebugNode = (function () {
     function DebugNode(nativeNode, parent, _debugInfo) {
         this._debugInfo = _debugInfo;
@@ -3241,12 +4325,17 @@ var DebugNode = (function () {
     return DebugNode;
 }());
 exports.DebugNode = DebugNode;
+/**
+ * @experimental
+ */
 var DebugElement = (function (_super) {
     __extends(DebugElement, _super);
     function DebugElement(nativeNode, parent, _debugInfo) {
         _super.call(this, nativeNode, parent, _debugInfo);
         this.properties = {};
         this.attributes = {};
+        this.classes = {};
+        this.styles = {};
         this.childNodes = [];
         this.nativeElement = nativeNode;
     }
@@ -3316,6 +4405,9 @@ var DebugElement = (function (_super) {
     return DebugElement;
 }(DebugNode));
 exports.DebugElement = DebugElement;
+/**
+ * @experimental
+ */
 function asNativeElements(debugEls) {
     return debugEls.map(function (el) { return el.nativeElement; });
 }
@@ -3344,6 +4436,9 @@ function _queryNodeChildren(parentNode, predicate, matches) {
 }
 // Need to keep the nodes in a global Map so that multiple angular apps are supported.
 var _nativeNodeToDebugNode = new Map();
+/**
+ * @experimental
+ */
 function getDebugNode(nativeNode) {
     return _nativeNodeToDebugNode.get(nativeNode);
 }
@@ -3361,9 +4456,9 @@ function removeDebugNodeFromIndex(node) {
 }
 exports.removeDebugNodeFromIndex = removeDebugNodeFromIndex;
 
-},{"../../src/facade/collection":64,"../../src/facade/lang":67}],49:[function(require,module,exports){
+},{"../facade/collection":74,"../facade/lang":77}],59:[function(require,module,exports){
 "use strict";
-var lang_1 = require('../../src/facade/lang');
+var lang_1 = require('../facade/lang');
 var debug_node_1 = require('./debug_node');
 var DebugDomRootRenderer = (function () {
     function DebugDomRootRenderer(_delegate) {
@@ -3466,37 +4561,47 @@ var DebugDomRenderer = (function () {
         this._delegate.setBindingDebugInfo(renderElement, propertyName, propertyValue);
     };
     DebugDomRenderer.prototype.setElementClass = function (renderElement, className, isAdd) {
+        var debugEl = debug_node_1.getDebugNode(renderElement);
+        if (lang_1.isPresent(debugEl) && debugEl instanceof debug_node_1.DebugElement) {
+            debugEl.classes[className] = isAdd;
+        }
         this._delegate.setElementClass(renderElement, className, isAdd);
     };
     DebugDomRenderer.prototype.setElementStyle = function (renderElement, styleName, styleValue) {
+        var debugEl = debug_node_1.getDebugNode(renderElement);
+        if (lang_1.isPresent(debugEl) && debugEl instanceof debug_node_1.DebugElement) {
+            debugEl.styles[styleName] = styleValue;
+        }
         this._delegate.setElementStyle(renderElement, styleName, styleValue);
     };
     DebugDomRenderer.prototype.invokeElementMethod = function (renderElement, methodName, args) {
         this._delegate.invokeElementMethod(renderElement, methodName, args);
     };
     DebugDomRenderer.prototype.setText = function (renderNode, text) { this._delegate.setText(renderNode, text); };
+    DebugDomRenderer.prototype.animate = function (element, startingStyles, keyframes, duration, delay, easing) {
+        return this._delegate.animate(element, startingStyles, keyframes, duration, delay, easing);
+    };
     return DebugDomRenderer;
 }());
 exports.DebugDomRenderer = DebugDomRenderer;
 
-},{"../../src/facade/lang":67,"./debug_node":48}],50:[function(require,module,exports){
+},{"../facade/lang":77,"./debug_node":58}],60:[function(require,module,exports){
+/**
+ * @module
+ * @description
+ * The `di` module provides dependency injection container services.
+ */
 "use strict";
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
-/**
-* @module
-* @description
-* The `di` module provides dependency injection container services.
-*/
 var metadata_1 = require('./di/metadata');
-exports.InjectMetadata = metadata_1.InjectMetadata;
-exports.OptionalMetadata = metadata_1.OptionalMetadata;
-exports.InjectableMetadata = metadata_1.InjectableMetadata;
-exports.SelfMetadata = metadata_1.SelfMetadata;
 exports.HostMetadata = metadata_1.HostMetadata;
+exports.InjectMetadata = metadata_1.InjectMetadata;
+exports.InjectableMetadata = metadata_1.InjectableMetadata;
+exports.OptionalMetadata = metadata_1.OptionalMetadata;
+exports.SelfMetadata = metadata_1.SelfMetadata;
 exports.SkipSelfMetadata = metadata_1.SkipSelfMetadata;
-exports.DependencyMetadata = metadata_1.DependencyMetadata;
 // we have to reexport * because Dart and TS export two different sets of types
 __export(require('./di/decorators'));
 var forward_ref_1 = require('./di/forward_ref');
@@ -3514,7 +4619,6 @@ exports.Provider = provider_1.Provider;
 exports.provide = provider_1.provide;
 var reflective_provider_1 = require('./di/reflective_provider');
 exports.ResolvedReflectiveFactory = reflective_provider_1.ResolvedReflectiveFactory;
-exports.ReflectiveDependency = reflective_provider_1.ReflectiveDependency;
 var reflective_key_1 = require('./di/reflective_key');
 exports.ReflectiveKey = reflective_key_1.ReflectiveKey;
 var reflective_exceptions_1 = require('./di/reflective_exceptions');
@@ -3528,38 +4632,44 @@ exports.OutOfBoundsError = reflective_exceptions_1.OutOfBoundsError;
 var opaque_token_1 = require('./di/opaque_token');
 exports.OpaqueToken = opaque_token_1.OpaqueToken;
 
-},{"./di/decorators":51,"./di/forward_ref":52,"./di/injector":53,"./di/metadata":54,"./di/opaque_token":55,"./di/provider":56,"./di/reflective_exceptions":58,"./di/reflective_injector":59,"./di/reflective_key":60,"./di/reflective_provider":61}],51:[function(require,module,exports){
+},{"./di/decorators":61,"./di/forward_ref":62,"./di/injector":63,"./di/metadata":64,"./di/opaque_token":65,"./di/provider":66,"./di/reflective_exceptions":68,"./di/reflective_injector":69,"./di/reflective_key":70,"./di/reflective_provider":71}],61:[function(require,module,exports){
 "use strict";
-var metadata_1 = require('./metadata');
 var decorators_1 = require('../util/decorators');
+var metadata_1 = require('./metadata');
 /**
  * Factory for creating {@link InjectMetadata}.
+ * @stable
  */
 exports.Inject = decorators_1.makeParamDecorator(metadata_1.InjectMetadata);
 /**
  * Factory for creating {@link OptionalMetadata}.
+ * @stable
  */
 exports.Optional = decorators_1.makeParamDecorator(metadata_1.OptionalMetadata);
 /**
  * Factory for creating {@link InjectableMetadata}.
+ * @stable
  */
 exports.Injectable = decorators_1.makeDecorator(metadata_1.InjectableMetadata);
 /**
  * Factory for creating {@link SelfMetadata}.
+ * @stable
  */
 exports.Self = decorators_1.makeParamDecorator(metadata_1.SelfMetadata);
 /**
  * Factory for creating {@link HostMetadata}.
+ * @stable
  */
 exports.Host = decorators_1.makeParamDecorator(metadata_1.HostMetadata);
 /**
  * Factory for creating {@link SkipSelfMetadata}.
+ * @stable
  */
 exports.SkipSelf = decorators_1.makeParamDecorator(metadata_1.SkipSelfMetadata);
 
-},{"../util/decorators":104,"./metadata":54}],52:[function(require,module,exports){
+},{"../util/decorators":116,"./metadata":64}],62:[function(require,module,exports){
 "use strict";
-var lang_1 = require('../../src/facade/lang');
+var lang_1 = require('../facade/lang');
 /**
  * Allows to refer to references which are not yet defined.
  *
@@ -3570,6 +4680,7 @@ var lang_1 = require('../../src/facade/lang');
  *
  * ### Example
  * {@example core/di/ts/forward_ref/forward_ref.ts region='forward_ref'}
+ * @experimental
  */
 function forwardRef(forwardRefFn) {
     forwardRefFn.__forward_ref__ = forwardRef;
@@ -3591,6 +4702,7 @@ exports.forwardRef = forwardRef;
  * ```
  *
  * See: {@link forwardRef}
+ * @experimental
  */
 function resolveForwardRef(type) {
     if (lang_1.isFunction(type) && type.hasOwnProperty('__forward_ref__') &&
@@ -3603,11 +4715,14 @@ function resolveForwardRef(type) {
 }
 exports.resolveForwardRef = resolveForwardRef;
 
-},{"../../src/facade/lang":67}],53:[function(require,module,exports){
+},{"../facade/lang":77}],63:[function(require,module,exports){
 "use strict";
-var exceptions_1 = require('../../src/facade/exceptions');
+var exceptions_1 = require('../facade/exceptions');
 var _THROW_IF_NOT_FOUND = new Object();
 exports.THROW_IF_NOT_FOUND = _THROW_IF_NOT_FOUND;
+/**
+ * @stable
+ */
 var Injector = (function () {
     function Injector() {
     }
@@ -3622,7 +4737,7 @@ var Injector = (function () {
      *
      * ```typescript
      * var injector = ReflectiveInjector.resolveAndCreate([
-     *   provide("validToken", {useValue: "Value"})
+     *   {provide: "validToken", useValue: "Value"}
      * ]);
      * expect(injector.get("validToken")).toEqual("Value");
      * expect(() => injector.get("invalidToken")).toThrowError();
@@ -3641,9 +4756,9 @@ var Injector = (function () {
 }());
 exports.Injector = Injector;
 
-},{"../../src/facade/exceptions":66}],54:[function(require,module,exports){
+},{"../facade/exceptions":76}],64:[function(require,module,exports){
 "use strict";
-var lang_1 = require('../../src/facade/lang');
+var lang_1 = require('../facade/lang');
 /**
  * A parameter metadata that specifies a dependency.
  *
@@ -3661,7 +4776,7 @@ var lang_1 = require('../../src/facade/lang');
  * }
  *
  * var injector = Injector.resolveAndCreate([
- *  provide("MyEngine", {useClass: Engine}),
+ *  {provide: "MyEngine", useClass: Engine},
  *  Car
  * ]);
  *
@@ -3684,9 +4799,10 @@ var lang_1 = require('../../src/facade/lang');
  * expect(injector.get(Car).engine instanceof Engine).toBe(true);
  * ```
  * @ts2dart_const
+ * @stable
  */
 var InjectMetadata = (function () {
-    function InjectMetadata(token) {
+    function InjectMetadata(token /** TODO #9100 */) {
         this.token = token;
     }
     InjectMetadata.prototype.toString = function () { return "@Inject(" + lang_1.stringify(this.token) + ")"; };
@@ -3714,6 +4830,7 @@ exports.InjectMetadata = InjectMetadata;
  * expect(injector.get(Car).engine).toBeNull();
  * ```
  * @ts2dart_const
+ * @stable
  */
 var OptionalMetadata = (function () {
     function OptionalMetadata() {
@@ -3726,6 +4843,7 @@ exports.OptionalMetadata = OptionalMetadata;
  * `DependencyMetadata` is used by the framework to extend DI.
  * This is internal to Angular and should not be used directly.
  * @ts2dart_const
+ * @stable
  */
 var DependencyMetadata = (function () {
     function DependencyMetadata() {
@@ -3769,6 +4887,7 @@ exports.DependencyMetadata = DependencyMetadata;
  * expect(() => injector.get(NeedsService)).toThrowError();
  * ```
  * @ts2dart_const
+ * @stable
  */
 var InjectableMetadata = (function () {
     function InjectableMetadata() {
@@ -3803,6 +4922,7 @@ exports.InjectableMetadata = InjectableMetadata;
  * expect(() => child.get(NeedsDependency)).toThrowError();
  * ```
  * @ts2dart_const
+ * @stable
  */
 var SelfMetadata = (function () {
     function SelfMetadata() {
@@ -3836,6 +4956,7 @@ exports.SelfMetadata = SelfMetadata;
  * expect(() => inj.get(NeedsDependency)).toThrowError();
  * ```
  * @ts2dart_const
+ * @stable
  */
 var SkipSelfMetadata = (function () {
     function SkipSelfMetadata() {
@@ -3898,6 +5019,7 @@ exports.SkipSelfMetadata = SkipSelfMetadata;
  * bootstrap(App);
  *```
  * @ts2dart_const
+ * @stable
  */
 var HostMetadata = (function () {
     function HostMetadata() {
@@ -3907,30 +5029,31 @@ var HostMetadata = (function () {
 }());
 exports.HostMetadata = HostMetadata;
 
-},{"../../src/facade/lang":67}],55:[function(require,module,exports){
+},{"../facade/lang":77}],65:[function(require,module,exports){
 "use strict";
 /**
-* Creates a token that can be used in a DI Provider.
-*
-* ### Example ([live demo](http://plnkr.co/edit/Ys9ezXpj2Mnoy3Uc8KBp?p=preview))
-*
-* ```typescript
-* var t = new OpaqueToken("value");
-*
-* var injector = Injector.resolveAndCreate([
-*   provide(t, {useValue: "bindingValue"})
-* ]);
-*
-* expect(injector.get(t)).toEqual("bindingValue");
-* ```
-*
-* Using an `OpaqueToken` is preferable to using strings as tokens because of possible collisions
-* caused by multiple providers using the same string as two different tokens.
-*
-* Using an `OpaqueToken` is preferable to using an `Object` as tokens because it provides better
-* error messages.
-* @ts2dart_const
-*/
+ * Creates a token that can be used in a DI Provider.
+ *
+ * ### Example ([live demo](http://plnkr.co/edit/Ys9ezXpj2Mnoy3Uc8KBp?p=preview))
+ *
+ * ```typescript
+ * var t = new OpaqueToken("value");
+ *
+ * var injector = Injector.resolveAndCreate([
+ *   {provide: t, useValue: "bindingValue"}
+ * ]);
+ *
+ * expect(injector.get(t)).toEqual("bindingValue");
+ * ```
+ *
+ * Using an `OpaqueToken` is preferable to using strings as tokens because of possible collisions
+ * caused by multiple providers using the same string as two different tokens.
+ *
+ * Using an `OpaqueToken` is preferable to using an `Object` as tokens because it provides better
+ * error messages.
+ * @ts2dart_const
+ * @stable
+ */
 var OpaqueToken = (function () {
     function OpaqueToken(_desc) {
         this._desc = _desc;
@@ -3940,15 +5063,15 @@ var OpaqueToken = (function () {
 }());
 exports.OpaqueToken = OpaqueToken;
 
-},{}],56:[function(require,module,exports){
+},{}],66:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var lang_1 = require('../../src/facade/lang');
-var exceptions_1 = require('../../src/facade/exceptions');
+var exceptions_1 = require('../facade/exceptions');
+var lang_1 = require('../facade/lang');
 /**
  * Describes how the {@link Injector} should instantiate a given token.
  *
@@ -3964,9 +5087,10 @@ var exceptions_1 = require('../../src/facade/exceptions');
  * expect(injector.get("message")).toEqual('Hello');
  * ```
  * @ts2dart_const
+ * @deprecated
  */
 var Provider = (function () {
-    function Provider(token, _a) {
+    function Provider(token /** TODO #9100 */, _a) {
         var useClass = _a.useClass, useValue = _a.useValue, useExisting = _a.useExisting, useFactory = _a.useFactory, deps = _a.deps, multi = _a.multi;
         this.token = token;
         this.useClass = useClass;
@@ -4022,7 +5146,7 @@ exports.Provider = Provider;
  */
 var Binding = (function (_super) {
     __extends(Binding, _super);
-    function Binding(token, _a) {
+    function Binding(token /** TODO #9100 */, _a) {
         var toClass = _a.toClass, toValue = _a.toValue, toAlias = _a.toAlias, toFactory = _a.toFactory, deps = _a.deps, multi = _a.multi;
         _super.call(this, token, {
             useClass: toClass,
@@ -4080,15 +5204,16 @@ exports.Binding = Binding;
  *
  * @deprecated
  */
-function bind(token) {
+function bind(token /** TODO #9100 */) {
     return new ProviderBuilder(token);
 }
 exports.bind = bind;
 /**
  * Helper class for the {@link bind} function.
+ * @deprecated
  */
 var ProviderBuilder = (function () {
-    function ProviderBuilder(token) {
+    function ProviderBuilder(token /** TODO #9100 */) {
         this.token = token;
     }
     /**
@@ -4106,11 +5231,11 @@ var ProviderBuilder = (function () {
      *
      * var injectorClass = Injector.resolveAndCreate([
      *   Car,
-     *   provide(Vehicle, {useClass: Car})
+     *   {provide: Vehicle, useClass: Car}
      * ]);
      * var injectorAlias = Injector.resolveAndCreate([
      *   Car,
-     *   provide(Vehicle, {useExisting: Car})
+     *   {provide: Vehicle, useExisting: Car}
      * ]);
      *
      * expect(injectorClass.get(Vehicle)).not.toBe(injectorClass.get(Car));
@@ -4133,7 +5258,7 @@ var ProviderBuilder = (function () {
      *
      * ```typescript
      * var injector = Injector.resolveAndCreate([
-     *   provide('message', {useValue: 'Hello'})
+     *   {provide: 'message', useValue: 'Hello'}
      * ]);
      *
      * expect(injector.get('message')).toEqual('Hello');
@@ -4158,11 +5283,11 @@ var ProviderBuilder = (function () {
      *
      * var injectorAlias = Injector.resolveAndCreate([
      *   Car,
-     *   provide(Vehicle, {useExisting: Car})
+     *   {provide: Vehicle, useExisting: Car}
      * ]);
      * var injectorClass = Injector.resolveAndCreate([
      *   Car,
-     *   provide(Vehicle, {useClass: Car})
+     *   {provide: Vehicle, useClass: Car})
      * ]);
      *
      * expect(injectorAlias.get(Vehicle)).toBe(injectorAlias.get(Car));
@@ -4185,8 +5310,8 @@ var ProviderBuilder = (function () {
      *
      * ```typescript
      * var injector = Injector.resolveAndCreate([
-     *   provide(Number, {useFactory: () => { return 1+2; }}),
-     *   provide(String, {useFactory: (v) => { return "Value: " + v; }, deps: [Number]})
+     *   {provide: Number, useFactory: () => { return 1+2; }},
+     *   {provide: String, useFactory: (v) => { return "Value: " + v; }, deps: [Number]}
      * ]);
      *
      * expect(injector.get(Number)).toEqual(3);
@@ -4208,8 +5333,9 @@ exports.ProviderBuilder = ProviderBuilder;
  * See {@link Provider} for more details.
  *
  * <!-- TODO: improve the docs -->
+ * @deprecated
  */
-function provide(token, _a) {
+function provide(token /** TODO #9100 */, _a) {
     var useClass = _a.useClass, useValue = _a.useValue, useExisting = _a.useExisting, useFactory = _a.useFactory, deps = _a.deps, multi = _a.multi;
     return new Provider(token, {
         useClass: useClass,
@@ -4222,7 +5348,7 @@ function provide(token, _a) {
 }
 exports.provide = provide;
 
-},{"../../src/facade/exceptions":66,"../../src/facade/lang":67}],57:[function(require,module,exports){
+},{"../facade/exceptions":76,"../facade/lang":77}],67:[function(require,module,exports){
 "use strict";
 var provider_1 = require('./provider');
 function isProviderLiteral(obj) {
@@ -4234,16 +5360,16 @@ function createProvider(obj) {
 }
 exports.createProvider = createProvider;
 
-},{"./provider":56}],58:[function(require,module,exports){
+},{"./provider":66}],68:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var collection_1 = require('../../src/facade/collection');
-var lang_1 = require('../../src/facade/lang');
-var exceptions_1 = require('../../src/facade/exceptions');
+var collection_1 = require('../facade/collection');
+var exceptions_1 = require('../facade/exceptions');
+var lang_1 = require('../facade/lang');
 function findFirstClosedCycle(keys) {
     var res = [];
     for (var i = 0; i < keys.length; ++i) {
@@ -4261,19 +5387,20 @@ function constructResolvingPath(keys) {
     if (keys.length > 1) {
         var reversed = findFirstClosedCycle(collection_1.ListWrapper.reversed(keys));
         var tokenStrs = reversed.map(function (k) { return lang_1.stringify(k.token); });
-        return " (" + tokenStrs.join(' -> ') + ")";
+        return ' (' + tokenStrs.join(' -> ') + ')';
     }
     else {
-        return "";
+        return '';
     }
 }
 /**
  * Base class for all errors arising from misconfigured providers.
+ * @stable
  */
 var AbstractProviderError = (function (_super) {
     __extends(AbstractProviderError, _super);
     function AbstractProviderError(injector, key, constructResolvingMessage) {
-        _super.call(this, "DI Exception");
+        _super.call(this, 'DI Exception');
         this.keys = [key];
         this.injectors = [injector];
         this.constructResolvingMessage = constructResolvingMessage;
@@ -4305,6 +5432,7 @@ exports.AbstractProviderError = AbstractProviderError;
  *
  * expect(() => Injector.resolveAndCreate([A])).toThrowError();
  * ```
+ * @stable
  */
 var NoProviderError = (function (_super) {
     __extends(NoProviderError, _super);
@@ -4324,14 +5452,15 @@ exports.NoProviderError = NoProviderError;
  *
  * ```typescript
  * var injector = Injector.resolveAndCreate([
- *   provide("one", {useFactory: (two) => "two", deps: [[new Inject("two")]]}),
- *   provide("two", {useFactory: (one) => "one", deps: [[new Inject("one")]]})
+ *   {provide: "one", useFactory: (two) => "two", deps: [[new Inject("two")]]},
+ *   {provide: "two", useFactory: (one) => "one", deps: [[new Inject("one")]]}
  * ]);
  *
  * expect(() => injector.get("one")).toThrowError();
  * ```
  *
  * Retrieving `A` or `B` throws a `CyclicDependencyError` as the graph above cannot be constructed.
+ * @stable
  */
 var CyclicDependencyError = (function (_super) {
     __extends(CyclicDependencyError, _super);
@@ -4368,11 +5497,12 @@ exports.CyclicDependencyError = CyclicDependencyError;
  *   expect(e.originalStack).toBeDefined();
  * }
  * ```
+ * @stable
  */
 var InstantiationError = (function (_super) {
     __extends(InstantiationError, _super);
-    function InstantiationError(injector, originalException, originalStack, key) {
-        _super.call(this, "DI Exception", originalException, originalStack, null);
+    function InstantiationError(injector, originalException /** TODO #9100 */, originalStack /** TODO #9100 */, key) {
+        _super.call(this, 'DI Exception', originalException, originalStack, null);
         this.keys = [key];
         this.injectors = [injector];
     }
@@ -4410,12 +5540,12 @@ exports.InstantiationError = InstantiationError;
  * ```typescript
  * expect(() => Injector.resolveAndCreate(["not a type"])).toThrowError();
  * ```
+ * @stable
  */
 var InvalidProviderError = (function (_super) {
     __extends(InvalidProviderError, _super);
-    function InvalidProviderError(provider) {
-        _super.call(this, "Invalid provider - only instances of Provider and Type are allowed, got: " +
-            provider.toString());
+    function InvalidProviderError(provider /** TODO #9100 */) {
+        _super.call(this, "Invalid provider - only instances of Provider and Type are allowed, got: " + provider);
     }
     return InvalidProviderError;
 }(exceptions_1.BaseException));
@@ -4447,13 +5577,14 @@ exports.InvalidProviderError = InvalidProviderError;
  *
  * expect(() => Injector.resolveAndCreate([A,B])).toThrowError();
  * ```
+ * @stable
  */
 var NoAnnotationError = (function (_super) {
     __extends(NoAnnotationError, _super);
-    function NoAnnotationError(typeOrFunc, params) {
+    function NoAnnotationError(typeOrFunc /** TODO #9100 */, params) {
         _super.call(this, NoAnnotationError._genMessage(typeOrFunc, params));
     }
-    NoAnnotationError._genMessage = function (typeOrFunc, params) {
+    NoAnnotationError._genMessage = function (typeOrFunc /** TODO #9100 */, params) {
         var signature = [];
         for (var i = 0, ii = params.length; i < ii; i++) {
             var parameter = params[i];
@@ -4464,10 +5595,10 @@ var NoAnnotationError = (function (_super) {
                 signature.push(parameter.map(lang_1.stringify).join(' '));
             }
         }
-        return "Cannot resolve all parameters for '" + lang_1.stringify(typeOrFunc) + "'(" +
-            signature.join(', ') + "). " +
-            "Make sure that all the parameters are decorated with Inject or have valid type annotations and that '" +
-            lang_1.stringify(typeOrFunc) + "' is decorated with Injectable.";
+        return 'Cannot resolve all parameters for \'' + lang_1.stringify(typeOrFunc) + '\'(' +
+            signature.join(', ') + '). ' +
+            'Make sure that all the parameters are decorated with Inject or have valid type annotations and that \'' +
+            lang_1.stringify(typeOrFunc) + '\' is decorated with Injectable.';
     };
     return NoAnnotationError;
 }(exceptions_1.BaseException));
@@ -4484,10 +5615,11 @@ exports.NoAnnotationError = NoAnnotationError;
  *
  * expect(() => injector.getAt(100)).toThrowError();
  * ```
+ * @stable
  */
 var OutOfBoundsError = (function (_super) {
     __extends(OutOfBoundsError, _super);
-    function OutOfBoundsError(index) {
+    function OutOfBoundsError(index /** TODO #9100 */) {
         _super.call(this, "Index " + index + " is out-of-bounds.");
     }
     return OutOfBoundsError;
@@ -4508,23 +5640,23 @@ exports.OutOfBoundsError = OutOfBoundsError;
  */
 var MixingMultiProvidersWithRegularProvidersError = (function (_super) {
     __extends(MixingMultiProvidersWithRegularProvidersError, _super);
-    function MixingMultiProvidersWithRegularProvidersError(provider1, provider2) {
-        _super.call(this, "Cannot mix multi providers and regular providers, got: " + provider1.toString() + " " +
+    function MixingMultiProvidersWithRegularProvidersError(provider1 /** TODO #9100 */, provider2 /** TODO #9100 */) {
+        _super.call(this, 'Cannot mix multi providers and regular providers, got: ' + provider1.toString() + ' ' +
             provider2.toString());
     }
     return MixingMultiProvidersWithRegularProvidersError;
 }(exceptions_1.BaseException));
 exports.MixingMultiProvidersWithRegularProvidersError = MixingMultiProvidersWithRegularProvidersError;
 
-},{"../../src/facade/collection":64,"../../src/facade/exceptions":66,"../../src/facade/lang":67}],59:[function(require,module,exports){
+},{"../facade/collection":74,"../facade/exceptions":76,"../facade/lang":77}],69:[function(require,module,exports){
 "use strict";
-var collection_1 = require('../../src/facade/collection');
-var reflective_provider_1 = require('./reflective_provider');
-var reflective_exceptions_1 = require('./reflective_exceptions');
-var exceptions_1 = require('../../src/facade/exceptions');
-var reflective_key_1 = require('./reflective_key');
-var metadata_1 = require('./metadata');
+var collection_1 = require('../facade/collection');
+var exceptions_1 = require('../facade/exceptions');
 var injector_1 = require('./injector');
+var metadata_1 = require('./metadata');
+var reflective_exceptions_1 = require('./reflective_exceptions');
+var reflective_key_1 = require('./reflective_key');
+var reflective_provider_1 = require('./reflective_provider');
 var __unused; // avoid unused import when Type union types are erased
 // Threshold for the dynamic version
 var _MAX_CONSTRUCTION_COUNTER = 10;
@@ -4927,6 +6059,7 @@ var ReflectiveInjector = (function () {
      * var injector = ReflectiveInjector.fromResolvedProviders(providers);
      * expect(injector.get(Car) instanceof Car).toBe(true);
      * ```
+     * @experimental
      */
     ReflectiveInjector.fromResolvedProviders = function (providers, parent) {
         if (parent === void 0) { parent = null; }
@@ -5325,7 +6458,9 @@ var ReflectiveInjector_ = (function () {
     };
     Object.defineProperty(ReflectiveInjector_.prototype, "displayName", {
         get: function () {
-            return "ReflectiveInjector(providers: [" + _mapProviders(this, function (b) { return (" \"" + b.key.displayName + "\" "); }).join(", ") + "])";
+            var providers = _mapProviders(this, function (b) { return ' "' + b.key.displayName + '" '; })
+                .join(', ');
+            return "ReflectiveInjector(providers: [" + providers + "])";
         },
         enumerable: true,
         configurable: true
@@ -5343,10 +6478,10 @@ function _mapProviders(injector, fn) {
     return res;
 }
 
-},{"../../src/facade/collection":64,"../../src/facade/exceptions":66,"./injector":53,"./metadata":54,"./reflective_exceptions":58,"./reflective_key":60,"./reflective_provider":61}],60:[function(require,module,exports){
+},{"../facade/collection":74,"../facade/exceptions":76,"./injector":63,"./metadata":64,"./reflective_exceptions":68,"./reflective_key":70,"./reflective_provider":71}],70:[function(require,module,exports){
 "use strict";
-var lang_1 = require('../../src/facade/lang');
-var exceptions_1 = require('../../src/facade/exceptions');
+var exceptions_1 = require('../facade/exceptions');
+var lang_1 = require('../facade/lang');
 var forward_ref_1 = require('./forward_ref');
 /**
  * A unique object used for retrieving items from the {@link ReflectiveInjector}.
@@ -5362,6 +6497,7 @@ var forward_ref_1 = require('./forward_ref');
  * `Key` should not be created directly. {@link ReflectiveInjector} creates keys automatically when
  * resolving
  * providers.
+ * @experimental
  */
 var ReflectiveKey = (function () {
     /**
@@ -5426,10 +6562,10 @@ var KeyRegistry = (function () {
 exports.KeyRegistry = KeyRegistry;
 var _globalKeyRegistry = new KeyRegistry();
 
-},{"../../src/facade/exceptions":66,"../../src/facade/lang":67,"./forward_ref":52}],61:[function(require,module,exports){
+},{"../facade/exceptions":76,"../facade/lang":77,"./forward_ref":62}],71:[function(require,module,exports){
 "use strict";
-var lang_1 = require('../../src/facade/lang');
-var collection_1 = require('../../src/facade/collection');
+var lang_1 = require('../facade/lang');
+var collection_1 = require('../facade/collection');
 var reflection_1 = require('../reflection/reflection');
 var reflective_key_1 = require('./reflective_key');
 var metadata_1 = require('./metadata');
@@ -5472,6 +6608,7 @@ var ResolvedReflectiveProvider_ = (function () {
 exports.ResolvedReflectiveProvider_ = ResolvedReflectiveProvider_;
 /**
  * An internal resolved representation of a factory function created by resolving {@link Provider}.
+ * @experimental
  */
 var ResolvedReflectiveFactory = (function () {
     function ResolvedReflectiveFactory(
@@ -5501,7 +6638,7 @@ function resolveReflectiveFactory(provider) {
         resolvedDeps = _dependenciesFor(useClass);
     }
     else if (lang_1.isPresent(provider.useExisting)) {
-        factoryFn = function (aliasInstance) { return aliasInstance; };
+        factoryFn = function (aliasInstance /** TODO #9100 */) { return aliasInstance; };
         resolvedDeps = [ReflectiveDependency.fromKey(reflective_key_1.ReflectiveKey.get(provider.useExisting))];
     }
     else if (lang_1.isPresent(provider.useFactory)) {
@@ -5612,7 +6749,7 @@ function _dependenciesFor(typeOrFunc) {
     }
     return params.map(function (p) { return _extractToken(typeOrFunc, p, params); });
 }
-function _extractToken(typeOrFunc, metadata /*any[] | any*/, params) {
+function _extractToken(typeOrFunc /** TODO #9100 */, metadata /** TODO #9100 */ /*any[] | any*/, params) {
     var depProps = [];
     var token = null;
     var optional = false;
@@ -5661,28 +6798,28 @@ function _extractToken(typeOrFunc, metadata /*any[] | any*/, params) {
         throw new reflective_exceptions_1.NoAnnotationError(typeOrFunc, params);
     }
 }
-function _createDependency(token, optional, lowerBoundVisibility, upperBoundVisibility, depProps) {
+function _createDependency(token /** TODO #9100 */, optional /** TODO #9100 */, lowerBoundVisibility /** TODO #9100 */, upperBoundVisibility /** TODO #9100 */, depProps /** TODO #9100 */) {
     return new ReflectiveDependency(reflective_key_1.ReflectiveKey.get(token), optional, lowerBoundVisibility, upperBoundVisibility, depProps);
 }
 
-},{"../../src/facade/collection":64,"../../src/facade/lang":67,"../reflection/reflection":95,"./forward_ref":52,"./metadata":54,"./provider":56,"./provider_util":57,"./reflective_exceptions":58,"./reflective_key":60}],62:[function(require,module,exports){
+},{"../facade/collection":74,"../facade/lang":77,"../reflection/reflection":107,"./forward_ref":62,"./metadata":64,"./provider":66,"./provider_util":67,"./reflective_exceptions":68,"./reflective_key":70}],72:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var lang_1 = require('./lang');
-var promise_1 = require('./promise');
-exports.PromiseWrapper = promise_1.PromiseWrapper;
-exports.PromiseCompleter = promise_1.PromiseCompleter;
 var Subject_1 = require('rxjs/Subject');
 var PromiseObservable_1 = require('rxjs/observable/PromiseObservable');
 var toPromise_1 = require('rxjs/operator/toPromise');
+var lang_1 = require('./lang');
 var Observable_1 = require('rxjs/Observable');
 exports.Observable = Observable_1.Observable;
 var Subject_2 = require('rxjs/Subject');
 exports.Subject = Subject_2.Subject;
+var promise_1 = require('./promise');
+exports.PromiseCompleter = promise_1.PromiseCompleter;
+exports.PromiseWrapper = promise_1.PromiseWrapper;
 var TimerWrapper = (function () {
     function TimerWrapper() {
     }
@@ -5703,8 +6840,8 @@ var ObservableWrapper = (function () {
     // TODO(vsavkin): when we use rxnext, try inferring the generic type from the first arg
     ObservableWrapper.subscribe = function (emitter, onNext, onError, onComplete) {
         if (onComplete === void 0) { onComplete = function () { }; }
-        onError = (typeof onError === "function") && onError || lang_1.noop;
-        onComplete = (typeof onComplete === "function") && onComplete || lang_1.noop;
+        onError = (typeof onError === 'function') && onError || lang_1.noop;
+        onComplete = (typeof onComplete === 'function') && onComplete || lang_1.noop;
         return emitter.subscribe({ next: onNext, error: onError, complete: onComplete });
     };
     ObservableWrapper.isObservable = function (obs) { return !!obs.subscribe; };
@@ -5761,10 +6898,18 @@ exports.ObservableWrapper = ObservableWrapper;
  * }
  * ```
  *
- * Use Rx.Observable but provides an adapter to make it work as specified here:
+ * The events payload can be accessed by the parameter `$event` on the components output event
+ * handler:
+ *
+ * ```
+ * <zippy (open)="onOpen($event)" (close)="onClose($event)"></zippy>
+ * ```
+ *
+ * Uses Rx.Observable but provides an adapter to make it work as specified here:
  * https://github.com/jhusain/observable-spec
  *
  * Once a reference implementation of the spec is available, switch to it.
+ * @stable
  */
 var EventEmitter = (function (_super) {
     __extends(EventEmitter, _super);
@@ -5773,9 +6918,9 @@ var EventEmitter = (function (_super) {
      * delivers events synchronously or asynchronously.
      */
     function EventEmitter(isAsync) {
-        if (isAsync === void 0) { isAsync = true; }
+        if (isAsync === void 0) { isAsync = false; }
         _super.call(this);
-        this._isAsync = isAsync;
+        this.__isAsync = isAsync;
     }
     EventEmitter.prototype.emit = function (value) { _super.prototype.next.call(this, value); };
     /**
@@ -5787,27 +6932,29 @@ var EventEmitter = (function (_super) {
         var errorFn = function (err) { return null; };
         var completeFn = function () { return null; };
         if (generatorOrNext && typeof generatorOrNext === 'object') {
-            schedulerFn = this._isAsync ? function (value) { setTimeout(function () { return generatorOrNext.next(value); }); } :
-                function (value) { generatorOrNext.next(value); };
+            schedulerFn = this.__isAsync ? function (value /** TODO #9100 */) {
+                setTimeout(function () { return generatorOrNext.next(value); });
+            } : function (value /** TODO #9100 */) { generatorOrNext.next(value); };
             if (generatorOrNext.error) {
-                errorFn = this._isAsync ? function (err) { setTimeout(function () { return generatorOrNext.error(err); }); } :
+                errorFn = this.__isAsync ? function (err) { setTimeout(function () { return generatorOrNext.error(err); }); } :
                     function (err) { generatorOrNext.error(err); };
             }
             if (generatorOrNext.complete) {
-                completeFn = this._isAsync ? function () { setTimeout(function () { return generatorOrNext.complete(); }); } :
+                completeFn = this.__isAsync ? function () { setTimeout(function () { return generatorOrNext.complete(); }); } :
                     function () { generatorOrNext.complete(); };
             }
         }
         else {
-            schedulerFn = this._isAsync ? function (value) { setTimeout(function () { return generatorOrNext(value); }); } :
-                function (value) { generatorOrNext(value); };
+            schedulerFn = this.__isAsync ? function (value /** TODO #9100 */) {
+                setTimeout(function () { return generatorOrNext(value); });
+            } : function (value /** TODO #9100 */) { generatorOrNext(value); };
             if (error) {
                 errorFn =
-                    this._isAsync ? function (err) { setTimeout(function () { return error(err); }); } : function (err) { error(err); };
+                    this.__isAsync ? function (err) { setTimeout(function () { return error(err); }); } : function (err) { error(err); };
             }
             if (complete) {
                 completeFn =
-                    this._isAsync ? function () { setTimeout(function () { return complete(); }); } : function () { complete(); };
+                    this.__isAsync ? function () { setTimeout(function () { return complete(); }); } : function () { complete(); };
             }
         }
         return _super.prototype.subscribe.call(this, schedulerFn, errorFn, completeFn);
@@ -5816,7 +6963,7 @@ var EventEmitter = (function (_super) {
 }(Subject_1.Subject));
 exports.EventEmitter = EventEmitter;
 
-},{"./lang":67,"./promise":68,"rxjs/Observable":236,"rxjs/Subject":238,"rxjs/observable/PromiseObservable":242,"rxjs/operator/toPromise":246}],63:[function(require,module,exports){
+},{"./lang":77,"./promise":79,"rxjs/Observable":248,"rxjs/Subject":250,"rxjs/observable/PromiseObservable":254,"rxjs/operator/toPromise":258}],73:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -5824,10 +6971,10 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 /**
-* A base class for the WrappedException that can be used to identify
-* a WrappedException from ExceptionHandler without adding circular
-* dependency.
-*/
+ * A base class for the WrappedException that can be used to identify
+ * a WrappedException from ExceptionHandler without adding circular
+ * dependency.
+ */
 var BaseWrappedException = (function (_super) {
     __extends(BaseWrappedException, _super);
     function BaseWrappedException(message) {
@@ -5867,7 +7014,7 @@ var BaseWrappedException = (function (_super) {
 }(Error));
 exports.BaseWrappedException = BaseWrappedException;
 
-},{}],64:[function(require,module,exports){
+},{}],74:[function(require,module,exports){
 "use strict";
 var lang_1 = require('./lang');
 exports.Map = lang_1.global.Map;
@@ -6236,11 +7383,11 @@ var SetWrapper = (function () {
 }());
 exports.SetWrapper = SetWrapper;
 
-},{"./lang":67}],65:[function(require,module,exports){
+},{"./lang":77}],75:[function(require,module,exports){
 "use strict";
-var lang_1 = require('./lang');
 var base_wrapped_exception_1 = require('./base_wrapped_exception');
 var collection_1 = require('./collection');
+var lang_1 = require('./lang');
 var _ArrayLogger = (function () {
     function _ArrayLogger() {
         this.res = [];
@@ -6269,9 +7416,10 @@ var _ArrayLogger = (function () {
  *   }
  * }
  *
- * bootstrap(MyApp, [provide(ExceptionHandler, {useClass: MyExceptionHandler})])
+ * bootstrap(MyApp, {provide: ExceptionHandler, useClass: MyExceptionHandler}])
  *
  * ```
+ * @stable
  */
 var ExceptionHandler = (function () {
     function ExceptionHandler(_logger, _rethrowException) {
@@ -6285,7 +7433,7 @@ var ExceptionHandler = (function () {
         var l = new _ArrayLogger();
         var e = new ExceptionHandler(l, false);
         e.call(exception, stackTrace, reason);
-        return l.res.join("\n");
+        return l.res.join('\n');
     };
     ExceptionHandler.prototype.call = function (exception, stackTrace, reason) {
         if (stackTrace === void 0) { stackTrace = null; }
@@ -6295,7 +7443,7 @@ var ExceptionHandler = (function () {
         var context = this._findContext(exception);
         this._logger.logGroup("EXCEPTION: " + this._extractMessage(exception));
         if (lang_1.isPresent(stackTrace) && lang_1.isBlank(originalStack)) {
-            this._logger.logError("STACKTRACE:");
+            this._logger.logError('STACKTRACE:');
             this._logger.logError(this._longStackTrace(stackTrace));
         }
         if (lang_1.isPresent(reason)) {
@@ -6305,11 +7453,11 @@ var ExceptionHandler = (function () {
             this._logger.logError("ORIGINAL EXCEPTION: " + this._extractMessage(originalException));
         }
         if (lang_1.isPresent(originalStack)) {
-            this._logger.logError("ORIGINAL STACKTRACE:");
+            this._logger.logError('ORIGINAL STACKTRACE:');
             this._logger.logError(this._longStackTrace(originalStack));
         }
         if (lang_1.isPresent(context)) {
-            this._logger.logError("ERROR CONTEXT:");
+            this._logger.logError('ERROR CONTEXT:');
             this._logger.logError(context);
         }
         this._logger.logGroupEnd();
@@ -6325,7 +7473,7 @@ var ExceptionHandler = (function () {
     };
     /** @internal */
     ExceptionHandler.prototype._longStackTrace = function (stackTrace) {
-        return collection_1.isListLikeIterable(stackTrace) ? stackTrace.join("\n\n-----async gap-----\n") :
+        return collection_1.isListLikeIterable(stackTrace) ? stackTrace.join('\n\n-----async gap-----\n') :
             stackTrace.toString();
     };
     /** @internal */
@@ -6369,7 +7517,7 @@ var ExceptionHandler = (function () {
 }());
 exports.ExceptionHandler = ExceptionHandler;
 
-},{"./base_wrapped_exception":63,"./collection":64,"./lang":67}],66:[function(require,module,exports){
+},{"./base_wrapped_exception":73,"./collection":74,"./lang":77}],76:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -6380,10 +7528,13 @@ var base_wrapped_exception_1 = require('./base_wrapped_exception');
 var exception_handler_1 = require('./exception_handler');
 var exception_handler_2 = require('./exception_handler');
 exports.ExceptionHandler = exception_handler_2.ExceptionHandler;
+/**
+ * @stable
+ */
 var BaseException = (function (_super) {
     __extends(BaseException, _super);
     function BaseException(message) {
-        if (message === void 0) { message = "--"; }
+        if (message === void 0) { message = '--'; }
         _super.call(this, message);
         this.message = message;
         this.stack = (new Error(message)).stack;
@@ -6394,10 +7545,11 @@ var BaseException = (function (_super) {
 exports.BaseException = BaseException;
 /**
  * Wraps an exception and provides additional context or information.
+ * @stable
  */
 var WrappedException = (function (_super) {
     __extends(WrappedException, _super);
-    function WrappedException(_wrapperMessage, _originalException, _originalStack, _context) {
+    function WrappedException(_wrapperMessage, _originalException /** TODO #9100 */, _originalStack /** TODO #9100 */, _context /** TODO #9100 */) {
         _super.call(this, _wrapperMessage);
         this._wrapperMessage = _wrapperMessage;
         this._originalException = _originalException;
@@ -6448,7 +7600,7 @@ function unimplemented() {
 }
 exports.unimplemented = unimplemented;
 
-},{"./base_wrapped_exception":63,"./exception_handler":65}],67:[function(require,module,exports){
+},{"./base_wrapped_exception":73,"./exception_handler":75}],77:[function(require,module,exports){
 (function (global){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
@@ -6501,6 +7653,7 @@ exports.lockMode = lockMode;
  * One important assertion this disables verifies that a change detection pass
  * does not result in additional changes to any bindings (also known as
  * unidirectional data flow).
+ * @stable
  */
 function enableProdMode() {
     if (_modeLocked) {
@@ -6529,19 +7682,19 @@ function isBlank(obj) {
 }
 exports.isBlank = isBlank;
 function isBoolean(obj) {
-    return typeof obj === "boolean";
+    return typeof obj === 'boolean';
 }
 exports.isBoolean = isBoolean;
 function isNumber(obj) {
-    return typeof obj === "number";
+    return typeof obj === 'number';
 }
 exports.isNumber = isNumber;
 function isString(obj) {
-    return typeof obj === "string";
+    return typeof obj === 'string';
 }
 exports.isString = isString;
 function isFunction(obj) {
-    return typeof obj === "function";
+    return typeof obj === 'function';
 }
 exports.isFunction = isFunction;
 function isType(obj) {
@@ -6585,7 +7738,7 @@ function stringify(token) {
         return token.overriddenName;
     }
     var res = token.toString();
-    var newLineIndex = res.indexOf("\n");
+    var newLineIndex = res.indexOf('\n');
     return (newLineIndex === -1) ? res : res.substring(0, newLineIndex);
 }
 exports.stringify = stringify;
@@ -6678,7 +7831,7 @@ var StringJoiner = (function () {
         this.parts = parts;
     }
     StringJoiner.prototype.add = function (part) { this.parts.push(part); };
-    StringJoiner.prototype.toString = function () { return this.parts.join(""); };
+    StringJoiner.prototype.toString = function () { return this.parts.join(''); };
     return StringJoiner;
 }());
 exports.StringJoiner = StringJoiner;
@@ -6700,7 +7853,7 @@ var NumberWrapper = (function () {
     NumberWrapper.parseIntAutoRadix = function (text) {
         var result = parseInt(text);
         if (isNaN(result)) {
-            throw new NumberParseError("Invalid integer literal when parsing " + text);
+            throw new NumberParseError('Invalid integer literal when parsing ' + text);
         }
         return result;
     };
@@ -6721,8 +7874,7 @@ var NumberWrapper = (function () {
                 return result;
             }
         }
-        throw new NumberParseError("Invalid integer literal when parsing " + text + " in base " +
-            radix);
+        throw new NumberParseError('Invalid integer literal when parsing ' + text + ' in base ' + radix);
     };
     // TODO: NaN is a valid literal but is returned by parseFloat to indicate an error.
     NumberWrapper.parseFloat = function (text) { return parseFloat(text); };
@@ -6792,12 +7944,13 @@ var FunctionWrapper = (function () {
     function FunctionWrapper() {
     }
     FunctionWrapper.apply = function (fn, posArgs) { return fn.apply(null, posArgs); };
+    FunctionWrapper.bind = function (fn, scope) { return fn.bind(scope); };
     return FunctionWrapper;
 }());
 exports.FunctionWrapper = FunctionWrapper;
 // JS has NaN !== NaN
 function looseIdentical(a, b) {
-    return a === b || typeof a === "number" && typeof b === "number" && isNaN(a) && isNaN(b);
+    return a === b || typeof a === 'number' && typeof b === 'number' && isNaN(a) && isNaN(b);
 }
 exports.looseIdentical = looseIdentical;
 // JS considers NaN is the same as NaN for map Key (while NaN !== NaN otherwise)
@@ -6815,7 +7968,7 @@ function normalizeBool(obj) {
 }
 exports.normalizeBool = normalizeBool;
 function isJsObject(o) {
-    return o !== null && (typeof o === "function" || typeof o === "object");
+    return o !== null && (typeof o === 'function' || typeof o === 'object');
 }
 exports.isJsObject = isJsObject;
 function print(obj) {
@@ -6930,7 +8083,13 @@ function escape(s) {
 exports.escape = escape;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],68:[function(require,module,exports){
+},{}],78:[function(require,module,exports){
+"use strict";
+var lang_1 = require('./lang');
+exports.Math = lang_1.global.Math;
+exports.NaN = typeof exports.NaN;
+
+},{"./lang":77}],79:[function(require,module,exports){
 "use strict";
 var PromiseCompleter = (function () {
     function PromiseCompleter() {
@@ -6980,39 +8139,42 @@ var PromiseWrapper = (function () {
 }());
 exports.PromiseWrapper = PromiseWrapper;
 
-},{}],69:[function(require,module,exports){
+},{}],80:[function(require,module,exports){
 "use strict";
 // Public API for compiler
+var component_factory_1 = require('./linker/component_factory');
+exports.ComponentFactory = component_factory_1.ComponentFactory;
+exports.ComponentRef = component_factory_1.ComponentRef;
 var component_resolver_1 = require('./linker/component_resolver');
 exports.ComponentResolver = component_resolver_1.ComponentResolver;
-var query_list_1 = require('./linker/query_list');
-exports.QueryList = query_list_1.QueryList;
 var dynamic_component_loader_1 = require('./linker/dynamic_component_loader');
 exports.DynamicComponentLoader = dynamic_component_loader_1.DynamicComponentLoader;
 var element_ref_1 = require('./linker/element_ref');
 exports.ElementRef = element_ref_1.ElementRef;
+var exceptions_1 = require('./linker/exceptions');
+exports.ExpressionChangedAfterItHasBeenCheckedException = exceptions_1.ExpressionChangedAfterItHasBeenCheckedException;
+var query_list_1 = require('./linker/query_list');
+exports.QueryList = query_list_1.QueryList;
+var systemjs_component_resolver_1 = require('./linker/systemjs_component_resolver');
+exports.SystemJsCmpFactoryResolver = systemjs_component_resolver_1.SystemJsCmpFactoryResolver;
+exports.SystemJsComponentResolver = systemjs_component_resolver_1.SystemJsComponentResolver;
 var template_ref_1 = require('./linker/template_ref');
 exports.TemplateRef = template_ref_1.TemplateRef;
+var view_container_ref_1 = require('./linker/view_container_ref');
+exports.ViewContainerRef = view_container_ref_1.ViewContainerRef;
 var view_ref_1 = require('./linker/view_ref');
 exports.EmbeddedViewRef = view_ref_1.EmbeddedViewRef;
 exports.ViewRef = view_ref_1.ViewRef;
-var view_container_ref_1 = require('./linker/view_container_ref');
-exports.ViewContainerRef = view_container_ref_1.ViewContainerRef;
-var component_factory_1 = require('./linker/component_factory');
-exports.ComponentRef = component_factory_1.ComponentRef;
-exports.ComponentFactory = component_factory_1.ComponentFactory;
-var exceptions_1 = require('./linker/exceptions');
-exports.ExpressionChangedAfterItHasBeenCheckedException = exceptions_1.ExpressionChangedAfterItHasBeenCheckedException;
 
-},{"./linker/component_factory":70,"./linker/component_resolver":71,"./linker/dynamic_component_loader":73,"./linker/element_ref":76,"./linker/exceptions":77,"./linker/query_list":78,"./linker/template_ref":79,"./linker/view_container_ref":81,"./linker/view_ref":82}],70:[function(require,module,exports){
+},{"./linker/component_factory":81,"./linker/component_resolver":82,"./linker/dynamic_component_loader":84,"./linker/element_ref":87,"./linker/exceptions":88,"./linker/query_list":89,"./linker/systemjs_component_resolver":90,"./linker/template_ref":91,"./linker/view_container_ref":93,"./linker/view_ref":94}],81:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var lang_1 = require('../../src/facade/lang');
-var exceptions_1 = require('../../src/facade/exceptions');
+var exceptions_1 = require('../facade/exceptions');
+var lang_1 = require('../facade/lang');
 var view_utils_1 = require('./view_utils');
 /**
  * Represents an instance of a Component created via a {@link ComponentFactory}.
@@ -7020,6 +8182,7 @@ var view_utils_1 = require('./view_utils');
  * `ComponentRef` provides access to the Component Instance as well other objects related to this
  * Component Instance and allows you to destroy the Component Instance via the {@link #destroy}
  * method.
+ * @stable
  */
 var ComponentRef = (function () {
     function ComponentRef() {
@@ -7122,8 +8285,11 @@ var ComponentRef_ = (function (_super) {
     return ComponentRef_;
 }(ComponentRef));
 exports.ComponentRef_ = ComponentRef_;
+/**
+ * @experimental
+ * @ts2dart_const
+ */
 var EMPTY_CONTEXT = new Object();
-/*@ts2dart_const*/
 var ComponentFactory = (function () {
     function ComponentFactory(selector, _viewFactory, _componentType) {
         this.selector = selector;
@@ -7154,22 +8320,23 @@ var ComponentFactory = (function () {
 }());
 exports.ComponentFactory = ComponentFactory;
 
-},{"../../src/facade/exceptions":66,"../../src/facade/lang":67,"./view_utils":84}],71:[function(require,module,exports){
+},{"../facade/exceptions":76,"../facade/lang":77,"./view_utils":96}],82:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var lang_1 = require('../../src/facade/lang');
-var exceptions_1 = require('../../src/facade/exceptions');
-var async_1 = require('../../src/facade/async');
+var decorators_1 = require('../di/decorators');
+var async_1 = require('../facade/async');
+var exceptions_1 = require('../facade/exceptions');
+var lang_1 = require('../facade/lang');
 var reflection_1 = require('../reflection/reflection');
 var component_factory_1 = require('./component_factory');
-var decorators_1 = require('../di/decorators');
 /**
  * Low-level service for loading {@link ComponentFactory}s, which
  * can later be used to create and render a Component instance.
+ * @experimental
  */
 var ComponentResolver = (function () {
     function ComponentResolver() {
@@ -7185,15 +8352,19 @@ var ReflectorComponentResolver = (function (_super) {
     function ReflectorComponentResolver() {
         _super.apply(this, arguments);
     }
-    ReflectorComponentResolver.prototype.resolveComponent = function (componentType) {
-        var metadatas = reflection_1.reflector.annotations(componentType);
+    ReflectorComponentResolver.prototype.resolveComponent = function (component) {
+        if (lang_1.isString(component)) {
+            return async_1.PromiseWrapper.reject(new exceptions_1.BaseException("Cannot resolve component using '" + component + "'."), null);
+        }
+        var metadatas = reflection_1.reflector.annotations(component);
         var componentFactory = metadatas.find(_isComponentFactory);
         if (lang_1.isBlank(componentFactory)) {
-            throw new exceptions_1.BaseException("No precompiled component " + lang_1.stringify(componentType) + " found");
+            throw new exceptions_1.BaseException("No precompiled component " + lang_1.stringify(component) + " found");
         }
         return async_1.PromiseWrapper.resolve(componentFactory);
     };
     ReflectorComponentResolver.prototype.clearCache = function () { };
+    /** @nocollapse */
     ReflectorComponentResolver.decorators = [
         { type: decorators_1.Injectable },
     ];
@@ -7201,10 +8372,10 @@ var ReflectorComponentResolver = (function (_super) {
 }(ComponentResolver));
 exports.ReflectorComponentResolver = ReflectorComponentResolver;
 
-},{"../../src/facade/async":62,"../../src/facade/exceptions":66,"../../src/facade/lang":67,"../di/decorators":51,"../reflection/reflection":95,"./component_factory":70}],72:[function(require,module,exports){
+},{"../di/decorators":61,"../facade/async":72,"../facade/exceptions":76,"../facade/lang":77,"../reflection/reflection":107,"./component_factory":81}],83:[function(require,module,exports){
 "use strict";
-var lang_1 = require('../../src/facade/lang');
-var collection_1 = require('../../src/facade/collection');
+var collection_1 = require('../facade/collection');
+var lang_1 = require('../facade/lang');
 var view_type_1 = require('./view_type');
 /* @ts2dart_const */
 var StaticNodeDebugInfo = (function () {
@@ -7299,10 +8470,11 @@ var DebugContext = (function () {
             var staticNodeInfo = this._staticNodeInfo;
             if (lang_1.isPresent(staticNodeInfo)) {
                 var refs = staticNodeInfo.refTokens;
-                collection_1.StringMapWrapper.forEach(refs, function (refToken, refName) {
+                collection_1.StringMapWrapper.forEach(refs, function (refToken /** TODO #9100 */, refName /** TODO #9100 */) {
                     var varValue;
                     if (lang_1.isBlank(refToken)) {
-                        varValue = lang_1.isPresent(_this._view.allNodes) ? _this._view.allNodes[_this._nodeIndex] : null;
+                        varValue =
+                            lang_1.isPresent(_this._view.allNodes) ? _this._view.allNodes[_this._nodeIndex] : null;
                     }
                     else {
                         varValue = _this._view.injectorGet(refToken, _this._nodeIndex, null);
@@ -7319,17 +8491,17 @@ var DebugContext = (function () {
 }());
 exports.DebugContext = DebugContext;
 
-},{"../../src/facade/collection":64,"../../src/facade/lang":67,"./view_type":83}],73:[function(require,module,exports){
+},{"../facade/collection":74,"../facade/lang":77,"./view_type":95}],84:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var component_resolver_1 = require('./component_resolver');
-var lang_1 = require('../../src/facade/lang');
-var reflective_injector_1 = require('../di/reflective_injector');
 var decorators_1 = require('../di/decorators');
+var reflective_injector_1 = require('../di/reflective_injector');
+var lang_1 = require('../facade/lang');
+var component_resolver_1 = require('./component_resolver');
 /**
  * Use ComponentResolver and ViewContainerRef directly.
  *
@@ -7367,9 +8539,11 @@ var DynamicComponentLoader_ = (function (_super) {
             return location.createComponent(componentFactory, location.length, childInjector, projectableNodes);
         });
     };
+    /** @nocollapse */
     DynamicComponentLoader_.decorators = [
         { type: decorators_1.Injectable },
     ];
+    /** @nocollapse */
     DynamicComponentLoader_.ctorParameters = [
         { type: component_resolver_1.ComponentResolver, },
     ];
@@ -7377,14 +8551,14 @@ var DynamicComponentLoader_ = (function (_super) {
 }(DynamicComponentLoader));
 exports.DynamicComponentLoader_ = DynamicComponentLoader_;
 
-},{"../../src/facade/lang":67,"../di/decorators":51,"../di/reflective_injector":59,"./component_resolver":71}],74:[function(require,module,exports){
+},{"../di/decorators":61,"../di/reflective_injector":69,"../facade/lang":77,"./component_resolver":82}],85:[function(require,module,exports){
 "use strict";
-var lang_1 = require('../../src/facade/lang');
-var collection_1 = require('../../src/facade/collection');
-var exceptions_1 = require('../../src/facade/exceptions');
-var view_type_1 = require('./view_type');
+var collection_1 = require('../facade/collection');
+var exceptions_1 = require('../facade/exceptions');
+var lang_1 = require('../facade/lang');
 var element_ref_1 = require('./element_ref');
 var view_container_ref_1 = require('./view_container_ref');
+var view_type_1 = require('./view_type');
 /**
  * An AppElement is created for elements that have a ViewContainerRef,
  * a nested component or a <template> element to keep data around
@@ -7463,7 +8637,7 @@ var AppElement = (function () {
         if (view.type === view_type_1.ViewType.COMPONENT) {
             throw new exceptions_1.BaseException("Component views can't be moved!");
         }
-        view.renderer.detachView(view.flatRootNodes);
+        view.detach();
         view.removeFromContentChildren(this);
         return view;
     };
@@ -7471,7 +8645,7 @@ var AppElement = (function () {
 }());
 exports.AppElement = AppElement;
 
-},{"../../src/facade/collection":64,"../../src/facade/exceptions":66,"../../src/facade/lang":67,"./element_ref":76,"./view_container_ref":81,"./view_type":83}],75:[function(require,module,exports){
+},{"../facade/collection":74,"../facade/exceptions":76,"../facade/lang":77,"./element_ref":87,"./view_container_ref":93,"./view_type":95}],86:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -7502,14 +8676,14 @@ var ElementInjector = (function (_super) {
 }(injector_1.Injector));
 exports.ElementInjector = ElementInjector;
 
-},{"../di/injector":53}],76:[function(require,module,exports){
+},{"../di/injector":63}],87:[function(require,module,exports){
 "use strict";
 /**
-* A wrapper around a native element inside of a View.
-*
-* An `ElementRef` is backed by a render-specific element. In the browser, this is usually a DOM
-* element.
-*/
+ * A wrapper around a native element inside of a View.
+ *
+ * An `ElementRef` is backed by a render-specific element. In the browser, this is usually a DOM
+ * element.
+ */
 // Note: We don't expose things like `Injector`, `ViewContainer`, ... here,
 // i.e. users have to ask for what they need. With that, we can build better analysis tools
 // and could do better codegen in the future.
@@ -7521,14 +8695,14 @@ var ElementRef = (function () {
 }());
 exports.ElementRef = ElementRef;
 
-},{}],77:[function(require,module,exports){
+},{}],88:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var exceptions_1 = require('../../src/facade/exceptions');
+var exceptions_1 = require('../facade/exceptions');
 /**
  * An error thrown if application changes model breaking the top-down data flow.
  *
@@ -7561,6 +8735,7 @@ var exceptions_1 = require('../../src/facade/exceptions');
  *   }
  * }
  * ```
+ * @stable
  */
 var ExpressionChangedAfterItHasBeenCheckedException = (function (_super) {
     __extends(ExpressionChangedAfterItHasBeenCheckedException, _super);
@@ -7576,6 +8751,7 @@ exports.ExpressionChangedAfterItHasBeenCheckedException = ExpressionChangedAfter
  *
  * This error wraps the original exception to attach additional contextual information that can
  * be useful for debugging.
+ * @stable
  */
 var ViewWrappedException = (function (_super) {
     __extends(ViewWrappedException, _super);
@@ -7591,6 +8767,7 @@ exports.ViewWrappedException = ViewWrappedException;
  * This error indicates a bug in the framework.
  *
  * This is an internal Angular error.
+ * @stable
  */
 var ViewDestroyedException = (function (_super) {
     __extends(ViewDestroyedException, _super);
@@ -7601,11 +8778,11 @@ var ViewDestroyedException = (function (_super) {
 }(exceptions_1.BaseException));
 exports.ViewDestroyedException = ViewDestroyedException;
 
-},{"../../src/facade/exceptions":66}],78:[function(require,module,exports){
+},{"../facade/exceptions":76}],89:[function(require,module,exports){
 "use strict";
-var collection_1 = require('../../src/facade/collection');
-var lang_1 = require('../../src/facade/lang');
-var async_1 = require('../../src/facade/async');
+var async_1 = require('../facade/async');
+var collection_1 = require('../facade/collection');
+var lang_1 = require('../facade/lang');
 /**
  * An unmodifiable list of items that Angular keeps up to date when the state
  * of the application changes.
@@ -7624,11 +8801,10 @@ var async_1 = require('../../src/facade/async');
  * ```typescript
  * @Component({...})
  * class Container {
- *   constructor(@Query(Item) items: QueryList<Item>) {
- *     items.changes.subscribe(_ => console.log(items.length));
- *   }
+ *   @ViewChildren(Item) items:QueryList<Item>;
  * }
  * ```
+ * @stable
  */
 var QueryList = (function () {
     function QueryList() {
@@ -7676,7 +8852,9 @@ var QueryList = (function () {
      * converts QueryList into an array
      */
     QueryList.prototype.toArray = function () { return collection_1.ListWrapper.clone(this._results); };
-    QueryList.prototype[lang_1.getSymbolIterator()] = function () { return this._results[lang_1.getSymbolIterator()](); };
+    QueryList.prototype[lang_1.getSymbolIterator()] = function () {
+        return this._results[lang_1.getSymbolIterator()]();
+    };
     QueryList.prototype.toString = function () { return this._results.toString(); };
     /**
      * @internal
@@ -7699,7 +8877,60 @@ var QueryList = (function () {
 }());
 exports.QueryList = QueryList;
 
-},{"../../src/facade/async":62,"../../src/facade/collection":64,"../../src/facade/lang":67}],79:[function(require,module,exports){
+},{"../facade/async":72,"../facade/collection":74,"../facade/lang":77}],90:[function(require,module,exports){
+"use strict";
+var lang_1 = require('../facade/lang');
+var _SEPARATOR = '#';
+/**
+ * Component resolver that can load components lazily
+ * @experimental
+ */
+var SystemJsComponentResolver = (function () {
+    function SystemJsComponentResolver(_resolver) {
+        this._resolver = _resolver;
+    }
+    SystemJsComponentResolver.prototype.resolveComponent = function (componentType) {
+        var _this = this;
+        if (lang_1.isString(componentType)) {
+            var _a = componentType.split(_SEPARATOR), module = _a[0], component_1 = _a[1];
+            if (component_1 === void (0)) {
+                // Use the default export when no component is specified
+                component_1 = 'default';
+            }
+            return lang_1.global
+                .System.import(module)
+                .then(function (module) { return _this._resolver.resolveComponent(module[component_1]); });
+        }
+        return this._resolver.resolveComponent(componentType);
+    };
+    SystemJsComponentResolver.prototype.clearCache = function () { };
+    return SystemJsComponentResolver;
+}());
+exports.SystemJsComponentResolver = SystemJsComponentResolver;
+var FACTORY_MODULE_SUFFIX = '.ngfactory';
+var FACTORY_CLASS_SUFFIX = 'NgFactory';
+/**
+ * Component resolver that can load component factories lazily
+ * @experimental
+ */
+var SystemJsCmpFactoryResolver = (function () {
+    function SystemJsCmpFactoryResolver() {
+    }
+    SystemJsCmpFactoryResolver.prototype.resolveComponent = function (componentType) {
+        if (lang_1.isString(componentType)) {
+            var _a = componentType.split(_SEPARATOR), module = _a[0], factory_1 = _a[1];
+            return lang_1.global
+                .System.import(module + FACTORY_MODULE_SUFFIX)
+                .then(function (module) { return module[factory_1 + FACTORY_CLASS_SUFFIX]; });
+        }
+        return Promise.resolve(null);
+    };
+    SystemJsCmpFactoryResolver.prototype.clearCache = function () { };
+    return SystemJsCmpFactoryResolver;
+}());
+exports.SystemJsCmpFactoryResolver = SystemJsCmpFactoryResolver;
+
+},{"../facade/lang":77}],91:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -7719,6 +8950,7 @@ var EMPTY_CONTEXT = new Object();
  * To instantiate Embedded Views based on a Template, use
  * {@link ViewContainerRef#createEmbeddedView}, which will create the View and attach it to the
  * View Container.
+ * @stable
  */
 var TemplateRef = (function () {
     function TemplateRef() {
@@ -7767,17 +8999,17 @@ var TemplateRef_ = (function (_super) {
 }(TemplateRef));
 exports.TemplateRef_ = TemplateRef_;
 
-},{"../facade/lang":67}],80:[function(require,module,exports){
+},{"../facade/lang":77}],92:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var collection_1 = require('../../src/facade/collection');
+var async_1 = require('../facade/async');
+var collection_1 = require('../facade/collection');
+var lang_1 = require('../facade/lang');
 var element_1 = require('./element');
-var lang_1 = require('../../src/facade/lang');
-var async_1 = require('../../src/facade/async');
 var view_ref_1 = require('./view_ref');
 var view_type_1 = require('./view_type');
 var view_utils_1 = require('./view_utils');
@@ -7786,6 +9018,8 @@ var profile_1 = require('../profile/profile');
 var exceptions_1 = require('./exceptions');
 var debug_context_1 = require('./debug_context');
 var element_injector_1 = require('./element_injector');
+var animation_group_player_1 = require('../animation/animation_group_player');
+var active_animation_players_map_1 = require('../animation/active_animation_players_map');
 var _scope_check = profile_1.wtfCreateScope("AppView#check(ascii id)");
 /**
  * Cost of making objects: http://jsperf.com/instantiate-size-of-object
@@ -7807,6 +9041,7 @@ var AppView = (function () {
         // change detection will fail.
         this.cdState = change_detection_1.ChangeDetectorState.NeverChecked;
         this.destroyed = false;
+        this.activeAnimationPlayers = new active_animation_players_map_1.ActiveAnimationPlayersMap();
         this.ref = new view_ref_1.ViewRef_(this);
         if (type === view_type_1.ViewType.COMPONENT || type === view_type_1.ViewType.HOST) {
             this.renderer = viewUtils.renderComponent(componentType);
@@ -7815,6 +9050,24 @@ var AppView = (function () {
             this.renderer = declarationAppElement.parentView.renderer;
         }
     }
+    AppView.prototype.cancelActiveAnimation = function (element, animationName, removeAllAnimations) {
+        if (removeAllAnimations === void 0) { removeAllAnimations = false; }
+        if (removeAllAnimations) {
+            this.activeAnimationPlayers.findAllPlayersByElement(element).forEach(function (player) { return player.destroy(); });
+        }
+        else {
+            var player = this.activeAnimationPlayers.find(element, animationName);
+            if (lang_1.isPresent(player)) {
+                player.destroy();
+            }
+        }
+    };
+    AppView.prototype.registerAndStartAnimation = function (element, animationName, player) {
+        var _this = this;
+        this.activeAnimationPlayers.set(element, animationName, player);
+        player.onDone(function () { _this.activeAnimationPlayers.remove(element, animationName); });
+        player.play();
+    };
     AppView.prototype.create = function (context, givenProjectableNodes, rootSelectorOrNode) {
         this.context = context;
         var projectableNodes;
@@ -7904,6 +9157,7 @@ var AppView = (function () {
         this.destroyed = true;
     };
     AppView.prototype.destroyLocal = function () {
+        var _this = this;
         var hostElement = this.type === view_type_1.ViewType.COMPONENT ? this.declarationAppElement.nativeElement : null;
         for (var i = 0; i < this.disposables.length; i++) {
             this.disposables[i]();
@@ -7912,21 +9166,34 @@ var AppView = (function () {
             async_1.ObservableWrapper.dispose(this.subscriptions[i]);
         }
         this.destroyInternal();
-        if (this._hasExternalHostElement) {
-            this.renderer.detachView(this.flatRootNodes);
-        }
-        else if (lang_1.isPresent(this.viewContainerElement)) {
-            this.viewContainerElement.detachView(this.viewContainerElement.nestedViews.indexOf(this));
+        this.dirtyParentQueriesInternal();
+        if (this.activeAnimationPlayers.length == 0) {
+            this.renderer.destroyView(hostElement, this.allNodes);
         }
         else {
-            this.dirtyParentQueriesInternal();
+            var player = new animation_group_player_1.AnimationGroupPlayer(this.activeAnimationPlayers.getAllPlayers());
+            player.onDone(function () { _this.renderer.destroyView(hostElement, _this.allNodes); });
         }
-        this.renderer.destroyView(hostElement, this.allNodes);
     };
     /**
      * Overwritten by implementations
      */
     AppView.prototype.destroyInternal = function () { };
+    /**
+     * Overwritten by implementations
+     */
+    AppView.prototype.detachInternal = function () { };
+    AppView.prototype.detach = function () {
+        var _this = this;
+        this.detachInternal();
+        if (this.activeAnimationPlayers.length == 0) {
+            this.renderer.detachView(this.flatRootNodes);
+        }
+        else {
+            var player = new animation_group_player_1.AnimationGroupPlayer(this.activeAnimationPlayers.getAllPlayers());
+            player.onDone(function () { _this.renderer.detachView(_this.flatRootNodes); });
+        }
+    };
     Object.defineProperty(AppView.prototype, "changeDetectorRef", {
         get: function () { return this.ref; },
         enumerable: true,
@@ -7960,8 +9227,7 @@ var AppView = (function () {
     AppView.prototype.dirtyParentQueriesInternal = function () { };
     AppView.prototype.detectChanges = function (throwOnChange) {
         var s = _scope_check(this.clazz);
-        if (this.cdMode === change_detection_1.ChangeDetectionStrategy.Detached ||
-            this.cdMode === change_detection_1.ChangeDetectionStrategy.Checked ||
+        if (this.cdMode === change_detection_1.ChangeDetectionStrategy.Checked ||
             this.cdState === change_detection_1.ChangeDetectorState.Errored)
             return;
         if (this.destroyed) {
@@ -7982,12 +9248,18 @@ var AppView = (function () {
     };
     AppView.prototype.detectContentChildrenChanges = function (throwOnChange) {
         for (var i = 0; i < this.contentChildren.length; ++i) {
-            this.contentChildren[i].detectChanges(throwOnChange);
+            var child = this.contentChildren[i];
+            if (child.cdMode === change_detection_1.ChangeDetectionStrategy.Detached)
+                continue;
+            child.detectChanges(throwOnChange);
         }
     };
     AppView.prototype.detectViewChildrenChanges = function (throwOnChange) {
         for (var i = 0; i < this.viewChildren.length; ++i) {
-            this.viewChildren[i].detectChanges(throwOnChange);
+            var child = this.viewChildren[i];
+            if (child.cdMode === change_detection_1.ChangeDetectionStrategy.Detached)
+                continue;
+            child.detectChanges(throwOnChange);
         }
     };
     AppView.prototype.addToContentChildren = function (renderAppElement) {
@@ -8043,6 +9315,16 @@ var DebugAppView = (function (_super) {
             throw e;
         }
     };
+    DebugAppView.prototype.detach = function () {
+        this._resetDebug();
+        try {
+            _super.prototype.detach.call(this);
+        }
+        catch (e) {
+            this._rethrowWithContext(e, e.stack);
+            throw e;
+        }
+    };
     DebugAppView.prototype.destroyLocal = function () {
         this._resetDebug();
         try {
@@ -8080,7 +9362,7 @@ var DebugAppView = (function (_super) {
     DebugAppView.prototype.eventHandler = function (cb) {
         var _this = this;
         var superHandler = _super.prototype.eventHandler.call(this, cb);
-        return function (event) {
+        return function (event /** TODO #9100 */) {
             _this._resetDebug();
             try {
                 return superHandler(event);
@@ -8115,11 +9397,11 @@ function _findLastRenderNode(node) {
     return lastNode;
 }
 
-},{"../../src/facade/async":62,"../../src/facade/collection":64,"../../src/facade/lang":67,"../change_detection/change_detection":39,"../profile/profile":92,"./debug_context":72,"./element":74,"./element_injector":75,"./exceptions":77,"./view_ref":82,"./view_type":83,"./view_utils":84}],81:[function(require,module,exports){
+},{"../animation/active_animation_players_map":35,"../animation/animation_group_player":38,"../change_detection/change_detection":49,"../facade/async":72,"../facade/collection":74,"../facade/lang":77,"../profile/profile":104,"./debug_context":83,"./element":85,"./element_injector":86,"./exceptions":88,"./view_ref":94,"./view_type":95,"./view_utils":96}],93:[function(require,module,exports){
 "use strict";
-var collection_1 = require('../../src/facade/collection');
-var exceptions_1 = require('../../src/facade/exceptions');
-var lang_1 = require('../../src/facade/lang');
+var collection_1 = require('../facade/collection');
+var exceptions_1 = require('../facade/exceptions');
+var lang_1 = require('../facade/lang');
 var profile_1 = require('../profile/profile');
 /**
  * Represents a container where one or more Views can be attached.
@@ -8137,6 +9419,7 @@ var profile_1 = require('../profile/profile');
  *
  * To access a `ViewContainerRef` of an Element, you can either place a {@link Directive} injected
  * with `ViewContainerRef` on the Element, or you obtain it via a {@link ViewChild} query.
+ * @stable
  */
 var ViewContainerRef = (function () {
     function ViewContainerRef() {
@@ -8269,15 +9552,18 @@ var ViewContainerRef_ = (function () {
 }());
 exports.ViewContainerRef_ = ViewContainerRef_;
 
-},{"../../src/facade/collection":64,"../../src/facade/exceptions":66,"../../src/facade/lang":67,"../profile/profile":92}],82:[function(require,module,exports){
+},{"../facade/collection":74,"../facade/exceptions":76,"../facade/lang":77,"../profile/profile":104}],94:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var exceptions_1 = require('../../src/facade/exceptions');
 var constants_1 = require('../change_detection/constants');
+var exceptions_1 = require('../facade/exceptions');
+/**
+ * @stable
+ */
 var ViewRef = (function () {
     function ViewRef() {
     }
@@ -8312,7 +9598,7 @@ exports.ViewRef = ViewRef;
  * </ul>
  * ```
  *
- * ... we have two {@link TemplateRef}s:
+ * We have two {@link TemplateRef}s:
  *
  * Outer {@link TemplateRef}:
  * ```
@@ -8341,6 +9627,7 @@ exports.ViewRef = ViewRef;
  * </ul>
  * <!-- /ViewRef: outer-0 -->
  * ```
+ * @experimental
  */
 var EmbeddedViewRef = (function (_super) {
     __extends(EmbeddedViewRef, _super);
@@ -8400,7 +9687,7 @@ var ViewRef_ = (function () {
 }());
 exports.ViewRef_ = ViewRef_;
 
-},{"../../src/facade/exceptions":66,"../change_detection/constants":42}],83:[function(require,module,exports){
+},{"../change_detection/constants":52,"../facade/exceptions":76}],95:[function(require,module,exports){
 "use strict";
 (function (ViewType) {
     // A view that contains the host element with bound component directive.
@@ -8415,19 +9702,19 @@ exports.ViewRef_ = ViewRef_;
 })(exports.ViewType || (exports.ViewType = {}));
 var ViewType = exports.ViewType;
 
-},{}],84:[function(require,module,exports){
+},{}],96:[function(require,module,exports){
 "use strict";
+var application_tokens_1 = require('../application_tokens');
+var change_detection_1 = require('../change_detection/change_detection');
+var change_detection_util_1 = require('../change_detection/change_detection_util');
+var decorators_1 = require('../di/decorators');
+var collection_1 = require('../facade/collection');
+var exceptions_1 = require('../facade/exceptions');
+var lang_1 = require('../facade/lang');
+var api_1 = require('../render/api');
 var security_1 = require('../security');
-var lang_1 = require('../../src/facade/lang');
-var collection_1 = require('../../src/facade/collection');
-var exceptions_1 = require('../../src/facade/exceptions');
 var element_1 = require('./element');
 var exceptions_2 = require('./exceptions');
-var change_detection_1 = require('../change_detection/change_detection');
-var api_1 = require('../render/api');
-var application_tokens_1 = require('../application_tokens');
-var decorators_1 = require('../di/decorators');
-var change_detection_util_1 = require("../change_detection/change_detection_util");
 var ViewUtils = (function () {
     function ViewUtils(_renderer, _appId, sanitizer) {
         this._renderer = _renderer;
@@ -8445,9 +9732,11 @@ var ViewUtils = (function () {
     ViewUtils.prototype.renderComponent = function (renderComponentType) {
         return this._renderer.renderComponent(renderComponentType);
     };
+    /** @nocollapse */
     ViewUtils.decorators = [
         { type: decorators_1.Injectable },
     ];
+    /** @nocollapse */
     ViewUtils.ctorParameters = [
         { type: api_1.RootRenderer, },
         { type: undefined, decorators: [{ type: decorators_1.Inject, args: [application_tokens_1.APP_ID,] },] },
@@ -8515,8 +9804,7 @@ function interpolate(valueCount, c0, a1, c1, a2, c2, a3, c3, a4, c4, a5, c5, a6,
                 c3 + _toStringWithNull(a4) + c4 + _toStringWithNull(a5) + c5;
         case 6:
             return c0 + _toStringWithNull(a1) + c1 + _toStringWithNull(a2) + c2 + _toStringWithNull(a3) +
-                c3 + _toStringWithNull(a4) + c4 + _toStringWithNull(a5) + c5 + _toStringWithNull(a6) +
-                c6;
+                c3 + _toStringWithNull(a4) + c4 + _toStringWithNull(a5) + c5 + _toStringWithNull(a6) + c6;
         case 7:
             return c0 + _toStringWithNull(a1) + c1 + _toStringWithNull(a2) + c2 + _toStringWithNull(a3) +
                 c3 + _toStringWithNull(a4) + c4 + _toStringWithNull(a5) + c5 + _toStringWithNull(a6) +
@@ -8528,8 +9816,7 @@ function interpolate(valueCount, c0, a1, c1, a2, c2, a3, c3, a4, c4, a5, c5, a6,
         case 9:
             return c0 + _toStringWithNull(a1) + c1 + _toStringWithNull(a2) + c2 + _toStringWithNull(a3) +
                 c3 + _toStringWithNull(a4) + c4 + _toStringWithNull(a5) + c5 + _toStringWithNull(a6) +
-                c6 + _toStringWithNull(a7) + c7 + _toStringWithNull(a8) + c8 + _toStringWithNull(a9) +
-                c9;
+                c6 + _toStringWithNull(a7) + c7 + _toStringWithNull(a8) + c8 + _toStringWithNull(a9) + c9;
         default:
             throw new exceptions_1.BaseException("Does not support more than 9 expressions");
     }
@@ -8597,7 +9884,7 @@ function pureProxy1(fn) {
 exports.pureProxy1 = pureProxy1;
 function pureProxy2(fn) {
     var result;
-    var v0, v1;
+    var v0 /** TODO #9100 */, v1;
     v0 = v1 = change_detection_util_1.uninitialized;
     return function (p0, p1) {
         if (!lang_1.looseIdentical(v0, p0) || !lang_1.looseIdentical(v1, p1)) {
@@ -8611,7 +9898,7 @@ function pureProxy2(fn) {
 exports.pureProxy2 = pureProxy2;
 function pureProxy3(fn) {
     var result;
-    var v0, v1, v2;
+    var v0 /** TODO #9100 */, v1 /** TODO #9100 */, v2;
     v0 = v1 = v2 = change_detection_util_1.uninitialized;
     return function (p0, p1, p2) {
         if (!lang_1.looseIdentical(v0, p0) || !lang_1.looseIdentical(v1, p1) || !lang_1.looseIdentical(v2, p2)) {
@@ -8626,7 +9913,7 @@ function pureProxy3(fn) {
 exports.pureProxy3 = pureProxy3;
 function pureProxy4(fn) {
     var result;
-    var v0, v1, v2, v3;
+    var v0 /** TODO #9100 */, v1 /** TODO #9100 */, v2 /** TODO #9100 */, v3;
     v0 = v1 = v2 = v3 = change_detection_util_1.uninitialized;
     return function (p0, p1, p2, p3) {
         if (!lang_1.looseIdentical(v0, p0) || !lang_1.looseIdentical(v1, p1) || !lang_1.looseIdentical(v2, p2) ||
@@ -8643,7 +9930,7 @@ function pureProxy4(fn) {
 exports.pureProxy4 = pureProxy4;
 function pureProxy5(fn) {
     var result;
-    var v0, v1, v2, v3, v4;
+    var v0 /** TODO #9100 */, v1 /** TODO #9100 */, v2 /** TODO #9100 */, v3 /** TODO #9100 */, v4;
     v0 = v1 = v2 = v3 = v4 = change_detection_util_1.uninitialized;
     return function (p0, p1, p2, p3, p4) {
         if (!lang_1.looseIdentical(v0, p0) || !lang_1.looseIdentical(v1, p1) || !lang_1.looseIdentical(v2, p2) ||
@@ -8661,7 +9948,7 @@ function pureProxy5(fn) {
 exports.pureProxy5 = pureProxy5;
 function pureProxy6(fn) {
     var result;
-    var v0, v1, v2, v3, v4, v5;
+    var v0 /** TODO #9100 */, v1 /** TODO #9100 */, v2 /** TODO #9100 */, v3 /** TODO #9100 */, v4 /** TODO #9100 */, v5;
     v0 = v1 = v2 = v3 = v4 = v5 = change_detection_util_1.uninitialized;
     return function (p0, p1, p2, p3, p4, p5) {
         if (!lang_1.looseIdentical(v0, p0) || !lang_1.looseIdentical(v1, p1) || !lang_1.looseIdentical(v2, p2) ||
@@ -8680,7 +9967,7 @@ function pureProxy6(fn) {
 exports.pureProxy6 = pureProxy6;
 function pureProxy7(fn) {
     var result;
-    var v0, v1, v2, v3, v4, v5, v6;
+    var v0 /** TODO #9100 */, v1 /** TODO #9100 */, v2 /** TODO #9100 */, v3 /** TODO #9100 */, v4 /** TODO #9100 */, v5 /** TODO #9100 */, v6;
     v0 = v1 = v2 = v3 = v4 = v5 = v6 = change_detection_util_1.uninitialized;
     return function (p0, p1, p2, p3, p4, p5, p6) {
         if (!lang_1.looseIdentical(v0, p0) || !lang_1.looseIdentical(v1, p1) || !lang_1.looseIdentical(v2, p2) ||
@@ -8701,7 +9988,7 @@ function pureProxy7(fn) {
 exports.pureProxy7 = pureProxy7;
 function pureProxy8(fn) {
     var result;
-    var v0, v1, v2, v3, v4, v5, v6, v7;
+    var v0 /** TODO #9100 */, v1 /** TODO #9100 */, v2 /** TODO #9100 */, v3 /** TODO #9100 */, v4 /** TODO #9100 */, v5 /** TODO #9100 */, v6 /** TODO #9100 */, v7;
     v0 = v1 = v2 = v3 = v4 = v5 = v6 = v7 = change_detection_util_1.uninitialized;
     return function (p0, p1, p2, p3, p4, p5, p6, p7) {
         if (!lang_1.looseIdentical(v0, p0) || !lang_1.looseIdentical(v1, p1) || !lang_1.looseIdentical(v2, p2) ||
@@ -8723,7 +10010,7 @@ function pureProxy8(fn) {
 exports.pureProxy8 = pureProxy8;
 function pureProxy9(fn) {
     var result;
-    var v0, v1, v2, v3, v4, v5, v6, v7, v8;
+    var v0 /** TODO #9100 */, v1 /** TODO #9100 */, v2 /** TODO #9100 */, v3 /** TODO #9100 */, v4 /** TODO #9100 */, v5 /** TODO #9100 */, v6 /** TODO #9100 */, v7 /** TODO #9100 */, v8;
     v0 = v1 = v2 = v3 = v4 = v5 = v6 = v7 = v8 = change_detection_util_1.uninitialized;
     return function (p0, p1, p2, p3, p4, p5, p6, p7, p8) {
         if (!lang_1.looseIdentical(v0, p0) || !lang_1.looseIdentical(v1, p1) || !lang_1.looseIdentical(v2, p2) ||
@@ -8746,7 +10033,7 @@ function pureProxy9(fn) {
 exports.pureProxy9 = pureProxy9;
 function pureProxy10(fn) {
     var result;
-    var v0, v1, v2, v3, v4, v5, v6, v7, v8, v9;
+    var v0 /** TODO #9100 */, v1 /** TODO #9100 */, v2 /** TODO #9100 */, v3 /** TODO #9100 */, v4 /** TODO #9100 */, v5 /** TODO #9100 */, v6 /** TODO #9100 */, v7 /** TODO #9100 */, v8 /** TODO #9100 */, v9;
     v0 = v1 = v2 = v3 = v4 = v5 = v6 = v7 = v8 = v9 = change_detection_util_1.uninitialized;
     return function (p0, p1, p2, p3, p4, p5, p6, p7, p8, p9) {
         if (!lang_1.looseIdentical(v0, p0) || !lang_1.looseIdentical(v1, p1) || !lang_1.looseIdentical(v2, p2) ||
@@ -8770,34 +10057,43 @@ function pureProxy10(fn) {
 }
 exports.pureProxy10 = pureProxy10;
 
-},{"../../src/facade/collection":64,"../../src/facade/exceptions":66,"../../src/facade/lang":67,"../application_tokens":37,"../change_detection/change_detection":39,"../change_detection/change_detection_util":40,"../di/decorators":51,"../render/api":100,"../security":101,"./element":74,"./exceptions":77}],85:[function(require,module,exports){
-"use strict";
+},{"../application_tokens":47,"../change_detection/change_detection":49,"../change_detection/change_detection_util":50,"../di/decorators":61,"../facade/collection":74,"../facade/exceptions":76,"../facade/lang":77,"../render/api":112,"../security":113,"./element":85,"./exceptions":88}],97:[function(require,module,exports){
 /**
-* This indirection is needed to free up Component, etc symbols in the public API
-* to be used by the decorator versions of these annotations.
-*/
+ * This indirection is needed to free up Component, etc symbols in the public API
+ * to be used by the decorator versions of these annotations.
+ */
+"use strict";
 var di_1 = require('./metadata/di');
-exports.QueryMetadata = di_1.QueryMetadata;
-exports.ContentChildrenMetadata = di_1.ContentChildrenMetadata;
-exports.ContentChildMetadata = di_1.ContentChildMetadata;
-exports.ViewChildrenMetadata = di_1.ViewChildrenMetadata;
-exports.ViewQueryMetadata = di_1.ViewQueryMetadata;
-exports.ViewChildMetadata = di_1.ViewChildMetadata;
-exports.AttributeMetadata = di_1.AttributeMetadata;
 var directives_1 = require('./metadata/directives');
-exports.ComponentMetadata = directives_1.ComponentMetadata;
-exports.DirectiveMetadata = directives_1.DirectiveMetadata;
-exports.PipeMetadata = directives_1.PipeMetadata;
-exports.InputMetadata = directives_1.InputMetadata;
-exports.OutputMetadata = directives_1.OutputMetadata;
-exports.HostBindingMetadata = directives_1.HostBindingMetadata;
-exports.HostListenerMetadata = directives_1.HostListenerMetadata;
 var view_1 = require('./metadata/view');
-exports.ViewMetadata = view_1.ViewMetadata;
-exports.ViewEncapsulation = view_1.ViewEncapsulation;
 var di_2 = require('./metadata/di');
+exports.AttributeMetadata = di_2.AttributeMetadata;
+exports.ContentChildMetadata = di_2.ContentChildMetadata;
+exports.ContentChildrenMetadata = di_2.ContentChildrenMetadata;
+exports.QueryMetadata = di_2.QueryMetadata;
+exports.ViewChildMetadata = di_2.ViewChildMetadata;
+exports.ViewChildrenMetadata = di_2.ViewChildrenMetadata;
+exports.ViewQueryMetadata = di_2.ViewQueryMetadata;
 var directives_2 = require('./metadata/directives');
+exports.ComponentMetadata = directives_2.ComponentMetadata;
+exports.DirectiveMetadata = directives_2.DirectiveMetadata;
+exports.HostBindingMetadata = directives_2.HostBindingMetadata;
+exports.HostListenerMetadata = directives_2.HostListenerMetadata;
+exports.InputMetadata = directives_2.InputMetadata;
+exports.OutputMetadata = directives_2.OutputMetadata;
+exports.PipeMetadata = directives_2.PipeMetadata;
+var lifecycle_hooks_1 = require('./metadata/lifecycle_hooks');
+exports.AfterContentChecked = lifecycle_hooks_1.AfterContentChecked;
+exports.AfterContentInit = lifecycle_hooks_1.AfterContentInit;
+exports.AfterViewChecked = lifecycle_hooks_1.AfterViewChecked;
+exports.AfterViewInit = lifecycle_hooks_1.AfterViewInit;
+exports.DoCheck = lifecycle_hooks_1.DoCheck;
+exports.OnChanges = lifecycle_hooks_1.OnChanges;
+exports.OnDestroy = lifecycle_hooks_1.OnDestroy;
+exports.OnInit = lifecycle_hooks_1.OnInit;
 var view_2 = require('./metadata/view');
+exports.ViewEncapsulation = view_2.ViewEncapsulation;
+exports.ViewMetadata = view_2.ViewMetadata;
 var decorators_1 = require('./util/decorators');
 // TODO(alexeagle): remove the duplication of this doc. It is copied from ComponentMetadata.
 /**
@@ -8822,8 +10118,9 @@ var decorators_1 = require('./util/decorators');
  * ### Example
  *
  * {@example core/ts/metadata/metadata.ts region='component'}
+ * @stable
  */
-exports.Component = decorators_1.makeDecorator(directives_2.ComponentMetadata, function (fn) { return fn.View = View; });
+exports.Component = decorators_1.makeDecorator(directives_1.ComponentMetadata, function (fn) { return fn.View = View; });
 // TODO(alexeagle): remove the duplication of this doc. It is copied from DirectiveMetadata.
 /**
  * Directives allow you to attach behavior to elements in the DOM.
@@ -9202,8 +10499,9 @@ exports.Component = decorators_1.makeDecorator(directives_2.ComponentMetadata, f
  * Note also that although the `<li></li>` template still exists inside the `<template></template>`,
  * the instantiated
  * view occurs on the second `<li></li>` which is a sibling to the `<template>` element.
+ * @stable
  */
-exports.Directive = decorators_1.makeDecorator(directives_2.DirectiveMetadata);
+exports.Directive = decorators_1.makeDecorator(directives_1.DirectiveMetadata);
 // TODO(alexeagle): remove the duplication of this doc. It is copied from ViewMetadata.
 /**
  * Metadata properties available for configuring Views.
@@ -9233,8 +10531,9 @@ exports.Directive = decorators_1.makeDecorator(directives_2.DirectiveMetadata);
  *   }
  * }
  * ```
+ * @deprecated
  */
-var View = decorators_1.makeDecorator(view_2.ViewMetadata, function (fn) { return fn.View = View; });
+var View = decorators_1.makeDecorator(view_1.ViewMetadata, function (fn) { return fn.View = View; });
 /**
  * Specifies that a constant attribute value should be injected.
  *
@@ -9251,8 +10550,9 @@ var View = decorators_1.makeDecorator(view_2.ViewMetadata, function (fn) { retur
  * A decorator can inject string literal `text` like so:
  *
  * {@example core/ts/metadata/metadata.ts region='attributeMetadata'}
+ * @stable
  */
-exports.Attribute = decorators_1.makeParamDecorator(di_2.AttributeMetadata);
+exports.Attribute = decorators_1.makeParamDecorator(di_1.AttributeMetadata);
 // TODO(alexeagle): remove the duplication of this doc. It is copied from QueryMetadata.
 /**
  * Declares an injectable parameter to be a live list of directives or variable
@@ -9360,8 +10660,9 @@ exports.Attribute = decorators_1.makeParamDecorator(di_2.AttributeMetadata);
  *
  * The injected object is an unmodifiable live list.
  * See {@link QueryList} for more details.
+ * @deprecated
  */
-exports.Query = decorators_1.makeParamDecorator(di_2.QueryMetadata);
+exports.Query = decorators_1.makeParamDecorator(di_1.QueryMetadata);
 // TODO(alexeagle): remove the duplication of this doc. It is copied from ContentChildrenMetadata.
 /**
  * Configures a content query.
@@ -9382,8 +10683,9 @@ exports.Query = decorators_1.makeParamDecorator(di_2.QueryMetadata);
  *   }
  * }
  * ```
+ * @stable
  */
-exports.ContentChildren = decorators_1.makePropDecorator(di_2.ContentChildrenMetadata);
+exports.ContentChildren = decorators_1.makePropDecorator(di_1.ContentChildrenMetadata);
 // TODO(alexeagle): remove the duplication of this doc. It is copied from ContentChildMetadata.
 /**
  * Configures a content query.
@@ -9398,14 +10700,24 @@ exports.ContentChildren = decorators_1.makePropDecorator(di_2.ContentChildrenMet
  * })
  * class SomeDir {
  *   @ContentChild(ChildDirective) contentChild;
+ *   @ContentChild('container_ref') containerChild
  *
  *   ngAfterContentInit() {
  *     // contentChild is set
+ *     // containerChild is set
  *   }
  * }
  * ```
+ *
+ * ```html
+ * <container #container_ref>
+ *   <item>a</item>
+ *   <item>b</item>
+ * </container>
+ * ```
+ * @stable
  */
-exports.ContentChild = decorators_1.makePropDecorator(di_2.ContentChildMetadata);
+exports.ContentChild = decorators_1.makePropDecorator(di_1.ContentChildMetadata);
 // TODO(alexeagle): remove the duplication of this doc. It is copied from ViewChildrenMetadata.
 /**
  * Declares a list of child element references.
@@ -9485,8 +10797,9 @@ exports.ContentChild = decorators_1.makePropDecorator(di_2.ContentChildMetadata)
  * ```
  *
  * See also: [ViewChildrenMetadata]
+ * @stable
  */
-exports.ViewChildren = decorators_1.makePropDecorator(di_2.ViewChildrenMetadata);
+exports.ViewChildren = decorators_1.makePropDecorator(di_1.ViewChildrenMetadata);
 // TODO(alexeagle): remove the duplication of this doc. It is copied from ViewChildMetadata.
 /**
  * Declares a reference to a child element.
@@ -9557,8 +10870,9 @@ exports.ViewChildren = decorators_1.makePropDecorator(di_2.ViewChildrenMetadata)
  * }
  * ```
  * See also: [ViewChildMetadata]
+ * @stable
  */
-exports.ViewChild = decorators_1.makePropDecorator(di_2.ViewChildMetadata);
+exports.ViewChild = decorators_1.makePropDecorator(di_1.ViewChildMetadata);
 // TODO(alexeagle): remove the duplication of this doc. It is copied from ViewQueryMetadata.
 /**
  * Similar to {@link QueryMetadata}, but querying the component view, instead of
@@ -9594,8 +10908,9 @@ exports.ViewChild = decorators_1.makePropDecorator(di_2.ViewChildMetadata);
  *
  * The injected object is an iterable and observable live list.
  * See {@link QueryList} for more details.
+ * @deprecated
  */
-exports.ViewQuery = decorators_1.makeParamDecorator(di_2.ViewQueryMetadata);
+exports.ViewQuery = decorators_1.makeParamDecorator(di_1.ViewQueryMetadata);
 // TODO(alexeagle): remove the duplication of this doc. It is copied from PipeMetadata.
 /**
  * Declare reusable pipe function.
@@ -9603,8 +10918,9 @@ exports.ViewQuery = decorators_1.makeParamDecorator(di_2.ViewQueryMetadata);
  * ### Example
  *
  * {@example core/ts/metadata/metadata.ts region='pipe'}
+ * @stable
  */
-exports.Pipe = decorators_1.makeDecorator(directives_2.PipeMetadata);
+exports.Pipe = decorators_1.makeDecorator(directives_1.PipeMetadata);
 // TODO(alexeagle): remove the duplication of this doc. It is copied from InputMetadata.
 /**
  * Declares a data-bound input property.
@@ -9646,8 +10962,9 @@ exports.Pipe = decorators_1.makeDecorator(directives_2.PipeMetadata);
  *
  * bootstrap(App);
  * ```
+ * @stable
  */
-exports.Input = decorators_1.makePropDecorator(directives_2.InputMetadata);
+exports.Input = decorators_1.makePropDecorator(directives_1.InputMetadata);
 // TODO(alexeagle): remove the duplication of this doc. It is copied from OutputMetadata.
 /**
  * Declares an event-bound output property.
@@ -9689,8 +11006,9 @@ exports.Input = decorators_1.makePropDecorator(directives_2.InputMetadata);
  * }
  * bootstrap(App);
  * ```
+ * @stable
  */
-exports.Output = decorators_1.makePropDecorator(directives_2.OutputMetadata);
+exports.Output = decorators_1.makePropDecorator(directives_1.OutputMetadata);
 // TODO(alexeagle): remove the duplication of this doc. It is copied from HostBindingMetadata.
 /**
  * Declares a host property binding.
@@ -9711,8 +11029,8 @@ exports.Output = decorators_1.makePropDecorator(directives_2.OutputMetadata);
  * @Directive({selector: '[ngModel]'})
  * class NgModelStatus {
  *   constructor(public control:NgModel) {}
- *   @HostBinding('[class.valid]') get valid { return this.control.valid; }
- *   @HostBinding('[class.invalid]') get invalid { return this.control.invalid; }
+ *   @HostBinding('class.valid') get valid() { return this.control.valid; }
+ *   @HostBinding('class.invalid') get invalid() { return this.control.invalid; }
  * }
  *
  * @Component({
@@ -9726,8 +11044,9 @@ exports.Output = decorators_1.makePropDecorator(directives_2.OutputMetadata);
  *
  * bootstrap(App);
  * ```
+ * @stable
  */
-exports.HostBinding = decorators_1.makePropDecorator(directives_2.HostBindingMetadata);
+exports.HostBinding = decorators_1.makePropDecorator(directives_1.HostBindingMetadata);
 // TODO(alexeagle): remove the duplication of this doc. It is copied from HostListenerMetadata.
 /**
  * Declares a host listener.
@@ -9762,19 +11081,20 @@ exports.HostBinding = decorators_1.makePropDecorator(directives_2.HostBindingMet
  *
  * bootstrap(App);
  * ```
+ * @stable
  */
-exports.HostListener = decorators_1.makePropDecorator(directives_2.HostListenerMetadata);
+exports.HostListener = decorators_1.makePropDecorator(directives_1.HostListenerMetadata);
 
-},{"./metadata/di":86,"./metadata/directives":87,"./metadata/view":89,"./util/decorators":104}],86:[function(require,module,exports){
+},{"./metadata/di":98,"./metadata/directives":99,"./metadata/lifecycle_hooks":100,"./metadata/view":101,"./util/decorators":116}],98:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var lang_1 = require('../../src/facade/lang');
-var metadata_1 = require('../di/metadata');
 var forward_ref_1 = require('../di/forward_ref');
+var metadata_1 = require('../di/metadata');
+var lang_1 = require('../facade/lang');
 /**
  * Specifies that a constant attribute value should be injected.
  *
@@ -9792,6 +11112,7 @@ var forward_ref_1 = require('../di/forward_ref');
  *
  * {@example core/ts/metadata/metadata.ts region='attributeMetadata'}
  * @ts2dart_const
+ * @stable
  */
 var AttributeMetadata = (function (_super) {
     __extends(AttributeMetadata, _super);
@@ -9922,6 +11243,7 @@ exports.AttributeMetadata = AttributeMetadata;
  * The injected object is an unmodifiable live list.
  * See {@link QueryList} for more details.
  * @ts2dart_const
+ * @deprecated
  */
 var QueryMetadata = (function (_super) {
     __extends(QueryMetadata, _super);
@@ -9962,7 +11284,7 @@ var QueryMetadata = (function (_super) {
          * returns a list of variable bindings this is querying for.
          * Only applicable if this is a variable bindings query.
          */
-        get: function () { return this.selector.split(','); },
+        get: function () { return lang_1.StringWrapper.split(this.selector, /\s*,\s*/g); },
         enumerable: true,
         configurable: true
     });
@@ -9991,6 +11313,7 @@ exports.QueryMetadata = QueryMetadata;
  * }
  * ```
  * @ts2dart_const
+ * @stable
  */
 var ContentChildrenMetadata = (function (_super) {
     __extends(ContentChildrenMetadata, _super);
@@ -10022,6 +11345,7 @@ exports.ContentChildrenMetadata = ContentChildrenMetadata;
  * }
  * ```
  * @ts2dart_const
+ * @stable
  */
 var ContentChildMetadata = (function (_super) {
     __extends(ContentChildMetadata, _super);
@@ -10067,6 +11391,7 @@ exports.ContentChildMetadata = ContentChildMetadata;
  * The injected object is an iterable and observable live list.
  * See {@link QueryList} for more details.
  * @ts2dart_const
+ * @deprecated
  */
 var ViewQueryMetadata = (function (_super) {
     __extends(ViewQueryMetadata, _super);
@@ -10163,6 +11488,7 @@ exports.ViewQueryMetadata = ViewQueryMetadata;
  * }
  * ```
  * @ts2dart_const
+ * @stable
  */
 var ViewChildrenMetadata = (function (_super) {
     __extends(ViewChildrenMetadata, _super);
@@ -10243,6 +11569,7 @@ exports.ViewChildrenMetadata = ViewChildrenMetadata;
  * }
  * ```
  * @ts2dart_const
+ * @stable
  */
 var ViewChildMetadata = (function (_super) {
     __extends(ViewChildMetadata, _super);
@@ -10254,16 +11581,16 @@ var ViewChildMetadata = (function (_super) {
 }(ViewQueryMetadata));
 exports.ViewChildMetadata = ViewChildMetadata;
 
-},{"../../src/facade/lang":67,"../di/forward_ref":52,"../di/metadata":54}],87:[function(require,module,exports){
+},{"../di/forward_ref":62,"../di/metadata":64,"../facade/lang":77}],99:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var lang_1 = require('../../src/facade/lang');
-var metadata_1 = require('../di/metadata');
 var constants_1 = require('../change_detection/constants');
+var metadata_1 = require('../di/metadata');
+var lang_1 = require('../facade/lang');
 /**
  * Directives allow you to attach behavior to elements in the DOM.
  *
@@ -10642,11 +11969,12 @@ var constants_1 = require('../change_detection/constants');
  * the instantiated
  * view occurs on the second `<li></li>` which is a sibling to the `<template>` element.
  * @ts2dart_const
+ * @stable
  */
 var DirectiveMetadata = (function (_super) {
     __extends(DirectiveMetadata, _super);
     function DirectiveMetadata(_a) {
-        var _b = _a === void 0 ? {} : _a, selector = _b.selector, inputs = _b.inputs, outputs = _b.outputs, properties = _b.properties, events = _b.events, host = _b.host, bindings = _b.bindings, providers = _b.providers, exportAs = _b.exportAs, queries = _b.queries;
+        var _b = _a === void 0 ? {} : _a, selector = _b.selector, inputs = _b.inputs, outputs = _b.outputs, properties = _b.properties, events = _b.events, host = _b.host, providers = _b.providers, exportAs = _b.exportAs, queries = _b.queries;
         _super.call(this);
         this.selector = selector;
         this._inputs = inputs;
@@ -10657,7 +11985,6 @@ var DirectiveMetadata = (function (_super) {
         this.exportAs = exportAs;
         this.queries = queries;
         this._providers = providers;
-        this._bindings = bindings;
     }
     Object.defineProperty(DirectiveMetadata.prototype, "inputs", {
         /**
@@ -10715,6 +12042,11 @@ var DirectiveMetadata = (function (_super) {
         configurable: true
     });
     Object.defineProperty(DirectiveMetadata.prototype, "properties", {
+        /**
+         * Use `inputs` instead
+         *
+         * @deprecated
+         */
         get: function () { return this.inputs; },
         enumerable: true,
         configurable: true
@@ -10772,6 +12104,11 @@ var DirectiveMetadata = (function (_super) {
         configurable: true
     });
     Object.defineProperty(DirectiveMetadata.prototype, "events", {
+        /**
+         * Use `outputs` instead
+         *
+         * @deprecated
+         */
         get: function () { return this.outputs; },
         enumerable: true,
         configurable: true
@@ -10794,7 +12131,7 @@ var DirectiveMetadata = (function (_super) {
          *
          * @Directive({
          *   selector: 'greet',
-         *   bindings: [
+         *   providers: [
          *     Greeter
          *   ]
          * })
@@ -10807,16 +12144,7 @@ var DirectiveMetadata = (function (_super) {
          * }
          * ```
          */
-        get: function () {
-            return lang_1.isPresent(this._bindings) && this._bindings.length > 0 ? this._bindings :
-                this._providers;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(DirectiveMetadata.prototype, "bindings", {
-        /** @deprecated */
-        get: function () { return this.providers; },
+        get: function () { return this._providers; },
         enumerable: true,
         configurable: true
     });
@@ -10849,11 +12177,12 @@ exports.DirectiveMetadata = DirectiveMetadata;
  *
  * {@example core/ts/metadata/metadata.ts region='component'}
  * @ts2dart_const
+ * @stable
  */
 var ComponentMetadata = (function (_super) {
     __extends(ComponentMetadata, _super);
     function ComponentMetadata(_a) {
-        var _b = _a === void 0 ? {} : _a, selector = _b.selector, inputs = _b.inputs, outputs = _b.outputs, properties = _b.properties, events = _b.events, host = _b.host, exportAs = _b.exportAs, moduleId = _b.moduleId, bindings = _b.bindings, providers = _b.providers, viewBindings = _b.viewBindings, viewProviders = _b.viewProviders, _c = _b.changeDetection, changeDetection = _c === void 0 ? constants_1.ChangeDetectionStrategy.Default : _c, queries = _b.queries, templateUrl = _b.templateUrl, template = _b.template, styleUrls = _b.styleUrls, styles = _b.styles, directives = _b.directives, pipes = _b.pipes, encapsulation = _b.encapsulation;
+        var _b = _a === void 0 ? {} : _a, selector = _b.selector, inputs = _b.inputs, outputs = _b.outputs, properties = _b.properties, events = _b.events, host = _b.host, exportAs = _b.exportAs, moduleId = _b.moduleId, providers = _b.providers, viewProviders = _b.viewProviders, _c = _b.changeDetection, changeDetection = _c === void 0 ? constants_1.ChangeDetectionStrategy.Default : _c, queries = _b.queries, templateUrl = _b.templateUrl, template = _b.template, styleUrls = _b.styleUrls, styles = _b.styles, animations = _b.animations, directives = _b.directives, pipes = _b.pipes, encapsulation = _b.encapsulation;
         _super.call(this, {
             selector: selector,
             inputs: inputs,
@@ -10862,13 +12191,11 @@ var ComponentMetadata = (function (_super) {
             events: events,
             host: host,
             exportAs: exportAs,
-            bindings: bindings,
             providers: providers,
             queries: queries
         });
         this.changeDetection = changeDetection;
         this._viewProviders = viewProviders;
-        this._viewBindings = viewBindings;
         this.templateUrl = templateUrl;
         this.template = template;
         this.styleUrls = styleUrls;
@@ -10877,6 +12204,7 @@ var ComponentMetadata = (function (_super) {
         this.pipes = pipes;
         this.encapsulation = encapsulation;
         this.moduleId = moduleId;
+        this.animations = animations;
     }
     Object.defineProperty(ComponentMetadata.prototype, "viewProviders", {
         /**
@@ -10917,15 +12245,7 @@ var ComponentMetadata = (function (_super) {
          *
          * ```
          */
-        get: function () {
-            return lang_1.isPresent(this._viewBindings) && this._viewBindings.length > 0 ? this._viewBindings :
-                this._viewProviders;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ComponentMetadata.prototype, "viewBindings", {
-        get: function () { return this.viewProviders; },
+        get: function () { return this._viewProviders; },
         enumerable: true,
         configurable: true
     });
@@ -10943,6 +12263,7 @@ exports.ComponentMetadata = ComponentMetadata;
  *
  * {@example core/ts/metadata/metadata.ts region='pipe'}
  * @ts2dart_const
+ * @stable
  */
 var PipeMetadata = (function (_super) {
     __extends(PipeMetadata, _super);
@@ -11001,6 +12322,7 @@ exports.PipeMetadata = PipeMetadata;
  * bootstrap(App);
  * ```
  * @ts2dart_const
+ * @stable
  */
 var InputMetadata = (function () {
     function InputMetadata(
@@ -11054,6 +12376,7 @@ exports.InputMetadata = InputMetadata;
  * bootstrap(App);
  * ```
  * @ts2dart_const
+ * @stable
  */
 var OutputMetadata = (function () {
     function OutputMetadata(bindingPropertyName) {
@@ -11097,6 +12420,7 @@ exports.OutputMetadata = OutputMetadata;
  * bootstrap(App);
  * ```
  * @ts2dart_const
+ * @stable
  */
 var HostBindingMetadata = (function () {
     function HostBindingMetadata(hostPropertyName) {
@@ -11139,6 +12463,7 @@ exports.HostBindingMetadata = HostBindingMetadata;
  * bootstrap(App);
  * ```
  * @ts2dart_const
+ * @stable
  */
 var HostListenerMetadata = (function () {
     function HostListenerMetadata(eventName, args) {
@@ -11149,8 +12474,11 @@ var HostListenerMetadata = (function () {
 }());
 exports.HostListenerMetadata = HostListenerMetadata;
 
-},{"../../src/facade/lang":67,"../change_detection/constants":42,"../di/metadata":54}],88:[function(require,module,exports){
+},{"../change_detection/constants":52,"../di/metadata":64,"../facade/lang":77}],100:[function(require,module,exports){
 "use strict";
+/**
+ * @stable
+ */
 (function (LifecycleHooks) {
     LifecycleHooks[LifecycleHooks["OnInit"] = 0] = "OnInit";
     LifecycleHooks[LifecycleHooks["OnDestroy"] = 1] = "OnDestroy";
@@ -11162,26 +12490,510 @@ exports.HostListenerMetadata = HostListenerMetadata;
     LifecycleHooks[LifecycleHooks["AfterViewChecked"] = 7] = "AfterViewChecked";
 })(exports.LifecycleHooks || (exports.LifecycleHooks = {}));
 var LifecycleHooks = exports.LifecycleHooks;
-/**
- * @internal
- */
 exports.LIFECYCLE_HOOKS_VALUES = [
-    LifecycleHooks.OnInit,
-    LifecycleHooks.OnDestroy,
-    LifecycleHooks.DoCheck,
-    LifecycleHooks.OnChanges,
-    LifecycleHooks.AfterContentInit,
-    LifecycleHooks.AfterContentChecked,
-    LifecycleHooks.AfterViewInit,
+    LifecycleHooks.OnInit, LifecycleHooks.OnDestroy, LifecycleHooks.DoCheck, LifecycleHooks.OnChanges,
+    LifecycleHooks.AfterContentInit, LifecycleHooks.AfterContentChecked, LifecycleHooks.AfterViewInit,
     LifecycleHooks.AfterViewChecked
 ];
+/**
+ * Lifecycle hooks are guaranteed to be called in the following order:
+ * - `OnChanges` (if any bindings have changed),
+ * - `OnInit` (after the first check only),
+ * - `DoCheck`,
+ * - `AfterContentInit`,
+ * - `AfterContentChecked`,
+ * - `AfterViewInit`,
+ * - `AfterViewChecked`,
+ * - `OnDestroy` (at the very end before destruction)
+ */
+/**
+ * Implement this interface to get notified when any data-bound property of your directive changes.
+ *
+ * `ngOnChanges` is called right after the data-bound properties have been checked and before view
+ * and content children are checked if at least one of them has changed.
+ *
+ * The `changes` parameter contains an entry for each of the changed data-bound property. The key is
+ * the property name and the value is an instance of {@link SimpleChange}.
+ *
+ * ### Example ([live example](http://plnkr.co/edit/AHrB6opLqHDBPkt4KpdT?p=preview)):
+ *
+ * ```typescript
+ * @Component({
+ *   selector: 'my-cmp',
+ *   template: `<p>myProp = {{myProp}}</p>`
+ * })
+ * class MyComponent implements OnChanges {
+ *   @Input() myProp: any;
+ *
+ *   ngOnChanges(changes: SimpleChanges) {
+ *     console.log('ngOnChanges - myProp = ' + changes['myProp'].currentValue);
+ *   }
+ * }
+ *
+ * @Component({
+ *   selector: 'app',
+ *   template: `
+ *     <button (click)="value = value + 1">Change MyComponent</button>
+ *     <my-cmp [my-prop]="value"></my-cmp>`,
+ *   directives: [MyComponent]
+ * })
+ * export class App {
+ *   value = 0;
+ * }
+ *
+ * bootstrap(App).catch(err => console.error(err));
+ * ```
+ * @stable
+ */
+var OnChanges = (function () {
+    function OnChanges() {
+    }
+    return OnChanges;
+}());
+exports.OnChanges = OnChanges;
+/**
+ * Implement this interface to execute custom initialization logic after your directive's
+ * data-bound properties have been initialized.
+ *
+ * `ngOnInit` is called right after the directive's data-bound properties have been checked for the
+ * first time, and before any of its children have been checked. It is invoked only once when the
+ * directive is instantiated.
+ *
+ * ### Example ([live example](http://plnkr.co/edit/1MBypRryXd64v4pV03Yn?p=preview))
+ *
+ * ```typescript
+ * @Component({
+ *   selector: 'my-cmp',
+ *   template: `<p>my-component</p>`
+ * })
+ * class MyComponent implements OnInit, OnDestroy {
+ *   ngOnInit() {
+ *     console.log('ngOnInit');
+ *   }
+ *
+ *   ngOnDestroy() {
+ *     console.log('ngOnDestroy');
+ *   }
+ * }
+ *
+ * @Component({
+ *   selector: 'app',
+ *   template: `
+ *     <button (click)="hasChild = !hasChild">
+ *       {{hasChild ? 'Destroy' : 'Create'}} MyComponent
+ *     </button>
+ *     <my-cmp *ngIf="hasChild"></my-cmp>`,
+ *   directives: [MyComponent, NgIf]
+ * })
+ * export class App {
+ *   hasChild = true;
+ * }
+ *
+ * bootstrap(App).catch(err => console.error(err));
+ *  ```
+ * @stable
+ */
+var OnInit = (function () {
+    function OnInit() {
+    }
+    return OnInit;
+}());
+exports.OnInit = OnInit;
+/**
+ * Implement this interface to supplement the default change detection algorithm in your directive.
+ *
+ * `ngDoCheck` gets called to check the changes in the directives in addition to the default
+ * algorithm.
+ *
+ * The default change detection algorithm looks for differences by comparing bound-property values
+ * by reference across change detection runs.
+ *
+ * Note that a directive typically should not use both `DoCheck` and {@link OnChanges} to respond to
+ * changes on the same input. `ngOnChanges` will continue to be called when the default change
+ * detector
+ * detects changes, so it is usually unnecessary to respond to changes on the same input in both
+ * hooks.
+ * Reaction to the changes have to be handled from within the `ngDoCheck` callback.
+ *
+ * You can use {@link KeyValueDiffers} and {@link IterableDiffers} to help add your custom check
+ * mechanisms.
+ *
+ * ### Example ([live demo](http://plnkr.co/edit/QpnIlF0CR2i5bcYbHEUJ?p=preview))
+ *
+ * In the following example `ngDoCheck` uses an {@link IterableDiffers} to detect the updates to the
+ * array `list`:
+ *
+ * ```typescript
+ * @Component({
+ *   selector: 'custom-check',
+ *   template: `
+ *     <p>Changes:</p>
+ *     <ul>
+ *       <li *ngFor="let line of logs">{{line}}</li>
+ *     </ul>`,
+ *   directives: [NgFor]
+ * })
+ * class CustomCheckComponent implements DoCheck {
+ *   @Input() list: any[];
+ *   differ: any;
+ *   logs = [];
+ *
+ *   constructor(differs: IterableDiffers) {
+ *     this.differ = differs.find([]).create(null);
+ *   }
+ *
+ *   ngDoCheck() {
+ *     var changes = this.differ.diff(this.list);
+ *
+ *     if (changes) {
+ *       changes.forEachAddedItem(r => this.logs.push('added ' + r.item));
+ *       changes.forEachRemovedItem(r => this.logs.push('removed ' + r.item))
+ *     }
+ *   }
+ * }
+ *
+ * @Component({
+ *   selector: 'app',
+ *   template: `
+ *     <button (click)="list.push(list.length)">Push</button>
+ *     <button (click)="list.pop()">Pop</button>
+ *     <custom-check [list]="list"></custom-check>`,
+ *   directives: [CustomCheckComponent]
+ * })
+ * export class App {
+ *   list = [];
+ * }
+ * ```
+ * @stable
+ */
+var DoCheck = (function () {
+    function DoCheck() {
+    }
+    return DoCheck;
+}());
+exports.DoCheck = DoCheck;
+/**
+ * Implement this interface to get notified when your directive is destroyed.
+ *
+ * `ngOnDestroy` callback is typically used for any custom cleanup that needs to occur when the
+ * instance is destroyed
+ *
+ * ### Example ([live example](http://plnkr.co/edit/1MBypRryXd64v4pV03Yn?p=preview))
+ *
+ * ```typesript
+ * @Component({
+ *   selector: 'my-cmp',
+ *   template: `<p>my-component</p>`
+ * })
+ * class MyComponent implements OnInit, OnDestroy {
+ *   ngOnInit() {
+ *     console.log('ngOnInit');
+ *   }
+ *
+ *   ngOnDestroy() {
+ *     console.log('ngOnDestroy');
+ *   }
+ * }
+ *
+ * @Component({
+ *   selector: 'app',
+ *   template: `
+ *     <button (click)="hasChild = !hasChild">
+ *       {{hasChild ? 'Destroy' : 'Create'}} MyComponent
+ *     </button>
+ *     <my-cmp *ngIf="hasChild"></my-cmp>`,
+ *   directives: [MyComponent, NgIf]
+ * })
+ * export class App {
+ *   hasChild = true;
+ * }
+ *
+ * bootstrap(App).catch(err => console.error(err));
+ * ```
+ *
+ *
+ * To create a stateful Pipe, you should implement this interface and set the `pure`
+ * parameter to `false` in the {@link PipeMetadata}.
+ *
+ * A stateful pipe may produce different output, given the same input. It is
+ * likely that a stateful pipe may contain state that should be cleaned up when
+ * a binding is destroyed. For example, a subscription to a stream of data may need to
+ * be disposed, or an interval may need to be cleared.
+ *
+ * ### Example ([live demo](http://plnkr.co/edit/i8pm5brO4sPaLxBx56MR?p=preview))
+ *
+ * In this example, a pipe is created to countdown its input value, updating it every
+ * 50ms. Because it maintains an internal interval, it automatically clears
+ * the interval when the binding is destroyed or the countdown completes.
+ *
+ * ```
+ * import {OnDestroy, Pipe, PipeTransform} from '@angular/core'
+ * @Pipe({name: 'countdown', pure: false})
+ * class CountDown implements PipeTransform, OnDestroy {
+ *   remainingTime:Number;
+ *   interval:SetInterval;
+ *   ngOnDestroy() {
+ *     if (this.interval) {
+ *       clearInterval(this.interval);
+ *     }
+ *   }
+ *   transform(value: any, args: any[] = []) {
+ *     if (!parseInt(value, 10)) return null;
+ *     if (typeof this.remainingTime !== 'number') {
+ *       this.remainingTime = parseInt(value, 10);
+ *     }
+ *     if (!this.interval) {
+ *       this.interval = setInterval(() => {
+ *         this.remainingTime-=50;
+ *         if (this.remainingTime <= 0) {
+ *           this.remainingTime = 0;
+ *           clearInterval(this.interval);
+ *           delete this.interval;
+ *         }
+ *       }, 50);
+ *     }
+ *     return this.remainingTime;
+ *   }
+ * }
+ * ```
+ *
+ * Invoking `{{ 10000 | countdown }}` would cause the value to be decremented by 50,
+ * every 50ms, until it reaches 0.
+ *
+ * @stable
+ */
+var OnDestroy = (function () {
+    function OnDestroy() {
+    }
+    return OnDestroy;
+}());
+exports.OnDestroy = OnDestroy;
+/**
+ * Implement this interface to get notified when your directive's content has been fully
+ * initialized.
+ *
+ * ### Example ([live demo](http://plnkr.co/edit/plamXUpsLQbIXpViZhUO?p=preview))
+ *
+ * ```typescript
+ * @Component({
+ *   selector: 'child-cmp',
+ *   template: `{{where}} child`
+ * })
+ * class ChildComponent {
+ *   @Input() where: string;
+ * }
+ *
+ * @Component({
+ *   selector: 'parent-cmp',
+ *   template: `<ng-content></ng-content>`
+ * })
+ * class ParentComponent implements AfterContentInit {
+ *   @ContentChild(ChildComponent) contentChild: ChildComponent;
+ *
+ *   constructor() {
+ *     // contentChild is not initialized yet
+ *     console.log(this.getMessage(this.contentChild));
+ *   }
+ *
+ *   ngAfterContentInit() {
+ *     // contentChild is updated after the content has been checked
+ *     console.log('AfterContentInit: ' + this.getMessage(this.contentChild));
+ *   }
+ *
+ *   private getMessage(cmp: ChildComponent): string {
+ *     return cmp ? cmp.where + ' child' : 'no child';
+ *   }
+ * }
+ *
+ * @Component({
+ *   selector: 'app',
+ *   template: `
+ *     <parent-cmp>
+ *       <child-cmp where="content"></child-cmp>
+ *     </parent-cmp>`,
+ *   directives: [ParentComponent, ChildComponent]
+ * })
+ * export class App {
+ * }
+ *
+ * bootstrap(App).catch(err => console.error(err));
+ * ```
+ * @stable
+ */
+var AfterContentInit = (function () {
+    function AfterContentInit() {
+    }
+    return AfterContentInit;
+}());
+exports.AfterContentInit = AfterContentInit;
+/**
+ * Implement this interface to get notified after every check of your directive's content.
+ *
+ * ### Example ([live demo](http://plnkr.co/edit/tGdrytNEKQnecIPkD7NU?p=preview))
+ *
+ * ```typescript
+ * @Component({selector: 'child-cmp', template: `{{where}} child`})
+ * class ChildComponent {
+ *   @Input() where: string;
+ * }
+ *
+ * @Component({selector: 'parent-cmp', template: `<ng-content></ng-content>`})
+ * class ParentComponent implements AfterContentChecked {
+ *   @ContentChild(ChildComponent) contentChild: ChildComponent;
+ *
+ *   constructor() {
+ *     // contentChild is not initialized yet
+ *     console.log(this.getMessage(this.contentChild));
+ *   }
+ *
+ *   ngAfterContentChecked() {
+ *     // contentChild is updated after the content has been checked
+ *     console.log('AfterContentChecked: ' + this.getMessage(this.contentChild));
+ *   }
+ *
+ *   private getMessage(cmp: ChildComponent): string {
+ *     return cmp ? cmp.where + ' child' : 'no child';
+ *   }
+ * }
+ *
+ * @Component({
+ *   selector: 'app',
+ *   template: `
+ *     <parent-cmp>
+ *       <button (click)="hasContent = !hasContent">Toggle content child</button>
+ *       <child-cmp *ngIf="hasContent" where="content"></child-cmp>
+ *     </parent-cmp>`,
+ *   directives: [NgIf, ParentComponent, ChildComponent]
+ * })
+ * export class App {
+ *   hasContent = true;
+ * }
+ *
+ * bootstrap(App).catch(err => console.error(err));
+ * ```
+ * @stable
+ */
+var AfterContentChecked = (function () {
+    function AfterContentChecked() {
+    }
+    return AfterContentChecked;
+}());
+exports.AfterContentChecked = AfterContentChecked;
+/**
+ * Implement this interface to get notified when your component's view has been fully initialized.
+ *
+ * ### Example ([live demo](http://plnkr.co/edit/LhTKVMEM0fkJgyp4CI1W?p=preview))
+ *
+ * ```typescript
+ * @Component({selector: 'child-cmp', template: `{{where}} child`})
+ * class ChildComponent {
+ *   @Input() where: string;
+ * }
+ *
+ * @Component({
+ *   selector: 'parent-cmp',
+ *   template: `<child-cmp where="view"></child-cmp>`,
+ *   directives: [ChildComponent]
+ * })
+ * class ParentComponent implements AfterViewInit {
+ *   @ViewChild(ChildComponent) viewChild: ChildComponent;
+ *
+ *   constructor() {
+ *     // viewChild is not initialized yet
+ *     console.log(this.getMessage(this.viewChild));
+ *   }
+ *
+ *   ngAfterViewInit() {
+ *     // viewChild is updated after the view has been initialized
+ *     console.log('ngAfterViewInit: ' + this.getMessage(this.viewChild));
+ *   }
+ *
+ *   private getMessage(cmp: ChildComponent): string {
+ *     return cmp ? cmp.where + ' child' : 'no child';
+ *   }
+ * }
+ *
+ * @Component({
+ *   selector: 'app',
+ *   template: `<parent-cmp></parent-cmp>`,
+ *   directives: [ParentComponent]
+ * })
+ * export class App {
+ * }
+ *
+ * bootstrap(App).catch(err => console.error(err));
+ * ```
+ * @stable
+ */
+var AfterViewInit = (function () {
+    function AfterViewInit() {
+    }
+    return AfterViewInit;
+}());
+exports.AfterViewInit = AfterViewInit;
+/**
+ * Implement this interface to get notified after every check of your component's view.
+ *
+ * ### Example ([live demo](http://plnkr.co/edit/0qDGHcPQkc25CXhTNzKU?p=preview))
+ *
+ * ```typescript
+ * @Component({selector: 'child-cmp', template: `{{where}} child`})
+ * class ChildComponent {
+ *   @Input() where: string;
+ * }
+ *
+ * @Component({
+ *   selector: 'parent-cmp',
+ *   template: `
+ *     <button (click)="showView = !showView">Toggle view child</button>
+ *     <child-cmp *ngIf="showView" where="view"></child-cmp>`,
+ *   directives: [NgIf, ChildComponent]
+ * })
+ * class ParentComponent implements AfterViewChecked {
+ *   @ViewChild(ChildComponent) viewChild: ChildComponent;
+ *   showView = true;
+ *
+ *   constructor() {
+ *     // viewChild is not initialized yet
+ *     console.log(this.getMessage(this.viewChild));
+ *   }
+ *
+ *   ngAfterViewChecked() {
+ *     // viewChild is updated after the view has been checked
+ *     console.log('AfterViewChecked: ' + this.getMessage(this.viewChild));
+ *   }
+ *
+ *   private getMessage(cmp: ChildComponent): string {
+ *     return cmp ? cmp.where + ' child' : 'no child';
+ *   }
+ * }
+ *
+ * @Component({
+ *   selector: 'app',
+ *   template: `<parent-cmp></parent-cmp>`,
+ *   directives: [ParentComponent]
+ * })
+ * export class App {
+ * }
+ *
+ * bootstrap(App).catch(err => console.error(err));
+ * ```
+ * @stable
+ */
+var AfterViewChecked = (function () {
+    function AfterViewChecked() {
+    }
+    return AfterViewChecked;
+}());
+exports.AfterViewChecked = AfterViewChecked;
 
-},{}],89:[function(require,module,exports){
+},{}],101:[function(require,module,exports){
 "use strict";
 /**
  * Defines template and style encapsulation options available for Component's {@link View}.
  *
  * See {@link ViewMetadata#encapsulation}.
+ * @stable
  */
 (function (ViewEncapsulation) {
     /**
@@ -11239,7 +13051,7 @@ exports.VIEW_ENCAPSULATION_VALUES = [ViewEncapsulation.Emulated, ViewEncapsulati
  */
 var ViewMetadata = (function () {
     function ViewMetadata(_a) {
-        var _b = _a === void 0 ? {} : _a, templateUrl = _b.templateUrl, template = _b.template, directives = _b.directives, pipes = _b.pipes, encapsulation = _b.encapsulation, styles = _b.styles, styleUrls = _b.styleUrls;
+        var _b = _a === void 0 ? {} : _a, templateUrl = _b.templateUrl, template = _b.template, directives = _b.directives, pipes = _b.pipes, encapsulation = _b.encapsulation, styles = _b.styles, styleUrls = _b.styleUrls, animations = _b.animations;
         this.templateUrl = templateUrl;
         this.template = template;
         this.styleUrls = styleUrls;
@@ -11247,88 +13059,92 @@ var ViewMetadata = (function () {
         this.directives = directives;
         this.pipes = pipes;
         this.encapsulation = encapsulation;
+        this.animations = animations;
     }
     return ViewMetadata;
 }());
 exports.ViewMetadata = ViewMetadata;
 
-},{}],90:[function(require,module,exports){
+},{}],102:[function(require,module,exports){
 "use strict";
+var application_ref_1 = require('./application_ref');
 var console_1 = require('./console');
 var reflection_1 = require('./reflection/reflection');
 var reflector_reader_1 = require('./reflection/reflector_reader');
 var testability_1 = require('./testability/testability');
-var application_ref_1 = require('./application_ref');
 function _reflector() {
     return reflection_1.reflector;
 }
 var __unused; // prevent missing use Dart warning.
 /**
  * A default set of providers which should be included in any Angular platform.
+ * @experimental
  */
 exports.PLATFORM_COMMON_PROVIDERS = [
     application_ref_1.PLATFORM_CORE_PROVIDERS,
     /*@ts2dart_Provider*/ { provide: reflection_1.Reflector, useFactory: _reflector, deps: [] },
-    /*@ts2dart_Provider*/ { provide: reflector_reader_1.ReflectorReader, useExisting: reflection_1.Reflector },
-    testability_1.TestabilityRegistry,
+    /*@ts2dart_Provider*/ { provide: reflector_reader_1.ReflectorReader, useExisting: reflection_1.Reflector }, testability_1.TestabilityRegistry,
     console_1.Console
 ];
 
-},{"./application_ref":36,"./console":47,"./reflection/reflection":95,"./reflection/reflector_reader":98,"./testability/testability":102}],91:[function(require,module,exports){
+},{"./application_ref":46,"./console":57,"./reflection/reflection":107,"./reflection/reflector_reader":110,"./testability/testability":114}],103:[function(require,module,exports){
 "use strict";
 var di_1 = require('./di');
 /**
- * A token that can be provided when bootstraping an application to make an array of directives
- * available in every component of the application.
- *
- * ### Example
- *
- * ```typescript
- * import {PLATFORM_DIRECTIVES} from '@angular/core';
- * import {OtherDirective} from './myDirectives';
- *
- * @Component({
- *   selector: 'my-component',
- *   template: `
- *     <!-- can use other directive even though the component does not list it in `directives` -->
- *     <other-directive></other-directive>
- *   `
- * })
- * export class MyComponent {
- *   ...
- * }
- *
- * bootstrap(MyComponent, [provide(PLATFORM_DIRECTIVES, {useValue: [OtherDirective], multi:true})]);
- * ```
- */
+   A token that can be provided when bootstrapping an application to make an array of directives
+  * available in every component of the application.
+  *
+  * ### Example
+  *
+  * ```typescript
+  * import {PLATFORM_DIRECTIVES} from '@angular/core';
+  * import {OtherDirective} from './myDirectives';
+  *
+  * @Component({
+  *   selector: 'my-component',
+  *   template: `
+  *     <!-- can use other directive even though the component does not list it in `directives` -->
+  *     <other-directive></other-directive>
+  *   `
+  * })
+  * export class MyComponent {
+  *   ...
+  * }
+  *
+  * bootstrap(MyComponent, [{provide: PLATFORM_DIRECTIVES, useValue: [OtherDirective],
+  multi:true}]);
+  * ```
+  * @stable
+  */
 exports.PLATFORM_DIRECTIVES = 
-/*@ts2dart_const*/ new di_1.OpaqueToken("Platform Directives");
+/*@ts2dart_const*/ new di_1.OpaqueToken('Platform Directives');
 /**
- * A token that can be provided when bootstraping an application to make an array of pipes
- * available in every component of the application.
- *
- * ### Example
- *
- * ```typescript
- * import {PLATFORM_PIPES} from '@angular/core';
- * import {OtherPipe} from './myPipe';
- *
- * @Component({
- *   selector: 'my-component',
- *   template: `
- *     {{123 | other-pipe}}
- *   `
- * })
- * export class MyComponent {
- *   ...
- * }
- *
- * bootstrap(MyComponent, [provide(PLATFORM_PIPES, {useValue: [OtherPipe], multi:true})]);
- * ```
- */
-exports.PLATFORM_PIPES = new di_1.OpaqueToken("Platform Pipes");
+  * A token that can be provided when bootstraping an application to make an array of pipes
+  * available in every component of the application.
+  *
+  * ### Example
+  *
+  * ```typescript
+  * import {PLATFORM_PIPES} from '@angular/core';
+  * import {OtherPipe} from './myPipe';
+  *
+  * @Component({
+  *   selector: 'my-component',
+  *   template: `
+  *     {{123 | other-pipe}}
+  *   `
+  * })
+  * export class MyComponent {
+  *   ...
+  * }
+  *
+  * bootstrap(MyComponent, [{provide: PLATFORM_PIPES, useValue: [OtherPipe], multi:true}]);
+  * ```
+  * @stable
+  */
+exports.PLATFORM_PIPES = new di_1.OpaqueToken('Platform Pipes');
 
-},{"./di":50}],92:[function(require,module,exports){
+},{"./di":60}],104:[function(require,module,exports){
 "use strict";
 var impl = require('./wtf_impl');
 // Change exports to const once https://github.com/angular/ts2dart/issues/150
@@ -11367,6 +13183,7 @@ function noopScope(arg0, arg1) {
  * needs to be fixed before the app should be profiled. Add try-finally only when you expect that
  * an exception is expected during normal execution while profiling.
  *
+ * @experimental
  */
 exports.wtfCreateScope = exports.wtfEnabled ? impl.createScope : function (signature, flags) { return noopScope; };
 /**
@@ -11376,6 +13193,7 @@ exports.wtfCreateScope = exports.wtfEnabled ? impl.createScope : function (signa
  * - `returnValue` (optional) to be passed to the WTF.
  *
  * Returns the `returnValue for easy chaining.
+ * @experimental
  */
 exports.wtfLeave = exports.wtfEnabled ? impl.leave : function (s, r) { return r; };
 /**
@@ -11389,20 +13207,20 @@ exports.wtfLeave = exports.wtfEnabled ? impl.leave : function (s, r) { return r;
  *          wtfEndTimeRange(s);
  *        });
  *     }
+ * @experimental
  */
 exports.wtfStartTimeRange = exports.wtfEnabled ? impl.startTimeRange : function (rangeType, action) { return null; };
 /**
  * Ends a async time range operation.
  * [range] is the return value from [wtfStartTimeRange] Async ranges only work if WTF has been
  * enabled.
+ * @experimental
  */
-exports.wtfEndTimeRange = exports.wtfEnabled ? impl.endTimeRange : function (r) {
-    return null;
-};
+exports.wtfEndTimeRange = exports.wtfEnabled ? impl.endTimeRange : function (r) { return null; };
 
-},{"./wtf_impl":93}],93:[function(require,module,exports){
+},{"./wtf_impl":105}],105:[function(require,module,exports){
 "use strict";
-var lang_1 = require('../../src/facade/lang');
+var lang_1 = require('../facade/lang');
 var trace;
 var events;
 function detectWTF() {
@@ -11436,31 +13254,30 @@ function endTimeRange(range) {
 }
 exports.endTimeRange = endTimeRange;
 
-},{"../../src/facade/lang":67}],94:[function(require,module,exports){
+},{"../facade/lang":77}],106:[function(require,module,exports){
 "use strict";
 /**
-* This is here because DART requires it. It is noop in JS.
-*/
+ * This is here because DART requires it. It is noop in JS.
+ */
 function wtfInit() { }
 exports.wtfInit = wtfInit;
 
-},{}],95:[function(require,module,exports){
+},{}],107:[function(require,module,exports){
 "use strict";
+var reflection_capabilities_1 = require('./reflection_capabilities');
 var reflector_1 = require('./reflector');
 var reflector_2 = require('./reflector');
-exports.Reflector = reflector_2.Reflector;
 exports.ReflectionInfo = reflector_2.ReflectionInfo;
-var reflection_capabilities_1 = require('./reflection_capabilities');
+exports.Reflector = reflector_2.Reflector;
 /**
  * The {@link Reflector} used internally in Angular to access metadata
  * about symbols.
  */
 exports.reflector = new reflector_1.Reflector(new reflection_capabilities_1.ReflectionCapabilities());
 
-},{"./reflection_capabilities":96,"./reflector":97}],96:[function(require,module,exports){
+},{"./reflection_capabilities":108,"./reflector":109}],108:[function(require,module,exports){
 "use strict";
-var lang_1 = require('../../src/facade/lang');
-var exceptions_1 = require('../../src/facade/exceptions');
+var lang_1 = require('../facade/lang');
 var ReflectionCapabilities = (function () {
     function ReflectionCapabilities(reflect) {
         this._reflect = lang_1.isPresent(reflect) ? reflect : lang_1.global.Reflect;
@@ -11545,7 +13362,7 @@ var ReflectionCapabilities = (function () {
         throw new Error("Cannot create a factory for '" + lang_1.stringify(t) + "' because its constructor has more than 20 arguments");
     };
     /** @internal */
-    ReflectionCapabilities.prototype._zipTypesAndAnnotations = function (paramTypes, paramAnnotations) {
+    ReflectionCapabilities.prototype._zipTypesAndAnnotations = function (paramTypes /** TODO #9100 */, paramAnnotations /** TODO #9100 */) {
         var result;
         if (typeof paramTypes === 'undefined') {
             result = new Array(paramAnnotations.length);
@@ -11580,8 +13397,10 @@ var ReflectionCapabilities = (function () {
         // API of tsickle for lowering decorators to properties on the class.
         if (lang_1.isPresent(typeOrFunc.ctorParameters)) {
             var ctorParameters = typeOrFunc.ctorParameters;
-            var paramTypes_1 = ctorParameters.map(function (ctorParam) { return ctorParam && ctorParam.type; });
-            var paramAnnotations_1 = ctorParameters.map(function (ctorParam) { return ctorParam && convertTsickleDecoratorIntoMetadata(ctorParam.decorators); });
+            var paramTypes_1 = ctorParameters.map(function (ctorParam /** TODO #9100 */) { return ctorParam && ctorParam.type; });
+            var paramAnnotations_1 = ctorParameters.map(function (ctorParam /** TODO #9100 */) {
+                return ctorParam && convertTsickleDecoratorIntoMetadata(ctorParam.decorators);
+            });
             return this._zipTypesAndAnnotations(paramTypes_1, paramAnnotations_1);
         }
         // API for metadata created by invoking the decorators.
@@ -11631,8 +13450,7 @@ var ReflectionCapabilities = (function () {
         if (lang_1.isPresent(typeOrFunc.propDecorators)) {
             var propDecorators_1 = typeOrFunc.propDecorators;
             var propMetadata_1 = {};
-            Object.keys(propDecorators_1)
-                .forEach(function (prop) {
+            Object.keys(propDecorators_1).forEach(function (prop) {
                 propMetadata_1[prop] = convertTsickleDecoratorIntoMetadata(propDecorators_1[prop]);
             });
             return propMetadata_1;
@@ -11645,8 +13463,15 @@ var ReflectionCapabilities = (function () {
         }
         return {};
     };
-    ReflectionCapabilities.prototype.interfaces = function (type) {
-        throw new exceptions_1.BaseException("JavaScript does not support interfaces");
+    // Note: JavaScript does not support to query for interfaces during runtime.
+    // However, we can't throw here as the reflector will always call this method
+    // when asked for a lifecycle interface as this is what we check in Dart.
+    ReflectionCapabilities.prototype.interfaces = function (type) { return []; };
+    ReflectionCapabilities.prototype.hasLifecycleHook = function (type, lcInterface, lcProperty) {
+        if (!(type instanceof lang_1.Type))
+            return false;
+        var proto = type.prototype;
+        return !!proto[lcProperty];
     };
     ReflectionCapabilities.prototype.getter = function (name) { return new Function('o', 'return o.' + name + ';'); };
     ReflectionCapabilities.prototype.setter = function (name) {
@@ -11657,7 +13482,14 @@ var ReflectionCapabilities = (function () {
         return new Function('o', 'args', functionBody);
     };
     // There is not a concept of import uri in Js, but this is useful in developing Dart applications.
-    ReflectionCapabilities.prototype.importUri = function (type) { return "./" + lang_1.stringify(type); };
+    ReflectionCapabilities.prototype.importUri = function (type) {
+        // StaticSymbol
+        if (typeof type === 'object' && type['filePath']) {
+            return type['filePath'];
+        }
+        // Runtime type
+        return "./" + lang_1.stringify(type);
+    };
     return ReflectionCapabilities;
 }());
 exports.ReflectionCapabilities = ReflectionCapabilities;
@@ -11675,16 +13507,16 @@ function convertTsickleDecoratorIntoMetadata(decoratorInvocations) {
     });
 }
 
-},{"../../src/facade/exceptions":66,"../../src/facade/lang":67}],97:[function(require,module,exports){
+},{"../facade/lang":77}],109:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var lang_1 = require('../../src/facade/lang');
-var exceptions_1 = require('../../src/facade/exceptions');
-var collection_1 = require('../../src/facade/collection');
+var collection_1 = require('../facade/collection');
+var exceptions_1 = require('../facade/exceptions');
+var lang_1 = require('../facade/lang');
 var reflector_reader_1 = require('./reflector_reader');
 /**
  * Reflective information about a symbol, including annotations, interfaces, and other metadata.
@@ -11719,6 +13551,7 @@ var Reflector = (function (_super) {
         this._usedKeys = null;
         this.reflectionCapabilities = reflectionCapabilities;
     }
+    Reflector.prototype.updateCapabilities = function (caps) { this.reflectionCapabilities = caps; };
     Reflector.prototype.isReflectionEnabled = function () { return this.reflectionCapabilities.isReflectionEnabled(); };
     /**
      * Causes `this` reflector to track keys used to access
@@ -11792,6 +13625,15 @@ var Reflector = (function (_super) {
             return this.reflectionCapabilities.interfaces(type);
         }
     };
+    Reflector.prototype.hasLifecycleHook = function (type, lcInterface, lcProperty) {
+        var interfaces = this.interfaces(type);
+        if (interfaces.indexOf(lcInterface) !== -1) {
+            return true;
+        }
+        else {
+            return this.reflectionCapabilities.hasLifecycleHook(type, lcInterface, lcProperty);
+        }
+    };
     Reflector.prototype.getter = function (name) {
         if (this._getters.has(name)) {
             return this._getters.get(name);
@@ -11833,12 +13675,12 @@ function _mergeMaps(target, config) {
     collection_1.StringMapWrapper.forEach(config, function (v, k) { return target.set(k, v); });
 }
 
-},{"../../src/facade/collection":64,"../../src/facade/exceptions":66,"../../src/facade/lang":67,"./reflector_reader":98}],98:[function(require,module,exports){
+},{"../facade/collection":74,"../facade/exceptions":76,"../facade/lang":77,"./reflector_reader":110}],110:[function(require,module,exports){
 "use strict";
 /**
-* Provides read-only access to reflection data about symbols. Used internally by Angular
-* to power dependency injection and compilation.
-*/
+ * Provides read-only access to reflection data about symbols. Used internally by Angular
+ * to power dependency injection and compilation.
+ */
 var ReflectorReader = (function () {
     function ReflectorReader() {
     }
@@ -11846,17 +13688,20 @@ var ReflectorReader = (function () {
 }());
 exports.ReflectorReader = ReflectorReader;
 
-},{}],99:[function(require,module,exports){
+},{}],111:[function(require,module,exports){
 "use strict";
 // Public API for render
 var api_1 = require('./render/api');
-exports.RootRenderer = api_1.RootRenderer;
-exports.Renderer = api_1.Renderer;
 exports.RenderComponentType = api_1.RenderComponentType;
+exports.Renderer = api_1.Renderer;
+exports.RootRenderer = api_1.RootRenderer;
 
-},{"./render/api":100}],100:[function(require,module,exports){
+},{"./render/api":112}],112:[function(require,module,exports){
 "use strict";
-var exceptions_1 = require('../../src/facade/exceptions');
+var exceptions_1 = require('../facade/exceptions');
+/**
+ * @experimental
+ */
 var RenderComponentType = (function () {
     function RenderComponentType(id, templateUrl, slotCount, encapsulation, styles) {
         this.id = id;
@@ -11904,6 +13749,9 @@ var RenderDebugInfo = (function () {
     return RenderDebugInfo;
 }());
 exports.RenderDebugInfo = RenderDebugInfo;
+/**
+ * @experimental
+ */
 var Renderer = (function () {
     function Renderer() {
     }
@@ -11921,6 +13769,7 @@ exports.Renderer = Renderer;
  * If you are implementing a custom renderer, you must implement this interface.
  *
  * The default Renderer implementation is `DomRenderer`. Also available is `WebWorkerRenderer`.
+ * @experimental
  */
 var RootRenderer = (function () {
     function RootRenderer() {
@@ -11929,15 +13778,15 @@ var RootRenderer = (function () {
 }());
 exports.RootRenderer = RootRenderer;
 
-},{"../../src/facade/exceptions":66}],101:[function(require,module,exports){
+},{"../facade/exceptions":76}],113:[function(require,module,exports){
 "use strict";
 /**
-* A SecurityContext marks a location that has dangerous security implications, e.g. a DOM property
-* like `innerHTML` that could cause Cross Site Scripting (XSS) security bugs when improperly
-* handled.
-*
-* See DomSanitizationService for more details on security in Angular applications.
-*/
+ * A SecurityContext marks a location that has dangerous security implications, e.g. a DOM property
+ * like `innerHTML` that could cause Cross Site Scripting (XSS) security bugs when improperly
+ * handled.
+ *
+ * See DomSanitizationService for more details on security in Angular applications.
+ */
 (function (SecurityContext) {
     SecurityContext[SecurityContext["NONE"] = 0] = "NONE";
     SecurityContext[SecurityContext["HTML"] = 1] = "HTML";
@@ -11958,14 +13807,14 @@ var SanitizationService = (function () {
 }());
 exports.SanitizationService = SanitizationService;
 
-},{}],102:[function(require,module,exports){
+},{}],114:[function(require,module,exports){
 "use strict";
-var collection_1 = require('../../src/facade/collection');
-var lang_1 = require('../../src/facade/lang');
-var exceptions_1 = require('../../src/facade/exceptions');
-var ng_zone_1 = require('../zone/ng_zone');
-var async_1 = require('../../src/facade/async');
 var decorators_1 = require('../di/decorators');
+var async_1 = require('../facade/async');
+var collection_1 = require('../facade/collection');
+var exceptions_1 = require('../facade/exceptions');
+var lang_1 = require('../facade/lang');
+var ng_zone_1 = require('../zone/ng_zone');
 var Testability = (function () {
     function Testability(_ngZone) {
         this._ngZone = _ngZone;
@@ -12047,9 +13896,11 @@ var Testability = (function () {
         // TODO(juliemr): implement.
         return [];
     };
+    /** @nocollapse */
     Testability.decorators = [
         { type: decorators_1.Injectable },
     ];
+    /** @nocollapse */
     Testability.ctorParameters = [
         { type: ng_zone_1.NgZone, },
     ];
@@ -12072,9 +13923,11 @@ var TestabilityRegistry = (function () {
         if (findInAncestors === void 0) { findInAncestors = true; }
         return _testabilityGetter.findTestabilityInTree(this, elem, findInAncestors);
     };
+    /** @nocollapse */
     TestabilityRegistry.decorators = [
         { type: decorators_1.Injectable },
     ];
+    /** @nocollapse */
     TestabilityRegistry.ctorParameters = [];
     return TestabilityRegistry;
 }());
@@ -12091,6 +13944,7 @@ var _NoopGetTestability = (function () {
 }());
 /**
  * Set the {@link GetTestability} implementation used by the Angular testing framework.
+ * @experimental
  */
 function setTestabilityGetter(getter) {
     _testabilityGetter = getter;
@@ -12098,15 +13952,15 @@ function setTestabilityGetter(getter) {
 exports.setTestabilityGetter = setTestabilityGetter;
 var _testabilityGetter = new _NoopGetTestability();
 
-},{"../../src/facade/async":62,"../../src/facade/collection":64,"../../src/facade/exceptions":66,"../../src/facade/lang":67,"../di/decorators":51,"../zone/ng_zone":106}],103:[function(require,module,exports){
+},{"../di/decorators":61,"../facade/async":72,"../facade/collection":74,"../facade/exceptions":76,"../facade/lang":77,"../zone/ng_zone":118}],115:[function(require,module,exports){
 "use strict";
 // Public API for util
 var decorators_1 = require('./util/decorators');
 exports.Class = decorators_1.Class;
 
-},{"./util/decorators":104}],104:[function(require,module,exports){
+},{"./util/decorators":116}],116:[function(require,module,exports){
 "use strict";
-var lang_1 = require('../../src/facade/lang');
+var lang_1 = require('../facade/lang');
 var _nextClassId = 0;
 function extractAnnotation(annotation) {
     if (lang_1.isFunction(annotation) && annotation.hasOwnProperty('annotation')) {
@@ -12237,6 +14091,7 @@ function applyParams(fnOrArray, key) {
  *   }
  * });
  * ```
+ * @stable
  */
 function Class(clsDef) {
     var constructor = applyParams(clsDef.hasOwnProperty('constructor') ? clsDef.constructor : undefined, 'constructor');
@@ -12272,9 +14127,9 @@ var Reflect = lang_1.global.Reflect;
         throw 'reflect-metadata shim is required when using class decorators';
     }
 })();
-function makeDecorator(annotationCls, chainFn) {
+function makeDecorator(annotationCls /* TODO #9100 */, chainFn) {
     if (chainFn === void 0) { chainFn = null; }
-    function DecoratorFactory(objOrType) {
+    function DecoratorFactory(objOrType /** TODO #9100 */) {
         var annotationInstance = new annotationCls(objOrType);
         if (this instanceof annotationCls) {
             return annotationInstance;
@@ -12282,7 +14137,7 @@ function makeDecorator(annotationCls, chainFn) {
         else {
             var chainAnnotation = lang_1.isFunction(this) && this.annotations instanceof Array ? this.annotations : [];
             chainAnnotation.push(annotationInstance);
-            var TypeDecorator = function TypeDecorator(cls) {
+            var TypeDecorator = function TypeDecorator(cls /** TODO #9100 */) {
                 var annotations = Reflect.getOwnMetadata('annotations', cls);
                 annotations = annotations || [];
                 annotations.push(annotationInstance);
@@ -12301,9 +14156,9 @@ function makeDecorator(annotationCls, chainFn) {
     return DecoratorFactory;
 }
 exports.makeDecorator = makeDecorator;
-function makeParamDecorator(annotationCls) {
+function makeParamDecorator(annotationCls /** TODO #9100 */) {
     function ParamDecoratorFactory() {
-        var args = [];
+        var args = []; /** TODO #9100 */
         for (var _i = 0; _i < arguments.length; _i++) {
             args[_i - 0] = arguments[_i];
         }
@@ -12316,7 +14171,7 @@ function makeParamDecorator(annotationCls) {
             ParamDecorator.annotation = annotationInstance;
             return ParamDecorator;
         }
-        function ParamDecorator(cls, unusedKey, index) {
+        function ParamDecorator(cls /** TODO #9100 */, unusedKey /** TODO #9100 */, index /** TODO #9100 */) {
             var parameters = Reflect.getMetadata('parameters', cls);
             parameters = parameters || [];
             // there might be gaps if some in between parameters do not have annotations.
@@ -12336,9 +14191,9 @@ function makeParamDecorator(annotationCls) {
     return ParamDecoratorFactory;
 }
 exports.makeParamDecorator = makeParamDecorator;
-function makePropDecorator(annotationCls) {
+function makePropDecorator(annotationCls /** TODO #9100 */) {
     function PropDecoratorFactory() {
-        var args = [];
+        var args = []; /** TODO #9100 */
         for (var _i = 0; _i < arguments.length; _i++) {
             args[_i - 0] = arguments[_i];
         }
@@ -12363,18 +14218,18 @@ function makePropDecorator(annotationCls) {
 }
 exports.makePropDecorator = makePropDecorator;
 
-},{"../../src/facade/lang":67}],105:[function(require,module,exports){
+},{"../facade/lang":77}],117:[function(require,module,exports){
 "use strict";
 // Public API for Zone
 var ng_zone_1 = require('./zone/ng_zone');
 exports.NgZone = ng_zone_1.NgZone;
 exports.NgZoneError = ng_zone_1.NgZoneError;
 
-},{"./zone/ng_zone":106}],106:[function(require,module,exports){
+},{"./zone/ng_zone":118}],118:[function(require,module,exports){
 "use strict";
-var async_1 = require('../../src/facade/async');
+var async_1 = require('../facade/async');
+var exceptions_1 = require('../facade/exceptions');
 var ng_zone_impl_1 = require('./ng_zone_impl');
-var exceptions_1 = require('../../src/facade/exceptions');
 var ng_zone_impl_2 = require('./ng_zone_impl');
 exports.NgZoneError = ng_zone_impl_2.NgZoneError;
 /**
@@ -12447,12 +14302,9 @@ exports.NgZoneError = ng_zone_impl_2.NgZoneError;
  *   }
  * }
  * ```
+ * @experimental
  */
 var NgZone = (function () {
-    /**
-     * @param {bool} enableLongStackTrace whether to enable long stack trace. They should only be
-     *               enabled in development mode as they significantly impact perf.
-     */
     function NgZone(_a) {
         var _this = this;
         var _b = _a.enableLongStackTrace, enableLongStackTrace = _b === void 0 ? false : _b;
@@ -12565,6 +14417,14 @@ var NgZone = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(NgZone.prototype, "isStable", {
+        /**
+         * Whether there are no outstanding microtasks or microtasks.
+         */
+        get: function () { return this._isStable; },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(NgZone.prototype, "hasPendingMicrotasks", {
         /**
          * Whether there are any outstanding microtasks.
@@ -12616,11 +14476,12 @@ var NgZone = (function () {
 }());
 exports.NgZone = NgZone;
 
-},{"../../src/facade/async":62,"../../src/facade/exceptions":66,"./ng_zone_impl":107}],107:[function(require,module,exports){
+},{"../facade/async":72,"../facade/exceptions":76,"./ng_zone_impl":119}],119:[function(require,module,exports){
 "use strict";
 /**
-* Stores error information; delivered via [NgZone.onError] stream.
-*/
+ * Stores error information; delivered via [NgZone.onError] stream.
+ * @deprecated
+ */
 var NgZoneError = (function () {
     function NgZoneError(error, stackTrace) {
         this.error = error;
@@ -12702,7 +14563,7 @@ var NgZoneImpl = (function () {
 }());
 exports.NgZoneImpl = NgZoneImpl;
 
-},{}],108:[function(require,module,exports){
+},{}],120:[function(require,module,exports){
 var asn1 = exports;
 
 asn1.bignum = require('bn.js');
@@ -12713,7 +14574,7 @@ asn1.constants = require('./asn1/constants');
 asn1.decoders = require('./asn1/decoders');
 asn1.encoders = require('./asn1/encoders');
 
-},{"./asn1/api":109,"./asn1/base":111,"./asn1/constants":115,"./asn1/decoders":117,"./asn1/encoders":120,"bn.js":123}],109:[function(require,module,exports){
+},{"./asn1/api":121,"./asn1/base":123,"./asn1/constants":127,"./asn1/decoders":129,"./asn1/encoders":132,"bn.js":135}],121:[function(require,module,exports){
 var asn1 = require('../asn1');
 var inherits = require('inherits');
 
@@ -12776,7 +14637,7 @@ Entity.prototype.encode = function encode(data, enc, /* internal */ reporter) {
   return this._getEncoder(enc).encode(data, reporter);
 };
 
-},{"../asn1":108,"inherits":199,"vm":282}],110:[function(require,module,exports){
+},{"../asn1":120,"inherits":211,"vm":294}],122:[function(require,module,exports){
 var inherits = require('inherits');
 var Reporter = require('../base').Reporter;
 var Buffer = require('buffer').Buffer;
@@ -12894,7 +14755,7 @@ EncoderBuffer.prototype.join = function join(out, offset) {
   return out;
 };
 
-},{"../base":111,"buffer":152,"inherits":199}],111:[function(require,module,exports){
+},{"../base":123,"buffer":164,"inherits":211}],123:[function(require,module,exports){
 var base = exports;
 
 base.Reporter = require('./reporter').Reporter;
@@ -12902,7 +14763,7 @@ base.DecoderBuffer = require('./buffer').DecoderBuffer;
 base.EncoderBuffer = require('./buffer').EncoderBuffer;
 base.Node = require('./node');
 
-},{"./buffer":110,"./node":112,"./reporter":113}],112:[function(require,module,exports){
+},{"./buffer":122,"./node":124,"./reporter":125}],124:[function(require,module,exports){
 var Reporter = require('../base').Reporter;
 var EncoderBuffer = require('../base').EncoderBuffer;
 var DecoderBuffer = require('../base').DecoderBuffer;
@@ -13519,7 +15380,7 @@ Node.prototype._isPrintstr = function isPrintstr(str) {
   return /^[A-Za-z0-9 '\(\)\+,\-\.\/:=\?]*$/.test(str);
 };
 
-},{"../base":111,"minimalistic-assert":210}],113:[function(require,module,exports){
+},{"../base":123,"minimalistic-assert":222}],125:[function(require,module,exports){
 var inherits = require('inherits');
 
 function Reporter(options) {
@@ -13632,7 +15493,7 @@ ReporterError.prototype.rethrow = function rethrow(msg) {
   return this;
 };
 
-},{"inherits":199}],114:[function(require,module,exports){
+},{"inherits":211}],126:[function(require,module,exports){
 var constants = require('../constants');
 
 exports.tagClass = {
@@ -13676,7 +15537,7 @@ exports.tag = {
 };
 exports.tagByName = constants._reverse(exports.tag);
 
-},{"../constants":115}],115:[function(require,module,exports){
+},{"../constants":127}],127:[function(require,module,exports){
 var constants = exports;
 
 // Helper
@@ -13697,7 +15558,7 @@ constants._reverse = function reverse(map) {
 
 constants.der = require('./der');
 
-},{"./der":114}],116:[function(require,module,exports){
+},{"./der":126}],128:[function(require,module,exports){
 var inherits = require('inherits');
 
 var asn1 = require('../../asn1');
@@ -14020,13 +15881,13 @@ function derDecodeLen(buf, primitive, fail) {
   return len;
 }
 
-},{"../../asn1":108,"inherits":199}],117:[function(require,module,exports){
+},{"../../asn1":120,"inherits":211}],129:[function(require,module,exports){
 var decoders = exports;
 
 decoders.der = require('./der');
 decoders.pem = require('./pem');
 
-},{"./der":116,"./pem":118}],118:[function(require,module,exports){
+},{"./der":128,"./pem":130}],130:[function(require,module,exports){
 var inherits = require('inherits');
 var Buffer = require('buffer').Buffer;
 
@@ -14077,7 +15938,7 @@ PEMDecoder.prototype.decode = function decode(data, options) {
   return DERDecoder.prototype.decode.call(this, input, options);
 };
 
-},{"./der":116,"buffer":152,"inherits":199}],119:[function(require,module,exports){
+},{"./der":128,"buffer":164,"inherits":211}],131:[function(require,module,exports){
 var inherits = require('inherits');
 var Buffer = require('buffer').Buffer;
 
@@ -14372,13 +16233,13 @@ function encodeTag(tag, primitive, cls, reporter) {
   return res;
 }
 
-},{"../../asn1":108,"buffer":152,"inherits":199}],120:[function(require,module,exports){
+},{"../../asn1":120,"buffer":164,"inherits":211}],132:[function(require,module,exports){
 var encoders = exports;
 
 encoders.der = require('./der');
 encoders.pem = require('./pem');
 
-},{"./der":119,"./pem":121}],121:[function(require,module,exports){
+},{"./der":131,"./pem":133}],133:[function(require,module,exports){
 var inherits = require('inherits');
 
 var DEREncoder = require('./der');
@@ -14401,7 +16262,7 @@ PEMEncoder.prototype.encode = function encode(data, options) {
   return out.join('\n');
 };
 
-},{"./der":119,"inherits":199}],122:[function(require,module,exports){
+},{"./der":131,"inherits":211}],134:[function(require,module,exports){
 'use strict'
 
 exports.toByteArray = toByteArray
@@ -14512,7 +16373,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],123:[function(require,module,exports){
+},{}],135:[function(require,module,exports){
 (function (module, exports) {
   'use strict';
 
@@ -17933,7 +19794,7 @@ function fromByteArray (uint8) {
   };
 })(typeof module === 'undefined' || module, this);
 
-},{}],124:[function(require,module,exports){
+},{}],136:[function(require,module,exports){
 var r;
 
 module.exports = function rand(len) {
@@ -17992,9 +19853,9 @@ if (typeof window === 'object') {
   }
 }
 
-},{}],125:[function(require,module,exports){
+},{}],137:[function(require,module,exports){
 
-},{}],126:[function(require,module,exports){
+},{}],138:[function(require,module,exports){
 (function (Buffer){
 // based on the aes implimentation in triple sec
 // https://github.com/keybase/triplesec
@@ -18175,7 +20036,7 @@ AES.prototype._doCryptBlock = function (M, keySchedule, SUB_MIX, SBOX) {
 exports.AES = AES
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":152}],127:[function(require,module,exports){
+},{"buffer":164}],139:[function(require,module,exports){
 (function (Buffer){
 var aes = require('./aes')
 var Transform = require('cipher-base')
@@ -18276,7 +20137,7 @@ function xorTest (a, b) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"./aes":126,"./ghash":131,"buffer":152,"buffer-xor":151,"cipher-base":154,"inherits":199}],128:[function(require,module,exports){
+},{"./aes":138,"./ghash":143,"buffer":164,"buffer-xor":163,"cipher-base":166,"inherits":211}],140:[function(require,module,exports){
 var ciphers = require('./encrypter')
 exports.createCipher = exports.Cipher = ciphers.createCipher
 exports.createCipheriv = exports.Cipheriv = ciphers.createCipheriv
@@ -18289,7 +20150,7 @@ function getCiphers () {
 }
 exports.listCiphers = exports.getCiphers = getCiphers
 
-},{"./decrypter":129,"./encrypter":130,"./modes":132}],129:[function(require,module,exports){
+},{"./decrypter":141,"./encrypter":142,"./modes":144}],141:[function(require,module,exports){
 (function (Buffer){
 var aes = require('./aes')
 var Transform = require('cipher-base')
@@ -18430,7 +20291,7 @@ exports.createDecipher = createDecipher
 exports.createDecipheriv = createDecipheriv
 
 }).call(this,require("buffer").Buffer)
-},{"./aes":126,"./authCipher":127,"./modes":132,"./modes/cbc":133,"./modes/cfb":134,"./modes/cfb1":135,"./modes/cfb8":136,"./modes/ctr":137,"./modes/ecb":138,"./modes/ofb":139,"./streamCipher":140,"buffer":152,"cipher-base":154,"evp_bytestokey":190,"inherits":199}],130:[function(require,module,exports){
+},{"./aes":138,"./authCipher":139,"./modes":144,"./modes/cbc":145,"./modes/cfb":146,"./modes/cfb1":147,"./modes/cfb8":148,"./modes/ctr":149,"./modes/ecb":150,"./modes/ofb":151,"./streamCipher":152,"buffer":164,"cipher-base":166,"evp_bytestokey":202,"inherits":211}],142:[function(require,module,exports){
 (function (Buffer){
 var aes = require('./aes')
 var Transform = require('cipher-base')
@@ -18556,7 +20417,7 @@ exports.createCipheriv = createCipheriv
 exports.createCipher = createCipher
 
 }).call(this,require("buffer").Buffer)
-},{"./aes":126,"./authCipher":127,"./modes":132,"./modes/cbc":133,"./modes/cfb":134,"./modes/cfb1":135,"./modes/cfb8":136,"./modes/ctr":137,"./modes/ecb":138,"./modes/ofb":139,"./streamCipher":140,"buffer":152,"cipher-base":154,"evp_bytestokey":190,"inherits":199}],131:[function(require,module,exports){
+},{"./aes":138,"./authCipher":139,"./modes":144,"./modes/cbc":145,"./modes/cfb":146,"./modes/cfb1":147,"./modes/cfb8":148,"./modes/ctr":149,"./modes/ecb":150,"./modes/ofb":151,"./streamCipher":152,"buffer":164,"cipher-base":166,"evp_bytestokey":202,"inherits":211}],143:[function(require,module,exports){
 (function (Buffer){
 var zeros = new Buffer(16)
 zeros.fill(0)
@@ -18658,7 +20519,7 @@ function xor (a, b) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":152}],132:[function(require,module,exports){
+},{"buffer":164}],144:[function(require,module,exports){
 exports['aes-128-ecb'] = {
   cipher: 'AES',
   key: 128,
@@ -18831,7 +20692,7 @@ exports['aes-256-gcm'] = {
   type: 'auth'
 }
 
-},{}],133:[function(require,module,exports){
+},{}],145:[function(require,module,exports){
 var xor = require('buffer-xor')
 
 exports.encrypt = function (self, block) {
@@ -18850,7 +20711,7 @@ exports.decrypt = function (self, block) {
   return xor(out, pad)
 }
 
-},{"buffer-xor":151}],134:[function(require,module,exports){
+},{"buffer-xor":163}],146:[function(require,module,exports){
 (function (Buffer){
 var xor = require('buffer-xor')
 
@@ -18885,7 +20746,7 @@ function encryptStart (self, data, decrypt) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":152,"buffer-xor":151}],135:[function(require,module,exports){
+},{"buffer":164,"buffer-xor":163}],147:[function(require,module,exports){
 (function (Buffer){
 function encryptByte (self, byteParam, decrypt) {
   var pad
@@ -18923,7 +20784,7 @@ function shiftIn (buffer, value) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":152}],136:[function(require,module,exports){
+},{"buffer":164}],148:[function(require,module,exports){
 (function (Buffer){
 function encryptByte (self, byteParam, decrypt) {
   var pad = self._cipher.encryptBlock(self._prev)
@@ -18942,7 +20803,7 @@ exports.encrypt = function (self, chunk, decrypt) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":152}],137:[function(require,module,exports){
+},{"buffer":164}],149:[function(require,module,exports){
 (function (Buffer){
 var xor = require('buffer-xor')
 
@@ -18977,7 +20838,7 @@ exports.encrypt = function (self, chunk) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":152,"buffer-xor":151}],138:[function(require,module,exports){
+},{"buffer":164,"buffer-xor":163}],150:[function(require,module,exports){
 exports.encrypt = function (self, block) {
   return self._cipher.encryptBlock(block)
 }
@@ -18985,7 +20846,7 @@ exports.decrypt = function (self, block) {
   return self._cipher.decryptBlock(block)
 }
 
-},{}],139:[function(require,module,exports){
+},{}],151:[function(require,module,exports){
 (function (Buffer){
 var xor = require('buffer-xor')
 
@@ -19005,7 +20866,7 @@ exports.encrypt = function (self, chunk) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":152,"buffer-xor":151}],140:[function(require,module,exports){
+},{"buffer":164,"buffer-xor":163}],152:[function(require,module,exports){
 (function (Buffer){
 var aes = require('./aes')
 var Transform = require('cipher-base')
@@ -19034,7 +20895,7 @@ StreamCipher.prototype._final = function () {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"./aes":126,"buffer":152,"cipher-base":154,"inherits":199}],141:[function(require,module,exports){
+},{"./aes":138,"buffer":164,"cipher-base":166,"inherits":211}],153:[function(require,module,exports){
 var ebtk = require('evp_bytestokey')
 var aes = require('browserify-aes/browser')
 var DES = require('browserify-des')
@@ -19109,7 +20970,7 @@ function getCiphers () {
 }
 exports.listCiphers = exports.getCiphers = getCiphers
 
-},{"browserify-aes/browser":128,"browserify-aes/modes":132,"browserify-des":142,"browserify-des/modes":143,"evp_bytestokey":190}],142:[function(require,module,exports){
+},{"browserify-aes/browser":140,"browserify-aes/modes":144,"browserify-des":154,"browserify-des/modes":155,"evp_bytestokey":202}],154:[function(require,module,exports){
 (function (Buffer){
 var CipherBase = require('cipher-base')
 var des = require('des.js')
@@ -19156,7 +21017,7 @@ DES.prototype._final = function () {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":152,"cipher-base":154,"des.js":162,"inherits":199}],143:[function(require,module,exports){
+},{"buffer":164,"cipher-base":166,"des.js":174,"inherits":211}],155:[function(require,module,exports){
 exports['des-ecb'] = {
   key: 8,
   iv: 0
@@ -19182,7 +21043,7 @@ exports['des-ede'] = {
   iv: 0
 }
 
-},{}],144:[function(require,module,exports){
+},{}],156:[function(require,module,exports){
 (function (Buffer){
 var bn = require('bn.js');
 var randomBytes = require('randombytes');
@@ -19226,7 +21087,7 @@ function getr(priv) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"bn.js":123,"buffer":152,"randombytes":224}],145:[function(require,module,exports){
+},{"bn.js":135,"buffer":164,"randombytes":236}],157:[function(require,module,exports){
 (function (Buffer){
 'use strict'
 exports['RSA-SHA224'] = exports.sha224WithRSAEncryption = {
@@ -19302,7 +21163,7 @@ exports['RSA-MD5'] = exports.md5WithRSAEncryption = {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":152}],146:[function(require,module,exports){
+},{"buffer":164}],158:[function(require,module,exports){
 (function (Buffer){
 var _algos = require('./algos')
 var createHash = require('create-hash')
@@ -19409,7 +21270,7 @@ module.exports = {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"./algos":145,"./sign":148,"./verify":149,"buffer":152,"create-hash":157,"inherits":199,"stream":268}],147:[function(require,module,exports){
+},{"./algos":157,"./sign":160,"./verify":161,"buffer":164,"create-hash":169,"inherits":211,"stream":280}],159:[function(require,module,exports){
 'use strict'
 exports['1.3.132.0.10'] = 'secp256k1'
 
@@ -19423,7 +21284,7 @@ exports['1.3.132.0.34'] = 'p384'
 
 exports['1.3.132.0.35'] = 'p521'
 
-},{}],148:[function(require,module,exports){
+},{}],160:[function(require,module,exports){
 (function (Buffer){
 // much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
 var createHmac = require('create-hmac')
@@ -19612,7 +21473,7 @@ module.exports.getKey = getKey
 module.exports.makeKey = makeKey
 
 }).call(this,require("buffer").Buffer)
-},{"./curves":147,"bn.js":123,"browserify-rsa":144,"buffer":152,"create-hmac":160,"elliptic":172,"parse-asn1":214}],149:[function(require,module,exports){
+},{"./curves":159,"bn.js":135,"browserify-rsa":156,"buffer":164,"create-hmac":172,"elliptic":184,"parse-asn1":226}],161:[function(require,module,exports){
 (function (Buffer){
 // much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
 var curves = require('./curves')
@@ -19719,7 +21580,7 @@ function checkValue (b, q) {
 module.exports = verify
 
 }).call(this,require("buffer").Buffer)
-},{"./curves":147,"bn.js":123,"buffer":152,"elliptic":172,"parse-asn1":214}],150:[function(require,module,exports){
+},{"./curves":159,"bn.js":135,"buffer":164,"elliptic":184,"parse-asn1":226}],162:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -19831,7 +21692,7 @@ exports.allocUnsafeSlow = function allocUnsafeSlow(size) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"buffer":152}],151:[function(require,module,exports){
+},{"buffer":164}],163:[function(require,module,exports){
 (function (Buffer){
 module.exports = function xor (a, b) {
   var length = Math.min(a.length, b.length)
@@ -19845,7 +21706,7 @@ module.exports = function xor (a, b) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":152}],152:[function(require,module,exports){
+},{"buffer":164}],164:[function(require,module,exports){
 (function (global){
 /*!
  * The buffer module from node.js, for the browser.
@@ -21560,14 +23421,14 @@ function isnan (val) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"base64-js":122,"ieee754":197,"isarray":153}],153:[function(require,module,exports){
+},{"base64-js":134,"ieee754":209,"isarray":165}],165:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],154:[function(require,module,exports){
+},{}],166:[function(require,module,exports){
 (function (Buffer){
 var Transform = require('stream').Transform
 var inherits = require('inherits')
@@ -21661,7 +23522,7 @@ CipherBase.prototype._toString = function (value, enc, final) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":152,"inherits":199,"stream":268,"string_decoder":280}],155:[function(require,module,exports){
+},{"buffer":164,"inherits":211,"stream":280,"string_decoder":292}],167:[function(require,module,exports){
 (function (Buffer){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -21772,7 +23633,7 @@ function objectToString(o) {
 }
 
 }).call(this,{"isBuffer":require("../../is-buffer/index.js")})
-},{"../../is-buffer/index.js":200}],156:[function(require,module,exports){
+},{"../../is-buffer/index.js":212}],168:[function(require,module,exports){
 (function (Buffer){
 var elliptic = require('elliptic');
 var BN = require('bn.js');
@@ -21898,7 +23759,7 @@ function formatReturnValue(bn, enc, len) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"bn.js":123,"buffer":152,"elliptic":172}],157:[function(require,module,exports){
+},{"bn.js":135,"buffer":164,"elliptic":184}],169:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 var inherits = require('inherits')
@@ -21954,7 +23815,7 @@ module.exports = function createHash (alg) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"./md5":159,"buffer":152,"cipher-base":154,"inherits":199,"ripemd160":227,"sha.js":261}],158:[function(require,module,exports){
+},{"./md5":171,"buffer":164,"cipher-base":166,"inherits":211,"ripemd160":239,"sha.js":273}],170:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 var intSize = 4;
@@ -21991,7 +23852,7 @@ function hash(buf, fn, hashSize, bigEndian) {
 }
 exports.hash = hash;
 }).call(this,require("buffer").Buffer)
-},{"buffer":152}],159:[function(require,module,exports){
+},{"buffer":164}],171:[function(require,module,exports){
 'use strict';
 /*
  * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
@@ -22148,7 +24009,7 @@ function bit_rol(num, cnt)
 module.exports = function md5(buf) {
   return helpers.hash(buf, core_md5, 16);
 };
-},{"./helpers":158}],160:[function(require,module,exports){
+},{"./helpers":170}],172:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 var createHash = require('create-hash/browser');
@@ -22220,7 +24081,7 @@ module.exports = function createHmac(alg, key) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":152,"create-hash/browser":157,"inherits":199,"stream":268}],161:[function(require,module,exports){
+},{"buffer":164,"create-hash/browser":169,"inherits":211,"stream":280}],173:[function(require,module,exports){
 'use strict'
 
 exports.randomBytes = exports.rng = exports.pseudoRandomBytes = exports.prng = require('randombytes')
@@ -22299,7 +24160,7 @@ var publicEncrypt = require('public-encrypt')
   }
 })
 
-},{"browserify-cipher":141,"browserify-sign":146,"browserify-sign/algos":145,"create-ecdh":156,"create-hash":157,"create-hmac":160,"diffie-hellman":168,"pbkdf2":215,"public-encrypt":218,"randombytes":224}],162:[function(require,module,exports){
+},{"browserify-cipher":153,"browserify-sign":158,"browserify-sign/algos":157,"create-ecdh":168,"create-hash":169,"create-hmac":172,"diffie-hellman":180,"pbkdf2":227,"public-encrypt":230,"randombytes":236}],174:[function(require,module,exports){
 'use strict';
 
 exports.utils = require('./des/utils');
@@ -22308,7 +24169,7 @@ exports.DES = require('./des/des');
 exports.CBC = require('./des/cbc');
 exports.EDE = require('./des/ede');
 
-},{"./des/cbc":163,"./des/cipher":164,"./des/des":165,"./des/ede":166,"./des/utils":167}],163:[function(require,module,exports){
+},{"./des/cbc":175,"./des/cipher":176,"./des/des":177,"./des/ede":178,"./des/utils":179}],175:[function(require,module,exports){
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -22375,7 +24236,7 @@ proto._update = function _update(inp, inOff, out, outOff) {
   }
 };
 
-},{"inherits":199,"minimalistic-assert":210}],164:[function(require,module,exports){
+},{"inherits":211,"minimalistic-assert":222}],176:[function(require,module,exports){
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -22518,7 +24379,7 @@ Cipher.prototype._finalDecrypt = function _finalDecrypt() {
   return this._unpad(out);
 };
 
-},{"minimalistic-assert":210}],165:[function(require,module,exports){
+},{"minimalistic-assert":222}],177:[function(require,module,exports){
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -22663,7 +24524,7 @@ DES.prototype._decrypt = function _decrypt(state, lStart, rStart, out, off) {
   utils.rip(l, r, out, off);
 };
 
-},{"../des":162,"inherits":199,"minimalistic-assert":210}],166:[function(require,module,exports){
+},{"../des":174,"inherits":211,"minimalistic-assert":222}],178:[function(require,module,exports){
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -22720,7 +24581,7 @@ EDE.prototype._update = function _update(inp, inOff, out, outOff) {
 EDE.prototype._pad = DES.prototype._pad;
 EDE.prototype._unpad = DES.prototype._unpad;
 
-},{"../des":162,"inherits":199,"minimalistic-assert":210}],167:[function(require,module,exports){
+},{"../des":174,"inherits":211,"minimalistic-assert":222}],179:[function(require,module,exports){
 'use strict';
 
 exports.readUInt32BE = function readUInt32BE(bytes, off) {
@@ -22978,7 +24839,7 @@ exports.padSplit = function padSplit(num, size, group) {
   return out.join(' ');
 };
 
-},{}],168:[function(require,module,exports){
+},{}],180:[function(require,module,exports){
 (function (Buffer){
 var generatePrime = require('./lib/generatePrime')
 var primes = require('./lib/primes.json')
@@ -23024,7 +24885,7 @@ exports.DiffieHellmanGroup = exports.createDiffieHellmanGroup = exports.getDiffi
 exports.createDiffieHellman = exports.DiffieHellman = createDiffieHellman
 
 }).call(this,require("buffer").Buffer)
-},{"./lib/dh":169,"./lib/generatePrime":170,"./lib/primes.json":171,"buffer":152}],169:[function(require,module,exports){
+},{"./lib/dh":181,"./lib/generatePrime":182,"./lib/primes.json":183,"buffer":164}],181:[function(require,module,exports){
 (function (Buffer){
 var BN = require('bn.js');
 var MillerRabin = require('miller-rabin');
@@ -23192,7 +25053,7 @@ function formatReturnValue(bn, enc) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"./generatePrime":170,"bn.js":123,"buffer":152,"miller-rabin":209,"randombytes":224}],170:[function(require,module,exports){
+},{"./generatePrime":182,"bn.js":135,"buffer":164,"miller-rabin":221,"randombytes":236}],182:[function(require,module,exports){
 var randomBytes = require('randombytes');
 module.exports = findPrime;
 findPrime.simpleSieve = simpleSieve;
@@ -23299,7 +25160,7 @@ function findPrime(bits, gen) {
 
 }
 
-},{"bn.js":123,"miller-rabin":209,"randombytes":224}],171:[function(require,module,exports){
+},{"bn.js":135,"miller-rabin":221,"randombytes":236}],183:[function(require,module,exports){
 module.exports={
     "modp1": {
         "gen": "02",
@@ -23334,7 +25195,7 @@ module.exports={
         "prime": "ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a92108011a723c12a787e6d788719a10bdba5b2699c327186af4e23c1a946834b6150bda2583e9ca2ad44ce8dbbbc2db04de8ef92e8efc141fbecaa6287c59474e6bc05d99b2964fa090c3a2233ba186515be7ed1f612970cee2d7afb81bdd762170481cd0069127d5b05aa993b4ea988d8fddc186ffb7dc90a6c08f4df435c93402849236c3fab4d27c7026c1d4dcb2602646dec9751e763dba37bdf8ff9406ad9e530ee5db382f413001aeb06a53ed9027d831179727b0865a8918da3edbebcf9b14ed44ce6cbaced4bb1bdb7f1447e6cc254b332051512bd7af426fb8f401378cd2bf5983ca01c64b92ecf032ea15d1721d03f482d7ce6e74fef6d55e702f46980c82b5a84031900b1c9e59e7c97fbec7e8f323a97a7e36cc88be0f1d45b7ff585ac54bd407b22b4154aacc8f6d7ebf48e1d814cc5ed20f8037e0a79715eef29be32806a1d58bb7c5da76f550aa3d8a1fbff0eb19ccb1a313d55cda56c9ec2ef29632387fe8d76e3c0468043e8f663f4860ee12bf2d5b0b7474d6e694f91e6dbe115974a3926f12fee5e438777cb6a932df8cd8bec4d073b931ba3bc832b68d9dd300741fa7bf8afc47ed2576f6936ba424663aab639c5ae4f5683423b4742bf1c978238f16cbe39d652de3fdb8befc848ad922222e04a4037c0713eb57a81a23f0c73473fc646cea306b4bcbc8862f8385ddfa9d4b7fa2c087e879683303ed5bdd3a062b3cf5b3a278a66d2a13f83f44f82ddf310ee074ab6a364597e899a0255dc164f31cc50846851df9ab48195ded7ea1b1d510bd7ee74d73faf36bc31ecfa268359046f4eb879f924009438b481c6cd7889a002ed5ee382bc9190da6fc026e479558e4475677e9aa9e3050e2765694dfc81f56e880b96e7160c980dd98edd3dfffffffffffffffff"
     }
 }
-},{}],172:[function(require,module,exports){
+},{}],184:[function(require,module,exports){
 'use strict';
 
 var elliptic = exports;
@@ -23350,7 +25211,7 @@ elliptic.curves = require('./elliptic/curves');
 elliptic.ec = require('./elliptic/ec');
 elliptic.eddsa = require('./elliptic/eddsa');
 
-},{"../package.json":188,"./elliptic/curve":175,"./elliptic/curves":178,"./elliptic/ec":179,"./elliptic/eddsa":182,"./elliptic/hmac-drbg":185,"./elliptic/utils":187,"brorand":124}],173:[function(require,module,exports){
+},{"../package.json":200,"./elliptic/curve":187,"./elliptic/curves":190,"./elliptic/ec":191,"./elliptic/eddsa":194,"./elliptic/hmac-drbg":197,"./elliptic/utils":199,"brorand":136}],185:[function(require,module,exports){
 'use strict';
 
 var BN = require('bn.js');
@@ -23381,6 +25242,15 @@ function BaseCurve(type, conf) {
   this._wnafT2 = new Array(4);
   this._wnafT3 = new Array(4);
   this._wnafT4 = new Array(4);
+
+  // Generalized Greg Maxwell's trick
+  var adjustCount = this.n && this.p.div(this.n);
+  if (!adjustCount || adjustCount.cmpn(100) > 0) {
+    this.redN = null;
+  } else {
+    this._maxwellTrick = true;
+    this.redN = this.n.toRed(this.red);
+  }
 }
 module.exports = BaseCurve;
 
@@ -23469,7 +25339,8 @@ BaseCurve.prototype._wnafMul = function _wnafMul(p, k) {
 BaseCurve.prototype._wnafMulAdd = function _wnafMulAdd(defW,
                                                        points,
                                                        coeffs,
-                                                       len) {
+                                                       len,
+                                                       jacobianResult) {
   var wndWidth = this._wnafT1;
   var wnd = this._wnafT2;
   var naf = this._wnafT3;
@@ -23582,7 +25453,11 @@ BaseCurve.prototype._wnafMulAdd = function _wnafMulAdd(defW,
   // Zeroify references
   for (var i = 0; i < len; i++)
     wnd[i] = null;
-  return acc.toP();
+
+  if (jacobianResult)
+    return acc;
+  else
+    return acc.toP();
 };
 
 function BasePoint(curve, type) {
@@ -23713,7 +25588,7 @@ BasePoint.prototype.dblp = function dblp(k) {
   return r;
 };
 
-},{"../../elliptic":172,"bn.js":123}],174:[function(require,module,exports){
+},{"../../elliptic":184,"bn.js":135}],186:[function(require,module,exports){
 'use strict';
 
 var curve = require('../curve');
@@ -24080,7 +25955,11 @@ Point.prototype.mul = function mul(k) {
 };
 
 Point.prototype.mulAdd = function mulAdd(k1, p, k2) {
-  return this.curve._wnafMulAdd(1, [ this, p ], [ k1, k2 ], 2);
+  return this.curve._wnafMulAdd(1, [ this, p ], [ k1, k2 ], 2, false);
+};
+
+Point.prototype.jmulAdd = function jmulAdd(k1, p, k2) {
+  return this.curve._wnafMulAdd(1, [ this, p ], [ k1, k2 ], 2, true);
 };
 
 Point.prototype.normalize = function normalize() {
@@ -24121,11 +26000,30 @@ Point.prototype.eq = function eq(other) {
          this.getY().cmp(other.getY()) === 0;
 };
 
+Point.prototype.eqXToP = function eqXToP(x) {
+  var rx = x.toRed(this.curve.red).redMul(this.z);
+  if (this.x.cmp(rx) === 0)
+    return true;
+
+  var xc = x.clone();
+  var t = this.curve.redN.redMul(this.z);
+  for (;;) {
+    xc.iadd(this.curve.n);
+    if (xc.cmp(this.curve.p) >= 0)
+      return false;
+
+    rx.redIAdd(t);
+    if (this.x.cmp(rx) === 0)
+      return true;
+  }
+  return false;
+};
+
 // Compatibility with BaseCurve
 Point.prototype.toP = Point.prototype.normalize;
 Point.prototype.mixedAdd = Point.prototype.add;
 
-},{"../../elliptic":172,"../curve":175,"bn.js":123,"inherits":199}],175:[function(require,module,exports){
+},{"../../elliptic":184,"../curve":187,"bn.js":135,"inherits":211}],187:[function(require,module,exports){
 'use strict';
 
 var curve = exports;
@@ -24135,7 +26033,7 @@ curve.short = require('./short');
 curve.mont = require('./mont');
 curve.edwards = require('./edwards');
 
-},{"./base":173,"./edwards":174,"./mont":176,"./short":177}],176:[function(require,module,exports){
+},{"./base":185,"./edwards":186,"./mont":188,"./short":189}],188:[function(require,module,exports){
 'use strict';
 
 var curve = require('../curve');
@@ -24296,6 +26194,10 @@ Point.prototype.mulAdd = function mulAdd() {
   throw new Error('Not supported on Montgomery curve');
 };
 
+Point.prototype.jumlAdd = function jumlAdd() {
+  throw new Error('Not supported on Montgomery curve');
+};
+
 Point.prototype.eq = function eq(other) {
   return this.getX().cmp(other.getX()) === 0;
 };
@@ -24313,7 +26215,7 @@ Point.prototype.getX = function getX() {
   return this.x.fromRed();
 };
 
-},{"../../elliptic":172,"../curve":175,"bn.js":123,"inherits":199}],177:[function(require,module,exports){
+},{"../../elliptic":184,"../curve":187,"bn.js":135,"inherits":211}],189:[function(require,module,exports){
 'use strict';
 
 var curve = require('../curve');
@@ -24533,7 +26435,7 @@ ShortCurve.prototype.validate = function validate(point) {
 };
 
 ShortCurve.prototype._endoWnafMulAdd =
-    function _endoWnafMulAdd(points, coeffs) {
+    function _endoWnafMulAdd(points, coeffs, jacobianResult) {
   var npoints = this._endoWnafT1;
   var ncoeffs = this._endoWnafT2;
   for (var i = 0; i < points.length; i++) {
@@ -24555,7 +26457,7 @@ ShortCurve.prototype._endoWnafMulAdd =
     ncoeffs[i * 2] = split.k1;
     ncoeffs[i * 2 + 1] = split.k2;
   }
-  var res = this._wnafMulAdd(1, npoints, ncoeffs, i * 2);
+  var res = this._wnafMulAdd(1, npoints, ncoeffs, i * 2, jacobianResult);
 
   // Clean-up references to points and coefficients
   for (var j = 0; j < i * 2; j++) {
@@ -24754,6 +26656,15 @@ Point.prototype.mulAdd = function mulAdd(k1, p2, k2) {
     return this.curve._endoWnafMulAdd(points, coeffs);
   else
     return this.curve._wnafMulAdd(1, points, coeffs, 2);
+};
+
+Point.prototype.jmulAdd = function jmulAdd(k1, p2, k2) {
+  var points = [ this, p2 ];
+  var coeffs = [ k1, k2 ];
+  if (this.curve.endo)
+    return this.curve._endoWnafMulAdd(points, coeffs, true);
+  else
+    return this.curve._wnafMulAdd(1, points, coeffs, 2, true);
 };
 
 Point.prototype.eq = function eq(p) {
@@ -25211,6 +27122,26 @@ JPoint.prototype.eq = function eq(p) {
   return this.y.redMul(pz3).redISub(p.y.redMul(z3)).cmpn(0) === 0;
 };
 
+JPoint.prototype.eqXToP = function eqXToP(x) {
+  var zs = this.z.redSqr();
+  var rx = x.toRed(this.curve.red).redMul(zs);
+  if (this.x.cmp(rx) === 0)
+    return true;
+
+  var xc = x.clone();
+  var t = this.curve.redN.redMul(zs);
+  for (;;) {
+    xc.iadd(this.curve.n);
+    if (xc.cmp(this.curve.p) >= 0)
+      return false;
+
+    rx.redIAdd(t);
+    if (this.x.cmp(rx) === 0)
+      return true;
+  }
+  return false;
+};
+
 JPoint.prototype.inspect = function inspect() {
   if (this.isInfinity())
     return '<EC JPoint Infinity>';
@@ -25224,7 +27155,7 @@ JPoint.prototype.isInfinity = function isInfinity() {
   return this.z.cmpn(0) === 0;
 };
 
-},{"../../elliptic":172,"../curve":175,"bn.js":123,"inherits":199}],178:[function(require,module,exports){
+},{"../../elliptic":184,"../curve":187,"bn.js":135,"inherits":211}],190:[function(require,module,exports){
 'use strict';
 
 var curves = exports;
@@ -25431,7 +27362,7 @@ defineCurve('secp256k1', {
   ]
 });
 
-},{"../elliptic":172,"./precomputed/secp256k1":186,"hash.js":191}],179:[function(require,module,exports){
+},{"../elliptic":184,"./precomputed/secp256k1":198,"hash.js":203}],191:[function(require,module,exports){
 'use strict';
 
 var BN = require('bn.js');
@@ -25600,11 +27531,25 @@ EC.prototype.verify = function verify(msg, signature, key, enc) {
   var u1 = sinv.mul(msg).umod(this.n);
   var u2 = sinv.mul(r).umod(this.n);
 
-  var p = this.g.mulAdd(u1, key.getPublic(), u2);
+  if (!this.curve._maxwellTrick) {
+    var p = this.g.mulAdd(u1, key.getPublic(), u2);
+    if (p.isInfinity())
+      return false;
+
+    return p.getX().umod(this.n).cmp(r) === 0;
+  }
+
+  // NOTE: Greg Maxwell's trick, inspired by:
+  // https://git.io/vad3K
+
+  var p = this.g.jmulAdd(u1, key.getPublic(), u2);
   if (p.isInfinity())
     return false;
 
-  return p.getX().umod(this.n).cmp(r) === 0;
+  // Compare `p.x` of Jacobian point with `r`,
+  // this will do `p.x == r * p.z^2` instead of multiplying `p.x` by the
+  // inverse of `p.z^2`
+  return p.eqXToP(r);
 };
 
 EC.prototype.recoverPubKey = function(msg, signature, j, enc) {
@@ -25655,7 +27600,7 @@ EC.prototype.getKeyRecoveryParam = function(e, signature, Q, enc) {
   throw new Error('Unable to find valid recovery factor');
 };
 
-},{"../../elliptic":172,"./key":180,"./signature":181,"bn.js":123}],180:[function(require,module,exports){
+},{"../../elliptic":184,"./key":192,"./signature":193,"bn.js":135}],192:[function(require,module,exports){
 'use strict';
 
 var BN = require('bn.js');
@@ -25764,7 +27709,7 @@ KeyPair.prototype.inspect = function inspect() {
          ' pub: ' + (this.pub && this.pub.inspect()) + ' >';
 };
 
-},{"bn.js":123}],181:[function(require,module,exports){
+},{"bn.js":135}],193:[function(require,module,exports){
 'use strict';
 
 var BN = require('bn.js');
@@ -25901,7 +27846,7 @@ Signature.prototype.toDER = function toDER(enc) {
   return utils.encode(res, enc);
 };
 
-},{"../../elliptic":172,"bn.js":123}],182:[function(require,module,exports){
+},{"../../elliptic":184,"bn.js":135}],194:[function(require,module,exports){
 'use strict';
 
 var hash = require('hash.js');
@@ -26021,7 +27966,7 @@ EDDSA.prototype.isPoint = function isPoint(val) {
   return val instanceof this.pointClass;
 };
 
-},{"../../elliptic":172,"./key":183,"./signature":184,"hash.js":191}],183:[function(require,module,exports){
+},{"../../elliptic":184,"./key":195,"./signature":196,"hash.js":203}],195:[function(require,module,exports){
 'use strict';
 
 var elliptic = require('../../elliptic');
@@ -26119,7 +28064,7 @@ KeyPair.prototype.getPublic = function getPublic(enc) {
 
 module.exports = KeyPair;
 
-},{"../../elliptic":172}],184:[function(require,module,exports){
+},{"../../elliptic":184}],196:[function(require,module,exports){
 'use strict';
 
 var BN = require('bn.js');
@@ -26187,7 +28132,7 @@ Signature.prototype.toHex = function toHex() {
 
 module.exports = Signature;
 
-},{"../../elliptic":172,"bn.js":123}],185:[function(require,module,exports){
+},{"../../elliptic":184,"bn.js":135}],197:[function(require,module,exports){
 'use strict';
 
 var hash = require('hash.js');
@@ -26303,7 +28248,7 @@ HmacDRBG.prototype.generate = function generate(len, enc, add, addEnc) {
   return utils.encode(res, enc);
 };
 
-},{"../elliptic":172,"hash.js":191}],186:[function(require,module,exports){
+},{"../elliptic":184,"hash.js":203}],198:[function(require,module,exports){
 module.exports = {
   doubles: {
     step: 4,
@@ -27085,7 +29030,7 @@ module.exports = {
   }
 };
 
-},{}],187:[function(require,module,exports){
+},{}],199:[function(require,module,exports){
 'use strict';
 
 var utils = exports;
@@ -27259,7 +29204,7 @@ function intFromLE(bytes) {
 utils.intFromLE = intFromLE;
 
 
-},{"bn.js":123}],188:[function(require,module,exports){
+},{"bn.js":135}],200:[function(require,module,exports){
 module.exports={
   "_args": [
     [
@@ -27268,14 +29213,14 @@ module.exports={
     ]
   ],
   "_from": "elliptic@>=6.0.0 <7.0.0",
-  "_id": "elliptic@6.2.8",
+  "_id": "elliptic@6.3.1",
   "_inCache": true,
   "_installable": true,
   "_location": "/elliptic",
   "_nodeVersion": "6.0.0",
   "_npmOperationalInternal": {
-    "host": "packages-12-west.internal.npmjs.com",
-    "tmp": "tmp/elliptic-6.2.8.tgz_1464746004719_0.6379144776146859"
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/elliptic-6.3.1.tgz_1465921413402_0.5202967382501811"
   },
   "_npmUser": {
     "email": "fedor@indutny.com",
@@ -27295,8 +29240,8 @@ module.exports={
     "/browserify-sign",
     "/create-ecdh"
   ],
-  "_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-6.2.8.tgz",
-  "_shasum": "44a25b3d1550bebb74d0b6d22d89940206b51739",
+  "_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-6.3.1.tgz",
+  "_shasum": "17781f2109ab0ec686b146bdcff5d2e8c6aeceda",
   "_shrinkwrap": null,
   "_spec": "elliptic@^6.0.0",
   "_where": "/Users/chrisguttandin/Repositories/analog4all-client/node_modules/browserify-sign",
@@ -27308,7 +29253,7 @@ module.exports={
     "url": "https://github.com/indutny/elliptic/issues"
   },
   "dependencies": {
-    "bn.js": "^4.0.0",
+    "bn.js": "^4.4.0",
     "brorand": "^1.0.1",
     "hash.js": "^1.0.0",
     "inherits": "^2.0.1"
@@ -27331,13 +29276,13 @@ module.exports={
   },
   "directories": {},
   "dist": {
-    "shasum": "44a25b3d1550bebb74d0b6d22d89940206b51739",
-    "tarball": "https://registry.npmjs.org/elliptic/-/elliptic-6.2.8.tgz"
+    "shasum": "17781f2109ab0ec686b146bdcff5d2e8c6aeceda",
+    "tarball": "https://registry.npmjs.org/elliptic/-/elliptic-6.3.1.tgz"
   },
   "files": [
     "lib"
   ],
-  "gitHead": "236f37395bdf9e4af1dfc8e84f6353bce540b93e",
+  "gitHead": "c53f5cf3d832c0073eb4a4ed423a464cbce68f3e",
   "homepage": "https://github.com/indutny/elliptic",
   "keywords": [
     "EC",
@@ -27368,10 +29313,10 @@ module.exports={
     "unit": "istanbul test _mocha --reporter=spec test/index.js",
     "version": "grunt dist && git add dist/"
   },
-  "version": "6.2.8"
+  "version": "6.3.1"
 }
 
-},{}],189:[function(require,module,exports){
+},{}],201:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -27671,7 +29616,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],190:[function(require,module,exports){
+},{}],202:[function(require,module,exports){
 (function (Buffer){
 var md5 = require('create-hash/md5')
 module.exports = EVP_BytesToKey
@@ -27743,7 +29688,7 @@ function EVP_BytesToKey (password, salt, keyLen, ivLen) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":152,"create-hash/md5":159}],191:[function(require,module,exports){
+},{"buffer":164,"create-hash/md5":171}],203:[function(require,module,exports){
 var hash = exports;
 
 hash.utils = require('./hash/utils');
@@ -27760,7 +29705,7 @@ hash.sha384 = hash.sha.sha384;
 hash.sha512 = hash.sha.sha512;
 hash.ripemd160 = hash.ripemd.ripemd160;
 
-},{"./hash/common":192,"./hash/hmac":193,"./hash/ripemd":194,"./hash/sha":195,"./hash/utils":196}],192:[function(require,module,exports){
+},{"./hash/common":204,"./hash/hmac":205,"./hash/ripemd":206,"./hash/sha":207,"./hash/utils":208}],204:[function(require,module,exports){
 var hash = require('../hash');
 var utils = hash.utils;
 var assert = utils.assert;
@@ -27853,7 +29798,7 @@ BlockHash.prototype._pad = function pad() {
   return res;
 };
 
-},{"../hash":191}],193:[function(require,module,exports){
+},{"../hash":203}],205:[function(require,module,exports){
 var hmac = exports;
 
 var hash = require('../hash');
@@ -27903,7 +29848,7 @@ Hmac.prototype.digest = function digest(enc) {
   return this.outer.digest(enc);
 };
 
-},{"../hash":191}],194:[function(require,module,exports){
+},{"../hash":203}],206:[function(require,module,exports){
 var hash = require('../hash');
 var utils = hash.utils;
 
@@ -28049,7 +29994,7 @@ var sh = [
   8, 5, 12, 9, 12, 5, 14, 6, 8, 13, 6, 5, 15, 13, 11, 11
 ];
 
-},{"../hash":191}],195:[function(require,module,exports){
+},{"../hash":203}],207:[function(require,module,exports){
 var hash = require('../hash');
 var utils = hash.utils;
 var assert = utils.assert;
@@ -28615,7 +30560,7 @@ function g1_512_lo(xh, xl) {
   return r;
 }
 
-},{"../hash":191}],196:[function(require,module,exports){
+},{"../hash":203}],208:[function(require,module,exports){
 var utils = exports;
 var inherits = require('inherits');
 
@@ -28874,7 +30819,7 @@ function shr64_lo(ah, al, num) {
 };
 exports.shr64_lo = shr64_lo;
 
-},{"inherits":199}],197:[function(require,module,exports){
+},{"inherits":211}],209:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -28960,7 +30905,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],198:[function(require,module,exports){
+},{}],210:[function(require,module,exports){
 
 var indexOf = [].indexOf;
 
@@ -28971,7 +30916,7 @@ module.exports = function(arr, obj){
   }
   return -1;
 };
-},{}],199:[function(require,module,exports){
+},{}],211:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -28996,7 +30941,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],200:[function(require,module,exports){
+},{}],212:[function(require,module,exports){
 /**
  * Determine if an object is Buffer
  *
@@ -29015,7 +30960,7 @@ module.exports = function (obj) {
     ))
 }
 
-},{}],201:[function(require,module,exports){
+},{}],213:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -29361,7 +31306,7 @@ const _writeVariableLengthQuantity = value => {
     return uint8Array.buffer;
 };
 
-},{}],202:[function(require,module,exports){
+},{}],214:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -29403,13 +31348,16 @@ const encodeJSON = exports.encodeJSON = json => {
     });
 };
 
-},{"./worker":203,"webworkify":283}],203:[function(require,module,exports){
+},{"./worker":215,"webworkify":295}],215:[function(require,module,exports){
 'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
 var _midiFile = require('./encoder/midi-file');
 
-// @todo Use ES2015 module syntax if webworkify supports it.
-module.exports = self => {
+exports.default = self => {
     self.addEventListener('message', _ref => {
         let json = _ref.data.json;
 
@@ -29427,23 +31375,26 @@ module.exports = self => {
     });
 };
 
-},{"./encoder/midi-file":201}],204:[function(require,module,exports){
+},{"./encoder/midi-file":213}],216:[function(require,module,exports){
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var _arguments = arguments;
 /**
  * This function turns a part of a given ArrayBuffer into a hexadecimal String.
  */
-
-module.exports = function hexify(dataView, offset, length) {
+const hexify = exports.hexify = (dataView, offset, length) => {
     var hexArray, uint8Array;
 
-    if (arguments.length < 2) {
+    if (_arguments.length < 2) {
         offset = dataView.byteOffset;
     } else {
         offset += dataView.byteOffset;
     }
 
-    if (arguments.length < 3) {
+    if (_arguments.length < 3) {
         length = dataView.byteLength - (offset - dataView.byteOffset);
     }
 
@@ -29465,23 +31416,26 @@ module.exports = function hexify(dataView, offset, length) {
     return hexArray.join('');
 };
 
-},{}],205:[function(require,module,exports){
-'use strict';
+},{}],217:[function(require,module,exports){
+"use strict";
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var _arguments = arguments;
 /**
  * This function turns a part of a given ArrayBuffer into a String.
  */
-
-module.exports = function stringify(dataView, offset, length) {
+const stringify = exports.stringify = (dataView, offset, length) => {
     var array;
 
-    if (arguments.length < 2) {
+    if (_arguments.length < 2) {
         offset = dataView.byteOffset;
     } else {
         offset += dataView.byteOffset;
     }
 
-    if (arguments.length < 3) {
+    if (_arguments.length < 3) {
         length = dataView.byteLength - (offset - dataView.byteOffset);
     }
 
@@ -29490,128 +31444,138 @@ module.exports = function stringify(dataView, offset, length) {
     return String.fromCharCode.apply(null, array);
 };
 
-},{}],206:[function(require,module,exports){
+},{}],218:[function(require,module,exports){
 'use strict';
 
-var index = 0,
-    midiJsonParserWorker = require('./worker/midi-json-parser.js'),
-    webworkify = require('webworkify'),
-    worker;
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.parseArrayBuffer = undefined;
 
-worker = webworkify(midiJsonParserWorker);
+var _midiJsonParser = require('./worker//midi-json-parser');
 
-module.exports = {
-    parseArrayBuffer: function (arrayBuffer) {
-        var currentIndex = index;
+var _midiJsonParser2 = _interopRequireDefault(_midiJsonParser);
 
-        index += 1;
+var _webworkify = require('webworkify');
 
-        function transferSlice(byteIndex) {
-            var slice;
+var _webworkify2 = _interopRequireDefault(_webworkify);
 
-            if (byteIndex + 1048576 < arrayBuffer.byteLength) {
-                slice = arrayBuffer.slice(byteIndex, byteIndex + 1048576);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-                worker.postMessage({
-                    arrayBuffer: slice,
-                    byteIndex: byteIndex,
-                    byteLength: arrayBuffer.byteLength,
-                    index: currentIndex
-                }, [slice]);
+const worker = (0, _webworkify2.default)(_midiJsonParser2.default);
 
-                setTimeout(function () {
-                    transferSlice(byteIndex + 1048576);
-                });
-            } else {
-                slice = arrayBuffer.slice(byteIndex);
+var index = 0;
 
-                worker.postMessage({
-                    arrayBuffer: slice,
-                    byteIndex: byteIndex,
-                    byteLength: arrayBuffer.byteLength,
-                    index: currentIndex
-                }, [slice]);
-            }
+const parseArrayBuffer = exports.parseArrayBuffer = arrayBuffer => {
+    var currentIndex = index;
+
+    index += 1;
+
+    const transferSlice = byteIndex => {
+        var slice;
+
+        if (byteIndex + 1048576 < arrayBuffer.byteLength) {
+            slice = arrayBuffer.slice(byteIndex, byteIndex + 1048576);
+
+            worker.postMessage({
+                arrayBuffer: slice,
+                byteIndex,
+                byteLength: arrayBuffer.byteLength,
+                index: currentIndex
+            }, [slice]);
+
+            setTimeout(() => transferSlice(byteIndex + 1048576));
+        } else {
+            slice = arrayBuffer.slice(byteIndex);
+
+            worker.postMessage({
+                arrayBuffer: slice,
+                byteIndex,
+                byteLength: arrayBuffer.byteLength,
+                index: currentIndex
+            }, [slice]);
         }
+    };
 
-        return new Promise(function (resolve, reject) {
-            function onMessage(event) {
-                var data = event.data;
+    return new Promise((resolve, reject) => {
+        const onMessage = ({ data }) => {
+            if (data.index === currentIndex) {
+                worker.removeEventListener('message', onMessage);
 
-                if (data.index === currentIndex) {
-                    worker.removeEventListener('message', onMessage);
-
-                    if (data.midiFile === null) {
-                        reject(new Error(data.err.message));
-                    } else {
-                        resolve(data.midiFile);
-                    }
+                if (data.midiFile === null) {
+                    reject(new Error(data.err.message));
+                } else {
+                    resolve(data.midiFile);
                 }
             }
+        };
 
-            worker.addEventListener('message', onMessage);
+        worker.addEventListener('message', onMessage);
 
-            transferSlice(0);
-        });
-    }
+        transferSlice(0);
+    });
 };
 
-},{"./worker/midi-json-parser.js":208,"webworkify":283}],207:[function(require,module,exports){
+},{"./worker//midi-json-parser":220,"webworkify":295}],219:[function(require,module,exports){
 'use strict';
 
-var hexify = require('../helpers/hexify.js'),
-    stringify = require('../helpers/stringify.js');
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.parseArrayBuffer = undefined;
 
-function MidiFileParser() {}
+var _hexify = require('../helpers/hexify');
 
-MidiFileParser.prototype.parseArrayBuffer = function (arrayBuffer) {
-    var dataView, header, i, offset, tracks;
+var _stringify = require('../helpers/stringify');
+
+const parseArrayBuffer = exports.parseArrayBuffer = arrayBuffer => {
+    var dataView, header, offset, tracks;
 
     dataView = new DataView(arrayBuffer);
 
-    header = this._parseHeaderChunk(dataView);
+    header = _parseHeaderChunk(dataView);
 
     offset = 14;
     tracks = [];
 
-    for (i = 0; i < header.numberOfTracks; i += 1) {
+    for (let i = 0, length = header.numberOfTracks; i < length; i += 1) {
         let track;
 
-        // jshint ignore: line
+        var _parseTrackChunk2 = _parseTrackChunk(dataView, offset);
 
-        var _parseTrackChunk = this._parseTrackChunk(dataView, offset);
+        offset = _parseTrackChunk2.offset;
+        track = _parseTrackChunk2.track;
 
-        offset = _parseTrackChunk.offset;
-        track = _parseTrackChunk.track;
+
         tracks.push(track);
     }
 
     return {
         division: header.division,
         format: header.format,
-        tracks: tracks
+        tracks
     };
 };
 
-MidiFileParser.prototype._parseEvent = function (dataView, offset, lastEvent) {
+const _parseEvent = (dataView, offset, lastEvent) => {
     var delta, eventTypeByte, result;
 
-    // jshint ignore: line
-
-    var _readVariableLengthQu = this._readVariableLengthQuantity(dataView, offset);
+    var _readVariableLengthQu = _readVariableLengthQuantity(dataView, offset);
 
     offset = _readVariableLengthQu.offset;
     delta = _readVariableLengthQu.value;
+
+
     offset += 1;
 
     eventTypeByte = dataView.getUint8(offset);
 
     if (eventTypeByte === 0xF0) {
-        result = this._parseSysexEvent(dataView, offset + 1);
+        result = _parseSysexEvent(dataView, offset + 1);
     } else if (eventTypeByte === 0xFF) {
-        result = this._parseMetaEvent(dataView, offset + 1);
+        result = _parseMetaEvent(dataView, offset + 1);
     } else {
-        result = this._parseMidiEvent(eventTypeByte, dataView, offset + 1, lastEvent);
+        result = _parseMidiEvent(eventTypeByte, dataView, offset + 1, lastEvent);
     }
 
     result.event.delta = delta;
@@ -29619,11 +31583,11 @@ MidiFileParser.prototype._parseEvent = function (dataView, offset, lastEvent) {
     return result;
 };
 
-MidiFileParser.prototype._parseHeaderChunk = function (dataView) {
+const _parseHeaderChunk = dataView => {
     var division, format, numberOfTracks;
 
-    if (stringify(dataView, 0, 4) !== 'MThd') {
-        throw new Error(`Unexpected characters "${ stringify(dataView, 0, 4) }" found instead of "MThd"`);
+    if ((0, _stringify.stringify)(dataView, 0, 4) !== 'MThd') {
+        throw new Error(`Unexpected characters "${ (0, _stringify.stringify)(dataView, 0, 4) }" found instead of "MThd"`);
     }
 
     if (dataView.getUint32(4) !== 6) {
@@ -29635,26 +31599,26 @@ MidiFileParser.prototype._parseHeaderChunk = function (dataView) {
     division = dataView.getUint16(12);
 
     return {
-        division: division,
-        format: format,
-        numberOfTracks: numberOfTracks
+        division,
+        format,
+        numberOfTracks
     };
 };
 
-MidiFileParser.prototype._parseMetaEvent = function (dataView, offset) {
+const _parseMetaEvent = (dataView, offset) => {
     var event, length, metaTypeByte;
 
     metaTypeByte = dataView.getUint8(offset);
 
-    // jshint ignore: line
-
-    var _readVariableLengthQu2 = this._readVariableLengthQuantity(dataView, offset + 1);
+    var _readVariableLengthQu2 = _readVariableLengthQuantity(dataView, offset + 1);
 
     offset = _readVariableLengthQu2.offset;
     length = _readVariableLengthQu2.value;
+
+
     if (metaTypeByte === 0x03) {
         event = {
-            trackName: stringify(dataView, offset + 1, length)
+            trackName: (0, _stringify.stringify)(dataView, offset + 1, length)
         };
     } else if (metaTypeByte === 0x20) {
         event = {
@@ -29677,9 +31641,7 @@ MidiFileParser.prototype._parseMetaEvent = function (dataView, offset) {
 
         event = {
             setTempo: {
-                /* jshint bitwise: false */
-                microsecondsPerBeat: (dataView.getUint8(offset + 1) << 16) + (dataView.getUint8(offset + 2) << 8) + dataView.getUint8(offset + 3)
-                /* jshint bitwise: true */
+                microsecondsPerBeat: (dataView.getUint8(offset + 1) << 16) + (dataView.getUint8(offset + 2) << 8) + dataView.getUint8(offset + 3) // eslint-disable-line no-bitwise
             }
         };
     } else if (metaTypeByte === 0x54) {
@@ -29689,25 +31651,25 @@ MidiFileParser.prototype._parseMetaEvent = function (dataView, offset) {
 
             hourByte = dataView.getUint8(offset + 1);
 
-            /* jshint bitwise: false */
             if ((hourByte & 0x60) === 0x00) {
+                // eslint-disable-line no-bitwise
                 frameRate = 24;
             } else if ((hourByte & 0x60) === 0x20) {
+                // eslint-disable-line no-bitwise
                 frameRate = 25;
             } else if ((hourByte & 0x60) === 0x40) {
+                // eslint-disable-line no-bitwise
                 frameRate = 29;
             } else if ((hourByte & 0x60) === 0x60) {
+                // eslint-disable-line no-bitwise
                 frameRate = 30;
             }
-            /* jshint bitwise: true */
 
             event = {
                 smpteOffset: {
                     frame: dataView.getUint8(offset + 4),
-                    frameRate: frameRate,
-                    /* jshint bitwise: false */
-                    hour: hourByte & 0x1F,
-                    /* jshint bitwise: true */
+                    frameRate,
+                    hour: hourByte & 0x1F, // eslint-disable-line no-bitwise
                     minutes: dataView.getUint8(offset + 2),
                     seconds: dataView.getUint8(offset + 3),
                     subFrame: dataView.getUint8(offset + 5)
@@ -29737,25 +31699,21 @@ MidiFileParser.prototype._parseMetaEvent = function (dataView, offset) {
         }
 
     return {
-        event: event,
+        event,
         offset: offset + length + 1
     };
 };
 
-MidiFileParser.prototype._parseMidiEvent = function (statusByte, dataView, offset, lastEvent) {
+const _parseMidiEvent = (statusByte, dataView, offset, lastEvent) => {
     var event,
+        eventType = statusByte >> 4; // eslint-disable-line no-bitwise
 
-    /* jshint bitwise: false */
-    eventType = statusByte >> 4;
-    /* jshint bitwise: true */
-
-    /* jshint bitwise: false */
     if ((statusByte & 0x80) === 0) {
+        // eslint-disable-line no-bitwise
         offset -= 1;
     } else {
         lastEvent = null;
     }
-    /* jshint bitwise: true */
 
     if (eventType === 0x08 || lastEvent !== null && lastEvent.noteOff !== undefined) {
         event = {
@@ -29775,15 +31733,15 @@ MidiFileParser.prototype._parseMidiEvent = function (statusByte, dataView, offse
         if (velocity === 0) {
             event = {
                 noteOff: {
-                    noteNumber: noteNumber,
-                    velocity: velocity
+                    noteNumber,
+                    velocity
                 }
             };
         } else {
             event = {
                 noteOn: {
-                    noteNumber: noteNumber,
-                    velocity: velocity
+                    noteNumber,
+                    velocity
                 }
             };
         }
@@ -29808,9 +31766,7 @@ MidiFileParser.prototype._parseMidiEvent = function (statusByte, dataView, offse
         offset += 1;
     } else if (eventType === 0x0E || lastEvent !== null && lastEvent.pitchBend !== undefined) {
         event = {
-            /* jshint bitwise: false */
-            pitchBend: dataView.getUint8(offset) | dataView.getUint8(offset + 1) << 7
-            /* jshint bitwise: true */
+            pitchBend: dataView.getUint8(offset) | dataView.getUint8(offset + 1) << 7 // eslint-disable-line no-bitwise
         };
 
         offset += 2;
@@ -29818,35 +31774,33 @@ MidiFileParser.prototype._parseMidiEvent = function (statusByte, dataView, offse
         throw new Error(`Cannot parse a midi event with a type of "${ eventType.toString(16) }"`);
     }
 
-    /* jshint bitwise: false */
-    event.channel = statusByte & 0x0F;
-    /* jshint bitwise: true */
+    event.channel = statusByte & 0x0F; // eslint-disable-line no-bitwise
 
     return { event, offset };
 };
 
-MidiFileParser.prototype._parseSysexEvent = function (dataView, offset) {
+const _parseSysexEvent = (dataView, offset) => {
     var length;
 
-    // jshint ignore: line
-
-    var _readVariableLengthQu3 = this._readVariableLengthQuantity(dataView, offset);
+    var _readVariableLengthQu3 = _readVariableLengthQuantity(dataView, offset);
 
     offset = _readVariableLengthQu3.offset;
     length = _readVariableLengthQu3.value;
+
+
     return {
         event: {
-            sysex: hexify(dataView, offset + 1, length)
+            sysex: (0, _hexify.hexify)(dataView, offset + 1, length)
         },
         offset: offset + length + 1
     };
 };
 
-MidiFileParser.prototype._parseTrackChunk = function (dataView, offset) {
+const _parseTrackChunk = (dataView, offset) => {
     var event, events, length;
 
-    if (stringify(dataView, offset, 4) !== 'MTrk') {
-        throw new Error(`Unexpected characters "${ stringify(dataView, offset, 4) }" found instead of "MTrk"`);
+    if ((0, _stringify.stringify)(dataView, offset, 4) !== 'MTrk') {
+        throw new Error(`Unexpected characters "${ (0, _stringify.stringify)(dataView, offset, 4) }" found instead of "MTrk"`);
     }
 
     event = null;
@@ -29855,31 +31809,31 @@ MidiFileParser.prototype._parseTrackChunk = function (dataView, offset) {
     offset += 8;
 
     while (offset < length) {
-        // jshint ignore: line
+        var _parseEvent2 = _parseEvent(dataView, offset, event);
 
-        var _parseEvent = this._parseEvent(dataView, offset, event);
+        event = _parseEvent2.event;
+        offset = _parseEvent2.offset;
 
-        event = _parseEvent.event;
-        offset = _parseEvent.offset;
+
         events.push(event);
     }
 
     return {
-        offset: offset,
+        offset,
         track: events
     };
 };
 
-MidiFileParser.prototype._readVariableLengthQuantity = function (dataView, offset) {
+const _readVariableLengthQuantity = (dataView, offset) => {
     var value = 0;
 
     while (true) {
         let byte = dataView.getUint8(offset);
 
-        /* jshint bitwise: false */
         if (byte & 0x80) {
-            value += byte & 0x7f;
-            value <<= 7;
+            // eslint-disable-line no-bitwise
+            value += byte & 0x7f; // eslint-disable-line no-bitwise
+            value <<= 7; // eslint-disable-line no-bitwise
             offset += 1;
         } else {
             value += byte;
@@ -29889,67 +31843,61 @@ MidiFileParser.prototype._readVariableLengthQuantity = function (dataView, offse
                 value
             };
         }
-        /* jshint bitwise: true */
     }
 };
 
-module.exports.MidiFileParser = MidiFileParser;
-
-},{"../helpers/hexify.js":204,"../helpers/stringify.js":205}],208:[function(require,module,exports){
+},{"../helpers/hexify":216,"../helpers/stringify":217}],220:[function(require,module,exports){
 'use strict';
 
-var arrayBuffers = new Map(),
-    midiFileParser,
-    MidiFileParser = require('../parser/midi-file.js').MidiFileParser;
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
-midiFileParser = new MidiFileParser();
+var _midiFile = require('../parser/midi-file');
 
-module.exports = function (self) {
-    self.addEventListener('message', function (event) {
-        var arrayBuffer,
-            destination,
-            data = event.data,
-            i,
-            length,
-            source;
+const arrayBuffers = new Map();
 
-        arrayBuffer = arrayBuffers.get(data.index);
+exports.default = self => {
+    self.addEventListener('message', ({ data: { arrayBuffer, byteIndex, byteLength, index } }) => {
+        var completeArrayBuffer, destination, length, source;
 
-        if (arrayBuffer === undefined) {
-            arrayBuffer = new ArrayBuffer(data.byteLength);
-            arrayBuffers.set(data.index, arrayBuffer);
+        completeArrayBuffer = arrayBuffers.get(index);
+
+        if (completeArrayBuffer === undefined) {
+            completeArrayBuffer = new ArrayBuffer(byteLength);
+            arrayBuffers.set(index, completeArrayBuffer);
         }
 
-        destination = new Uint8Array(arrayBuffer);
-        length = Math.min(data.byteIndex + 1048576, data.byteLength);
-        source = new Uint8Array(data.arrayBuffer);
+        destination = new Uint8Array(completeArrayBuffer);
+        length = Math.min(byteIndex + 1048576, byteLength);
+        source = new Uint8Array(arrayBuffer);
 
-        for (i = data.byteIndex; i < length; i += 1) {
-            destination[i] = source[i - data.byteIndex];
+        for (let i = byteIndex; i < length; i += 1) {
+            destination[i] = source[i - byteIndex];
         }
 
-        if (length === data.byteLength) {
+        if (length === byteLength) {
             try {
                 self.postMessage({
-                    index: data.index,
-                    midiFile: midiFileParser.parseArrayBuffer(arrayBuffer)
+                    index,
+                    midiFile: (0, _midiFile.parseArrayBuffer)(completeArrayBuffer)
                 });
             } catch (err) {
                 self.postMessage({
                     err: {
                         message: err.message
                     },
-                    index: data.index,
+                    index,
                     midiFile: null
                 });
             }
 
-            arrayBuffers.delete(data.index);
+            arrayBuffers.delete(index);
         }
     });
 };
 
-},{"../parser/midi-file.js":207}],209:[function(require,module,exports){
+},{"../parser/midi-file":219}],221:[function(require,module,exports){
 var bn = require('bn.js');
 var brorand = require('brorand');
 
@@ -30064,7 +32012,7 @@ MillerRabin.prototype.getDivisor = function getDivisor(n, k) {
   return false;
 };
 
-},{"bn.js":123,"brorand":124}],210:[function(require,module,exports){
+},{"bn.js":135,"brorand":136}],222:[function(require,module,exports){
 module.exports = assert;
 
 function assert(val, msg) {
@@ -30077,7 +32025,7 @@ assert.equal = function assertEqual(l, r, msg) {
     throw new Error(msg || ('Assertion failed: ' + l + ' != ' + r));
 };
 
-},{}],211:[function(require,module,exports){
+},{}],223:[function(require,module,exports){
 module.exports={"2.16.840.1.101.3.4.1.1": "aes-128-ecb",
 "2.16.840.1.101.3.4.1.2": "aes-128-cbc",
 "2.16.840.1.101.3.4.1.3": "aes-128-ofb",
@@ -30091,7 +32039,7 @@ module.exports={"2.16.840.1.101.3.4.1.1": "aes-128-ecb",
 "2.16.840.1.101.3.4.1.43": "aes-256-ofb",
 "2.16.840.1.101.3.4.1.44": "aes-256-cfb"
 }
-},{}],212:[function(require,module,exports){
+},{}],224:[function(require,module,exports){
 // from https://github.com/indutny/self-signed/blob/gh-pages/lib/asn1.js
 // Fedor, you are amazing.
 
@@ -30210,7 +32158,7 @@ exports.signature = asn1.define('signature', function () {
   )
 })
 
-},{"asn1.js":108}],213:[function(require,module,exports){
+},{"asn1.js":120}],225:[function(require,module,exports){
 (function (Buffer){
 // adapted from https://github.com/apatil/pemstrip
 var findProc = /Proc-Type: 4,ENCRYPTED\r?\nDEK-Info: AES-((?:128)|(?:192)|(?:256))-CBC,([0-9A-H]+)\r?\n\r?\n([0-9A-z\n\r\+\/\=]+)\r?\n/m
@@ -30244,7 +32192,7 @@ module.exports = function (okey, password) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"browserify-aes":128,"buffer":152,"evp_bytestokey":190}],214:[function(require,module,exports){
+},{"browserify-aes":140,"buffer":164,"evp_bytestokey":202}],226:[function(require,module,exports){
 (function (Buffer){
 var asn1 = require('./asn1')
 var aesid = require('./aesid.json')
@@ -30349,7 +32297,7 @@ function decrypt (data, password) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"./aesid.json":211,"./asn1":212,"./fixProc":213,"browserify-aes":128,"buffer":152,"pbkdf2":215}],215:[function(require,module,exports){
+},{"./aesid.json":223,"./asn1":224,"./fixProc":225,"browserify-aes":140,"buffer":164,"pbkdf2":227}],227:[function(require,module,exports){
 (function (Buffer){
 var createHmac = require('create-hmac')
 var MAX_ALLOC = Math.pow(2, 30) - 1 // default in iojs
@@ -30433,7 +32381,7 @@ function pbkdf2Sync (password, salt, iterations, keylen, digest) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":152,"create-hmac":160}],216:[function(require,module,exports){
+},{"buffer":164,"create-hmac":172}],228:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -30480,10 +32428,35 @@ function nextTick(fn, arg1, arg2, arg3) {
 }
 
 }).call(this,require('_process'))
-},{"_process":217}],217:[function(require,module,exports){
+},{"_process":229}],229:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+(function () {
+  try {
+    cachedSetTimeout = setTimeout;
+  } catch (e) {
+    cachedSetTimeout = function () {
+      throw new Error('setTimeout is not defined');
+    }
+  }
+  try {
+    cachedClearTimeout = clearTimeout;
+  } catch (e) {
+    cachedClearTimeout = function () {
+      throw new Error('clearTimeout is not defined');
+    }
+  }
+} ())
 var queue = [];
 var draining = false;
 var currentQueue;
@@ -30508,7 +32481,7 @@ function drainQueue() {
     if (draining) {
         return;
     }
-    var timeout = setTimeout(cleanUpNextTick);
+    var timeout = cachedSetTimeout(cleanUpNextTick);
     draining = true;
 
     var len = queue.length;
@@ -30525,7 +32498,7 @@ function drainQueue() {
     }
     currentQueue = null;
     draining = false;
-    clearTimeout(timeout);
+    cachedClearTimeout(timeout);
 }
 
 process.nextTick = function (fun) {
@@ -30537,7 +32510,7 @@ process.nextTick = function (fun) {
     }
     queue.push(new Item(fun, args));
     if (queue.length === 1 && !draining) {
-        setTimeout(drainQueue, 0);
+        cachedSetTimeout(drainQueue, 0);
     }
 };
 
@@ -30576,7 +32549,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],218:[function(require,module,exports){
+},{}],230:[function(require,module,exports){
 exports.publicEncrypt = require('./publicEncrypt');
 exports.privateDecrypt = require('./privateDecrypt');
 
@@ -30587,7 +32560,7 @@ exports.privateEncrypt = function privateEncrypt(key, buf) {
 exports.publicDecrypt = function publicDecrypt(key, buf) {
   return exports.privateDecrypt(key, buf, true);
 };
-},{"./privateDecrypt":220,"./publicEncrypt":221}],219:[function(require,module,exports){
+},{"./privateDecrypt":232,"./publicEncrypt":233}],231:[function(require,module,exports){
 (function (Buffer){
 var createHash = require('create-hash');
 module.exports = function (seed, len) {
@@ -30606,7 +32579,7 @@ function i2ops(c) {
   return out;
 }
 }).call(this,require("buffer").Buffer)
-},{"buffer":152,"create-hash":157}],220:[function(require,module,exports){
+},{"buffer":164,"create-hash":169}],232:[function(require,module,exports){
 (function (Buffer){
 var parseKeys = require('parse-asn1');
 var mgf = require('./mgf');
@@ -30717,7 +32690,7 @@ function compare(a, b){
   return dif;
 }
 }).call(this,require("buffer").Buffer)
-},{"./mgf":219,"./withPublic":222,"./xor":223,"bn.js":123,"browserify-rsa":144,"buffer":152,"create-hash":157,"parse-asn1":214}],221:[function(require,module,exports){
+},{"./mgf":231,"./withPublic":234,"./xor":235,"bn.js":135,"browserify-rsa":156,"buffer":164,"create-hash":169,"parse-asn1":226}],233:[function(require,module,exports){
 (function (Buffer){
 var parseKeys = require('parse-asn1');
 var randomBytes = require('randombytes');
@@ -30815,7 +32788,7 @@ function nonZero(len, crypto) {
   return out;
 }
 }).call(this,require("buffer").Buffer)
-},{"./mgf":219,"./withPublic":222,"./xor":223,"bn.js":123,"browserify-rsa":144,"buffer":152,"create-hash":157,"parse-asn1":214,"randombytes":224}],222:[function(require,module,exports){
+},{"./mgf":231,"./withPublic":234,"./xor":235,"bn.js":135,"browserify-rsa":156,"buffer":164,"create-hash":169,"parse-asn1":226,"randombytes":236}],234:[function(require,module,exports){
 (function (Buffer){
 var bn = require('bn.js');
 function withPublic(paddedMsg, key) {
@@ -30828,7 +32801,7 @@ function withPublic(paddedMsg, key) {
 
 module.exports = withPublic;
 }).call(this,require("buffer").Buffer)
-},{"bn.js":123,"buffer":152}],223:[function(require,module,exports){
+},{"bn.js":135,"buffer":164}],235:[function(require,module,exports){
 module.exports = function xor(a, b) {
   var len = a.length;
   var i = -1;
@@ -30837,7 +32810,7 @@ module.exports = function xor(a, b) {
   }
   return a
 };
-},{}],224:[function(require,module,exports){
+},{}],236:[function(require,module,exports){
 (function (process,global,Buffer){
 'use strict'
 
@@ -30877,7 +32850,7 @@ function randomBytes (size, cb) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
-},{"_process":217,"buffer":152}],225:[function(require,module,exports){
+},{"_process":229,"buffer":164}],237:[function(require,module,exports){
 var WORKER_PATH = './recorderWorker.js';
 
 var Recorder = function(source, cfg){
@@ -30967,7 +32940,7 @@ Recorder.forceDownload = function(blob, filename){
 
 module.exports = Recorder;
 
-},{}],226:[function(require,module,exports){
+},{}],238:[function(require,module,exports){
 (function (global){
 /*! *****************************************************************************
 Copyright (C) Microsoft. All rights reserved.
@@ -31932,7 +33905,7 @@ var Reflect;
 })(Reflect || (Reflect = {}));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"crypto":161}],227:[function(require,module,exports){
+},{"crypto":173}],239:[function(require,module,exports){
 (function (Buffer){
 /*
 CryptoJS v3.1.2
@@ -32146,7 +34119,7 @@ function ripemd160 (message) {
 module.exports = ripemd160
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":152}],228:[function(require,module,exports){
+},{"buffer":164}],240:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -32193,7 +34166,7 @@ class DataChannelObservableFactory {
 }
 exports.DataChannelObservableFactory = DataChannelObservableFactory;
 
-},{"rxjs/Observable":236}],229:[function(require,module,exports){
+},{"rxjs/Observable":248}],241:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -32288,7 +34261,7 @@ class DataChannelObserverFactory {
 }
 exports.DataChannelObserverFactory = DataChannelObserverFactory;
 
-},{}],230:[function(require,module,exports){
+},{}],242:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -32363,7 +34336,7 @@ class DataChannelSubjectFactory {
 exports.DataChannelSubjectFactory = DataChannelSubjectFactory;
 DataChannelSubjectFactory.parameters = [[new _decorators.Inject(_dataChannelObservableFactory.DataChannelObservableFactory)], [new _decorators.Inject(_dataChannelObserverFactory.DataChannelObserverFactory)]];
 
-},{"./data-channel-observable-factory":228,"./data-channel-observer-factory":229,"@angular/core/src/di/decorators":51,"rxjs/Subject":238,"rxjs/operator/filter":243,"rxjs/operator/map":245}],231:[function(require,module,exports){
+},{"./data-channel-observable-factory":240,"./data-channel-observer-factory":241,"@angular/core/src/di/decorators":61,"rxjs/Subject":250,"rxjs/operator/filter":255,"rxjs/operator/map":257}],243:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -32405,7 +34378,7 @@ const connect = exports.connect = url => {
 
 const wrap = exports.wrap = dataChannel => dataChannelSubjectFactory.create({ dataChannel });
 
-},{"./data-channel-observable-factory":228,"./data-channel-observer-factory":229,"./data-channel-subject-factory":230,"./web-socket-factory":232,"./web-socket-observable-factory":233,"./web-socket-observer-factory":234,"./web-socket-subject-factory":235,"@angular/core":33,"reflect-metadata":226}],232:[function(require,module,exports){
+},{"./data-channel-observable-factory":240,"./data-channel-observer-factory":241,"./data-channel-subject-factory":242,"./web-socket-factory":244,"./web-socket-observable-factory":245,"./web-socket-observer-factory":246,"./web-socket-subject-factory":247,"@angular/core":33,"reflect-metadata":238}],244:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32420,7 +34393,7 @@ class WebSocketFactory {
 }
 exports.WebSocketFactory = WebSocketFactory;
 
-},{}],233:[function(require,module,exports){
+},{}],245:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -32467,7 +34440,7 @@ class WebSocketObservableFactory {
 }
 exports.WebSocketObservableFactory = WebSocketObservableFactory;
 
-},{"rxjs/Observable":236}],234:[function(require,module,exports){
+},{"rxjs/Observable":248}],246:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -32530,7 +34503,7 @@ class WebSocketObserverFactory {
 }
 exports.WebSocketObserverFactory = WebSocketObserverFactory;
 
-},{}],235:[function(require,module,exports){
+},{}],247:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -32605,7 +34578,7 @@ class WebSocketSubjectFactory {
 exports.WebSocketSubjectFactory = WebSocketSubjectFactory;
 WebSocketSubjectFactory.parameters = [[new _decorators.Inject(_webSocketObservableFactory.WebSocketObservableFactory)], [new _decorators.Inject(_webSocketObserverFactory.WebSocketObserverFactory)]];
 
-},{"./web-socket-observable-factory":233,"./web-socket-observer-factory":234,"@angular/core/src/di/decorators":51,"rxjs/Subject":238,"rxjs/operator/filter":243,"rxjs/operator/map":245}],236:[function(require,module,exports){
+},{"./web-socket-observable-factory":245,"./web-socket-observer-factory":246,"@angular/core/src/di/decorators":61,"rxjs/Subject":250,"rxjs/operator/filter":255,"rxjs/operator/map":257}],248:[function(require,module,exports){
 "use strict";
 var root_1 = require('./util/root');
 var observable_1 = require('./symbol/observable');
@@ -32741,7 +34714,7 @@ var Observable = (function () {
 }());
 exports.Observable = Observable;
 
-},{"./symbol/observable":247,"./util/root":256,"./util/toSubscriber":258}],237:[function(require,module,exports){
+},{"./symbol/observable":259,"./util/root":268,"./util/toSubscriber":270}],249:[function(require,module,exports){
 "use strict";
 exports.empty = {
     isUnsubscribed: true,
@@ -32750,7 +34723,7 @@ exports.empty = {
     complete: function () { }
 };
 
-},{}],238:[function(require,module,exports){
+},{}],250:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -32957,7 +34930,7 @@ var SubjectObservable = (function (_super) {
     return SubjectObservable;
 }(Observable_1.Observable));
 
-},{"./Observable":236,"./SubjectSubscription":239,"./Subscriber":240,"./Subscription":241,"./symbol/rxSubscriber":248,"./util/ObjectUnsubscribedError":250,"./util/throwError":257}],239:[function(require,module,exports){
+},{"./Observable":248,"./SubjectSubscription":251,"./Subscriber":252,"./Subscription":253,"./symbol/rxSubscriber":260,"./util/ObjectUnsubscribedError":262,"./util/throwError":269}],251:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -32998,7 +34971,7 @@ var SubjectSubscription = (function (_super) {
 }(Subscription_1.Subscription));
 exports.SubjectSubscription = SubjectSubscription;
 
-},{"./Subscription":241}],240:[function(require,module,exports){
+},{"./Subscription":253}],252:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -33250,7 +35223,7 @@ var SafeSubscriber = (function (_super) {
     return SafeSubscriber;
 }(Subscriber));
 
-},{"./Observer":237,"./Subscription":241,"./symbol/rxSubscriber":248,"./util/isFunction":254}],241:[function(require,module,exports){
+},{"./Observer":249,"./Subscription":253,"./symbol/rxSubscriber":260,"./util/isFunction":266}],253:[function(require,module,exports){
 "use strict";
 var isArray_1 = require('./util/isArray');
 var isObject_1 = require('./util/isObject');
@@ -33401,7 +35374,7 @@ var Subscription = (function () {
 }());
 exports.Subscription = Subscription;
 
-},{"./util/UnsubscriptionError":251,"./util/errorObject":252,"./util/isArray":253,"./util/isFunction":254,"./util/isObject":255,"./util/tryCatch":259}],242:[function(require,module,exports){
+},{"./util/UnsubscriptionError":263,"./util/errorObject":264,"./util/isArray":265,"./util/isFunction":266,"./util/isObject":267,"./util/tryCatch":271}],254:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -33507,7 +35480,7 @@ function dispatchError(arg) {
     }
 }
 
-},{"../Observable":236,"../util/root":256}],243:[function(require,module,exports){
+},{"../Observable":248,"../util/root":268}],255:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -33601,7 +35574,7 @@ var FilterSubscriber = (function (_super) {
     return FilterSubscriber;
 }(Subscriber_1.Subscriber));
 
-},{"../Subscriber":240}],244:[function(require,module,exports){
+},{"../Subscriber":252}],256:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -33750,7 +35723,7 @@ var FirstSubscriber = (function (_super) {
     return FirstSubscriber;
 }(Subscriber_1.Subscriber));
 
-},{"../Subscriber":240,"../util/EmptyError":249}],245:[function(require,module,exports){
+},{"../Subscriber":252,"../util/EmptyError":261}],257:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -33837,7 +35810,7 @@ var MapSubscriber = (function (_super) {
     return MapSubscriber;
 }(Subscriber_1.Subscriber));
 
-},{"../Subscriber":240}],246:[function(require,module,exports){
+},{"../Subscriber":252}],258:[function(require,module,exports){
 "use strict";
 var root_1 = require('../util/root');
 /**
@@ -33866,7 +35839,7 @@ function toPromise(PromiseCtor) {
 }
 exports.toPromise = toPromise;
 
-},{"../util/root":256}],247:[function(require,module,exports){
+},{"../util/root":268}],259:[function(require,module,exports){
 "use strict";
 var root_1 = require('../util/root');
 var Symbol = root_1.root.Symbol;
@@ -33888,14 +35861,14 @@ else {
     exports.$$observable = '@@observable';
 }
 
-},{"../util/root":256}],248:[function(require,module,exports){
+},{"../util/root":268}],260:[function(require,module,exports){
 "use strict";
 var root_1 = require('../util/root');
 var Symbol = root_1.root.Symbol;
 exports.$$rxSubscriber = (typeof Symbol === 'function' && typeof Symbol.for === 'function') ?
     Symbol.for('rxSubscriber') : '@@rxSubscriber';
 
-},{"../util/root":256}],249:[function(require,module,exports){
+},{"../util/root":268}],261:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -33922,7 +35895,7 @@ var EmptyError = (function (_super) {
 }(Error));
 exports.EmptyError = EmptyError;
 
-},{}],250:[function(require,module,exports){
+},{}],262:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -33948,7 +35921,7 @@ var ObjectUnsubscribedError = (function (_super) {
 }(Error));
 exports.ObjectUnsubscribedError = ObjectUnsubscribedError;
 
-},{}],251:[function(require,module,exports){
+},{}],263:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -33971,30 +35944,30 @@ var UnsubscriptionError = (function (_super) {
 }(Error));
 exports.UnsubscriptionError = UnsubscriptionError;
 
-},{}],252:[function(require,module,exports){
+},{}],264:[function(require,module,exports){
 "use strict";
 // typeof any so that it we don't have to cast when comparing a result to the error object
 exports.errorObject = { e: {} };
 
-},{}],253:[function(require,module,exports){
+},{}],265:[function(require,module,exports){
 "use strict";
 exports.isArray = Array.isArray || (function (x) { return x && typeof x.length === 'number'; });
 
-},{}],254:[function(require,module,exports){
+},{}],266:[function(require,module,exports){
 "use strict";
 function isFunction(x) {
     return typeof x === 'function';
 }
 exports.isFunction = isFunction;
 
-},{}],255:[function(require,module,exports){
+},{}],267:[function(require,module,exports){
 "use strict";
 function isObject(x) {
     return x != null && typeof x === 'object';
 }
 exports.isObject = isObject;
 
-},{}],256:[function(require,module,exports){
+},{}],268:[function(require,module,exports){
 (function (global){
 "use strict";
 var objectTypes = {
@@ -34015,12 +35988,12 @@ if (freeGlobal && (freeGlobal.global === freeGlobal || freeGlobal.window === fre
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],257:[function(require,module,exports){
+},{}],269:[function(require,module,exports){
 "use strict";
 function throwError(e) { throw e; }
 exports.throwError = throwError;
 
-},{}],258:[function(require,module,exports){
+},{}],270:[function(require,module,exports){
 "use strict";
 var Subscriber_1 = require('../Subscriber');
 var rxSubscriber_1 = require('../symbol/rxSubscriber');
@@ -34037,7 +36010,7 @@ function toSubscriber(nextOrObserver, error, complete) {
 }
 exports.toSubscriber = toSubscriber;
 
-},{"../Subscriber":240,"../symbol/rxSubscriber":248}],259:[function(require,module,exports){
+},{"../Subscriber":252,"../symbol/rxSubscriber":260}],271:[function(require,module,exports){
 "use strict";
 var errorObject_1 = require('./errorObject');
 var tryCatchTarget;
@@ -34057,7 +36030,7 @@ function tryCatch(fn) {
 exports.tryCatch = tryCatch;
 ;
 
-},{"./errorObject":252}],260:[function(require,module,exports){
+},{"./errorObject":264}],272:[function(require,module,exports){
 (function (Buffer){
 // prototype class for hash functions
 function Hash (blockSize, finalSize) {
@@ -34130,7 +36103,7 @@ Hash.prototype._update = function () {
 module.exports = Hash
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":152}],261:[function(require,module,exports){
+},{"buffer":164}],273:[function(require,module,exports){
 var exports = module.exports = function SHA (algorithm) {
   algorithm = algorithm.toLowerCase()
 
@@ -34147,7 +36120,7 @@ exports.sha256 = require('./sha256')
 exports.sha384 = require('./sha384')
 exports.sha512 = require('./sha512')
 
-},{"./sha":262,"./sha1":263,"./sha224":264,"./sha256":265,"./sha384":266,"./sha512":267}],262:[function(require,module,exports){
+},{"./sha":274,"./sha1":275,"./sha224":276,"./sha256":277,"./sha384":278,"./sha512":279}],274:[function(require,module,exports){
 (function (Buffer){
 /*
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-0, as defined
@@ -34244,7 +36217,7 @@ Sha.prototype._hash = function () {
 module.exports = Sha
 
 }).call(this,require("buffer").Buffer)
-},{"./hash":260,"buffer":152,"inherits":199}],263:[function(require,module,exports){
+},{"./hash":272,"buffer":164,"inherits":211}],275:[function(require,module,exports){
 (function (Buffer){
 /*
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-1, as defined
@@ -34346,7 +36319,7 @@ Sha1.prototype._hash = function () {
 module.exports = Sha1
 
 }).call(this,require("buffer").Buffer)
-},{"./hash":260,"buffer":152,"inherits":199}],264:[function(require,module,exports){
+},{"./hash":272,"buffer":164,"inherits":211}],276:[function(require,module,exports){
 (function (Buffer){
 /**
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
@@ -34402,7 +36375,7 @@ Sha224.prototype._hash = function () {
 module.exports = Sha224
 
 }).call(this,require("buffer").Buffer)
-},{"./hash":260,"./sha256":265,"buffer":152,"inherits":199}],265:[function(require,module,exports){
+},{"./hash":272,"./sha256":277,"buffer":164,"inherits":211}],277:[function(require,module,exports){
 (function (Buffer){
 /**
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
@@ -34540,7 +36513,7 @@ Sha256.prototype._hash = function () {
 module.exports = Sha256
 
 }).call(this,require("buffer").Buffer)
-},{"./hash":260,"buffer":152,"inherits":199}],266:[function(require,module,exports){
+},{"./hash":272,"buffer":164,"inherits":211}],278:[function(require,module,exports){
 (function (Buffer){
 var inherits = require('inherits')
 var SHA512 = require('./sha512')
@@ -34600,7 +36573,7 @@ Sha384.prototype._hash = function () {
 module.exports = Sha384
 
 }).call(this,require("buffer").Buffer)
-},{"./hash":260,"./sha512":267,"buffer":152,"inherits":199}],267:[function(require,module,exports){
+},{"./hash":272,"./sha512":279,"buffer":164,"inherits":211}],279:[function(require,module,exports){
 (function (Buffer){
 var inherits = require('inherits')
 var Hash = require('./hash')
@@ -34863,7 +36836,7 @@ Sha512.prototype._hash = function () {
 module.exports = Sha512
 
 }).call(this,require("buffer").Buffer)
-},{"./hash":260,"buffer":152,"inherits":199}],268:[function(require,module,exports){
+},{"./hash":272,"buffer":164,"inherits":211}],280:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -34992,12 +36965,12 @@ Stream.prototype.pipe = function(dest, options) {
   return dest;
 };
 
-},{"events":189,"inherits":199,"readable-stream/duplex.js":270,"readable-stream/passthrough.js":276,"readable-stream/readable.js":277,"readable-stream/transform.js":278,"readable-stream/writable.js":279}],269:[function(require,module,exports){
-arguments[4][153][0].apply(exports,arguments)
-},{"dup":153}],270:[function(require,module,exports){
+},{"events":201,"inherits":211,"readable-stream/duplex.js":282,"readable-stream/passthrough.js":288,"readable-stream/readable.js":289,"readable-stream/transform.js":290,"readable-stream/writable.js":291}],281:[function(require,module,exports){
+arguments[4][165][0].apply(exports,arguments)
+},{"dup":165}],282:[function(require,module,exports){
 module.exports = require("./lib/_stream_duplex.js")
 
-},{"./lib/_stream_duplex.js":271}],271:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":283}],283:[function(require,module,exports){
 // a duplex stream is just a stream that is both readable and writable.
 // Since JS doesn't have multiple prototypal inheritance, this class
 // prototypally inherits from Readable, and then parasitically from
@@ -35073,7 +37046,7 @@ function forEach(xs, f) {
     f(xs[i], i);
   }
 }
-},{"./_stream_readable":273,"./_stream_writable":275,"core-util-is":155,"inherits":199,"process-nextick-args":216}],272:[function(require,module,exports){
+},{"./_stream_readable":285,"./_stream_writable":287,"core-util-is":167,"inherits":211,"process-nextick-args":228}],284:[function(require,module,exports){
 // a passthrough stream.
 // basically just the most minimal sort of Transform stream.
 // Every written chunk gets output as-is.
@@ -35100,7 +37073,7 @@ function PassThrough(options) {
 PassThrough.prototype._transform = function (chunk, encoding, cb) {
   cb(null, chunk);
 };
-},{"./_stream_transform":274,"core-util-is":155,"inherits":199}],273:[function(require,module,exports){
+},{"./_stream_transform":286,"core-util-is":167,"inherits":211}],285:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -35996,7 +37969,7 @@ function indexOf(xs, x) {
   return -1;
 }
 }).call(this,require('_process'))
-},{"./_stream_duplex":271,"_process":217,"buffer":152,"buffer-shims":150,"core-util-is":155,"events":189,"inherits":199,"isarray":269,"process-nextick-args":216,"string_decoder/":280,"util":125}],274:[function(require,module,exports){
+},{"./_stream_duplex":283,"_process":229,"buffer":164,"buffer-shims":162,"core-util-is":167,"events":201,"inherits":211,"isarray":281,"process-nextick-args":228,"string_decoder/":292,"util":137}],286:[function(require,module,exports){
 // a transform stream is a readable/writable stream where you do
 // something with the data.  Sometimes it's called a "filter",
 // but that's not a great name for it, since that implies a thing where
@@ -36177,7 +38150,7 @@ function done(stream, er) {
 
   return stream.push(null);
 }
-},{"./_stream_duplex":271,"core-util-is":155,"inherits":199}],275:[function(require,module,exports){
+},{"./_stream_duplex":283,"core-util-is":167,"inherits":211}],287:[function(require,module,exports){
 (function (process){
 // A bit simpler than readable streams.
 // Implement an async ._write(chunk, encoding, cb), and it'll handle all
@@ -36706,10 +38679,10 @@ function CorkedRequest(state) {
   };
 }
 }).call(this,require('_process'))
-},{"./_stream_duplex":271,"_process":217,"buffer":152,"buffer-shims":150,"core-util-is":155,"events":189,"inherits":199,"process-nextick-args":216,"util-deprecate":281}],276:[function(require,module,exports){
+},{"./_stream_duplex":283,"_process":229,"buffer":164,"buffer-shims":162,"core-util-is":167,"events":201,"inherits":211,"process-nextick-args":228,"util-deprecate":293}],288:[function(require,module,exports){
 module.exports = require("./lib/_stream_passthrough.js")
 
-},{"./lib/_stream_passthrough.js":272}],277:[function(require,module,exports){
+},{"./lib/_stream_passthrough.js":284}],289:[function(require,module,exports){
 (function (process){
 var Stream = (function (){
   try {
@@ -36729,13 +38702,13 @@ if (!process.browser && process.env.READABLE_STREAM === 'disable' && Stream) {
 }
 
 }).call(this,require('_process'))
-},{"./lib/_stream_duplex.js":271,"./lib/_stream_passthrough.js":272,"./lib/_stream_readable.js":273,"./lib/_stream_transform.js":274,"./lib/_stream_writable.js":275,"_process":217}],278:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":283,"./lib/_stream_passthrough.js":284,"./lib/_stream_readable.js":285,"./lib/_stream_transform.js":286,"./lib/_stream_writable.js":287,"_process":229}],290:[function(require,module,exports){
 module.exports = require("./lib/_stream_transform.js")
 
-},{"./lib/_stream_transform.js":274}],279:[function(require,module,exports){
+},{"./lib/_stream_transform.js":286}],291:[function(require,module,exports){
 module.exports = require("./lib/_stream_writable.js")
 
-},{"./lib/_stream_writable.js":275}],280:[function(require,module,exports){
+},{"./lib/_stream_writable.js":287}],292:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -36958,7 +38931,7 @@ function base64DetectIncompleteChar(buffer) {
   this.charLength = this.charReceived ? 3 : 0;
 }
 
-},{"buffer":152}],281:[function(require,module,exports){
+},{"buffer":164}],293:[function(require,module,exports){
 (function (global){
 
 /**
@@ -37029,7 +39002,7 @@ function config (name) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],282:[function(require,module,exports){
+},{}],294:[function(require,module,exports){
 var indexOf = require('indexof');
 
 var Object_keys = function (obj) {
@@ -37169,7 +39142,7 @@ exports.createContext = Script.createContext = function (context) {
     return copy;
 };
 
-},{"indexof":198}],283:[function(require,module,exports){
+},{"indexof":210}],295:[function(require,module,exports){
 var bundleFn = arguments[3];
 var sources = arguments[4];
 var cache = arguments[5];
@@ -37234,9 +39207,7 @@ module.exports = function (fn, options) {
     if (options && options.bare) { return blob; }
     var workerUrl = URL.createObjectURL(blob);
     var worker = new Worker(workerUrl);
-    if (typeof URL.revokeObjectURL == "function") {
-      URL.revokeObjectURL(workerUrl);
-    }
+    worker.objectURL = workerUrl;
     return worker;
 };
 
