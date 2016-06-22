@@ -39,7 +39,7 @@
   },
   "description": "This is the client for analog4all.",
   "devDependencies": {
-    "babel-eslint": "^6.0.4",
+    "babel-eslint": "^6.1.0",
     "eslint-config-holy-grail": "^4.0.0",
     "grunt": "^1.0.1",
     "grunt-browserify": "^5.0.0",
