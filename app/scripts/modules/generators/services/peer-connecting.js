@@ -10,7 +10,7 @@ const ICE_SERVERS = [ { urls: [
 
 export class PeerConnectingService {
 
-    connect (webSocketSubject) {
+    connect (webSocketSubject) { // eslint-disable-line class-methods-use-this
         return new Promise((resolve, reject) => {
             var candidateChannel,
                 candidateChannelSubscription,
