@@ -35,7 +35,7 @@
     "brfs-htmlmin": "^2.0.0",
     "browserify": "^13.1.0",
     "browserify-shim": "^3.8.12",
-    "json-midi-encoder": "0.0.7",
+    "json-midi-encoder": "0.0.8",
     "midi-json-parser": "^1.0.1",
     "recorderjs": "git+https://github.com/chrisguttandin/Recorderjs.git",
     "rxjs-broker": "^0.2.3"
