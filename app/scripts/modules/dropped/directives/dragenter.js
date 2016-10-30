@@ -6,7 +6,7 @@ function inject ($parse) {
             element.on('dragenter', function (event) {
                 event.preventDefault();
 
-                scope.$evalAsync(function() {
+                scope.$evalAsync(function () {
                     fn(scope);
                 });
             });

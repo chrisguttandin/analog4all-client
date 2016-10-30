@@ -18,7 +18,7 @@ module.exports = {
             '!app/scripts/bundle.js'
         ],
         options: {
-            livereload: 35730,
+            livereload: 35730
         },
         tasks: [
             'js'

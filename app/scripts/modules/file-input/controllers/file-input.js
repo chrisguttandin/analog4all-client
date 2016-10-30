@@ -32,7 +32,7 @@ export class FileInputController {
 
                     this._$scope.$evalAsync();
                 });
-        }
+        };
 
         fileReader.readAsArrayBuffer(file);
     }

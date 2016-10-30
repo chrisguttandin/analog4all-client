@@ -7,7 +7,7 @@ import { registry } from './routes/registry';
 export default angular
     .module('registry', [
         angularRoute,
-        instruments.name,
+        instruments.name
     ])
 
     .config([ '$routeProvider', ($routeProvider) => $routeProvider.when('/instruments', registry) ])

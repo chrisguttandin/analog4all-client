@@ -17,7 +17,7 @@ function inject ($parse) {
                     // Angular actually evaluates the expression
                     let file = event.dataTransfer.files[0];
 
-                    scope.$evalAsync(function() {
+                    scope.$evalAsync(function () {
                         fn(scope, {
                             file
                         });
