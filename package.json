@@ -38,7 +38,7 @@
     "json-midi-encoder": "0.0.8",
     "midi-json-parser": "^1.0.1",
     "recorderjs": "git+https://github.com/chrisguttandin/Recorderjs.git",
-    "rxjs-broker": "^0.2.3"
+    "rxjs-broker": "^1.0.0"
   },
   "description": "This is the client for analog4all.",
   "devDependencies": {
