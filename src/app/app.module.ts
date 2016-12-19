@@ -14,8 +14,8 @@ import {
     MidiJsonEncodingService,
     PeerConnectingService,
     RenderingService,
-    WindowService,
-    WaitingService
+    WaitingService,
+    WindowService
 } from './shared';
 import { StoreModule } from './store';
 
@@ -43,8 +43,8 @@ import { StoreModule } from './store';
         MidiJsonEncodingService,
         PeerConnectingService,
         RenderingService,
-        WindowService,
-        WaitingService
+        WaitingService,
+        WindowService
     ]
 })
 export class AppModule { }
