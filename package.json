@@ -74,7 +74,7 @@
     "e2e": "protractor",
     "precommit": "grunt lint",
     "pree2e": "webdriver-manager update",
-    "test": "grunt test"
+    "test": "grunt lint && grunt test"
   },
   "version": "2.0.1"
 }
