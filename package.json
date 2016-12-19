@@ -65,6 +65,7 @@
   "license": "MIT",
   "main": "src/index.html",
   "name": "analog4all-client",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/chrisguttandin/analog4all-client.git"
