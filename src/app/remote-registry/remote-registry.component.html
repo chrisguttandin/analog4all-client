@@ -1,0 +1,8 @@
+<h2 *ngIf="(numberOfInstruments$ | async) === 0">Sorry, there is currently no instrument available</h2>
+<h2 *ngIf="(numberOfInstruments$ | async) > 0">Currently available instruments</h2>
+<button (click)="refresh()">refresh</button>
+<ul>
+    <li *ngFor="let instrument of instruments$ | async">
+        <a [routerLink]="[ '/', instrument.id ]">{{ instrument.name }}</a>
+    </li>
+</ul>

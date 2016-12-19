@@ -1,0 +1,33 @@
+label {
+    cursor: pointer;
+    display: block;
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+
+input {
+    background-color: #F0F;
+    height: 100%;
+    left: 0;
+    outline: none;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+div {
+    align-items: center;
+    background-color: #CCC;
+    display: flex;
+    height: 100%;
+    left: 0;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+div.is-dragged-over {
+    background-color: #999;
+}

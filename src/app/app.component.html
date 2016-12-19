@@ -1,0 +1,4 @@
+<h1>Analog4All Client</h1>
+<hr>
+<router-outlet *ngIf="isSupported"></router-outlet>
+<p *ngIf="!isSupported">Sorry, your browser is not supported. :-(</p>
