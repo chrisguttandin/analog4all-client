@@ -14,7 +14,7 @@ import {
     MidiJsonEncodingService,
     PeerConnectingService,
     RenderingService,
-    WINDOW_REF_PROVIDER,
+    WindowService,
     WaitingService
 } from './shared';
 import { StoreModule } from './store';
@@ -43,7 +43,7 @@ import { StoreModule } from './store';
         MidiJsonEncodingService,
         PeerConnectingService,
         RenderingService,
-        WINDOW_REF_PROVIDER,
+        WindowService,
         WaitingService
     ]
 })

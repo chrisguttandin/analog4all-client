@@ -10,4 +10,4 @@ export * from './peer-connecting.service';
 export * from './rendering.service';
 export * from './response-error';
 export * from './waiting.service';
-export * from './window';
+export * from './window.service';

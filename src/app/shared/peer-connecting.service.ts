@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { windowRef } from './window';
+import { WindowService } from './window.service';
 
 const ICE_SERVERS = [ { urls: [
     'stun:stun.l.google.com:19302',
@@ -16,7 +16,11 @@ declare var webkitRTCPeerConnection: RTCPeerConnectionStatic;
 @Injectable()
 export class PeerConnectingService {
 
-    constructor (@Inject(windowRef) private _window) { }
+    private _window;
+
+    constructor (windowService: WindowService) {
+        this._window = windowService.nativeWindow;
+    }
 
     /**
      * This property is true if the browser supports all the required APIs to use the
