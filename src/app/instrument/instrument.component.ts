@@ -82,7 +82,7 @@ export class InstrumentComponent implements OnDestroy, OnInit {
             .take(1)
             .mergeMap((instrument) => this._renderingService.render(instrument, bpm, filename, midiJson))
             .subscribe(() => {
-                alert('YEAH');
+                // @todo
             });
     }
 
