@@ -23,7 +23,7 @@ export class GeneratorsService {
         return isSupported;
     }
 
-    public connect ({ id, instrument: { id: instrumentId } }): Observable<RTCDataChannel> {
+    public connect ({ id, instrument: { id: instrumentId } }: IGenerator): Observable<RTCDataChannel> {
         const webSocketSubject = connect(`wss${ this._endpoint }instruments/${ instrumentId }/generators/${ id }`);
 
         return this._peerConnectingService
