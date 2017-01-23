@@ -59,27 +59,27 @@ export class PeerConnectingService {
 
             const descriptionChannelSubscription = descriptionChannel
                 .subscribe(({ description }) => {
-                        peerConnection
-                            .setRemoteDescription(new RTCSessionDescription(description))
-                            .catch(() => {
-                                // @todo Handle this error and maybe request another description.
-                            });
+                    peerConnection
+                        .setRemoteDescription(new RTCSessionDescription(description))
+                        .catch(() => {
+                            // @todo Handle this error and maybe request another description.
+                        });
 
-                        peerConnection
-                            .createAnswer()
-                            .then((answer) => {
-                                peerConnection
-                                    .setLocalDescription(answer)
-                                    .catch(() => {
-                                        // @todo Handle this error and maybe create another description.
-                                    });
+                    peerConnection
+                        .createAnswer()
+                        .then((answer) => {
+                            peerConnection
+                                .setLocalDescription(answer)
+                                .catch(() => {
+                                    // @todo Handle this error and maybe create another description.
+                                });
 
                                 descriptionChannel.send({ description: answer });
-                            })
-                            .catch(() => {
-                                // @todo Handle this error and maybe create another answer.
-                            });
-                    });
+                        })
+                        .catch(() => {
+                            // @todo Handle this error and maybe create another answer.
+                        });
+                });
 
             peerConnection.ondatachannel = ({ channel }) => {
                 candidateChannelSubscription.unsubscribe();
