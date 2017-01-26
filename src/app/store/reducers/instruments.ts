@@ -29,7 +29,7 @@ export function instrumentsReducer (state = [], action: Action): IInstrument[] {
                 .filter(([ , newInstrument ]) => (newInstrument !== undefined))
                 .map(([ oldInstrument, newInstrument ]) => {
                     if (oldInstrument.modified !== newInstrument.modified) {
-                        return Object.assign(oldInstrument, newInstrument);
+                        return Object.assign({}, oldInstrument, newInstrument);
                     }
 
                     return oldInstrument;
