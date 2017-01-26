@@ -46,7 +46,7 @@ export class GeneratorsService {
     public delete (generator: IGenerator): Observable<null> {
         return this._http
             .delete(`https${ this._endpoint }instruments/${ generator.instrument.id }/generators/${ generator.id }`)
-            .map((response) => null)
+            .map(() => null)
             .catch((response) => Observable.throw(new ResponseError(response)));
     }
 
