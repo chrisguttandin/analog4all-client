@@ -1,6 +1,6 @@
 module.exports = {
     build: {
-        cmd: 'ng build --aot --base-href /analog4all-client --prod'
+        cmd: 'ng build --aot --base-href /analog4all-client --no-sourcemap --prod'
     },
     continuous: {
         cmd: 'ng test'
