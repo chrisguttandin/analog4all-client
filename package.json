@@ -11,7 +11,7 @@
     "@angular/http": "2.4.7",
     "@angular/platform-browser": "2.4.7",
     "@angular/platform-browser-dynamic": "2.4.7",
-    "@angular/router": "3.4.7",
+    "@angular/router": "4.0.0-rc.1",
     "@ngrx/core": "^1.2.0",
     "@ngrx/store": "^2.2.1",
     "core-js": "^2.4.1",
