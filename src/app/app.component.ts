@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GeneratorsService, PeerConnectingService } from './shared';
 
 @Component({
-    selector: 'anc-root',
+    selector: 'anc-app',
     styleUrls: [ './app.component.css' ],
     templateUrl: './app.component.html'
 })
