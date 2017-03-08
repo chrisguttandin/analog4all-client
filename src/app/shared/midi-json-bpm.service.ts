@@ -7,8 +7,8 @@ export class MidiJsonBpmService {
     public read (midiJson) {
         const { tracks } = midiJson;
 
-        for (let events of tracks) {
-            for (let event of events) {
+        for (const events of tracks) {
+            for (const event of events) {
                 if ('setTempo' in event) {
                     return (60000000 / event.setTempo.microsecondsPerBeat);
                 }

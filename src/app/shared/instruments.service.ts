@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { IInstrument } from '../interfaces';
 import { IAppState, UPDATE_INSTRUMENT, UPDATE_INSTRUMENTS } from '../store';
 import { ENDPOINT } from './endpoint-token';

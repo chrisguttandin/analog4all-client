@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * This service sends a waiting message to the data channel. It waits for the data channel to emit a

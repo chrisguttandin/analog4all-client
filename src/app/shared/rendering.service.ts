@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { wrap } from 'rxjs-broker';
+import { Observable } from 'rxjs/Observable';
 import { DownloadingService } from './downloading.service';
 import { FileReceivingService } from './file-receiving.service';
 import { FileSendingService } from './file-sending.service';
