@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { parseArrayBuffer } from 'midi-json-parser';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/switchMap';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';

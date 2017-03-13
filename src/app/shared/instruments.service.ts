@@ -1,6 +1,9 @@
 import { Inject, Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Store } from '@ngrx/store';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { IInstrument } from '../interfaces';
 import { IAppState, UPDATE_INSTRUMENT, UPDATE_INSTRUMENTS } from '../store';

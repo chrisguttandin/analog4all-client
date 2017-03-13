@@ -1,6 +1,10 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/take';
 import { ENDPOINT, GeneratorsService, InstrumentsService, MidiJsonBpmService, RenderingService } from '../shared';
 
 @Component({

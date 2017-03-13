@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 import { wrap } from 'rxjs-broker';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/zip';
 import { Observable } from 'rxjs/Observable';
 import { DownloadingService } from './downloading.service';
 import { FileReceivingService } from './file-receiving.service';
