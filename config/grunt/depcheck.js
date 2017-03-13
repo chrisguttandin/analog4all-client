@@ -12,7 +12,8 @@ module.exports = {
                 'jasmine',
                 'karma*',
                 'tslint-config-holy-grail',
-                'typescript'
+                'typescript',
+                'webpack-bundle-analyzer'
             ]
         },
         src: './'
