@@ -17,7 +17,7 @@ export class InstrumentResolver implements Resolve<IInstrument> {
     public resolve (activatedRoute: ActivatedRouteSnapshot) {
         return this._instrumentsService
             .get(activatedRoute.params['id'])
-            .catch((err) => {
+            .catch(() => {
                 this._router.navigate([ '/' ]);
 
                 return Observable.empty();
