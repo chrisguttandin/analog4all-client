@@ -3,6 +3,7 @@
     "rules": {
         "component-selector": [ true, "element", "anc", "kebab-case" ],
         "directive-selector": [ true, "attribute", "anc", "camelCase" ],
+        "import-blacklist": false,
         "pipe-naming": [ true, "camelCase", "anc" ]
     }
 }
