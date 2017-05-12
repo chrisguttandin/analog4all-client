@@ -103,11 +103,11 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
         this._checkForFileOnFocus = true;
     }
 
-    public onDragEnter (event) {
+    public onDragEnter () {
         this.isDraggedOver = true;
     }
 
-    public onDragLeave (event) {
+    public onDragLeave () {
         this.isDraggedOver = false;
     }
 
