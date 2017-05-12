@@ -11,8 +11,6 @@
     "outDir": "../build/out-tsc",
     "sourceMap": true,
     "target": "es5",
-    "types": [
-      "webrtc"
-    ]
+    "types": [ ]
   }
 }

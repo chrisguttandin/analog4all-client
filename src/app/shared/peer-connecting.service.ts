@@ -1,5 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
+import { IDataChannel } from 'rxjs-broker';
 import { Observable } from 'rxjs/Observable';
+import { IDataChannelEvent } from '../interfaces';
 import { WindowService } from './window.service';
 
 const ICE_SERVERS = [ { urls: [
@@ -9,9 +11,6 @@ const ICE_SERVERS = [ { urls: [
     'stun:stun3.l.google.com:19302',
     'stun:stun4.l.google.com:19302'
 ] } ];
-
-// @todo Remove this again when Chrome supports the unprefixed RTCPeerConnection.
-declare var webkitRTCPeerConnection: RTCPeerConnectionStatic;
 
 @Injectable()
 export class PeerConnectingService {
@@ -27,8 +26,8 @@ export class PeerConnectingService {
      * PeerConnectingService.
      */
     get isSupported () {
-        if ('webkitRTCPeerConnection' in this._window) {
-            const peerConnection = new webkitRTCPeerConnection({
+        if ('RTCPeerConnection' in this._window) {
+            const peerConnection = new RTCPeerConnection({
                 iceServers: [ { urls: 'stun:0' } ]
             });
 
@@ -38,26 +37,26 @@ export class PeerConnectingService {
         return false;
     }
 
-    public connect (webSocketSubject): Observable<RTCDataChannel> {
+    public connect (webSocketSubject): Observable<IDataChannel> {
         return Observable.create((observer) => {
-            const peerConnection = new webkitRTCPeerConnection({
+            const peerConnection = new RTCPeerConnection({
                 iceServers: ICE_SERVERS
             });
 
-            const candidateChannel = webSocketSubject
+            const candidateSubject = webSocketSubject
                 .mask({ type: 'candidate' });
 
-            const descriptionChannel = webSocketSubject
+            const descriptionSubject = webSocketSubject
                 .mask({ type: 'description' });
 
-            const candidateChannelSubscription = candidateChannel
+            const candidateSubjectSubscription = candidateSubject
                 .subscribe(({ candidate }) => peerConnection
                     .addIceCandidate(new RTCIceCandidate(candidate))
                     .catch(() => {
                         // Errors can be ignored.
                     }));
 
-            const descriptionChannelSubscription = descriptionChannel
+            const descriptionSubjectSubscription = descriptionSubject
                 .subscribe(({ description }) => {
                     peerConnection
                         .setRemoteDescription(new RTCSessionDescription(description))
@@ -74,25 +73,25 @@ export class PeerConnectingService {
                                     // @todo Handle this error and maybe create another description.
                                 });
 
-                                descriptionChannel.send({ description: answer });
+                            descriptionSubject.send({ description: answer });
                         })
                         .catch(() => {
                             // @todo Handle this error and maybe create another answer.
                         });
                 });
 
-            peerConnection.ondatachannel = ({ channel }) => {
-                candidateChannelSubscription.unsubscribe();
-                descriptionChannelSubscription.unsubscribe();
+            peerConnection.addEventListener('datachannel', ({ channel }: IDataChannelEvent) => {
+                candidateSubjectSubscription.unsubscribe();
+                descriptionSubjectSubscription.unsubscribe();
 
                 observer.next(channel);
-            };
+            });
 
-            peerConnection.onicecandidate = ({ candidate }) => {
+            peerConnection.addEventListener('icecandidate', ({ candidate }) => {
                 if (candidate) {
-                    candidateChannel.send({ candidate });
+                    candidateSubject.send({ candidate });
                 }
-            };
+            });
 
             webSocketSubject.next({ type: 'request' });
         });
