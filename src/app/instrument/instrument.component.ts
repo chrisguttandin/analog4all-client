@@ -13,8 +13,6 @@ import { ENDPOINT, GeneratorsService, InstrumentsService, MidiJsonBpmService, Re
 })
 export class InstrumentComponent implements OnDestroy, OnInit {
 
-    private _bpmDisabledSubscription;
-
     public hasMidiJson$;
 
     public instrument$;
@@ -24,6 +22,8 @@ export class InstrumentComponent implements OnDestroy, OnInit {
     public renderForm: FormGroup;
 
     public sampleUrl$;
+
+    private _bpmDisabledSubscription;
 
     constructor (
         private _activatedRoute: ActivatedRoute,

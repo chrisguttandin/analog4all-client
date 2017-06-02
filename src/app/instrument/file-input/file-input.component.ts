@@ -21,21 +21,21 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnInit {
 
-    private _checkForFileOnFocus: boolean;
-
     public filename$: Observable<string>;
 
-    private _filenameChanges$: BehaviorSubject<string>;
-
     public isDraggedOver: boolean;
+
+    public state$;
+
+    private _checkForFileOnFocus: boolean;
+
+    private _filenameChanges$: BehaviorSubject<string>;
 
     private _onChange: (_: any) => void;
 
     private _onTouched: () => void;
 
     private _stateChanges$: BehaviorSubject<string>;
-
-    public state$;
 
     private _valueChanges$: BehaviorSubject<any>; // @todo BehaviorSubject<MidiJson>
 
