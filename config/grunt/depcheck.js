@@ -11,6 +11,7 @@ module.exports = {
                 '@angular/language-service',
                 '@types/*',
                 'eslint-config-holy-grail',
+                'greenkeeper-lockfile',
                 'grunt-*',
                 'husky',
                 'jasmine-core',
