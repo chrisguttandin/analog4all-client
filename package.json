@@ -28,6 +28,7 @@
     "@angular/language-service": "^4.2.2",
     "@types/jasmine": "2.5.45",
     "@types/node": "~6.0.60",
+    "chromedriver": "^2.30.1",
     "content-security-policy-builder": "^1.1.0",
     "eslint-config-holy-grail": "^18.0.0",
     "greenkeeper-lockfile": "^1.6.0",
