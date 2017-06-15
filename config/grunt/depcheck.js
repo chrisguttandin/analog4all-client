@@ -10,6 +10,7 @@ module.exports = {
                 '@angular/compiler-cli',
                 '@angular/language-service',
                 '@types/*',
+                'chromedriver',
                 'eslint-config-holy-grail',
                 'greenkeeper-lockfile',
                 'grunt-*',
