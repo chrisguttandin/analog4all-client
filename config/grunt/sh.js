@@ -20,6 +20,9 @@ module.exports = {
     preview: {
         cmd: 'ng serve --aot --port 6699 --prod'
     },
+    smoke: {
+        cmd: 'IS_SMOKE_TEST=true ng e2e --serve false'
+    },
     test: {
         cmd: 'ng test --watch false'
     }
