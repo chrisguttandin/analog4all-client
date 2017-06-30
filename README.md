@@ -1,7 +1,5 @@
 # analog4all-client
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/chrisguttandin/analog4all-client.svg)](https://greenkeeper.io/)
-
 **This is the client for analog4all.**
 
 [![tests](https://img.shields.io/travis/chrisguttandin/analog4all-client/master.svg?style=flat-square)](https://travis-ci.org/chrisguttandin/analog4all-client)
