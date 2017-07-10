@@ -13,7 +13,7 @@
     "@angular/platform-browser-dynamic": "^4.2.6",
     "@angular/router": "^4.2.6",
     "@ngrx/core": "^1.2.0",
-    "@ngrx/store": "^2.2.1",
+    "@ngrx/store": "^2.2.3",
     "core-js": "^2.4.1",
     "json-midi-encoder": "^2.0.9",
     "midi-json-parser": "^4.0.4",
