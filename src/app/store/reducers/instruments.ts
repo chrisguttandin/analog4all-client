@@ -1,4 +1,3 @@
-import { Action, ActionReducer } from '@ngrx/store';
 import { IInstrument } from '../../interfaces';
 import { IUpdateInstrumentAction, IUpdateInstrumentsAction } from '../interfaces';
 import { TInstrumentAction } from '../types';
@@ -29,7 +28,8 @@ export function instrumentsReducer (state: IInstrument[] = [], action: TInstrume
             const remainingInstruments = state
                 .map((instrument) => [ instrument, action.payload.find(({ id }) => instrument.id === id) ])
                 .filter(([ , newInstrument ]) => (newInstrument !== undefined))
-                .map(([ oldInstrument, newInstrument ]) => {
+                // @todo TypeScript needs to be convinced that no value is undefined.
+                .map(([ oldInstrument, newInstrument ]: [ IInstrument, IInstrument ]) => {
                     if (oldInstrument.modified !== newInstrument.modified) {
                         return { ...oldInstrument, ...newInstrument };
                     }

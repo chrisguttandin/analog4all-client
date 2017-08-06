@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+import { IMaskableSubject, IStringifyableJsonObject } from 'rxjs-broker';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/first';
 import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
 
 /**
  * This service sends a waiting message to the data channel. It waits for the data channel to emit a
@@ -12,8 +14,8 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class WaitingService {
 
-    public wait (dataChannelSubject) {
-        return Observable.create((observer) => {
+    public wait (dataChannelSubject: IMaskableSubject<IStringifyableJsonObject>) {
+        return Observable.create((observer: Observer<void>) => {
             let isPending = true;
 
             const waitingChannel = dataChannelSubject.mask({ type: 'waiting' });
@@ -36,7 +38,7 @@ export class WaitingService {
                     },
                     next () {
                         isPending = false;
-                        observer.next();
+                        observer.next(undefined);
                         observer.complete();
                     }
                 });
@@ -57,11 +59,11 @@ export class WaitingService {
                     },
                     next () {
                         waitingChannelSubscription.unsubscribe();
-                        waitingChannel.next();
+                        waitingChannel.next(undefined);
                     }
                 });
 
-            waitingChannel.next();
+            waitingChannel.next(undefined);
         });
     }
 

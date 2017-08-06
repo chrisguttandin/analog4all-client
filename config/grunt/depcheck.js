@@ -6,6 +6,7 @@ module.exports = {
                 'build'
             ],
             ignoreMatches: [
+                'midi-json-parser-worker',
                 '@angular/cli',
                 '@angular/compiler-cli',
                 '@angular/language-service',

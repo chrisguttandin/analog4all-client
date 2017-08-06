@@ -1,13 +1,13 @@
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { InstrumentResolver } from '../../../src/app/instrument/instrument.resolver';
 
 describe('InstrumentResolver', () => {
 
-    let instrumentResolver;
+    let instrumentResolver: InstrumentResolver;
 
-    let instrumentsService;
+    let instrumentsService: any;
 
-    let router;
+    let router: any;
 
     beforeEach(() => {
         instrumentsService = {
@@ -20,12 +20,12 @@ describe('InstrumentResolver', () => {
 
         spyOn(router, 'navigate').and.callThrough();
 
-        instrumentResolver = new InstrumentResolver(<any> instrumentsService, <any> router);
+        instrumentResolver = new InstrumentResolver(instrumentsService, router);
     });
 
     describe('resolve()', () => {
 
-        let activatedRouteSnapshot;
+        let activatedRouteSnapshot: any;
 
         beforeEach(() => {
             activatedRouteSnapshot = {

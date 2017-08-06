@@ -14,7 +14,7 @@ import { ResponseError } from './response-error';
 export class InstrumentsService {
 
     constructor (
-        @Inject(ENDPOINT) private _endpoint,
+        @Inject(ENDPOINT) private _endpoint: string,
         private _http: Http,
         private _store: Store<IAppState>
     ) { }

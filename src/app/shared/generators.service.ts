@@ -1,6 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
-import { Store } from '@ngrx/store';
 import { IDataChannel, connect, isSupported } from 'rxjs-broker';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
@@ -8,7 +7,6 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 import { Observable } from 'rxjs/Observable';
 import { IGenerator } from '../interfaces';
-import { IAppState } from '../store';
 import { ENDPOINT } from './endpoint-token';
 import { PeerConnectingService } from './peer-connecting.service';
 import { ResponseError } from './response-error';
@@ -17,10 +15,9 @@ import { ResponseError } from './response-error';
 export class GeneratorsService {
 
     constructor (
-        @Inject(ENDPOINT) private _endpoint,
+        @Inject(ENDPOINT) private _endpoint: string,
         private _http: Http,
-        private _peerConnectingService: PeerConnectingService,
-        private _store: Store<IAppState>
+        private _peerConnectingService: PeerConnectingService
     ) { }
 
     get isSupported () {
@@ -36,7 +33,7 @@ export class GeneratorsService {
             .do(() => webSocketSubject.close());
     }
 
-    public create (generator): Observable<IGenerator> {
+    public create (generator: { instrument: { id: string } }): Observable<IGenerator> {
         const headers = new Headers();
 
         headers.set('Content-Type', 'application/json');

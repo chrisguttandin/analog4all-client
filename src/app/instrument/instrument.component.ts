@@ -5,7 +5,10 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/take';
-import { ENDPOINT, GeneratorsService, InstrumentsService, MidiJsonBpmService, RenderingService } from '../shared';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+import { IInstrument } from '../interfaces';
+import { ENDPOINT, InstrumentsService, MidiJsonBpmService, RenderingService } from '../shared';
 
 @Component({
     styleUrls: [ './instrument.component.css' ],
@@ -13,23 +16,22 @@ import { ENDPOINT, GeneratorsService, InstrumentsService, MidiJsonBpmService, Re
 })
 export class InstrumentComponent implements OnDestroy, OnInit {
 
-    public hasMidiJson$;
+    public hasMidiJson$: Observable<boolean>;
 
-    public instrument$;
+    public instrument$: Observable<IInstrument>;
 
-    public instrumentName$;
+    public instrumentName$: Observable<string>;
 
     public renderForm: FormGroup;
 
-    public sampleUrl$;
+    public sampleUrl$: Observable<null | string>;
 
-    private _bpmDisabledSubscription;
+    private _bpmDisabledSubscription: Subscription;
 
     constructor (
         private _activatedRoute: ActivatedRoute,
-        @Inject(ENDPOINT) private _endpoint,
+        @Inject(ENDPOINT) private _endpoint: string,
         private _formBuilder: FormBuilder,
-        private _generatorsService: GeneratorsService,
         private _instrumentsService: InstrumentsService,
         private _midiJsonBpmService: MidiJsonBpmService,
         private _renderingService: RenderingService
@@ -51,26 +53,34 @@ export class InstrumentComponent implements OnDestroy, OnInit {
             file: [ null ]
         });
 
-        const midiJsonAndFilename$ = this.renderForm.get('file').valueChanges;
+        const fileFormControl = this.renderForm.get('file');
 
-        this.hasMidiJson$ = midiJsonAndFilename$
-            .map((value) => (value === null) ? false : true);
+        if (fileFormControl !== null) {
+            const midiJsonAndFilename$ = fileFormControl.valueChanges;
 
-        this._bpmDisabledSubscription = midiJsonAndFilename$
-            .subscribe((midiJsonAndFilename) => {
-                if (midiJsonAndFilename) {
-                    const { midiJson } = midiJsonAndFilename;
+            this.hasMidiJson$ = midiJsonAndFilename$
+                .map((value) => (value === null) ? false : true);
 
-                    this.renderForm.get('bpm').setValue(this._midiJsonBpmService.read(midiJson));
-                    this.renderForm.get('bpm').enable();
-                } else {
-                    this.renderForm.get('bpm').reset({ disabled: true, value: 120 });
-                }
-            });
+            this._bpmDisabledSubscription = midiJsonAndFilename$
+                .subscribe((midiJsonAndFilename) => {
+                    const bpmFormControl = this.renderForm.get('bpm');
+
+                    if (bpmFormControl !== null) {
+                        if (midiJsonAndFilename) {
+                            const { midiJson } = midiJsonAndFilename;
+
+                            bpmFormControl.setValue(this._midiJsonBpmService.read(midiJson));
+                            bpmFormControl.enable();
+                        } else {
+                            bpmFormControl.reset({ disabled: true, value: 120 });
+                        }
+                    }
+                });
+        }
 
         this.sampleUrl$ = this.instrument$
             .map((instrument) => {
-                if (instrument !== null && 'sample' in instrument) {
+                if (instrument !== null && instrument.sample !== undefined) {
                     return `https${ this._endpoint }samples/${ instrument.sample.id }.wav`;
                 }
 
@@ -79,15 +89,20 @@ export class InstrumentComponent implements OnDestroy, OnInit {
     }
 
     public render () {
-        const bpm = this.renderForm.get('bpm').value;
-        const { filename, midiJson } = this.renderForm.get('file').value;
+        const bpmFormControl = this.renderForm.get('bpm');
+        const fileFormControl = this.renderForm.get('file');
 
-        this.instrument$
-            .take(1)
-            .mergeMap((instrument) => this._renderingService.render(instrument, bpm, filename, midiJson))
-            .subscribe(() => {
-                // @todo
-            });
+        if (bpmFormControl !== null && fileFormControl !== null) {
+            const bpm = bpmFormControl.value;
+            const { filename, midiJson } = fileFormControl.value;
+
+            this.instrument$
+                .take(1)
+                .mergeMap((instrument) => this._renderingService.render(instrument, bpm, filename, midiJson))
+                .subscribe(() => {
+                    // @todo
+                });
+        }
     }
 
 }

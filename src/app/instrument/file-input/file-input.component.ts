@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { parseArrayBuffer } from 'midi-json-parser';
+import { IMidiFile } from 'midi-json-parser-worker';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/switchMap';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -25,11 +27,11 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
 
     public isDraggedOver: boolean;
 
-    public state$;
+    public state$: Observable<string>;
 
     private _checkForFileOnFocus: boolean;
 
-    private _filenameChanges$: BehaviorSubject<string>;
+    private _filenameChanges$: BehaviorSubject<null | string>;
 
     private _onChange: (_: any) => void;
 
@@ -68,7 +70,7 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
                     return Observable.of(null);
                 }
 
-                return Observable.create((observer) => {
+                return Observable.create((observer: Observer<null | { filename: string, midiJson: IMidiFile }>) => {
                     const fileReader = new FileReader();
 
                     this._filenameChanges$.next(file.name);
@@ -81,7 +83,7 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
 
                                 observer.next({ filename: file.name, midiJson });
                             })
-                            .catch((err) => {
+                            .catch(() => {
                                 this._stateChanges$.next('failed');
 
                                 observer.next(null);
@@ -95,7 +97,7 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
             .subscribe((midiJson) => this._onChange(midiJson));
     }
 
-    public onChanged (file) {
+    public onChanged (file: File) {
         this._valueChanges$.next((file === undefined) ? null : file);
     }
 
@@ -111,11 +113,11 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
         this.isDraggedOver = false;
     }
 
-    public onDragover (event) {
+    public onDragover (event: DragEvent) {
         event.preventDefault();
     }
 
-    public onDrop (event) {
+    public onDrop (event: DragEvent) {
         event.preventDefault();
 
         this._checkForFileOnFocus = false;
@@ -126,13 +128,13 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
         }
     }
 
-    public onFocus (event) {
+    public onFocus (event: FocusEvent) {
         if (this._checkForFileOnFocus) {
             setTimeout(() => {
                 if (this._checkForFileOnFocus) {
                     this._checkForFileOnFocus = false;
 
-                    this.onChanged(event.target.files[0]);
+                    this.onChanged((<any> event.target).files[0]);
                 }
             });
         }
@@ -150,9 +152,7 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
         this._onTouched = fn;
     }
 
-    public setDisabledState (isDisabled: boolean): void {
-        // @todo
-    }
+    // @todo public setDisabledState (isDisabled: boolean): void { }
 
     public writeValue (value: any): void {
         this._valueChanges$.next(value);

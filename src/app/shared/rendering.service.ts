@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
+import { IMidiFile } from 'midi-json-parser-worker';
 import { wrap } from 'rxjs-broker';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/zip';
 import { Observable } from 'rxjs/Observable';
+import { IInstrument } from '../interfaces';
 import { DownloadingService } from './downloading.service';
 import { FileReceivingService } from './file-receiving.service';
 import { FileSendingService } from './file-sending.service';
@@ -24,7 +26,7 @@ export class RenderingService {
         private _waitingService: WaitingService
     ) { }
 
-    public render (instrument, bpm, filename, midiJson) {
+    public render (instrument: IInstrument, bpm: number, filename: string, midiJson: IMidiFile) {
         return this._generatorsService
             .create({ instrument: { id: instrument.id } })
             .mergeMap((generator) => Observable

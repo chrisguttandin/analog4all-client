@@ -4,6 +4,7 @@ import 'rxjs/add/operator/switchMap';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
+import { IInstrument } from '../interfaces';
 import { InstrumentsService } from '../shared';
 
 @Component({
@@ -12,7 +13,7 @@ import { InstrumentsService } from '../shared';
 })
 export class RemoteRegistryComponent implements OnDestroy, OnInit {
 
-    public instruments$;
+    public instruments$: Observable<IInstrument[]>;
 
     public numberOfInstruments$: Observable<number>;
 
