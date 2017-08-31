@@ -18,7 +18,7 @@
     "midi-json-parser": "^4.0.5",
     "midi-json-parser-worker": "^2.1.2",
     "rxjs": "^5.4.3",
-    "rxjs-broker": "^2.0.18",
+    "rxjs-broker": "^2.0.19",
     "zone.js": "^0.8.17"
   },
   "description": "This is the client for analog4all.",
