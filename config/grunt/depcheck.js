@@ -7,6 +7,7 @@ module.exports = {
             ],
             ignoreMatches: [
                 'midi-json-parser-worker',
+                'tslib',
                 '@angular/cli',
                 '@angular/compiler-cli',
                 '@angular/language-service',
