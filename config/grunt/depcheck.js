@@ -15,6 +15,7 @@ module.exports = {
                 'axe-core',
                 'bundle-buddy',
                 'chromedriver',
+                'eslint',
                 'eslint-config-holy-grail',
                 'greenkeeper-lockfile',
                 'grunt-*',
