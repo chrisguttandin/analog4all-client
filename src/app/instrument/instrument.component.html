@@ -11,7 +11,7 @@
         <input formControlName="bpm" type="number">
         <span>(you can modify the BPM of the given MIDI file)</span>
     </div>
-    <button (click)="render()" [disabled]="!(hasMidiJson$ | async)" type="submit">render</button>
+    <button (click)="render()" [disabled]="(hasMidiJson$ | async) === false" type="submit">render</button>
 </form>
 
 <a [routerLink]="[ '/' ]">&laquo; go back to the list of all instruments</a>

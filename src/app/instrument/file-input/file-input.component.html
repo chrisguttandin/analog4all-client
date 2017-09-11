@@ -1,9 +1,9 @@
 <label (dragenter)="onDragEnter()" (dragleave)="onDragLeave()" (dragover)="onDragover($event)" (drop)="onDrop($event)">
     <input accept="audio/midi" (blur)="onTouched()" (change)="onChanged($event.target.files[0])" (click)="onClick()" (focus)="onFocus($event)" type="file">
     <div [ngClass]="{ 'is-dragged-over': isDraggedOver }">
-        <span *ngIf="(state$ | async) == 'empty'">drop a MIDI file here or click to open the file dialog</span>
-        <span *ngIf="(state$ | async) == 'failed'">the given file "{{ filename$ | async }}" could not be parsed, please try another one</span>
-        <span *ngIf="(state$ | async) == 'filled'">the given file "{{ filename$ | async }}" looks like a valid MIDI file</span>
-        <span *ngIf="(state$ | async) == 'parsing'">the given file gets parsed, please wait</span>
+        <span *ngIf="state$ | async === 'empty'">drop a MIDI file here or click to open the file dialog</span>
+        <span *ngIf="state$ | async === 'failed'">the given file "{{ filename$ | async }}" could not be parsed, please try another one</span>
+        <span *ngIf="state$ | async === 'filled'">the given file "{{ filename$ | async }}" looks like a valid MIDI file</span>
+        <span *ngIf="state$ | async === 'parsing'">the given file gets parsed, please wait</span>
     </div>
 </label>
