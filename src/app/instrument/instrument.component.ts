@@ -24,7 +24,7 @@ export class InstrumentComponent implements OnDestroy, OnInit {
 
     public renderForm: FormGroup;
 
-    public sampleUrl$: Observable<null | string>;
+    public sampleUrl$: Observable<null | string>;
 
     private _bpmDisabledSubscription: Subscription;
 
