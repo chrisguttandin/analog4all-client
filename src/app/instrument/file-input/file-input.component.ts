@@ -31,7 +31,7 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
 
     private _checkForFileOnFocus: boolean;
 
-    private _filenameChanges$: BehaviorSubject<null | string>;
+    private _filenameChanges$: BehaviorSubject<null | string>;
 
     private _onChange: (_: any) => void;
 
@@ -70,7 +70,7 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
                     return Observable.of(null);
                 }
 
-                return Observable.create((observer: Observer<null | { filename: string, midiJson: IMidiFile }>) => {
+                return Observable.create((observer: Observer<null | { filename: string, midiJson: IMidiFile }>) => {
                     const fileReader = new FileReader();
 
                     this._filenameChanges$.next(file.name);

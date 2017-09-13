@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GeneratorsService, PeerConnectingService } from './shared';
+import { GeneratorsService, PeerConnectingService } from './shared';
 
 @Component({
     selector: 'anc-app',

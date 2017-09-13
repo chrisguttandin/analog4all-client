@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IMidiFile, IMidiSetTempoEvent } from 'midi-json-parser-worker';
+import { IMidiFile, IMidiSetTempoEvent } from 'midi-json-parser-worker';
 
 @Injectable()
 export class MidiJsonBpmService {
