@@ -14,7 +14,7 @@
     "@angular/router": "^4.4.3",
     "@ngrx/store": "^4.0.3",
     "core-js": "^2.5.1",
-    "json-midi-encoder": "^2.0.19",
+    "json-midi-encoder": "^2.0.20",
     "midi-json-parser": "^4.0.11",
     "midi-json-parser-worker": "^2.1.5",
     "rxjs": "^5.4.3",
