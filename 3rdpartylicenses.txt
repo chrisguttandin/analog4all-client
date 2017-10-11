@@ -103,11 +103,11 @@ MIT
 MIT
 MIT
 
-json-midi-encoder@2.0.20
+json-midi-encoder@2.0.21
 MIT
 MIT
 
-rxjs-broker@2.0.29
+rxjs-broker@2.0.30
 MIT
 MIT
 
