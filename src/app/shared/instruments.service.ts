@@ -1,10 +1,8 @@
 import { Inject, Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Store } from '@ngrx/store';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
+import { catchError, map, tap } from 'rxjs/operators';
 import { IInstrument } from '../interfaces';
 import { IAppState, UPDATE_INSTRUMENT, UPDATE_INSTRUMENTS } from '../store';
 import { ENDPOINT } from './endpoint-token';
@@ -22,24 +20,30 @@ export class InstrumentsService {
     public fetch (): Observable<IInstrument[]> {
         return this._http
             .get(`https${ this._endpoint }instruments/`)
-            .map((response) => response.json())
-            .do((instruments) => this._store.dispatch({ payload: instruments, type: UPDATE_INSTRUMENTS }))
-            .catch((response) => Observable.throw(new ResponseError(response)));
+            .pipe(
+                map((response: any) => response.json()),
+                tap((instruments) => this._store.dispatch({ payload: instruments, type: UPDATE_INSTRUMENTS })),
+                catchError((response) => Observable.throw(new ResponseError(response)))
+            );
     }
 
     public get (id: string): Observable<IInstrument> {
         return this._http
             .get(`https${ this._endpoint }instruments/${ id }`)
-            .map((response) => response.json())
-            .do((instrument) => this._store.dispatch({ payload: instrument, type: UPDATE_INSTRUMENT }))
-            .catch((response) => Observable.throw(new ResponseError(response)));
+            .pipe(
+                map((response: any) => response.json()),
+                tap((instrument) => this._store.dispatch({ payload: instrument, type: UPDATE_INSTRUMENT })),
+                catchError((response) => Observable.throw(new ResponseError(response)))
+            );
     }
 
     public select (id: string): Observable<IInstrument> {
         return this._store
             .select('instruments')
-            .map((instruments: IInstrument[]) => instruments.find(({ id: d }) => id === d))
-            .map((instrument) => (instrument === undefined) ? null : instrument);
+            .pipe(
+                map<IInstrument[], undefined | IInstrument>((instruments) => instruments.find(({ id: d }) => id === d)),
+                map<undefined | IInstrument, null | IInstrument>((instrument) => (instrument === undefined) ? null : instrument)
+            );
     }
 
     public watch (): Observable<IInstrument[]> {

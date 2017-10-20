@@ -1,11 +1,8 @@
 import { Inject, Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import { IDataChannel, connect, isSupported } from 'rxjs-broker';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/take';
 import { Observable } from 'rxjs/Observable';
+import { catchError, map, take, tap } from 'rxjs/operators';
 import { IGenerator } from '../interfaces';
 import { ENDPOINT } from './endpoint-token';
 import { PeerConnectingService } from './peer-connecting.service';
@@ -29,8 +26,10 @@ export class GeneratorsService {
 
         return this._peerConnectingService
             .connect(webSocketSubject)
-            .take(1)
-            .do(() => webSocketSubject.close());
+            .pipe(
+                take(1),
+                tap(() => webSocketSubject.close())
+            );
     }
 
     public create (generator: { instrument: { id: string } }): Observable<IGenerator> {
@@ -40,15 +39,19 @@ export class GeneratorsService {
 
         return this._http
             .post(`https${ this._endpoint }instruments/${ generator.instrument.id }/generators`, JSON.stringify(generator), { headers })
-            .map((response) => response.json())
-            .catch((response) => Observable.throw(new ResponseError(response)));
+            .pipe(
+                map((response: any) => response.json()),
+                catchError((response) => Observable.throw(new ResponseError(response)))
+            );
     }
 
     public delete (generator: IGenerator): Observable<null> {
         return this._http
             .delete(`https${ this._endpoint }instruments/${ generator.instrument.id }/generators/${ generator.id }`)
-            .map(() => null)
-            .catch((response) => Observable.throw(new ResponseError(response)));
+            .pipe(
+                map(() => null),
+                catchError((response) => Observable.throw(new ResponseError(response)))
+            );
     }
 
 }

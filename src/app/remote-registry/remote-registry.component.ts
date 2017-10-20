@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
+import { map, switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs/Subscription';
 import { IInstrument } from '../interfaces';
 import { InstrumentsService } from '../shared';
@@ -31,13 +30,19 @@ export class RemoteRegistryComponent implements OnDestroy, OnInit {
 
     public ngOnInit () {
         this.instruments$ = this._instrumentsService.watch()
-            .map((instruments) => instruments.filter((instrument) => instrument.isAvailable));
+            .pipe(
+                map<IInstrument[], IInstrument[]>((instruments) => instruments.filter((instrument) => instrument.isAvailable))
+            );
 
         this.numberOfInstruments$ = this.instruments$
-            .map((instruments) => instruments.length);
+            .pipe(
+                map<IInstrument[], number>((instruments) => instruments.length)
+            );
 
         this._refreshmentsSubscription = this._refreshments$
-            .switchMap(() => this._instrumentsService.fetch())
+            .pipe(
+                switchMap<null, IInstrument[]>(() => this._instrumentsService.fetch())
+            )
             .subscribe({
                 error () {
                     // @todo Handle errors.

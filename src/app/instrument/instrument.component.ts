@@ -1,11 +1,8 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/take';
 import { Observable } from 'rxjs/Observable';
+import { map, mergeMap, switchMap, take } from 'rxjs/operators';
 import { Subscription } from 'rxjs/Subscription';
 import { IInstrument } from '../interfaces';
 import { ENDPOINT, InstrumentsService, MidiJsonBpmService, RenderingService } from '../shared';
@@ -43,10 +40,14 @@ export class InstrumentComponent implements OnDestroy, OnInit {
 
     public ngOnInit () {
         this.instrument$ = this._activatedRoute.data
-            .switchMap(({ instrument: { id } }) => this._instrumentsService.select(id));
+            .pipe(
+                switchMap(({ instrument: { id } }) => this._instrumentsService.select(id))
+            );
 
         this.instrumentName$ = this.instrument$
-            .map((instrument) => (instrument === null) ? null : instrument.name);
+            .pipe(
+                map((instrument: IInstrument) => (instrument === null) ? null : instrument.name)
+            );
 
         this.renderForm = this._formBuilder.group({
             bpm: { disabled: true, value: 120 },
@@ -59,7 +60,9 @@ export class InstrumentComponent implements OnDestroy, OnInit {
             const midiJsonAndFilename$ = fileFormControl.valueChanges;
 
             this.hasMidiJson$ = midiJsonAndFilename$
-                .map((value) => (value === null) ? false : true);
+                .pipe(
+                    map((value) => (value === null) ? false : true)
+                );
 
             this._bpmDisabledSubscription = midiJsonAndFilename$
                 .subscribe((midiJsonAndFilename) => {
@@ -79,13 +82,15 @@ export class InstrumentComponent implements OnDestroy, OnInit {
         }
 
         this.sampleUrl$ = this.instrument$
-            .map((instrument) => {
-                if (instrument !== null && instrument.sample !== undefined) {
-                    return `https${ this._endpoint }samples/${ instrument.sample.id }.wav`;
-                }
+            .pipe(
+                map((instrument: IInstrument) => {
+                    if (instrument !== null && instrument.sample !== undefined) {
+                        return `https${ this._endpoint }samples/${ instrument.sample.id }.wav`;
+                    }
 
-                return null;
-            });
+                    return null;
+                })
+            );
     }
 
     public render () {
@@ -97,8 +102,10 @@ export class InstrumentComponent implements OnDestroy, OnInit {
             const { filename, midiJson } = fileFormControl.value;
 
             this.instrument$
-                .take(1)
-                .mergeMap((instrument) => this._renderingService.render(instrument, bpm, filename, midiJson))
+                .pipe(
+                    take(1),
+                    mergeMap((instrument: IInstrument) => this._renderingService.render(instrument, bpm, filename, midiJson))
+                )
                 .subscribe(() => {
                     // @todo
                 });

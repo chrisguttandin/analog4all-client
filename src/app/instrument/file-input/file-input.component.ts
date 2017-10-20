@@ -2,11 +2,11 @@ import { Component, OnDestroy, OnInit, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { parseArrayBuffer } from 'midi-json-parser';
 import { IMidiFile } from 'midi-json-parser-worker';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/switchMap';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
 import { Observer } from 'rxjs/Observer';
+import { switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -62,38 +62,40 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
         this.state$ = this._stateChanges$.asObservable();
 
         this._valueChangesSubscription = this._valueChanges$
-            .switchMap((file) => {
-                if (file === null) {
-                    this._filenameChanges$.next(null);
-                    this._stateChanges$.next('empty');
+            .pipe(
+                switchMap((file) => {
+                    if (file === null) {
+                        this._filenameChanges$.next(null);
+                        this._stateChanges$.next('empty');
 
-                    return Observable.of(null);
-                }
+                        return of(null);
+                    }
 
-                return Observable.create((observer: Observer<null | { filename: string, midiJson: IMidiFile }>) => {
-                    const fileReader = new FileReader();
+                    return Observable.create((observer: Observer<null | { filename: string, midiJson: IMidiFile }>) => {
+                        const fileReader = new FileReader();
 
-                    this._filenameChanges$.next(file.name);
-                    this._stateChanges$.next('parsing');
+                        this._filenameChanges$.next((<File> file).name);
+                        this._stateChanges$.next('parsing');
 
-                    fileReader.addEventListener('load', () => {
-                        parseArrayBuffer(fileReader.result)
-                            .then((midiJson) => {
-                                this._stateChanges$.next('filled');
+                        fileReader.addEventListener('load', () => {
+                            parseArrayBuffer(fileReader.result)
+                                .then((midiJson) => {
+                                    this._stateChanges$.next('filled');
 
-                                observer.next({ filename: file.name, midiJson });
-                            })
-                            .catch(() => {
-                                this._stateChanges$.next('failed');
+                                    observer.next({ filename: (<File> file).name, midiJson });
+                                })
+                                .catch(() => {
+                                    this._stateChanges$.next('failed');
 
-                                observer.next(null);
-                            })
-                            .then(() => observer.complete());
+                                    observer.next(null);
+                                })
+                                .then(() => observer.complete());
+                        });
+
+                        fileReader.readAsArrayBuffer(file);
                     });
-
-                    fileReader.readAsArrayBuffer(file);
-                });
-            })
+                })
+            )
             .subscribe((midiJson) => this._onChange(midiJson));
     }
 

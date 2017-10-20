@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
-import 'rxjs/add/observable/empty';
-import 'rxjs/add/operator/catch';
-import { Observable } from 'rxjs/Observable';
+import { empty } from 'rxjs/observable/empty';
+import { catchError } from 'rxjs/operators';
 import { IInstrument } from '../interfaces';
 import { InstrumentsService } from '../shared';
 
@@ -17,11 +16,13 @@ export class InstrumentResolver implements Resolve<IInstrument> {
     public resolve (activatedRoute: ActivatedRouteSnapshot) {
         return this._instrumentsService
             .get(activatedRoute.params['id'])
-            .catch(() => {
-                this._router.navigate([ '/' ]);
+            .pipe(
+                catchError(() => {
+                    this._router.navigate([ '/' ]);
 
-                return Observable.empty();
-            });
+                    return empty();
+                })
+            );
     }
 
 }
