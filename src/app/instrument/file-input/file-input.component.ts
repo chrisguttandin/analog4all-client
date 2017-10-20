@@ -92,7 +92,7 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
                                 .then(() => observer.complete());
                         });
 
-                        fileReader.readAsArrayBuffer(file);
+                        fileReader.readAsArrayBuffer((<File> file));
                     });
                 })
             )
