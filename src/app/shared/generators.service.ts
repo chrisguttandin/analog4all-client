@@ -1,5 +1,5 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
 import { IDataChannel, connect, isSupported } from 'rxjs-broker';
 import { Observable } from 'rxjs/Observable';
 import { catchError, map, take, tap } from 'rxjs/operators';
@@ -13,7 +13,7 @@ export class GeneratorsService {
 
     constructor (
         @Inject(ENDPOINT) private _endpoint: string,
-        private _http: Http,
+        private _httpClient: HttpClient,
         private _peerConnectingService: PeerConnectingService
     ) { }
 
@@ -33,20 +33,17 @@ export class GeneratorsService {
     }
 
     public create (generator: { instrument: { id: string } }): Observable<IGenerator> {
-        const headers = new Headers();
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-        headers.set('Content-Type', 'application/json');
-
-        return this._http
+        return this._httpClient
             .post(`https${ this._endpoint }instruments/${ generator.instrument.id }/generators`, JSON.stringify(generator), { headers })
             .pipe(
-                map((response: any) => response.json()),
                 catchError((response) => Observable.throw(new ResponseError(response)))
             );
     }
 
     public delete (generator: IGenerator): Observable<null> {
-        return this._http
+        return this._httpClient
             .delete(`https${ this._endpoint }instruments/${ generator.instrument.id }/generators/${ generator.id }`)
             .pipe(
                 map(() => null),
