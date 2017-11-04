@@ -20,7 +20,7 @@ export class InstrumentResolver implements Resolve<IInstrument> {
                 catchError(() => {
                     this._router.navigate([ '/' ]);
 
-                    return empty();
+                    return empty<IInstrument>();
                 })
             );
     }

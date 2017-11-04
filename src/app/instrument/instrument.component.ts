@@ -15,9 +15,9 @@ export class InstrumentComponent implements OnDestroy, OnInit {
 
     public hasMidiJson$: Observable<boolean>;
 
-    public instrument$: Observable<IInstrument>;
+    public instrument$: Observable<null | IInstrument>;
 
-    public instrumentName$: Observable<string>;
+    public instrumentName$: Observable<null | string>;
 
     public renderForm: FormGroup;
 

@@ -35,7 +35,7 @@ export class InstrumentsService {
             );
     }
 
-    public select (id: string): Observable<IInstrument> {
+    public select (id: string): Observable<null | IInstrument> {
         return this._store
             .select('instruments')
             .pipe(

@@ -23,7 +23,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnInit {
 
-    public filename$: Observable<string>;
+    public filename$: Observable<null | string>;
 
     public isDraggedOver: boolean;
 
