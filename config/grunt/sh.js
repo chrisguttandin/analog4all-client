@@ -3,7 +3,7 @@ module.exports = {
         cmd: 'ng build --aot --prod --sourcemaps --stats-json && (bundle-buddy build/*.map & webpack-bundle-analyzer build/stats.json)'
     },
     build: {
-        cmd: 'ng build --aot --base-href /analog4all-client --no-sourcemap --prod'
+        cmd: 'ng build --aot --base-href /analog4all-client --build-optimizer false --no-sourcemap --prod'
     },
     continuous: {
         cmd: 'ng test'
