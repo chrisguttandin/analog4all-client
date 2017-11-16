@@ -4,8 +4,7 @@
     "declaration": false,
     "noUnusedParameters": false,
     "outDir": "../out-tsc/app",
-    "target": "es5",
-    "types": [ ]
+    "target": "es5"
   },
   "extends": "../node_modules/tsconfig-holy-grail/src/tsconfig-browser"
 }
