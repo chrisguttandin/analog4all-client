@@ -67,7 +67,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-@angular/common@5.0.2
+@angular/common@5.0.3
 MIT
 MIT
 
@@ -95,7 +95,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-@angular/core@5.0.2
+@angular/core@5.0.3
 MIT
 MIT
 
@@ -103,7 +103,7 @@ json-midi-encoder@2.0.26
 MIT
 MIT
 
-@angular/platform-browser@5.0.2
+@angular/platform-browser@5.0.3
 MIT
 MIT
 
@@ -111,6 +111,6 @@ rxjs-broker@2.1.6
 MIT
 MIT
 
-@angular/router@5.0.2
+@angular/router@5.0.3
 MIT
 MIT
