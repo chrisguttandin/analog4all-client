@@ -99,7 +99,7 @@ SOFTWARE.
 MIT
 MIT
 
-json-midi-encoder@2.0.26
+json-midi-encoder@2.1.0
 MIT
 MIT
 
