@@ -67,11 +67,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-fast-unique-numbers@1.0.0
+fast-unique-numbers@1.1.1
 MIT
 MIT
 
-@angular/common@5.0.4
+@angular/common@5.0.5
 MIT
 MIT
 
@@ -99,22 +99,22 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-@angular/core@5.0.4
+@angular/core@5.0.5
 MIT
 MIT
 
-json-midi-encoder@2.1.2
+json-midi-encoder@2.1.3
 MIT
 MIT
 
-@angular/platform-browser@5.0.4
+@angular/platform-browser@5.0.5
 MIT
 MIT
 
-rxjs-broker@2.1.8
+rxjs-broker@2.1.9
 MIT
 MIT
 
-@angular/router@5.0.4
+@angular/router@5.0.5
 MIT
 MIT
