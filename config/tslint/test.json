@@ -4,6 +4,7 @@
         "component-selector": [ true, "element", "anc", "kebab-case" ],
         "directive-selector": [ true, "attribute", "anc", "camelCase" ],
         "import-blacklist": false,
+        "no-implicit-dependencies": [ true, "dev" ],
         "pipe-naming": [ true, "camelCase", "anc" ]
     }
 }
