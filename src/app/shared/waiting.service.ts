@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IMaskableSubject, IStringifyableJsonObject } from 'rxjs-broker';
+import { IMaskableSubject, TStringifyableJsonValue } from 'rxjs-broker';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import { first } from 'rxjs/operators';
@@ -13,7 +13,7 @@ import { first } from 'rxjs/operators';
 @Injectable()
 export class WaitingService {
 
-    public wait (dataChannelSubject: IMaskableSubject<IStringifyableJsonObject>) {
+    public wait (dataChannelSubject: IMaskableSubject<TStringifyableJsonValue>) {
         return Observable.create((observer: Observer<void>) => {
             let isPending = true;
 

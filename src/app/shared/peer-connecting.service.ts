@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IDataChannel, IMaskableSubject, IStringifyableJsonObject } from 'rxjs-broker';
+import { IDataChannel, IMaskableSubject, TStringifyableJsonValue } from 'rxjs-broker';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import { ICandidateSubjectEvent, IDataChannelEvent, IDescriptionSubjectEvent } from '../interfaces';
@@ -38,7 +38,7 @@ export class PeerConnectingService {
         return false;
     }
 
-    public connect (webSocketSubject: IMaskableSubject<IStringifyableJsonObject>): Observable<IDataChannel> {
+    public connect (webSocketSubject: IMaskableSubject<TStringifyableJsonValue>): Observable<IDataChannel> {
         return Observable.create((observer: Observer<IDataChannel>) => {
             const peerConnection = new RTCPeerConnection({
                 iceServers: ICE_SERVERS
