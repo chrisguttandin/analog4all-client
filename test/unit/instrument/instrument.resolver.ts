@@ -1,3 +1,4 @@
+import 'core-js/es7/reflect';
 import { Observable } from 'rxjs';
 import { InstrumentResolver } from '../../../src/app/instrument/instrument.resolver';
 
