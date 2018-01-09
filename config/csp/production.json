@@ -5,6 +5,6 @@
         "default-src": "'none'",
         "media-src": [ "https://analog4all-samples.s3-eu-west-1.amazonaws.com", "https://analog4all-registry.eu-west-1.elasticbeanstalk.com" ],
         "script-src": [ "'self'", "'unsafe-eval'" ],
-        "style-src": [ "'self'", "'unsafe-inline'" ]
+        "style-src": [ "https://fonts.googleapis.com", "'self'", "'unsafe-inline'" ]
     }
 }
