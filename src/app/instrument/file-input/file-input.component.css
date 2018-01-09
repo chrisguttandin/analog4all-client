@@ -17,7 +17,8 @@ input {
 
 div {
     align-items: center;
-    background-color: #CCC;
+    background: linear-gradient(135deg, #2D5E63 0%, #151833 100%);
+    border-top: 1px solid #FFF;
     display: flex;
     height: 100%;
     left: 0;

@@ -5,9 +5,11 @@ anc-file-input {
 
 div {
     align-items: center;
-    background-color: #CCC;
+    border-bottom: 1px solid #FFF;
+    border-top: 1px solid #FFF;
     display: flex;
     height: 30px;
+    margin: 1px 0 0;
     justify-content: center;
     width: 100%;
 }
