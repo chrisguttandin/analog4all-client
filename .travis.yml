@@ -1,4 +1,7 @@
 addons:
+  apt:
+    packages:
+      - libnss3
   chrome: stable
 after_script: greenkeeper-lockfile-upload
 before_install: npm install npm@latest --global
