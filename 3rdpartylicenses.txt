@@ -1,16 +1,16 @@
-@angular/common@5.2.0
+@angular/common@5.2.1
 MIT
 MIT
 
-@angular/core@5.2.0
+@angular/core@5.2.1
 MIT
 MIT
 
-@angular/platform-browser@5.2.0
+@angular/platform-browser@5.2.1
 MIT
 MIT
 
-@angular/router@5.2.0
+@angular/router@5.2.1
 MIT
 MIT
 
@@ -42,7 +42,7 @@ fast-unique-numbers@1.1.2
 MIT
 MIT
 
-rxjs-broker@2.1.21
+rxjs-broker@2.1.22
 MIT
 MIT
 
