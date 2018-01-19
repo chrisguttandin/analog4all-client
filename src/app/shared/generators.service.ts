@@ -21,8 +21,8 @@ export class GeneratorsService {
         return isSupported;
     }
 
-    public connect ({ id, instrument: { id: instrumentId } }: IGenerator): Observable<IDataChannel> {
-        const webSocketSubject = connect(`wss${ this._endpoint }instruments/${ instrumentId }/generators/${ id }`);
+    public connect ({ id, socket: { url } }: IGenerator): Observable<IDataChannel> {
+        const webSocketSubject = connect(url);
 
         return this._peerConnectingService
             .connect(webSocketSubject)
@@ -38,6 +38,7 @@ export class GeneratorsService {
         return this._httpClient
             .post(`https${ this._endpoint }instruments/${ generator.instrument.id }/generators`, JSON.stringify(generator), { headers })
             .pipe(
+                map((gnrtr) => ({ ...gnrtr, instrument: { id: generator.instrument.id } })),
                 catchError((response) => Observable.throw(new ResponseError(response)))
             );
     }

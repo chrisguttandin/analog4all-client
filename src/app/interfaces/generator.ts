@@ -12,4 +12,10 @@ export interface IGenerator {
 
     modified: number;
 
+    socket: {
+
+        url: string;
+
+    };
+
 }
