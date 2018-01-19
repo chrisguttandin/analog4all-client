@@ -34,7 +34,7 @@ import { StoreModule } from './store';
     ],
     providers: [
         DownloadingService,
-        { provide: ENDPOINT, useValue: '://analog4all-registry.eu-west-1.elasticbeanstalk.com/' },
+        { provide: ENDPOINT, useValue: '://w8flhge089.execute-api.eu-west-1.amazonaws.com/dev/' },
         FileReceivingService,
         FileSendingService,
         GeneratorsService,
