@@ -21,7 +21,7 @@ export class GeneratorsService {
         return isSupported;
     }
 
-    public connect ({ id, socket: { url } }: IGenerator): Observable<IDataChannel> {
+    public connect ({ socket: { url } }: IGenerator): Observable<IDataChannel> {
         const webSocketSubject = connect(url);
 
         return this._peerConnectingService
