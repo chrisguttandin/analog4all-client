@@ -73,7 +73,7 @@
     "webpack-stats-duplicates": "^2.1.0"
   },
   "homepage": "https://chrisguttandin.github.io/analog4all-client",
-  "license": "MIT",
+  "license": "AGPL-3.0-or-later",
   "main": "src/index.html",
   "name": "analog4all-client",
   "private": true,
