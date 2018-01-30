@@ -1,5 +1,9 @@
 addons:
-  chrome: stable
+  apt:
+    packages:
+      - google-chrome-stable
+    sources:
+      - google-chrome
 after_script: greenkeeper-lockfile-upload
 before_install: npm install npm@latest --global
 before_script:
