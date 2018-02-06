@@ -4,7 +4,7 @@
     <button (click)="refresh()">refresh</button>
     <ul>
         <li *ngFor="let instrument of instruments$ | async">
-            <img src="assets/korg-monopoly.jpg">
+            <img alt="icon of {{ instrument.name }}" src="assets/korg-monopoly.jpg">
             <a [routerLink]="[ '/', instrument.id ]">{{ instrument.name }}</a>
             <p><!-- @todo Allow to add a description. --></p>
         </li>
