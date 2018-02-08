@@ -6,7 +6,9 @@
         <li *ngFor="let instrument of instruments$ | async">
             <img alt="icon of {{ instrument.name }}" src="assets/korg-monopoly.jpg">
             <a [routerLink]="[ '/', instrument.id ]">{{ instrument.name }}</a>
-            <p><!-- @todo Allow to add a description. --></p>
+            <p *ngIf="instrument.description" >{{ instrument.description }}</p>
+            <a *ngIf="instrument.soundCloudUsername" href="https://soundcloud.com/{{ instrument.soundCloudUsername }}" target="_blank">SoundCloud: {{ instrument.soundCloudUsername }}</a>
+            <a *ngIf="instrument.gearogsSlug" href="https://gearogs.com/gear/{{ instrument.gearogsSlug }}" target="_blank">Gearogs: {{ instrument.gearogsSlug }}</a>
         </li>
     </ul>
 </main>
