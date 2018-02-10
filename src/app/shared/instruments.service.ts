@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { catchError, map, tap } from 'rxjs/operators';
 import { IInstrument } from '../interfaces';
 import { IAppState } from '../store';
-import { UPDATE_INSTRUMENT, UPDATE_INSTRUMENTS } from '../store/actions';
+import { updateInstrument, updateInstruments } from '../store/actions';
 import { ENDPOINT } from './endpoint-token';
 import { ResponseError } from './response-error';
 
@@ -20,18 +20,18 @@ export class InstrumentsService {
 
     public fetch (): Observable<IInstrument[]> {
         return this._httpClient
-            .get(`https${ this._endpoint }instruments/`)
+            .get<IInstrument[]>(`https${ this._endpoint }instruments/`)
             .pipe(
-                tap((instruments) => this._store.dispatch({ payload: instruments, type: UPDATE_INSTRUMENTS })),
+                tap((instruments) => this._store.dispatch(updateInstruments(instruments))),
                 catchError((response) => Observable.throw(new ResponseError(response)))
             );
     }
 
     public get (id: string): Observable<IInstrument> {
         return this._httpClient
-            .get(`https${ this._endpoint }instruments/${ id }`)
+            .get<IInstrument>(`https${ this._endpoint }instruments/${ id }`)
             .pipe(
-                tap((instrument) => this._store.dispatch({ payload: instrument, type: UPDATE_INSTRUMENT })),
+                tap((instrument) => this._store.dispatch(updateInstrument(instrument))),
                 catchError((response) => Observable.throw(new ResponseError(response)))
             );
     }
