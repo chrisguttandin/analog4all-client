@@ -1,9 +1,6 @@
 import { IInstrument } from '../../interfaces';
-import { IUpdateInstrumentAction, IUpdateInstrumentsAction } from '../interfaces';
+import { UPDATE_INSTRUMENT, UPDATE_INSTRUMENTS } from '../actions';
 import { TInstrumentAction } from '../types';
-
-export const UPDATE_INSTRUMENT: IUpdateInstrumentAction['type'] = 'UPDATE_INSTRUMENT';
-export const UPDATE_INSTRUMENTS: IUpdateInstrumentsAction['type'] = 'UPDATE_INSTRUMENTS';
 
 const updateInstrument = (instruments: IInstrument[], instrument: IInstrument) => {
     const index = instruments.findIndex(({ id }) => id === instrument.id);

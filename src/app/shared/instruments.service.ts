@@ -4,7 +4,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { catchError, map, tap } from 'rxjs/operators';
 import { IInstrument } from '../interfaces';
-import { IAppState, UPDATE_INSTRUMENT, UPDATE_INSTRUMENTS } from '../store';
+import { IAppState } from '../store';
+import { UPDATE_INSTRUMENT, UPDATE_INSTRUMENTS } from '../store/actions';
 import { ENDPOINT } from './endpoint-token';
 import { ResponseError } from './response-error';
 
