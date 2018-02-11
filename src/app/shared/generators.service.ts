@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { IDataChannel, connect, isSupported } from 'rxjs-broker';
 import { Observable } from 'rxjs/Observable';
-import { catchError, map, take, tap } from 'rxjs/operators';
+import { catchError, first, map, tap } from 'rxjs/operators';
 import { IGenerator } from '../interfaces';
 import { ENDPOINT } from './endpoint-token';
 import { PeerConnectingService } from './peer-connecting.service';
@@ -27,7 +27,7 @@ export class GeneratorsService {
         return this._peerConnectingService
             .connect(webSocketSubject)
             .pipe(
-                take(1),
+                first(),
                 tap(() => webSocketSubject.close())
             );
     }

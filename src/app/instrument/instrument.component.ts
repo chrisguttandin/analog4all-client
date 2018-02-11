@@ -2,7 +2,7 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { map, mergeMap, switchMap, take } from 'rxjs/operators';
+import { first, map, mergeMap, switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs/Subscription';
 import { IInstrument } from '../interfaces';
 import { ENDPOINT, InstrumentsService, MidiJsonBpmService, RenderingService } from '../shared';
@@ -103,7 +103,7 @@ export class InstrumentComponent implements OnDestroy, OnInit {
 
             this.instrument$
                 .pipe(
-                    take(1),
+                    first(),
                     mergeMap((instrument: IInstrument) => this._renderingService.render(instrument, bpm, filename, midiJson))
                 )
                 .subscribe(() => {
