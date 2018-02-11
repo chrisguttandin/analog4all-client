@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { IInstrument } from '../interfaces';
 import { updateInstrument, updateInstruments } from '../store/actions';
 import { IAppState } from '../store/interfaces';
+import { createInstrumentByIdSelector, selectInstruments } from '../store/selectors';
 import { ENDPOINT } from './endpoint-token';
 import { ResponseError } from './response-error';
 
@@ -38,15 +39,16 @@ export class InstrumentsService {
 
     public select (id: string): Observable<null | IInstrument> {
         return this._store
-            .select('instruments')
             .pipe(
-                map<IInstrument[], undefined | IInstrument>((instruments) => instruments.find(({ id: d }) => id === d)),
-                map<undefined | IInstrument, null | IInstrument>((instrument) => (instrument === undefined) ? null : instrument)
+                select(createInstrumentByIdSelector(id))
             );
     }
 
     public watch (): Observable<IInstrument[]> {
-        return this._store.select('instruments');
+        return this._store
+            .pipe(
+                select(selectInstruments)
+            );
     }
 
 }
