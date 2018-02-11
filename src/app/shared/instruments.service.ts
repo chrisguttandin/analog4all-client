@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { catchError, map, tap } from 'rxjs/operators';
 import { IInstrument } from '../interfaces';
-import { IAppState } from '../store';
 import { updateInstrument, updateInstruments } from '../store/actions';
+import { IAppState } from '../store/interfaces';
 import { ENDPOINT } from './endpoint-token';
 import { ResponseError } from './response-error';
 
@@ -46,7 +46,7 @@ export class InstrumentsService {
     }
 
     public watch (): Observable<IInstrument[]> {
-        return <Observable<IInstrument[]>> this._store.select('instruments');
+        return this._store.select('instruments');
     }
 
 }
