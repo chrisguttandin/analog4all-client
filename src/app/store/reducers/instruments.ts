@@ -19,9 +19,10 @@ const updateInstrument = (instruments: IInstrument[], instrument: { id: string }
 const updateInstruments = (oldInstruments: IInstrument[], newInstruments: IInstrument[]) => {
     const remainingInstruments = oldInstruments
         .map((instrument) => [ instrument, newInstruments.find(({ id }) => instrument.id === id) ])
-        .filter(([ , newInstrument ]) => (newInstrument !== undefined))
-        // @todo TypeScript needs to be convinced that no value is undefined.
-        .map(([ oldInstrument, newInstrument ]: [ IInstrument, IInstrument ]) => {
+        .filter<[ IInstrument, IInstrument ]>((oldAndNewInstrument): oldAndNewInstrument is [ IInstrument, IInstrument ] => {
+            return (oldAndNewInstrument[1] !== undefined);
+        })
+        .map(([ oldInstrument, newInstrument ]) => {
             if (oldInstrument.modified < newInstrument.modified) {
                 return { ...oldInstrument, ...newInstrument };
             }
