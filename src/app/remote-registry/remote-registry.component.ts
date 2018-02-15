@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { IInstrument } from '../interfaces';
 import { fetchInstruments } from '../store/actions';
 import { IAppState } from '../store/interfaces';
-import { selectInstruments } from '../store/selectors';
+import { selectInstruments, selectIsFetchingInstruments } from '../store/selectors';
 
 @Component({
     styleUrls: [ './remote-registry.component.css' ],
@@ -14,6 +14,8 @@ import { selectInstruments } from '../store/selectors';
 export class RemoteRegistryComponent implements OnInit {
 
     public instruments$: Observable<IInstrument[]>;
+
+    public setIsFetchingInstruments$: Observable<boolean>;
 
     public numberOfInstruments$: Observable<number>;
 
@@ -28,6 +30,11 @@ export class RemoteRegistryComponent implements OnInit {
             .pipe(
                 select(selectInstruments),
                 map((instruments) => instruments.filter((instrument) => instrument.isAvailable))
+            );
+
+        this.setIsFetchingInstruments$ = this._store
+            .pipe(
+                select(selectIsFetchingInstruments)
             );
 
         this.numberOfInstruments$ = this.instruments$

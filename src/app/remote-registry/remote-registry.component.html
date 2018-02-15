@@ -1,7 +1,7 @@
 <main>
     <h2 *ngIf="0 === (numberOfInstruments$ | async)">Sorry, there is currently no instrument available</h2>
     <h2 *ngIf="0 < (numberOfInstruments$ | async)">Currently available instruments</h2>
-    <button (click)="refresh()">refresh</button>
+    <button (click)="refresh()" [disabled]="setIsFetchingInstruments$ | async">refresh</button>
     <ul>
         <li *ngFor="let instrument of instruments$ | async">
             <img alt="icon of {{ instrument.name }}" src="assets/korg-monopoly.jpg">
