@@ -8,6 +8,9 @@ const routes: Routes = [
     }, {
         loadChildren: './instrument/instrument.module#InstrumentModule',
         path: ''
+    }, {
+        path: '**',
+        redirectTo: ''
     }
 ];
 
