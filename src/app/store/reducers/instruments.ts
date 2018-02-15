@@ -1,20 +1,6 @@
 import { IInstrument } from '../../interfaces';
-import { UPDATE_INSTRUMENT, UPDATE_INSTRUMENTS } from '../actions';
+import { UPDATE_INSTRUMENTS, UPSERT_INSTRUMENT } from '../actions';
 import { TInstrumentAction } from '../types';
-
-const updateInstrument = (instruments: IInstrument[], instrument: { id: string } & Partial<IInstrument>) => {
-    const index = instruments.findIndex(({ id }) => id === instrument.id);
-
-    if (index === -1) {
-        throw new Error('An instrument with the same id is not stored.');
-    }
-
-    return [
-        ...instruments.slice(0, index),
-        { ...instruments[index], ...instrument },
-        ...instruments.slice(index + 1)
-    ];
-};
 
 const updateInstruments = (oldInstruments: IInstrument[], newInstruments: IInstrument[]) => {
     const remainingInstruments = oldInstruments
@@ -36,13 +22,27 @@ const updateInstruments = (oldInstruments: IInstrument[], newInstruments: IInstr
     return [ ...remainingInstruments, ...additionalInstruments ];
 };
 
+const upsertInstrument = (instruments: IInstrument[], instrument: IInstrument) => {
+    const index = instruments.findIndex(({ id }) => id === instrument.id);
+
+    if (index === -1) {
+        return [ ...instruments, instrument ];
+    }
+
+    return [
+        ...instruments.slice(0, index),
+        { ...instruments[index], ...instrument },
+        ...instruments.slice(index + 1)
+    ];
+};
+
 // @todo Defining this as a function was necessary to enable AoT with TypeScript 2.0.X.
 export function instrumentsReducer (state: IInstrument[] = [ ], action: TInstrumentAction): IInstrument[] {
     switch (action.type) {
-        case UPDATE_INSTRUMENT:
-            return updateInstrument(state, action.payload);
         case UPDATE_INSTRUMENTS:
             return updateInstruments(state, action.payload);
+        case UPSERT_INSTRUMENT:
+            return upsertInstrument(state, action.payload);
         default:
             return state;
     }

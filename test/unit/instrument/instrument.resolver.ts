@@ -1,27 +1,27 @@
 import 'core-js/es7/reflect';
-import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 import { InstrumentResolver } from '../../../src/app/instrument/instrument.resolver';
 
 describe('InstrumentResolver', () => {
 
+    let actions: any;
     let instrumentResolver: InstrumentResolver;
-
-    let instrumentsService: any;
-
     let router: any;
+    let store: any;
 
     beforeEach(() => {
-        instrumentsService = {
-            get () {} // tslint:disable-line:no-empty
-        };
-
+        actions = new Subject();
         router = {
             navigate () {} // tslint:disable-line:no-empty
         };
+        store = {
+            dispatch () {} // tslint:disable-line:no-empty
+        };
 
-        spyOn(router, 'navigate').and.callThrough();
+        spyOn(router, 'navigate');
+        spyOn(store, 'dispatch');
 
-        instrumentResolver = new InstrumentResolver(instrumentsService, router);
+        instrumentResolver = new InstrumentResolver(actions, router, store);
     });
 
     describe('resolve()', () => {
@@ -36,16 +36,18 @@ describe('InstrumentResolver', () => {
             };
         });
 
+        it('should dispatch an action of type FETCH_INSTRUMENT with the id given by the params', () => {
+            instrumentResolver.resolve(activatedRouteSnapshot);
+
+            expect(store.dispatch).toHaveBeenCalledWith({ payload: activatedRouteSnapshot.params.id, type: 'FETCH_INSTRUMENT' });
+        });
+
         describe('with an existing instument', () => {
 
+            let instrument: any;
+
             beforeEach(() => {
-                spyOn(instrumentsService, 'get').and.returnValue(Observable.of('a fake instrument'));
-            });
-
-            it('should get the instrument with the id given by the params', () => {
-                instrumentResolver.resolve(activatedRouteSnapshot);
-
-                expect(instrumentsService.get).toHaveBeenCalledWith(activatedRouteSnapshot.params.id);
+                instrument = { id: activatedRouteSnapshot.params.id };
             });
 
             it('should return an observable of the instument', (done) => {
@@ -55,7 +57,7 @@ describe('InstrumentResolver', () => {
                     .resolve(activatedRouteSnapshot)
                     .subscribe({
                         complete () {
-                            expect(next).toHaveBeenCalledWith('a fake instrument');
+                            expect(next).toHaveBeenCalledWith(instrument);
 
                             done();
                         },
@@ -64,26 +66,20 @@ describe('InstrumentResolver', () => {
                         },
                         next
                     });
+
+                actions.next(({ payload: instrument, type: 'FETCH_INSTRUMENT_SUCCESS' }));
             });
 
         });
 
         describe('without an existing instument', () => {
 
-            beforeEach(() => {
-                spyOn(instrumentsService, 'get').and.returnValue(Observable.throw('a fake error'));
-            });
-
-            it('should get the instrument with the id given by the params', () => {
-                instrumentResolver.resolve(activatedRouteSnapshot);
-
-                expect(instrumentsService.get).toHaveBeenCalledWith(activatedRouteSnapshot.params.id);
-            });
-
             it('should navigate to the / URL', () => {
                 instrumentResolver
                     .resolve(activatedRouteSnapshot)
                     .subscribe();
+
+                actions.next(({ payload: activatedRouteSnapshot.params.id, type: 'FETCH_INSTRUMENT_FAIL' }));
 
                 expect(router.navigate).toHaveBeenCalledWith([ '/' ]);
             });
@@ -104,6 +100,8 @@ describe('InstrumentResolver', () => {
                         },
                         next
                     });
+
+                actions.next(({ payload: activatedRouteSnapshot.params.id, type: 'FETCH_INSTRUMENT_FAIL' }));
             });
 
         });

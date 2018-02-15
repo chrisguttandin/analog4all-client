@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { catchError, tap } from 'rxjs/operators';
 import { IInstrument } from '../interfaces';
-import { updateInstrument, updateInstruments } from '../store/actions';
+import { updateInstruments } from '../store/actions';
 import { IAppState } from '../store/interfaces';
 import { createInstrumentByIdSelector, selectInstruments } from '../store/selectors';
 import { ENDPOINT } from './endpoint-token';
@@ -24,15 +24,6 @@ export class InstrumentsService {
             .get<IInstrument[]>(`https${ this._endpoint }instruments/`)
             .pipe(
                 tap((instruments) => this._store.dispatch(updateInstruments(instruments))),
-                catchError((response) => Observable.throw(new ResponseError(response)))
-            );
-    }
-
-    public get (id: string): Observable<IInstrument> {
-        return this._httpClient
-            .get<IInstrument>(`https${ this._endpoint }instruments/${ id }`)
-            .pipe(
-                tap((instrument) => this._store.dispatch(updateInstrument(instrument))),
                 catchError((response) => Observable.throw(new ResponseError(response)))
             );
     }

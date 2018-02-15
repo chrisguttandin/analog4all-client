@@ -1,3 +1,3 @@
-import { IUpdateInstrumentAction, IUpdateInstrumentsAction } from '../interfaces';
+import { IUpdateInstrumentsAction, IUpsertInstrumentAction } from '../interfaces';
 
-export type TInstrumentAction = IUpdateInstrumentAction | IUpdateInstrumentsAction;
+export type TInstrumentAction = IUpdateInstrumentsAction | IUpsertInstrumentAction;
