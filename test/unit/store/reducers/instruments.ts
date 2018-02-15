@@ -54,6 +54,43 @@ describe('instruments reducer', () => {
 
         });
 
+        describe('with an action of type FETCH_INSTRUMENTS', () => {
+
+            it('should return the default state', () => {
+                const state = instrumentsReducer(undefined, <any> { type: 'FETCH_INSTRUMENTS' });
+
+                expect(state).toEqual([ ]);
+            });
+
+        });
+
+        describe('with an action of type FETCH_INSTRUMENTS_FAIL', () => {
+
+            it('should return the default state', () => {
+                const state = instrumentsReducer(undefined, <any> { type: 'FETCH_INSTRUMENTS_FAIL' });
+
+                expect(state).toEqual([ ]);
+            });
+
+        });
+
+        describe('with an action of type FETCH_INSTRUMENTS_SUCCESS', () => {
+
+            it('should return the default state', () => {
+                const instruments = [ {
+                    created: 1518284684850,
+                    id: 'a fake id',
+                    isAvailable: false,
+                    modified: 1518284684850,
+                    name: 'a fake name'
+                } ];
+                const state = instrumentsReducer(undefined, <any> { payload: instruments, type: 'FETCH_INSTRUMENTS_SUCCESS' });
+
+                expect(state).toEqual([ ]);
+            });
+
+        });
+
         describe('with an action of type UPSERT_INSTRUMENT', () => {
 
             it('should return an updated array of instruments', () => {
@@ -147,6 +184,43 @@ describe('instruments reducer', () => {
                     name: 'a fake name'
                 };
                 const state = instrumentsReducer(previousState, <any> { payload: instrument, type: 'FETCH_INSTRUMENT_SUCCESS' });
+
+                expect(state).toEqual(previousState);
+            });
+
+        });
+
+        describe('with an action of type FETCH_INSTRUMENTS', () => {
+
+            it('should return the previous state', () => {
+                const state = instrumentsReducer(previousState, <any> { type: 'FETCH_INSTRUMENTS' });
+
+                expect(state).toEqual(previousState);
+            });
+
+        });
+
+        describe('with an action of type FETCH_INSTRUMENTS_FAIL', () => {
+
+            it('should return the previous state', () => {
+                const state = instrumentsReducer(previousState, <any> { type: 'FETCH_INSTRUMENTS_FAIL' });
+
+                expect(state).toEqual(previousState);
+            });
+
+        });
+
+        describe('with an action of type FETCH_INSTRUMENTS_SUCCESS', () => {
+
+            it('should return the previous state', () => {
+                const instruments = [ {
+                    created: 1518284684850,
+                    id: 'a fake id',
+                    isAvailable: false,
+                    modified: 1518284684850,
+                    name: 'a fake name'
+                } ];
+                const state = instrumentsReducer(previousState, <any> { payload: instruments, type: 'FETCH_INSTRUMENTS_SUCCESS' });
 
                 expect(state).toEqual(previousState);
             });
