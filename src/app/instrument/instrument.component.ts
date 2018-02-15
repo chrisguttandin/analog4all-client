@@ -1,11 +1,14 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { first, map, mergeMap, switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs/Subscription';
 import { IInstrument } from '../interfaces';
-import { ENDPOINT, InstrumentsService, MidiJsonBpmService, RenderingService } from '../shared';
+import { ENDPOINT, MidiJsonBpmService, RenderingService } from '../shared';
+import { IAppState } from '../store/interfaces';
+import { createInstrumentByIdSelector } from '../store/selectors';
 
 @Component({
     styleUrls: [ './instrument.component.css' ],
@@ -29,9 +32,9 @@ export class InstrumentComponent implements OnDestroy, OnInit {
         private _activatedRoute: ActivatedRoute,
         @Inject(ENDPOINT) private _endpoint: string,
         private _formBuilder: FormBuilder,
-        private _instrumentsService: InstrumentsService,
         private _midiJsonBpmService: MidiJsonBpmService,
-        private _renderingService: RenderingService
+        private _renderingService: RenderingService,
+        private _store: Store<IAppState>
     ) { }
 
     public ngOnDestroy () {
@@ -41,7 +44,11 @@ export class InstrumentComponent implements OnDestroy, OnInit {
     public ngOnInit () {
         this.instrument$ = this._activatedRoute.data
             .pipe(
-                switchMap(({ instrument: { id } }) => this._instrumentsService.select(id))
+                switchMap(({ instrument: { id } }) => this._store
+                    .pipe(
+                        select(createInstrumentByIdSelector(id))
+                    )
+                )
             );
 
         this.instrumentName$ = this.instrument$

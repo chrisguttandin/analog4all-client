@@ -1,10 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { map, switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs/Subscription';
 import { IInstrument } from '../interfaces';
 import { InstrumentsService } from '../shared';
+import { IAppState } from '../store/interfaces';
+import { selectInstruments } from '../store/selectors';
 
 @Component({
     styleUrls: [ './remote-registry.component.css' ],
@@ -20,7 +23,10 @@ export class RemoteRegistryComponent implements OnDestroy, OnInit {
 
     private _refreshmentsSubscription: Subscription;
 
-    constructor (private _instrumentsService: InstrumentsService) {
+    constructor (
+        private _instrumentsService: InstrumentsService,
+        private _store: Store<IAppState>
+    ) {
         this._refreshments$ = new BehaviorSubject(null);
     }
 
@@ -29,19 +35,20 @@ export class RemoteRegistryComponent implements OnDestroy, OnInit {
     }
 
     public ngOnInit () {
-        this.instruments$ = this._instrumentsService.watch()
+        this.instruments$ = this._store
             .pipe(
-                map<IInstrument[], IInstrument[]>((instruments) => instruments.filter((instrument) => instrument.isAvailable))
+                select(selectInstruments),
+                map((instruments) => instruments.filter((instrument) => instrument.isAvailable))
             );
 
         this.numberOfInstruments$ = this.instruments$
             .pipe(
-                map<IInstrument[], number>((instruments) => instruments.length)
+                map((instruments) => instruments.length)
             );
 
         this._refreshmentsSubscription = this._refreshments$
             .pipe(
-                switchMap<null, IInstrument[]>(() => this._instrumentsService.fetch())
+                switchMap(() => this._instrumentsService.fetch())
             )
             .subscribe({
                 error () {
