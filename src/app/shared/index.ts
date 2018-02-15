@@ -3,7 +3,6 @@ export * from './endpoint-token';
 export * from './file-receiving.service';
 export * from './file-sending.service';
 export * from './generators.service';
-export * from './instruments.service';
 export * from './midi-json-bpm.service';
 export * from './midi-json-encoding.service';
 export * from './peer-connecting.service';
