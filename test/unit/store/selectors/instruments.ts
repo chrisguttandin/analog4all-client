@@ -1,5 +1,4 @@
-import { IInstrument } from '../../../../src/app/interfaces';
-import { IAppState } from '../../../../src/app/store/interfaces';
+import { IAppState, IInstrument } from '../../../../src/app/store/interfaces';
 import { createInstrumentByIdSelector, selectInstruments } from '../../../../src/app/store/selectors';
 
 describe('instruments selectors', () => {

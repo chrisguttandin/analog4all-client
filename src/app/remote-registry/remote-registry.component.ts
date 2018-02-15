@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
-import { IInstrument } from '../interfaces';
 import { fetchInstruments } from '../store/actions';
-import { IAppState } from '../store/interfaces';
+import { IAppState, IInstrument } from '../store/interfaces';
 import { selectInstruments, selectIsFetchingInstruments } from '../store/selectors';
 
 @Component({

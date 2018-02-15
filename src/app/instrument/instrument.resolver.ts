@@ -6,9 +6,8 @@ import { Observable } from 'rxjs/Observable';
 import { empty } from 'rxjs/observable/empty';
 import { of } from 'rxjs/observable/of';
 import { filter, first, mergeMap } from 'rxjs/operators';
-import { IInstrument } from '../interfaces';
 import { FETCH_INSTRUMENT_FAIL, FETCH_INSTRUMENT_SUCCESS, fetchInstrument } from '../store/actions';
-import { IAppState, IFetchInstrumentFailAction, IFetchInstrumentSuccessAction } from '../store/interfaces';
+import { IAppState, IFetchInstrumentFailAction, IFetchInstrumentSuccessAction, IInstrument } from '../store/interfaces';
 
 @Injectable()
 export class InstrumentResolver implements Resolve<IInstrument> {

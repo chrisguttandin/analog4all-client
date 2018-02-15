@@ -1,4 +1,3 @@
-import { IInstrument } from '../../interfaces';
 import {
     IFetchInstrumentAction,
     IFetchInstrumentFailAction,
@@ -6,6 +5,7 @@ import {
     IFetchInstrumentsAction,
     IFetchInstrumentsFailAction,
     IFetchInstrumentsSuccessAction,
+    IInstrument,
     IUpdateInstrumentsAction,
     IUpsertInstrumentAction
 } from '../interfaces';

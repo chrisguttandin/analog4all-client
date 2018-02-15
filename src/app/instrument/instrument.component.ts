@@ -5,9 +5,8 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { first, map, mergeMap, switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs/Subscription';
-import { IInstrument } from '../interfaces';
 import { ENDPOINT, MidiJsonBpmService, RenderingService } from '../shared';
-import { IAppState } from '../store/interfaces';
+import { IAppState, IInstrument } from '../store/interfaces';
 import { createInstrumentByIdSelector } from '../store/selectors';
 
 @Component({

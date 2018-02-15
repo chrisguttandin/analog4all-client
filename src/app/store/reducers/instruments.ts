@@ -1,5 +1,5 @@
-import { IInstrument } from '../../interfaces';
 import { UPDATE_INSTRUMENTS, UPSERT_INSTRUMENT } from '../actions';
+import { IInstrument } from '../interfaces';
 import { TInstrumentAction } from '../types';
 
 const updateInstruments = (oldInstruments: IInstrument[], newInstruments: IInstrument[]) => {

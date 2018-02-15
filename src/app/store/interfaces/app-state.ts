@@ -1,4 +1,4 @@
-import { IInstrument } from '../../interfaces';
+import { IInstrument } from '.';
 
 export interface IAppState {
 

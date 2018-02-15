@@ -3,10 +3,9 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map } from 'rxjs/operators';
-import { IInstrument } from '../../interfaces';
 import { ENDPOINT } from '../../shared/endpoint-token';
 import { fetchInstrumentsFail, fetchInstrumentsSuccess } from '../actions';
-import { IFetchInstrumentsFailAction, IFetchInstrumentsSuccessAction } from '../interfaces';
+import { IFetchInstrumentsFailAction, IFetchInstrumentsSuccessAction, IInstrument } from '../interfaces';
 
 @Injectable()
 export class InstrumentsService {

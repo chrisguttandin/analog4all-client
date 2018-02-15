@@ -4,7 +4,7 @@ import { wrap } from 'rxjs-broker';
 import { of } from 'rxjs/observable/of';
 import { zip } from 'rxjs/observable/zip';
 import { map, mergeMap, tap } from 'rxjs/operators';
-import { IInstrument } from '../interfaces';
+import { IInstrument } from '../store/interfaces';
 import { DownloadingService } from './downloading.service';
 import { FileReceivingService } from './file-receiving.service';
 import { FileSendingService } from './file-sending.service';

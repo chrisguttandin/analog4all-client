@@ -1,4 +1,4 @@
-import { IInstrument } from '../../../../src/app/interfaces';
+import { IInstrument } from '../../../../src/app/store/interfaces';
 import { instrumentsReducer } from '../../../../src/app/store/reducers';
 
 describe('instruments reducer', () => {

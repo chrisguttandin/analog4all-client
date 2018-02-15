@@ -2,4 +2,3 @@ export * from './candidate-subject-event';
 export * from './data-channel-event';
 export * from './description-subject-event';
 export * from './generator';
-export * from './instrument';
