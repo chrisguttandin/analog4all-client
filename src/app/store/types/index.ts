@@ -1,1 +1,1 @@
-export * from './instrument-action';
+export * from './store-action';

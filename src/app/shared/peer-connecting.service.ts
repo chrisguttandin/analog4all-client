@@ -83,12 +83,12 @@ export class PeerConnectingService {
                         });
                 });
 
-            peerConnection.addEventListener('datachannel', ({ channel }: IDataChannelEvent) => {
+            peerConnection.addEventListener('datachannel', <EventListener> (({ channel }: IDataChannelEvent) => {
                 candidateSubjectSubscription.unsubscribe();
                 descriptionSubjectSubscription.unsubscribe();
 
                 observer.next(channel);
-            });
+            }));
 
             peerConnection.addEventListener('icecandidate', ({ candidate }) => {
                 if (candidate) {

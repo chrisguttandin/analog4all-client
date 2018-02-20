@@ -1,6 +1,6 @@
 import { UPDATE_INSTRUMENTS, UPSERT_INSTRUMENT } from '../actions';
 import { IInstrument } from '../interfaces';
-import { TInstrumentAction } from '../types';
+import { TStoreAction } from '../types';
 
 const updateInstruments = (oldInstruments: IInstrument[], newInstruments: IInstrument[]) => {
     const intersectingInstruments = oldInstruments
@@ -37,7 +37,7 @@ const upsertInstrument = (instruments: IInstrument[], instrument: IInstrument) =
 };
 
 // @todo Defining this as a function was necessary to enable AoT with TypeScript 2.0.X.
-export function instrumentsReducer (state: IInstrument[] = [ ], action: TInstrumentAction): IInstrument[] {
+export function instrumentsReducer (state: IInstrument[] = [ ], action: TStoreAction): IInstrument[] {
     switch (action.type) {
         case UPDATE_INSTRUMENTS:
             return updateInstruments(state, action.payload);
