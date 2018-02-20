@@ -3,7 +3,7 @@ import { IInstrument } from '../interfaces';
 import { TInstrumentAction } from '../types';
 
 const updateInstruments = (oldInstruments: IInstrument[], newInstruments: IInstrument[]) => {
-    const remainingInstruments = oldInstruments
+    const intersectingInstruments = oldInstruments
         .map((instrument) => [ instrument, newInstruments.find(({ id }) => instrument.id === id) ])
         .filter<[ IInstrument, IInstrument ]>((oldAndNewInstrument): oldAndNewInstrument is [ IInstrument, IInstrument ] => {
             return (oldAndNewInstrument[1] !== undefined);
@@ -17,9 +17,9 @@ const updateInstruments = (oldInstruments: IInstrument[], newInstruments: IInstr
         });
 
     const additionalInstruments = newInstruments
-        .filter(({ id }) => !(remainingInstruments.some(({ id: d }) => id === d)));
+        .filter(({ id }) => intersectingInstruments.every(({ id: d }) => id === d));
 
-    return [ ...remainingInstruments, ...additionalInstruments ];
+    return [ ...intersectingInstruments, ...additionalInstruments ];
 };
 
 const upsertInstrument = (instruments: IInstrument[], instrument: IInstrument) => {
