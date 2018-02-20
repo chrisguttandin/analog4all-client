@@ -33,14 +33,15 @@ export class RenderingService {
                 map(({ dataChannel, generator }) => ({ dataChannelSubject: wrap(dataChannel), generator })),
                 mergeMap(
                     ({ dataChannelSubject }) => this._waitingService.wait(dataChannelSubject),
-                    ({ dataChannelSubject, generator }) => ({ dataChannelSubject, generator })
+                    ({ dataChannelSubject, generator }) => ({ dataChannelSubject, generator })
                 ),
                 mergeMap(
                     () => this._midiJsonEncodingService.encode(midiJson, bpm),
-                    ({ dataChannelSubject, generator }, midiFile) => ({ dataChannelSubject, generator, midiFile })
+                    ({ dataChannelSubject, generator }, midiFile) => ({ dataChannelSubject, generator, midiFile })
                 ),
                 mergeMap(
-                    ({ dataChannelSubject, midiFile }) => this._fileSendingService.send(<any> dataChannelSubject, new File([ <any> midiFile ], filename, { type: 'audio/midi' })),
+                    ({ dataChannelSubject, midiFile }) => this._fileSendingService
+                        .send(<any> dataChannelSubject, new File([ <any> midiFile ], filename, { type: 'audio/midi' })),
                     ({ dataChannelSubject, generator }) => ({ dataChannelSubject, generator })
                 ),
                 mergeMap(
