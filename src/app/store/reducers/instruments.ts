@@ -17,7 +17,7 @@ const updateInstruments = (oldInstruments: IInstrument[], newInstruments: IInstr
         });
 
     const additionalInstruments = newInstruments
-        .filter(({ id }) => intersectingInstruments.every(({ id: d }) => id === d));
+        .filter(({ id }) => intersectingInstruments.every(({ id: d }) => id !== d));
 
     return [ ...intersectingInstruments, ...additionalInstruments ];
 };
