@@ -25,8 +25,8 @@ export class InstrumentResolver implements Resolve<IInstrument> {
 
         return this._actions
             .pipe(
-                ofType(FETCH_INSTRUMENT_FAIL, FETCH_INSTRUMENT_SUCCESS),
-                filter<IFetchInstrumentFailAction | IFetchInstrumentSuccessAction>(({ payload, type }) => {
+                ofType<IFetchInstrumentFailAction | IFetchInstrumentSuccessAction>(FETCH_INSTRUMENT_FAIL, FETCH_INSTRUMENT_SUCCESS),
+                filter(({ payload, type }) => {
                     if (type === FETCH_INSTRUMENT_FAIL) {
                         return (payload === id);
                     }
