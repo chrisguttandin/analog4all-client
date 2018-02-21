@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { first, map, mergeMap, switchMap } from 'rxjs/operators';
+import { filter, first, map, mergeMap, switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs/Subscription';
 import { ENDPOINT, MidiJsonBpmService, RenderingService } from '../shared';
 import { IAppState, IInstrument } from '../store/interfaces';
@@ -52,7 +52,7 @@ export class InstrumentComponent implements OnDestroy, OnInit {
 
         this.instrumentName$ = this.instrument$
             .pipe(
-                map((instrument: IInstrument) => (instrument === null) ? null : instrument.name)
+                map((instrument) => (instrument === null) ? null : instrument.name)
             );
 
         this.renderForm = this._formBuilder.group({
@@ -89,7 +89,7 @@ export class InstrumentComponent implements OnDestroy, OnInit {
 
         this.sampleUrl$ = this.instrument$
             .pipe(
-                map((instrument: IInstrument) => {
+                map((instrument) => {
                     if (instrument !== null && instrument.sample !== undefined) {
                         return `https${ this._endpoint }samples/${ instrument.sample.id }.wav`;
                     }
@@ -110,7 +110,8 @@ export class InstrumentComponent implements OnDestroy, OnInit {
             this.instrument$
                 .pipe(
                     first(),
-                    mergeMap((instrument: IInstrument) => this._renderingService.render(instrument, bpm, filename, midiJson))
+                    filter<null | IInstrument, IInstrument>((instrument): instrument is IInstrument => (instrument !== null)),
+                    mergeMap((instrument) => this._renderingService.render(instrument, bpm, filename, midiJson))
                 )
                 .subscribe(() => {
                     // @todo
