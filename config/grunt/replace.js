@@ -73,6 +73,16 @@ module.exports = {
             } ]
         }
     },
+    'manifest': {
+        files: {
+            './': [
+                'build/ngsw.json'
+            ]
+        },
+        options: {
+            patterns: [ ]
+        }
+    },
     'scripts': {
         files: {
             './': [
