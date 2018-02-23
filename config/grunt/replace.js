@@ -81,7 +81,7 @@ module.exports = {
         },
         options: {
             patterns: [ {
-                match: /<script\stype="text\/javascript"\ssrc="([a-z]*\.[a-z0-9]*\.bundle\.js)"><\/script>/g,
+                match: /<script\stype="text\/javascript"\ssrc="([a-z-]*\.[a-z0-9]*\.bundle\.js)"><\/script>/g,
                 replacement: (match, filename) => {
                     return `<script type="text/javascript" src="scripts/${ filename }"></script>`;
                 }
