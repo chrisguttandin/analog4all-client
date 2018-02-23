@@ -5,6 +5,19 @@ const fs = require('fs');
 
 module.exports = (grunt) => {
     return {
+        'bundle': {
+            files: {
+                './': [
+                    'build/main.*.bundle.js'
+                ]
+            },
+            options: {
+                patterns: [ {
+                    match: /"\/ngsw-worker\.js"/g,
+                    replacement: '"/analog4all-client/ngsw-worker.js"'
+                } ]
+            }
+        },
         'chunks': {
             files: {
                 './': [
