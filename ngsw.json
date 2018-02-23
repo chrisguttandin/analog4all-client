@@ -1,0 +1,51 @@
+{
+  "configVersion": 1,
+  "index": "/analog4all-client/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/analog4all-client/index.html",
+        "/analog4all-client/0.21b16a7b3c12ae55467f.chunk.js",
+        "/analog4all-client/1.29d9eed545820b302f0f.chunk.js",
+        "/analog4all-client/2.15833becca1b6dcfae6c.chunk.js",
+        "/analog4all-client/inline.8d6f812b7cd939d4184f.bundle.js",
+        "/analog4all-client/main.d0ec97b05ce9fb2fe2d8.bundle.js",
+        "/analog4all-client/polyfills.0de5b05ea6e70bd5d2d7.bundle.js",
+        "/analog4all-client/styles.583d631a27d394283ffc.bundle.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "/analog4all-client/assets/korg-monopoly.jpg",
+        "/analog4all-client/assets/moog-minitaur.jpg",
+        "/analog4all-client/assets/roland-juno60.jpg",
+        "/analog4all-client/assets/roland-system1.jpg",
+        "/analog4all-client/assets/sc-proone.jpg"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/analog4all-client/0.21b16a7b3c12ae55467f.chunk.js": "51ada123c10e260d7e516a61c59bb6be861da9a1",
+    "/analog4all-client/assets/korg-monopoly.jpg": "74100406fe0aba760c893df92eebf6dc395faf24",
+    "/analog4all-client/1.29d9eed545820b302f0f.chunk.js": "25677196a4ea40b5a18593a46aea321f4750baeb",
+    "/analog4all-client/assets/moog-minitaur.jpg": "bd7a1cafea9a8a5d962c625a3a48e19c80bde88c",
+    "/analog4all-client/2.15833becca1b6dcfae6c.chunk.js": "f4da782666d567d2991fae81591cdf7d635ad0dc",
+    "/analog4all-client/assets/roland-juno60.jpg": "170ea1624e7128b50b1b092b701ca6fc0b72e208",
+    "/analog4all-client/inline.8d6f812b7cd939d4184f.bundle.js": "2869a0ba93fbdc88e7232a76b4ccf8f88dd44296",
+    "/analog4all-client/assets/roland-system1.jpg": "9f8838be8d39f06760b7e436021dbafbe20fafe2",
+    "/analog4all-client/main.d0ec97b05ce9fb2fe2d8.bundle.js": "69794cd54897716cc40f0b72c021ddf2e706484d",
+    "/analog4all-client/assets/sc-proone.jpg": "2116fcb0987aae57921c0125178fe734732159bd",
+    "/analog4all-client/polyfills.0de5b05ea6e70bd5d2d7.bundle.js": "a44135a5b8bb5699dd9822ced994d59fc4414501",
+    "/analog4all-client/styles.583d631a27d394283ffc.bundle.css": "5405c7a4262d0de324f64d02faa5ea5145afbfd2",
+    "/analog4all-client/index.html": "8877bdf1f5f6976aa659ea08e978d4693a063e84"
+  }
+}
