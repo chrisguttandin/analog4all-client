@@ -7,6 +7,6 @@
         "media-src": [ "https://analog4all-samples.s3.eu-west-1.amazonaws.com", "https://analog4all-samples.s3-eu-west-1.amazonaws.com",  "https://w8flhge089.execute-api.eu-west-1.amazonaws.com" ],
         "script-src": [ "'self'", "'unsafe-eval'" ],
         "style-src": [ "https://fonts.googleapis.com", "'self'", "'unsafe-inline'" ],
-        "worker-src": [ "blob:", "'self'" ]
+        "worker-src": [ "blob:", "'self'" ]
     }
 }
