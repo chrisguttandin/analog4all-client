@@ -169,5 +169,5 @@ module.exports = (grunt) => {
                 } ]
             }
         }
-    }
+    };
 };
