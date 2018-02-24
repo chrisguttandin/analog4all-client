@@ -12,11 +12,11 @@ import { selectInstruments, selectIsFetchingInstruments } from '../store/selecto
 })
 export class RemoteRegistryComponent implements OnInit {
 
+    public hasAvailableInstruments$: Observable<boolean>;
+
     public instruments$: Observable<IInstrument[]>;
 
     public setIsFetchingInstruments$: Observable<boolean>;
-
-    public numberOfInstruments$: Observable<number>;
 
     constructor (
         private _store: Store<IAppState>
@@ -31,14 +31,14 @@ export class RemoteRegistryComponent implements OnInit {
                 map((instruments) => instruments.filter((instrument) => instrument.isAvailable))
             );
 
+        this.hasAvailableInstruments$ = this.instruments$
+            .pipe(
+                map((instruments) => (instruments.length > 0))
+            );
+
         this.setIsFetchingInstruments$ = this._store
             .pipe(
                 select(selectIsFetchingInstruments)
-            );
-
-        this.numberOfInstruments$ = this.instruments$
-            .pipe(
-                map((instruments) => instruments.length)
             );
     }
 

@@ -1,6 +1,6 @@
 <main>
-    <h2 *ngIf="0 === (numberOfInstruments$ | async)">Sorry, there is currently no instrument available</h2>
-    <h2 *ngIf="0 < (numberOfInstruments$ | async)">Currently available instruments</h2>
+    <h2 *ngIf="false === (hasAvailableInstruments$ | async)">Sorry, there is currently no instrument available</h2>
+    <h2 *ngIf="hasAvailableInstruments$ | async">Currently available instruments</h2>
     <button (click)="refresh()" [disabled]="setIsFetchingInstruments$ | async">refresh</button>
     <ul>
         <li *ngFor="let instrument of instruments$ | async">
