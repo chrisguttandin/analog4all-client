@@ -18,6 +18,7 @@ module.exports = {
                 '@types/*',
                 'axe-core',
                 'bundle-buddy',
+                'commitizen',
                 'eslint',
                 'eslint-config-holy-grail',
                 'greenkeeper-lockfile',
