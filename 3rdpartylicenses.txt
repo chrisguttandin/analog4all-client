@@ -1,4 +1,4 @@
-@ngrx/store@5.1.0
+@ngrx/store@5.2.0
 MIT
 The MIT License (MIT)
 
@@ -54,7 +54,7 @@ midi-json-parser-worker@4.0.10
 MIT
 MIT
 
-@ngrx/effects@5.1.0
+@ngrx/effects@5.2.0
 MIT
 The MIT License (MIT)
 
@@ -98,7 +98,7 @@ MIT
 MIT
 MIT
 
-@ngrx/store-devtools@5.1.0
+@ngrx/store-devtools@5.2.0
 MIT
 The MIT License (MIT)
 
