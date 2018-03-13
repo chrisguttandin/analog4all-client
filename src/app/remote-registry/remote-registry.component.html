@@ -1,14 +1,12 @@
-<main>
-    <h2 *ngIf="false === (hasAvailableInstruments$ | async)">Sorry, there is currently no instrument available</h2>
-    <h2 *ngIf="hasAvailableInstruments$ | async">Currently available instruments</h2>
-    <button (click)="refresh()" [disabled]="setIsFetchingInstruments$ | async">refresh</button>
-    <ul>
-        <li *ngFor="let instrument of instruments$ | async">
-            <img alt="icon of {{ instrument.name }}" src="assets/korg-monopoly.jpg">
-            <a [routerLink]="[ '/', instrument.id ]">{{ instrument.name }}</a>
-            <p *ngIf="instrument.description" >{{ instrument.description }}</p>
-            <a *ngIf="instrument.soundCloudUsername" href="https://soundcloud.com/{{ instrument.soundCloudUsername }}" target="_blank">SoundCloud: {{ instrument.soundCloudUsername }}</a>
-            <a *ngIf="instrument.gearogsSlug" href="https://gearogs.com/gear/{{ instrument.gearogsSlug }}" target="_blank">Gearogs: {{ instrument.gearogsSlug }}</a>
-        </li>
-    </ul>
-</main>
+<h2 *ngIf="false === (hasAvailableInstruments$ | async)">Sorry, there is currently no instrument available</h2>
+<h2 *ngIf="hasAvailableInstruments$ | async">Currently available instruments</h2>
+<button (click)="refresh()" [disabled]="setIsFetchingInstruments$ | async">refresh</button>
+<ul>
+    <li *ngFor="let instrument of instruments$ | async">
+        <img alt="icon of {{ instrument.name }}" src="assets/korg-monopoly.jpg">
+        <a [routerLink]="[ '/', instrument.id ]">{{ instrument.name }}</a>
+        <p *ngIf="instrument.description" >{{ instrument.description }}</p>
+        <a *ngIf="instrument.soundCloudUsername" href="https://soundcloud.com/{{ instrument.soundCloudUsername }}" target="_blank">SoundCloud: {{ instrument.soundCloudUsername }}</a>
+        <a *ngIf="instrument.gearogsSlug" href="https://gearogs.com/gear/{{ instrument.gearogsSlug }}" target="_blank">Gearogs: {{ instrument.gearogsSlug }}</a>
+    </li>
+</ul>
