@@ -10,8 +10,8 @@
         "/analog4all-client/index.html",
         "/analog4all-client/scripts/0.21b16a7b3c12ae55467f.chunk.js",
         "/analog4all-client/scripts/1.f4b262ba424eaeb7a324.chunk.js",
-        "/analog4all-client/scripts/2.2082833ef95bc45ea28b.chunk.js",
-        "/analog4all-client/scripts/main.09a3fcc3d7078804635e.bundle.js",
+        "/analog4all-client/scripts/2.11c5baa408831afd05c9.chunk.js",
+        "/analog4all-client/scripts/main.58f76727037bb7575f12.bundle.js",
         "/analog4all-client/scripts/polyfills.0de5b05ea6e70bd5d2d7.bundle.js",
         "/analog4all-client/styles/styles.583d631a27d394283ffc.bundle.css"
       ],
@@ -37,13 +37,13 @@
     "/analog4all-client/assets/korg-monopoly.jpg": "74100406fe0aba760c893df92eebf6dc395faf24",
     "/analog4all-client/scripts/1.f4b262ba424eaeb7a324.chunk.js": "609e91224d70679730f1f700ae5e9723785f3efc",
     "/analog4all-client/assets/moog-minitaur.jpg": "bd7a1cafea9a8a5d962c625a3a48e19c80bde88c",
-    "/analog4all-client/scripts/2.2082833ef95bc45ea28b.chunk.js": "eb32beea648a25cd22755e1b040a25d6640b8660",
+    "/analog4all-client/scripts/2.11c5baa408831afd05c9.chunk.js": "eb32beea648a25cd22755e1b040a25d6640b8660",
     "/analog4all-client/assets/roland-juno60.jpg": "170ea1624e7128b50b1b092b701ca6fc0b72e208",
     "/analog4all-client/assets/roland-system1.jpg": "9f8838be8d39f06760b7e436021dbafbe20fafe2",
-    "/analog4all-client/scripts/main.09a3fcc3d7078804635e.bundle.js": "74e8f1b68d0b3d076214fe7cf7680390af6d5824",
+    "/analog4all-client/scripts/main.58f76727037bb7575f12.bundle.js": "f42b93f87f889bf0c368d55ef30837be29469972",
     "/analog4all-client/assets/sc-proone.jpg": "2116fcb0987aae57921c0125178fe734732159bd",
     "/analog4all-client/scripts/polyfills.0de5b05ea6e70bd5d2d7.bundle.js": "a44135a5b8bb5699dd9822ced994d59fc4414501",
     "/analog4all-client/styles/styles.583d631a27d394283ffc.bundle.css": "5405c7a4262d0de324f64d02faa5ea5145afbfd2",
-    "/analog4all-client/index.html": "3da78432e81529498dfe64782923c273b74b7649"
+    "/analog4all-client/index.html": "403bef7d325aac0d0a440992a4d9547bca232999"
   }
 }
