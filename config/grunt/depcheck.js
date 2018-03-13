@@ -15,6 +15,7 @@ module.exports = {
                 '@commitlint/cli',
                 '@commitlint/config-angular',
                 '@ngrx/store-devtools',
+                '@sonarwhal/*',
                 '@types/*',
                 'axe-core',
                 'bundle-buddy',
