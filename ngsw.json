@@ -11,7 +11,7 @@
         "/analog4all-client/scripts/0.21b16a7b3c12ae55467f.chunk.js",
         "/analog4all-client/scripts/1.4f4f05466894d1f12840.chunk.js",
         "/analog4all-client/scripts/2.2f59dc59c8dd0231aef5.chunk.js",
-        "/analog4all-client/scripts/main.1c2f67ad6e916039a1fb.bundle.js",
+        "/analog4all-client/scripts/main.4119aae0c2858120310c.bundle.js",
         "/analog4all-client/scripts/polyfills.0de5b05ea6e70bd5d2d7.bundle.js",
         "/analog4all-client/styles/styles.583d631a27d394283ffc.bundle.css"
       ],
@@ -40,10 +40,10 @@
     "/analog4all-client/scripts/2.2f59dc59c8dd0231aef5.chunk.js": "eb32beea648a25cd22755e1b040a25d6640b8660",
     "/analog4all-client/assets/roland-juno60.jpg": "170ea1624e7128b50b1b092b701ca6fc0b72e208",
     "/analog4all-client/assets/roland-system1.jpg": "9f8838be8d39f06760b7e436021dbafbe20fafe2",
-    "/analog4all-client/scripts/main.1c2f67ad6e916039a1fb.bundle.js": "f71833e09c3d2ab472528b6d5bbb60cd86a20dc4",
+    "/analog4all-client/scripts/main.4119aae0c2858120310c.bundle.js": "f71833e09c3d2ab472528b6d5bbb60cd86a20dc4",
     "/analog4all-client/assets/sc-proone.jpg": "2116fcb0987aae57921c0125178fe734732159bd",
     "/analog4all-client/scripts/polyfills.0de5b05ea6e70bd5d2d7.bundle.js": "a44135a5b8bb5699dd9822ced994d59fc4414501",
     "/analog4all-client/styles/styles.583d631a27d394283ffc.bundle.css": "5405c7a4262d0de324f64d02faa5ea5145afbfd2",
-    "/analog4all-client/index.html": "e58a1af475dd1028ea424176cc17f972b6e0c87c"
+    "/analog4all-client/index.html": "b3711d7791846187dac3d6afc6d0b7f98e97f548"
   }
 }

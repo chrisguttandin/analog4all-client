@@ -38,19 +38,19 @@ MIT
 MIT
 MIT
 
-broker-factory@1.2.11
+broker-factory@1.2.12
 MIT
 MIT
 
-midi-json-parser-broker@2.0.27
+midi-json-parser-broker@2.0.28
 MIT
 MIT
 
-midi-json-parser@4.2.9
+midi-json-parser@4.2.10
 MIT
 MIT
 
-midi-json-parser-worker@4.0.10
+midi-json-parser-worker@4.0.11
 MIT
 MIT
 
@@ -78,15 +78,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-rxjs-broker@2.2.12
+rxjs-broker@2.2.13
 MIT
 MIT
 
-json-midi-encoder-broker@2.0.38
+json-midi-encoder-broker@2.0.39
 MIT
 MIT
 
-json-midi-encoder@2.1.15
+json-midi-encoder@2.1.16
 MIT
 MIT
 
@@ -150,7 +150,7 @@ SOFTWARE.
 MIT
 MIT
 
-fast-unique-numbers@1.1.3
+fast-unique-numbers@1.1.4
 MIT
 MIT
 
