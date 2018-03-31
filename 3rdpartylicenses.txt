@@ -38,19 +38,19 @@ MIT
 MIT
 MIT
 
-broker-factory@1.2.14
+broker-factory@1.2.15
 MIT
 MIT
 
-midi-json-parser-broker@2.0.30
+midi-json-parser-broker@2.0.32
 MIT
 MIT
 
-midi-json-parser@4.2.11
+midi-json-parser@4.2.13
 MIT
 MIT
 
-midi-json-parser-worker@4.0.14
+midi-json-parser-worker@4.0.15
 MIT
 MIT
 
@@ -78,15 +78,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-rxjs-broker@2.2.13
+rxjs-broker@2.2.16
 MIT
 MIT
 
-json-midi-encoder-broker@2.0.42
+json-midi-encoder-broker@2.0.44
 MIT
 MIT
 
-json-midi-encoder@2.1.18
+json-midi-encoder@2.1.20
 MIT
 MIT
 
@@ -150,7 +150,7 @@ SOFTWARE.
 MIT
 MIT
 
-fast-unique-numbers@1.1.4
+fast-unique-numbers@1.1.5
 MIT
 MIT
 
@@ -177,11 +177,11 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-zone.js@0.8.20
+zone.js@0.8.21
 MIT
 The MIT License
 
-Copyright (c) 2016 Google, Inc.
+Copyright (c) 2016-2018 Google, Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
