@@ -38,19 +38,19 @@ MIT
 MIT
 MIT
 
-broker-factory@1.2.15
+broker-factory@1.2.16
 MIT
 MIT
 
-midi-json-parser-broker@2.0.32
+midi-json-parser-broker@2.0.33
 MIT
 MIT
 
-midi-json-parser@4.2.13
+midi-json-parser@4.2.14
 MIT
 MIT
 
-midi-json-parser-worker@4.0.15
+midi-json-parser-worker@4.0.16
 MIT
 MIT
 
@@ -82,11 +82,11 @@ rxjs-broker@2.2.20
 MIT
 MIT
 
-json-midi-encoder-broker@2.0.44
+json-midi-encoder-broker@2.0.45
 MIT
 MIT
 
-json-midi-encoder@2.1.20
+json-midi-encoder@2.1.21
 MIT
 MIT
 
@@ -150,7 +150,7 @@ SOFTWARE.
 MIT
 MIT
 
-fast-unique-numbers@1.1.5
+fast-unique-numbers@2.0.0
 MIT
 MIT
 
