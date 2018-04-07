@@ -38,19 +38,19 @@ MIT
 MIT
 MIT
 
-broker-factory@1.2.16
+broker-factory@1.2.17
 MIT
 MIT
 
-midi-json-parser-broker@2.0.33
+midi-json-parser-broker@2.0.34
 MIT
 MIT
 
-midi-json-parser@4.2.14
+midi-json-parser@4.2.15
 MIT
 MIT
 
-midi-json-parser-worker@4.0.16
+midi-json-parser-worker@4.0.17
 MIT
 MIT
 
@@ -82,11 +82,11 @@ rxjs-broker@2.2.20
 MIT
 MIT
 
-json-midi-encoder-broker@2.0.45
+json-midi-encoder-broker@2.0.46
 MIT
 MIT
 
-json-midi-encoder@2.1.21
+json-midi-encoder@2.1.22
 MIT
 MIT
 
