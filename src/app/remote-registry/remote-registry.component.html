@@ -6,7 +6,7 @@
         <img alt="icon of {{ instrument.name }}" src="assets/korg-monopoly.jpg">
         <a [routerLink]="[ '/', instrument.id ]">{{ instrument.name }}</a>
         <p *ngIf="instrument.description" >{{ instrument.description }}</p>
-        <a *ngIf="instrument.soundCloudUsername" href="https://soundcloud.com/{{ instrument.soundCloudUsername }}" target="_blank">SoundCloud: {{ instrument.soundCloudUsername }}</a>
-        <a *ngIf="instrument.gearogsSlug" href="https://gearogs.com/gear/{{ instrument.gearogsSlug }}" target="_blank">Gearogs: {{ instrument.gearogsSlug }}</a>
+        <anc-sound-cloud-link [soundCloudUsername]="instrument.soundCloudUsername"></anc-sound-cloud-link>
+        <anc-gearogs-link [gearogsSlug]="instrument.gearogsSlug"></anc-gearogs-link>
     </li>
 </ul>
