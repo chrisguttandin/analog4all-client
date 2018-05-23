@@ -17,7 +17,7 @@
     "@angular/platform-browser-dynamic": "^5.2.10",
     "@angular/router": "^5.2.10",
     "@angular/service-worker": "^5.2.10",
-    "@ngrx/effects": "^5.2.0",
+    "@ngrx/effects": "^6.0.0",
     "@ngrx/store": "^5.2.0",
     "json-midi-encoder": "^2.1.27",
     "midi-json-parser": "^4.2.18",
