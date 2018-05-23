@@ -18,7 +18,7 @@
     "@angular/router": "^5.2.10",
     "@angular/service-worker": "^5.2.10",
     "@ngrx/effects": "^5.2.0",
-    "@ngrx/store": "^5.2.0",
+    "@ngrx/store": "^6.0.0",
     "json-midi-encoder": "^2.1.27",
     "midi-json-parser": "^4.2.18",
     "midi-json-parser-worker": "^4.0.19",
