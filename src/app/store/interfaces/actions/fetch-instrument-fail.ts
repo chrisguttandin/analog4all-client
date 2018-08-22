@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { IInstrument } from '..';
+import { IInstrument } from '../instrument';
 
 export interface IFetchInstrumentFailAction extends Action {
 
