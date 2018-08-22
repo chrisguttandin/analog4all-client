@@ -1,5 +1,8 @@
 import { isFetchingInstrumentsReducer } from '../../../../src/app/store/reducers';
 
+// @todo 'deep-freeze-strict' can't be imported as module.
+const deepFreeze = require('deep-freeze-strict'); // tslint:disable-line:no-var-requires no-require-imports
+
 describe('isFetchingInstruments reducer', () => {
 
     describe('with an undefined state', () => {
@@ -7,7 +10,7 @@ describe('isFetchingInstruments reducer', () => {
         describe('with an empty action', () => {
 
             it('should return the default state', () => {
-                const state = isFetchingInstrumentsReducer(undefined, <any> { });
+                const state = isFetchingInstrumentsReducer(undefined, <any> deepFreeze({ }));
 
                 expect(state).toEqual(false);
             });
@@ -18,10 +21,10 @@ describe('isFetchingInstruments reducer', () => {
 
             it('should return the given value', () => {
                 const isFetchingInstruments = true;
-                const state = isFetchingInstrumentsReducer(undefined, {
+                const state = isFetchingInstrumentsReducer(undefined, deepFreeze({
                     payload: isFetchingInstruments,
                     type: 'SET_IS_FETCHING_INSTRUMENTS'
-                });
+                }));
 
                 expect(state).toEqual(isFetchingInstruments);
             });
@@ -35,13 +38,13 @@ describe('isFetchingInstruments reducer', () => {
         let previousState: boolean;
 
         beforeEach(() => {
-            previousState = true;
+            previousState = deepFreeze(true);
         });
 
         describe('with an empty action', () => {
 
             it('should return the previous state', () => {
-                const state = isFetchingInstrumentsReducer(previousState, <any> { });
+                const state = isFetchingInstrumentsReducer(previousState, <any> deepFreeze({ }));
 
                 expect(state).toEqual(previousState);
             });
@@ -52,10 +55,10 @@ describe('isFetchingInstruments reducer', () => {
 
             it('should return the given value', () => {
                 const isFetchingInstruments = false;
-                const state = isFetchingInstrumentsReducer(previousState, {
+                const state = isFetchingInstrumentsReducer(previousState, deepFreeze({
                     payload: isFetchingInstruments,
                     type: 'SET_IS_FETCHING_INSTRUMENTS'
-                });
+                }));
 
                 expect(state).toEqual(isFetchingInstruments);
             });
