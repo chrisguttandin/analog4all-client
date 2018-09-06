@@ -3,10 +3,10 @@ ul {
 }
 
 li {
-    border-top: 1px solid;
     border-bottom: 1px solid;
-    list-style: none;
+    border-top: 1px solid;
     line-height: 20px;
+    list-style: none;
     margin: 0 0 -1px;
     padding: 10px 0;
 }
