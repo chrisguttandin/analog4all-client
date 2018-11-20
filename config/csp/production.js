@@ -4,7 +4,7 @@ module.exports = {
         'child-src': 'blob:',
         'connect-src': [
             "'self'",
-            'https://w8flhge089.execute-api.eu-west-1.amazonaws.com',
+            'https://jbnw79pt56.execute-api.eu-west-1.amazonaws.com',
             'wss://sock.cat'
         ],
         'default-src': "'none'",
@@ -13,7 +13,7 @@ module.exports = {
         'media-src': [
             'https://analog4all-samples.s3.eu-west-1.amazonaws.com',
             'https://analog4all-samples.s3-eu-west-1.amazonaws.com',
-            'https://w8flhge089.execute-api.eu-west-1.amazonaws.com'
+            'https://jbnw79pt56.execute-api.eu-west-1.amazonaws.com'
         ],
         'script-src': [ "'self'", "'unsafe-eval'" ],
         'style-src': [ 'https://fonts.googleapis.com', "'self'", "'unsafe-inline'" ],
