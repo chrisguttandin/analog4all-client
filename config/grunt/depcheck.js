@@ -23,7 +23,6 @@ module.exports = {
                 'commitizen',
                 'eslint',
                 'eslint-config-holy-grail',
-                'greenkeeper-lockfile',
                 'grunt-*',
                 'hint',
                 'husky',
