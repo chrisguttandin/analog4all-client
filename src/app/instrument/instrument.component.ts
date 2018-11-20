@@ -2,9 +2,8 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
+import { Observable, Subscription } from 'rxjs';
 import { filter, first, map, mergeMap, switchMap } from 'rxjs/operators';
-import { Subscription } from 'rxjs/Subscription';
 import { ENDPOINT, MidiJsonBpmService, RenderingService } from '../shared';
 import { IAppState, IInstrument } from '../store/interfaces';
 import { createInstrumentByIdSelector } from '../store/selectors';
@@ -15,17 +14,17 @@ import { createInstrumentByIdSelector } from '../store/selectors';
 })
 export class InstrumentComponent implements OnDestroy, OnInit {
 
-    public hasMidiJson$: Observable<boolean>;
+    public hasMidiJson$!: Observable<boolean>;
 
-    public instrument$: Observable<null | IInstrument>;
+    public instrument$!: Observable<null | IInstrument>;
 
-    public instrumentName$: Observable<null | string>;
+    public instrumentName$!: Observable<null | string>;
 
-    public renderForm: FormGroup;
+    public renderForm!: FormGroup;
 
-    public sampleUrl$: Observable<null | string>;
+    public sampleUrl$!: Observable<null | string>;
 
-    private _bpmDisabledSubscription: Subscription;
+    private _bpmDisabledSubscription: null | Subscription;
 
     constructor (
         private _activatedRoute: ActivatedRoute,
@@ -34,10 +33,14 @@ export class InstrumentComponent implements OnDestroy, OnInit {
         private _midiJsonBpmService: MidiJsonBpmService,
         private _renderingService: RenderingService,
         private _store: Store<IAppState>
-    ) { }
+    ) {
+        this._bpmDisabledSubscription = null;
+    }
 
     public ngOnDestroy () {
-        this._bpmDisabledSubscription.unsubscribe();
+        if (this._bpmDisabledSubscription !== null) {
+            this._bpmDisabledSubscription.unsubscribe();
+        }
     }
 
     public ngOnInit () {

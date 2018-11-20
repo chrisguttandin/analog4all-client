@@ -2,12 +2,8 @@ import { Component, OnDestroy, OnInit, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { parseArrayBuffer } from 'midi-json-parser';
 import { IMidiFile } from 'midi-json-parser-worker';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
-import { Observer } from 'rxjs/Observer';
+import { BehaviorSubject, Observable, Observer, Subscription, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     providers: [
@@ -23,11 +19,11 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnInit {
 
-    public filename$: Observable<null | string>;
+    public filename$!: Observable<null | string>;
 
     public isDraggedOver: boolean;
 
-    public state$: Observable<string>;
+    public state$!: Observable<string>;
 
     private _checkForFileOnFocus: boolean;
 
@@ -41,19 +37,23 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
 
     private _valueChanges$: BehaviorSubject<any>; // @todo BehaviorSubject<MidiJson>
 
-    private _valueChangesSubscription: Subscription;
+    private _valueChangesSubscription: null | Subscription;
 
     constructor () {
+        this._checkForFileOnFocus = false;
         this.isDraggedOver = false;
         this._filenameChanges$ = new BehaviorSubject<null | string>(null);
         this._onChange = (_: any) => {}; // tslint:disable-line:no-empty
         this._onTouched = () => {}; // tslint:disable-line:no-empty
         this._stateChanges$ = new BehaviorSubject('empty');
         this._valueChanges$ = new BehaviorSubject(null);
+        this._valueChangesSubscription = null;
     }
 
     public ngOnDestroy () {
-        this._valueChangesSubscription.unsubscribe();
+        if (this._valueChangesSubscription !== null) {
+            this._valueChangesSubscription.unsubscribe();
+        }
     }
 
     public ngOnInit () {
@@ -78,18 +78,22 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
                         this._stateChanges$.next('parsing');
 
                         fileReader.addEventListener('load', () => {
-                            parseArrayBuffer(fileReader.result)
-                                .then((midiJson) => {
-                                    this._stateChanges$.next('filled');
+                            if (fileReader.result instanceof ArrayBuffer) {
+                                parseArrayBuffer(fileReader.result)
+                                    .then((midiJson) => {
+                                        this._stateChanges$.next('filled');
 
-                                    observer.next({ filename: (<File> file).name, midiJson });
-                                })
-                                .catch(() => {
-                                    this._stateChanges$.next('failed');
+                                        observer.next({ filename: (<File> file).name, midiJson });
+                                    })
+                                    .catch(() => {
+                                        this._stateChanges$.next('failed');
 
-                                    observer.next(null);
-                                })
-                                .then(() => observer.complete());
+                                        observer.next(null);
+                                    })
+                                    .then(() => observer.complete());
+                            } else {
+                                observer.error(new Error('Reading the file failed.'));
+                            }
                         });
 
                         fileReader.readAsArrayBuffer((<File> file));

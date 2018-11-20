@@ -1,8 +1,17 @@
 {
     "extends": "tslint-config-holy-grail",
     "rules": {
-        "component-selector": [ true, "element", "anc", "kebab-case" ],
-        "directive-selector": [ true, "attribute", "anc", "camelCase" ],
-        "pipe-naming": [ true, "camelCase", "anc" ]
+        "component-selector": [
+            true,
+            "element",
+            "anc",
+            "kebab-case"
+        ],
+        "directive-selector": [
+            true,
+            "attribute",
+            "anc",
+            "camelCase"
+        ]
     }
 }

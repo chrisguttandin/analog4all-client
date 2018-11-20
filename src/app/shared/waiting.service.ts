@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Observable, Observer } from 'rxjs';
 import { IMaskableSubject, TStringifyableJsonValue } from 'rxjs-broker';
-import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
 import { first } from 'rxjs/operators';
 
 /**

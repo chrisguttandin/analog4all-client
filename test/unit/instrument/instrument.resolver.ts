@@ -1,4 +1,3 @@
-import 'core-js/es7/reflect';
 import { Subject } from 'rxjs';
 import { InstrumentResolver } from '../../../src/app/instrument/instrument.resolver';
 
@@ -62,7 +61,7 @@ describe('InstrumentResolver', () => {
                             done();
                         },
                         error (err) {
-                            throw err;
+                            throw err; // tslint:disable-line:rxjs-throw-error
                         },
                         next
                     });
@@ -96,7 +95,7 @@ describe('InstrumentResolver', () => {
                             done();
                         },
                         error (err) {
-                            throw err;
+                            throw err; // tslint:disable-line:rxjs-throw-error
                         },
                         next
                     });

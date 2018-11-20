@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
 import { IDataChannel, connect, isSupported } from 'rxjs-broker';
-import { Observable } from 'rxjs/Observable';
 import { catchError, first, map, tap } from 'rxjs/operators';
 import { IGenerator } from '../interfaces';
 import { ENDPOINT } from './endpoint-token';
@@ -36,10 +36,14 @@ export class GeneratorsService {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
         return this._httpClient
-            .post(`https${ this._endpoint }instruments/${ generator.instrument.id }/generators`, JSON.stringify(generator), { headers })
+            .post<IGenerator>(
+                `https${ this._endpoint }instruments/${ generator.instrument.id }/generators`,
+                JSON.stringify(generator),
+                { headers }
+            )
             .pipe(
                 map((gnrtr) => ({ ...gnrtr, instrument: { id: generator.instrument.id } })),
-                catchError((response) => Observable.throw(new ResponseError(response)))
+                catchError((response) => throwError(new ResponseError(response)))
             );
     }
 
@@ -48,7 +52,7 @@ export class GeneratorsService {
             .delete(`https${ this._endpoint }instruments/${ generator.instrument.id }/generators/${ generator.id }`)
             .pipe(
                 map(() => null),
-                catchError((response) => Observable.throw(new ResponseError(response)))
+                catchError((response) => throwError(new ResponseError(response)))
             );
     }
 

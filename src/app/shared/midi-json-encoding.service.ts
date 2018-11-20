@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { encode } from 'json-midi-encoder';
 import { IMidiFile } from 'midi-json-parser-worker';
-import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
+import { Observable, Observer } from 'rxjs';
 import { MidiJsonBpmService } from './midi-json-bpm.service';
 
 @Injectable()

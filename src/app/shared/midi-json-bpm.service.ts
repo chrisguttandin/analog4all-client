@@ -5,7 +5,7 @@ import { IMidiFile, IMidiSetTempoEvent } from 'midi-json-parser-worker';
 export class MidiJsonBpmService {
 
     // @todo A very similar function exists in the midi-file-slicer module.
-    public read (midiJson: IMidiFile) {
+    public read (midiJson: IMidiFile): number {
         const { tracks } = midiJson;
 
         for (const events of tracks) {
@@ -19,7 +19,7 @@ export class MidiJsonBpmService {
         return 120;
     }
 
-    public write (midiJson: IMidiFile, bpm: number) {
+    public write (midiJson: IMidiFile, bpm: number): IMidiFile {
         const microsecondsPerBeat = (60000000 / bpm);
 
         let wroteBpmInfo = false;
@@ -30,24 +30,21 @@ export class MidiJsonBpmService {
                     if (!wroteBpmInfo && 'setTempo' in event) {
                         wroteBpmInfo = true;
 
-                        return Object.assign({}, event, {
-                            setTempo: Object.assign({}, (<IMidiSetTempoEvent> event).setTempo, {
-                                microsecondsPerBeat
-                            })
-                        });
+                        return { ...event, setTempo: { ...(<IMidiSetTempoEvent> event).setTempo, microsecondsPerBeat } };
                     }
 
                     return event;
                 }));
 
         if (wroteBpmInfo) {
-            return Object.assign({}, midiJson, { tracks });
+            return { ...midiJson, tracks };
         }
 
-        return Object.assign({}, midiJson, {
+        return {
+            ...midiJson,
             tracks: [
                 [
-                    {
+                    <IMidiSetTempoEvent> {
                         delta: 0,
                         setTempo: {
                             microsecondsPerBeat
@@ -57,7 +54,7 @@ export class MidiJsonBpmService {
                 ],
                 ...midiJson.tracks.slice(1)
             ]
-        });
+        };
     }
 
 }

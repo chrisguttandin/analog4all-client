@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
-import { empty } from 'rxjs/observable/empty';
-import { of } from 'rxjs/observable/of';
+import { EMPTY, Observable, of } from 'rxjs';
 import { filter, first, mergeMap } from 'rxjs/operators';
 import { FETCH_INSTRUMENT_FAIL, FETCH_INSTRUMENT_SUCCESS, fetchInstrument } from '../store/actions';
 import { IAppState, IFetchInstrumentFailAction, IFetchInstrumentSuccessAction, IInstrument } from '../store/interfaces';
@@ -34,12 +32,12 @@ export class InstrumentResolver implements Resolve<IInstrument> {
                     // @todo TypeScript needs to be convinced that payload is of type IInstrument.
                     return (<IInstrument> payload).id === id;
                 }),
-                first(),
+                first(), // tslint:disable-line:rxjs-no-unsafe-first
                 mergeMap(({ payload, type }) => {
                     if (type === FETCH_INSTRUMENT_FAIL) {
                         this._router.navigate([ '/' ]);
 
-                        return empty<IInstrument>();
+                        return EMPTY;
                     }
 
                     // @todo TypeScript needs to be convinced that payload is of type IInstrument.

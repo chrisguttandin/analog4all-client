@@ -26,32 +26,49 @@ export class RenderingService {
         return this._generatorsService
             .create({ instrument: { id: instrument.id } })
             .pipe(
-                mergeMap(
-                    (generator) => this._generatorsService.connect(generator),
-                    (generator, dataChannel) => ({ dataChannel, generator })
+                mergeMap((generator) => this._generatorsService
+                    .connect(generator)
+                    .pipe(
+                        map((dataChannel) => ({ dataChannel, generator }))
+                    )
                 ),
                 map(({ dataChannel, generator }) => ({ dataChannelSubject: wrap(dataChannel), generator })),
-                mergeMap(
-                    ({ dataChannelSubject }) => this._waitingService.wait(dataChannelSubject),
-                    ({ dataChannelSubject, generator }) => ({ dataChannelSubject, generator })
+                mergeMap<
+                    { dataChannelSubject: any; generator: any },
+                    { dataChannelSubject: any; generator: any }
+                >(({ dataChannelSubject, generator }) => this._waitingService
+                    .wait(dataChannelSubject)
+                    .pipe(
+                        map(() => ({ dataChannelSubject, generator }))
+                    )
                 ),
-                mergeMap(
-                    () => this._midiJsonEncodingService.encode(midiJson, bpm),
-                    ({ dataChannelSubject, generator }, midiFile) => ({ dataChannelSubject, generator, midiFile })
+                mergeMap<
+                    { dataChannelSubject: any; generator: any },
+                    { dataChannelSubject: any; generator: any; midiFile: any }
+                >(({ dataChannelSubject, generator }) => this._midiJsonEncodingService
+                    .encode(midiJson, bpm)
+                    .pipe(
+                        map((midiFile) => ({ dataChannelSubject, generator, midiFile }))
+                    )
                 ),
-                mergeMap(
-                    ({ dataChannelSubject, midiFile }) => this._fileSendingService
-                        .send(<any> dataChannelSubject, new File([ <any> midiFile ], filename, { type: 'audio/midi' })),
-                    ({ dataChannelSubject, generator }) => ({ dataChannelSubject, generator })
+                mergeMap(({ dataChannelSubject, generator, midiFile }) => this._fileSendingService
+                    .send(dataChannelSubject, new File([ midiFile ], filename, { type: 'audio/midi' }))
+                    .pipe(
+                        map(() => ({ dataChannelSubject, generator }))
+                    )
                 ),
-                mergeMap(
-                    ({ dataChannelSubject }) => this._fileReceivingService.receive(<any> dataChannelSubject),
-                    ({ generator }, arrayBuffer) => ({ arrayBuffer, generator })
+                mergeMap(({ dataChannelSubject, generator }) => this._fileReceivingService
+                    .receive(<any> dataChannelSubject)
+                    .pipe(
+                        map((arrayBuffer) => ({ arrayBuffer, generator }))
+                    )
                 ),
                 tap(({ arrayBuffer }) => this._downloadingService.download(filename.replace(/\.[a-z][a-z0-9]+$/i, '.wav'), arrayBuffer)),
-                mergeMap(
-                    ({ generator }) => this._generatorsService.delete(generator),
-                    () => null
+                mergeMap(({ generator }) => this._generatorsService
+                    .delete(generator)
+                    .pipe(
+                        map(() => null)
+                    )
                 )
             );
     }

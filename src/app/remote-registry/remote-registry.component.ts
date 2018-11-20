@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { fetchInstruments } from '../store/actions';
 import { IAppState, IInstrument } from '../store/interfaces';
@@ -12,11 +12,11 @@ import { selectInstruments, selectIsFetchingInstruments } from '../store/selecto
 })
 export class RemoteRegistryComponent implements OnInit {
 
-    public hasAvailableInstruments$: Observable<boolean>;
+    public hasAvailableInstruments$!: Observable<boolean>;
 
-    public instruments$: Observable<IInstrument[]>;
+    public instruments$!: Observable<IInstrument[]>;
 
-    public setIsFetchingInstruments$: Observable<boolean>;
+    public setIsFetchingInstruments$!: Observable<boolean>;
 
     constructor (
         private _store: Store<IAppState>
