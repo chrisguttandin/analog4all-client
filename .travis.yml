@@ -4,7 +4,7 @@ before_install: npm install npm@latest --global
 cache:
   directories:
     - $HOME/.npm
-dist: trusty
+dist: xenial
 env:
   global:
     - secure: DWTxfI9sCCXvxQVous/Xla0afp2vHwuDXclHEYSekYAUWWmAvyxLbJlxjUOFyoZrqa2cIclponPkvfF1jWzcRK1XIeni6zgOmqPtCp4R1OF01S8eHvSmz3tmz6oVtVNknqLc/KudcOuxj3BfG86HDEdPqLCecRCIWY64WNU2vv7SoXGKaPBa8jsijMwoJwrRhtxmHm4BcumEJGLi2PQQlw1TgPmylwZOnI9O+vTct7f5EKFanSWzzbDoIzM5/Y14Ey+BHEalnM021ZhwWbTuy4POPghJcBYM7TmOKkojvZL8cpP8M0BwAebxvsSmxpIrjnJY7yLxU+FKh5qWRABb7WTkMq4TVjUw2aANFD2USAA/MluqeEla4oX1YAAkwKEyuudzdIGFQU8vZbOy/jOXhmiNjuRWXnpt88v2LpJsZOWmIfgiBiuo3tkZ2MdYJOQqsN/bf1ocNykgKSVCA16QU7PIu9kMW0tCmlZY7iM5C3K4zjVSfEnhEWNPuaSTyH/zLqql/On+dXmmmrevpmQ6VADk3HJDQXdTxvQoISXn9r1kpVPLAF4jbAWs3EG+9lkWy6HP5yVH3wEkZtPcG2KcTFRCV0g+E2ezLBLakzQLUYsf5xVOTitt7+xbF9jaR7HDdhkbHtd2RAMZ5B+A3Yl/DZDOP7okm7nq7GKqiARjI3g=
@@ -19,4 +19,3 @@ node_js: 11
 script:
   - npm test
   - grunt deploy-on-version-updates
-sudo: required
