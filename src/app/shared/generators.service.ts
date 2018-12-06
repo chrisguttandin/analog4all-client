@@ -17,7 +17,7 @@ export class GeneratorsService {
         private _peerConnectingService: PeerConnectingService
     ) { }
 
-    get isSupported () {
+    get isSupported (): boolean {
         return isSupported;
     }
 

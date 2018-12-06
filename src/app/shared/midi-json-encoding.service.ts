@@ -9,7 +9,7 @@ export class MidiJsonEncodingService {
 
     constructor (private _midiJsonBpmService: MidiJsonBpmService) { }
 
-    public encode (midiJson: IMidiFile, bpm: number) {
+    public encode (midiJson: IMidiFile, bpm: number): Observable<ArrayBuffer> {
         return Observable.create((observer: Observer<ArrayBuffer>) => {
             encode(this._midiJsonBpmService.write(midiJson, bpm))
                 .then((midiFile) => {

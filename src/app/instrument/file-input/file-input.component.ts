@@ -50,13 +50,13 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
         this._valueChangesSubscription = null;
     }
 
-    public ngOnDestroy () {
+    public ngOnDestroy (): void {
         if (this._valueChangesSubscription !== null) {
             this._valueChangesSubscription.unsubscribe();
         }
     }
 
-    public ngOnInit () {
+    public ngOnInit (): void {
         this.filename$ = this._filenameChanges$.asObservable();
 
         this.state$ = this._stateChanges$.asObservable();
@@ -100,30 +100,30 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
                     });
                 })
             )
-            .subscribe((midiJson) => this._onChange(midiJson));
+            .subscribe((midiJson) => this._onChange(midiJson)); // tslint:disable-line:rxjs-prefer-async-pipe
     }
 
-    public onChanged (file: File) {
+    public onChanged (file: File): void {
         this._valueChanges$.next((file === undefined) ? null : file);
     }
 
-    public onClick () {
+    public onClick (): void {
         this._checkForFileOnFocus = true;
     }
 
-    public onDragEnter () {
+    public onDragEnter (): void {
         this.isDraggedOver = true;
     }
 
-    public onDragLeave () {
+    public onDragLeave (): void {
         this.isDraggedOver = false;
     }
 
-    public onDragover (event: DragEvent) {
+    public onDragover (event: DragEvent): void {
         event.preventDefault();
     }
 
-    public onDrop (event: DragEvent) {
+    public onDrop (event: DragEvent): void {
         event.preventDefault();
 
         this._checkForFileOnFocus = false;
@@ -134,7 +134,7 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
         }
     }
 
-    public onFocus (event: FocusEvent) {
+    public onFocus (event: FocusEvent): void {
         if (this._checkForFileOnFocus) {
             setTimeout(() => {
                 if (this._checkForFileOnFocus) {
@@ -146,7 +146,7 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
         }
     }
 
-    public onTouched () {
+    public onTouched (): void {
         this._onTouched();
     }
 

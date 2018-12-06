@@ -11,10 +11,10 @@ describe('InstrumentResolver', () => {
     beforeEach(() => {
         actions = new Subject();
         router = {
-            navigate () {} // tslint:disable-line:no-empty
+            navigate (): void {} // tslint:disable-line:no-empty
         };
         store = {
-            dispatch () {} // tslint:disable-line:no-empty
+            dispatch (): void {} // tslint:disable-line:no-empty
         };
 
         spyOn(router, 'navigate');
@@ -55,12 +55,12 @@ describe('InstrumentResolver', () => {
                 instrumentResolver
                     .resolve(activatedRouteSnapshot)
                     .subscribe({
-                        complete () {
+                        complete (): void {
                             expect(next).toHaveBeenCalledWith(instrument);
 
                             done();
                         },
-                        error (err) {
+                        error (err): void {
                             throw err; // tslint:disable-line:rxjs-throw-error
                         },
                         next
@@ -89,12 +89,12 @@ describe('InstrumentResolver', () => {
                 instrumentResolver
                     .resolve(activatedRouteSnapshot)
                     .subscribe({
-                        complete () {
+                        complete (): void {
                             expect(next).not.toHaveBeenCalled();
 
                             done();
                         },
-                        error (err) {
+                        error (err): void {
                             throw err; // tslint:disable-line:rxjs-throw-error
                         },
                         next

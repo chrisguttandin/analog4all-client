@@ -22,7 +22,7 @@ export class RemoteRegistryComponent implements OnInit {
         private _store: Store<IAppState>
     ) { }
 
-    public ngOnInit () {
+    public ngOnInit (): void {
         this._store.dispatch(fetchInstruments());
 
         this.instruments$ = this._store
@@ -42,7 +42,7 @@ export class RemoteRegistryComponent implements OnInit {
             );
     }
 
-    public refresh () {
+    public refresh (): void {
         this._store.dispatch(fetchInstruments());
     }
 

@@ -13,13 +13,13 @@ export class FileReceivingService {
 
             const dataChannelSubscription = dataChannelSubject
                 .subscribe({
-                    complete () {
+                    complete (): void {
                         observer.error();
                     },
-                    error (err) {
+                    error (err): void {
                         observer.error(err);
                     },
-                    next (message) {
+                    next (message): void {
                         const { type } = message;
 
                         if (type === 'bof') {

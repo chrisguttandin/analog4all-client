@@ -37,13 +37,13 @@ export class InstrumentComponent implements OnDestroy, OnInit {
         this._bpmDisabledSubscription = null;
     }
 
-    public ngOnDestroy () {
+    public ngOnDestroy (): void {
         if (this._bpmDisabledSubscription !== null) {
             this._bpmDisabledSubscription.unsubscribe();
         }
     }
 
-    public ngOnInit () {
+    public ngOnInit (): void {
         this.instrument$ = this._activatedRoute.data
             .pipe(
                 switchMap(({ instrument: { id } }) => this._store
@@ -74,7 +74,7 @@ export class InstrumentComponent implements OnDestroy, OnInit {
                 );
 
             this._bpmDisabledSubscription = midiJsonAndFilename$
-                .subscribe((midiJsonAndFilename) => {
+                .subscribe((midiJsonAndFilename) => { // tslint:disable-line:rxjs-prefer-async-pipe
                     const bpmFormControl = this.renderForm.get('bpm');
 
                     if (bpmFormControl !== null) {
@@ -102,7 +102,7 @@ export class InstrumentComponent implements OnDestroy, OnInit {
             );
     }
 
-    public render () {
+    public render (): void {
         const bpmFormControl = this.renderForm.get('bpm');
         const fileFormControl = this.renderForm.get('file');
 
@@ -116,7 +116,7 @@ export class InstrumentComponent implements OnDestroy, OnInit {
                     filter<null | IInstrument, IInstrument>((instrument): instrument is IInstrument => (instrument !== null)),
                     mergeMap((instrument) => this._renderingService.render(instrument, bpm, filename, midiJson))
                 )
-                .subscribe(() => {
+                .subscribe(() => { // tslint:disable-line:rxjs-prefer-async-pipe
                     // @todo
                 });
         }

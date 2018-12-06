@@ -12,7 +12,7 @@ import { first } from 'rxjs/operators';
 @Injectable()
 export class WaitingService {
 
-    public wait (dataChannelSubject: IMaskableSubject<TStringifyableJsonValue>) {
+    public wait (dataChannelSubject: IMaskableSubject<TStringifyableJsonValue>): Observable<void> {
         return Observable.create((observer: Observer<void>) => {
             let isPending = true;
 
@@ -24,19 +24,19 @@ export class WaitingService {
                     first<any>()
                 )
                 .subscribe({
-                    complete () {
+                    complete (): void {
                         if (isPending) {
                             isPending = false;
                             observer.error(new Error('The underlying channel was closed before any value could be received.'));
                         }
                     },
-                    error (err) {
+                    error (err): void {
                         if (isPending) {
                             isPending = false;
                             observer.error(err);
                         }
                     },
-                    next () {
+                    next (): void {
                         isPending = false;
                         observer.next(undefined);
                         observer.complete();
@@ -45,19 +45,19 @@ export class WaitingService {
 
             const waitingChannelSubscription = waitingChannel
                 .subscribe({
-                    complete () {
+                    complete (): void {
                         if (isPending) {
                             isPending = false;
                             observer.error(new Error('The underlying channel was closed before any value could be received.'));
                         }
                     },
-                    error (err) {
+                    error (err): void {
                         if (isPending) {
                             isPending = false;
                             observer.error(err);
                         }
                     },
-                    next () {
+                    next (): void {
                         waitingChannelSubscription.unsubscribe();
                         waitingChannel.next(undefined);
                     }
