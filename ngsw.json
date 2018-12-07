@@ -7,11 +7,11 @@
       "installMode": "prefetch",
       "updateMode": "prefetch",
       "urls": [
-        "/analog4all-client/scripts/5.f8637197c804597804bf.js",
+        "/analog4all-client/scripts/5.dd890de0ad4311db8ad0.js",
         "/analog4all-client/scripts/6.c6aba1108d290aa39c63.js",
         "/analog4all-client/scripts/common.860a889e858f58f288e8.js",
         "/analog4all-client/index.html",
-        "/analog4all-client/scripts/main.4b4aa8b09cc6dbebf8a2.js",
+        "/analog4all-client/scripts/main.f359235b54b100151ff0.js",
         "/analog4all-client/scripts/polyfills.325eccc92c697fe3997d.js",
         "/analog4all-client/styles/styles.937dfc4e92c4e4572e9a.css"
       ],
@@ -33,7 +33,7 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "/analog4all-client/scripts/5.f8637197c804597804bf.js": "115c097fbe366ca953576a619cc556e320618ad1",
+    "/analog4all-client/scripts/5.dd890de0ad4311db8ad0.js": "115c097fbe366ca953576a619cc556e320618ad1",
     "/analog4all-client/scripts/6.c6aba1108d290aa39c63.js": "063175007d14019614d03b6e19ee0cd32f0ce89f",
     "/analog4all-client/assets/korg-monopoly.jpg": "74100406fe0aba760c893df92eebf6dc395faf24",
     "/analog4all-client/assets/moog-minitaur.jpg": "bd7a1cafea9a8a5d962c625a3a48e19c80bde88c",
@@ -41,8 +41,8 @@
     "/analog4all-client/assets/roland-system1.jpg": "9f8838be8d39f06760b7e436021dbafbe20fafe2",
     "/analog4all-client/assets/sc-proone.jpg": "2116fcb0987aae57921c0125178fe734732159bd",
     "/analog4all-client/scripts/common.860a889e858f58f288e8.js": "c4d65280cd6ffe8ba86eee05e5cf5efb9a10a616",
-    "/analog4all-client/index.html": "a916aa8d012797d7fc1efd92ecd8d8904f2cbaa5",
-    "/analog4all-client/scripts/main.4b4aa8b09cc6dbebf8a2.js": "0637de9000fb6b5d4e3fee80149230f7835bba60",
+    "/analog4all-client/index.html": "af0c3a21ad2d9739c00e4bc19d621e4fa7c1b739",
+    "/analog4all-client/scripts/main.f359235b54b100151ff0.js": "5654d0089aa737cc8ba851734b96f4ffc190b703",
     "/analog4all-client/scripts/polyfills.325eccc92c697fe3997d.js": "35efac68587d6024202d011a4139365d4b37942a",
     "/analog4all-client/styles/styles.937dfc4e92c4e4572e9a.css": "5405c7a4262d0de324f64d02faa5ea5145afbfd2"
   },
