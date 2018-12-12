@@ -15,7 +15,7 @@ exports.config = {
 
     allScriptsTimeout: 11000,
 
-    baseUrl: (env.IS_SMOKE_TEST) ? 'https://chrisguttandin.github.io' : `http://localhost:${ projects[defaultProject].targets.serve.options.port }`,
+    baseUrl: (env.IS_SMOKE_TEST) ? 'https://chrisguttandin.github.io/analog4all-client' : `http://localhost:${ projects[defaultProject].targets.serve.options.port }`,
 
     directConnect: !!env.TRAVIS,
 
