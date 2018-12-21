@@ -71,7 +71,7 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
                         return of(null);
                     }
 
-                    return Observable.create((observer: Observer<null | { filename: string, midiJson: IMidiFile }>) => {
+                    return Observable.create((observer: Observer<null | { filename: string; midiJson: IMidiFile }>) => {
                         const fileReader = new FileReader();
 
                         this._filenameChanges$.next((<File> file).name);
@@ -129,7 +129,7 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
         this._checkForFileOnFocus = false;
         this.isDraggedOver = false;
 
-        if (event.dataTransfer && event.dataTransfer.files && event.dataTransfer.files.length > 0) {
+        if (event.dataTransfer !== null && event.dataTransfer.files.length > 0) {
             this.onChanged(event.dataTransfer.files[0]);
         }
     }
