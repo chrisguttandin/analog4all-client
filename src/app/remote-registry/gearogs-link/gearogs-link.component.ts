@@ -8,6 +8,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class GearogsLinkComponent {
 
-    @Input() public gearogsSlug: string | undefined;
+    @Input() public readonly gearogsSlug: string | undefined;
 
 }

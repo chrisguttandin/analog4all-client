@@ -8,6 +8,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class SoundCloudLinkComponent {
 
-    @Input() public soundCloudUsername: string | undefined;
+    @Input() public readonly soundCloudUsername: string | undefined;
 
 }
