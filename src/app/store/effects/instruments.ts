@@ -34,7 +34,7 @@ export class InstrumentsEffects {
         private _instrumentsService: InstrumentsService
     ) { }
 
-    @Effect() public get fetchInstrument$ (): Observable<IFetchInstrumentFailAction | IFetchInstrumentSuccessAction> {
+    @Effect() get fetchInstrument$ (): Observable<IFetchInstrumentFailAction | IFetchInstrumentSuccessAction> {
         return this._actions$
             .pipe(
                 ofType<IFetchInstrumentAction>(FETCH_INSTRUMENT),
@@ -42,7 +42,7 @@ export class InstrumentsEffects {
             );
     }
 
-    @Effect() public get fetchInstruments$ (): Observable<IFetchInstrumentsFailAction | IFetchInstrumentsSuccessAction> {
+    @Effect() get fetchInstruments$ (): Observable<IFetchInstrumentsFailAction | IFetchInstrumentsSuccessAction> {
         return this._actions$
             .pipe(
                 ofType<IFetchInstrumentsAction>(FETCH_INSTRUMENTS),
@@ -50,7 +50,7 @@ export class InstrumentsEffects {
             );
     }
 
-    @Effect() public get setIsFetchingInstrumentsToFalse$ (): Observable<ISetIsFetchingInstrumentsAction> {
+    @Effect() get setIsFetchingInstrumentsToFalse$ (): Observable<ISetIsFetchingInstrumentsAction> {
         return this._actions$
             .pipe(
                 ofType<IFetchInstrumentsAction>(FETCH_INSTRUMENTS_FAIL, FETCH_INSTRUMENTS_SUCCESS),
@@ -58,7 +58,7 @@ export class InstrumentsEffects {
             );
     }
 
-    @Effect() public get setIsFetchingInstrumentsToTrue$ (): Observable<ISetIsFetchingInstrumentsAction> {
+    @Effect() get setIsFetchingInstrumentsToTrue$ (): Observable<ISetIsFetchingInstrumentsAction> {
         return this._actions$
             .pipe(
                 ofType<IFetchInstrumentsAction>(FETCH_INSTRUMENTS),
@@ -66,7 +66,7 @@ export class InstrumentsEffects {
             );
     }
 
-    @Effect() public get updateInstruments$ (): Observable<IUpdateInstrumentsAction> {
+    @Effect() get updateInstruments$ (): Observable<IUpdateInstrumentsAction> {
         return this._actions$
             .pipe(
                 ofType<IFetchInstrumentsSuccessAction>(FETCH_INSTRUMENTS_SUCCESS),
@@ -74,7 +74,7 @@ export class InstrumentsEffects {
             );
     }
 
-    @Effect() public get upsertInstrument$ (): Observable<IUpsertInstrumentAction> {
+    @Effect() get upsertInstrument$ (): Observable<IUpsertInstrumentAction> {
         return this._actions$
             .pipe(
                 ofType<IFetchInstrumentSuccessAction>(FETCH_INSTRUMENT_SUCCESS),
