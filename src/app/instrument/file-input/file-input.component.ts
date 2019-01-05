@@ -71,7 +71,7 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
                         return of(null);
                     }
 
-                    return Observable.create((observer: Observer<null | { filename: string; midiJson: IMidiFile }>) => {
+                    return new Observable((observer: Observer<null | { filename: string; midiJson: IMidiFile }>) => {
                         const fileReader = new FileReader();
 
                         this._filenameChanges$.next((<File> file).name);

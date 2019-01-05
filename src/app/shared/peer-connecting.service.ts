@@ -38,7 +38,7 @@ export class PeerConnectingService {
     }
 
     public connect (webSocketSubject: IMaskableSubject<TStringifyableJsonValue>): Observable<IDataChannel> {
-        return Observable.create((observer: Observer<IDataChannel>) => {
+        return new Observable((observer: Observer<IDataChannel>) => {
             const peerConnection = new RTCPeerConnection({
                 iceServers: ICE_SERVERS
             });

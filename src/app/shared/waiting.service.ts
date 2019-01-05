@@ -13,7 +13,7 @@ import { first } from 'rxjs/operators';
 export class WaitingService {
 
     public wait (dataChannelSubject: IMaskableSubject<TStringifyableJsonValue>): Observable<void> {
-        return Observable.create((observer: Observer<void>) => {
+        return new Observable((observer: Observer<void>) => {
             let isPending = true;
 
             const waitingChannel = dataChannelSubject.mask({ type: 'waiting' });
