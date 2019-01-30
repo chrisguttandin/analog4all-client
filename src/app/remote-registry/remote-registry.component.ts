@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { fetchInstruments } from '../store/actions';
 import { IAppState, IInstrument } from '../store/interfaces';
-import { selectInstruments, selectIsFetchingInstruments } from '../store/selectors';
+import { createInstrumentsSelector, createIsFetchingInstrumentsSelector } from '../store/selectors';
 
 @Component({
     styleUrls: [ './remote-registry.component.css' ],
@@ -25,9 +25,8 @@ export class RemoteRegistryComponent implements OnInit {
     public ngOnInit (): void {
         this._store.dispatch(fetchInstruments());
 
-        this.instruments$ = this._store
+        this.instruments$ = createInstrumentsSelector(this._store)
             .pipe(
-                select(selectInstruments),
                 map((instruments) => instruments.filter((instrument) => instrument.isAvailable))
             );
 
@@ -36,10 +35,7 @@ export class RemoteRegistryComponent implements OnInit {
                 map((instruments) => (instruments.length > 0))
             );
 
-        this.setIsFetchingInstruments$ = this._store
-            .pipe(
-                select(selectIsFetchingInstruments)
-            );
+        this.setIsFetchingInstruments$ = createIsFetchingInstrumentsSelector(this._store);
     }
 
     public refresh (): void {

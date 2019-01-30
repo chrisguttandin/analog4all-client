@@ -1,7 +1,7 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { filter, first, map, mergeMap, switchMap } from 'rxjs/operators';
 import { ENDPOINT, MidiJsonBpmService, RenderingService } from '../shared';
@@ -46,11 +46,7 @@ export class InstrumentComponent implements OnDestroy, OnInit {
     public ngOnInit (): void {
         this.instrument$ = this._activatedRoute.data
             .pipe(
-                switchMap(({ instrument: { id } }) => this._store
-                    .pipe(
-                        select(createInstrumentByIdSelector(id))
-                    )
-                )
+                switchMap(({ instrument: { id } }) => createInstrumentByIdSelector(this._store, id))
             );
 
         this.instrumentName$ = this.instrument$
