@@ -3,7 +3,7 @@ import { IMidiFile } from 'midi-json-parser-worker';
 import { Observable } from 'rxjs';
 import { wrap } from 'rxjs-broker';
 import { map, mergeMap, tap } from 'rxjs/operators';
-import { IInstrument } from '../store/interfaces';
+import { TInstrument } from '../store';
 import { DownloadingService } from './downloading.service';
 import { FileReceivingService } from './file-receiving.service';
 import { FileSendingService } from './file-sending.service';
@@ -23,7 +23,7 @@ export class RenderingService {
         private _waitingService: WaitingService
     ) { }
 
-    public render (instrument: IInstrument, bpm: number, filename: string, midiJson: IMidiFile): Observable<null> {
+    public render (instrument: TInstrument, bpm: number, filename: string, midiJson: IMidiFile): Observable<null> {
         return this._generatorsService
             .create({ instrument: { id: instrument.id } })
             .pipe(

@@ -4,19 +4,26 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { EMPTY, Observable, of } from 'rxjs';
 import { filter, first, mergeMap } from 'rxjs/operators';
-import { FETCH_INSTRUMENT_FAIL, FETCH_INSTRUMENT_SUCCESS, fetchInstrument } from '../store/actions';
-import { IAppState, IFetchInstrumentFailAction, IFetchInstrumentSuccessAction, IInstrument } from '../store/interfaces';
+import {
+    FETCH_INSTRUMENT_FAIL,
+    FETCH_INSTRUMENT_SUCCESS,
+    IFetchInstrumentFailAction,
+    IFetchInstrumentSuccessAction,
+    TAppState,
+    TInstrument,
+    fetchInstrument
+} from '../store';
 
 @Injectable()
-export class InstrumentResolver implements Resolve<IInstrument> {
+export class InstrumentResolver implements Resolve<TInstrument> {
 
     constructor (
         private _actions: Actions,
         private _router: Router,
-        private _store: Store<IAppState>
+        private _store: Store<TAppState>
     ) { }
 
-    public resolve (activatedRoute: ActivatedRouteSnapshot): Observable<IInstrument> {
+    public resolve (activatedRoute: ActivatedRouteSnapshot): Observable<TInstrument> {
         const id = activatedRoute.params.id;
 
         this._store.dispatch(fetchInstrument(id));
@@ -29,8 +36,8 @@ export class InstrumentResolver implements Resolve<IInstrument> {
                         return (payload === id);
                     }
 
-                    // @todo TypeScript needs to be convinced that payload is of type IInstrument.
-                    return (<IInstrument> payload).id === id;
+                    // @todo TypeScript needs to be convinced that payload is of type TInstrument.
+                    return (<TInstrument> payload).id === id;
                 }),
                 first(), // tslint:disable-line:rxjs-no-unsafe-first
                 mergeMap(({ payload, type }) => {
@@ -40,8 +47,8 @@ export class InstrumentResolver implements Resolve<IInstrument> {
                         return EMPTY;
                     }
 
-                    // @todo TypeScript needs to be convinced that payload is of type IInstrument.
-                    return of(<IInstrument> payload);
+                    // @todo TypeScript needs to be convinced that payload is of type TInstrument.
+                    return of(<TInstrument> payload);
                 })
             );
     }

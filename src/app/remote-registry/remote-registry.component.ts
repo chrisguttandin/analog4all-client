@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { fetchInstruments } from '../store/actions';
-import { IAppState, IInstrument } from '../store/interfaces';
-import { createInstrumentsSelector, createIsFetchingInstrumentsSelector } from '../store/selectors';
+import { TAppState, TInstrument, createInstrumentsSelector, createIsFetchingInstrumentsSelector, fetchInstruments } from '../store';
 
 @Component({
     styleUrls: [ './remote-registry.component.css' ],
@@ -14,12 +12,12 @@ export class RemoteRegistryComponent implements OnInit {
 
     public hasAvailableInstruments$!: Observable<boolean>;
 
-    public instruments$!: Observable<IInstrument[]>;
+    public instruments$!: Observable<TInstrument[]>;
 
     public setIsFetchingInstruments$!: Observable<boolean>;
 
     constructor (
-        private _store: Store<IAppState>
+        private _store: Store<TAppState>
     ) { }
 
     public ngOnInit (): void {

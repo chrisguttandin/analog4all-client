@@ -5,8 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { filter, first, map, mergeMap, switchMap } from 'rxjs/operators';
 import { ENDPOINT, MidiJsonBpmService, RenderingService } from '../shared';
-import { IAppState, IInstrument } from '../store/interfaces';
-import { createInstrumentByIdSelector } from '../store/selectors';
+import { TAppState, TInstrument, createInstrumentByIdSelector } from '../store';
 
 @Component({
     styleUrls: [ './instrument.component.css' ],
@@ -16,7 +15,7 @@ export class InstrumentComponent implements OnDestroy, OnInit {
 
     public hasMidiJson$!: Observable<boolean>;
 
-    public instrument$!: Observable<null | IInstrument>;
+    public instrument$!: Observable<null | TInstrument>;
 
     public instrumentName$!: Observable<null | string>;
 
@@ -32,7 +31,7 @@ export class InstrumentComponent implements OnDestroy, OnInit {
         private _formBuilder: FormBuilder,
         private _midiJsonBpmService: MidiJsonBpmService,
         private _renderingService: RenderingService,
-        private _store: Store<IAppState>
+        private _store: Store<TAppState>
     ) {
         this._bpmDisabledSubscription = null;
     }
@@ -109,7 +108,7 @@ export class InstrumentComponent implements OnDestroy, OnInit {
             this.instrument$
                 .pipe(
                     first(),
-                    filter<null | IInstrument, IInstrument>((instrument): instrument is IInstrument => (instrument !== null)),
+                    filter((instrument): instrument is TInstrument => (instrument !== null)),
                     mergeMap((instrument) => this._renderingService.render(instrument, bpm, filename, midiJson))
                 )
                 .subscribe(() => { // tslint:disable-line:rxjs-prefer-async-pipe
