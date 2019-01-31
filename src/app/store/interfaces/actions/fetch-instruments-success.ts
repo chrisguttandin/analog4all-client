@@ -1,9 +1,9 @@
 import { Action } from '@ngrx/store';
-import { IInstrument } from '../instrument';
+import { TInstrument } from '../../types';
 
 export interface IFetchInstrumentsSuccessAction extends Action {
 
-    payload: IInstrument[];
+    readonly payload: TInstrument[];
 
     type: 'FETCH_INSTRUMENTS_SUCCESS';
 

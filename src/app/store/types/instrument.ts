@@ -1,4 +1,4 @@
-export interface IInstrument {
+export type TInstrument = Readonly<{
 
     created: number;
 
@@ -14,12 +14,12 @@ export interface IInstrument {
 
     name: string;
 
-    sample?: {
+    sample?: Readonly<{
 
         id: string;
 
-    };
+    }>;
 
     soundCloudUsername?: string;
 
-}
+}>;

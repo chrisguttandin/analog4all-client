@@ -1,9 +1,9 @@
 import { Action } from '@ngrx/store';
-import { IInstrument } from '../instrument';
+import { TInstrument } from '../../types';
 
 export interface IFetchInstrumentFailAction extends Action {
 
-    payload: IInstrument['id'];
+    readonly payload: TInstrument['id'];
 
     type: 'FETCH_INSTRUMENT_FAIL';
 

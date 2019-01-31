@@ -4,7 +4,8 @@ import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { ENDPOINT } from '../../shared/endpoint-token';
 import { fetchInstrumentFail, fetchInstrumentSuccess } from '../actions';
-import { IFetchInstrumentFailAction, IFetchInstrumentSuccessAction, IInstrument } from '../interfaces';
+import { IFetchInstrumentFailAction, IFetchInstrumentSuccessAction } from '../interfaces';
+import { TInstrument } from '../types';
 
 @Injectable()
 export class InstrumentService {
@@ -14,9 +15,9 @@ export class InstrumentService {
         private _httpClient: HttpClient
     ) { }
 
-    public fetch (id: IInstrument['id']): Observable<IFetchInstrumentFailAction | IFetchInstrumentSuccessAction> {
+    public fetch (id: TInstrument['id']): Observable<IFetchInstrumentFailAction | IFetchInstrumentSuccessAction> {
         return this._httpClient
-            .get<IInstrument>(`https${ this._endpoint }instruments/${ id }`)
+            .get<TInstrument>(`https${ this._endpoint }instruments/${ id }`)
             .pipe(
                 map((instrument) => fetchInstrumentSuccess(instrument)),
                 catchError(() => of(fetchInstrumentFail(id)))

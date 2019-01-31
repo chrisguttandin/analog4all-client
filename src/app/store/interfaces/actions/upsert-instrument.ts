@@ -1,9 +1,9 @@
 import { Action } from '@ngrx/store';
-import { IInstrument } from '../instrument';
+import { TInstrument } from '../../types';
 
 export interface IUpsertInstrumentAction extends Action {
 
-    payload: IInstrument;
+    readonly payload: TInstrument;
 
     type: 'UPSERT_INSTRUMENT';
 

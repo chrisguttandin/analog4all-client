@@ -1,12 +1,12 @@
 import { createSelector, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { IAppState, IInstrument } from '../interfaces';
+import { TAppState, TInstrument } from '../types';
 
-const findInstrumentById = (instruments: IAppState['instruments'], id: IInstrument['id']) => {
+const findInstrumentById = (instruments: TAppState['instruments'], id: TInstrument['id']) => {
     return instruments.find((instrument) => (instrument.id === id));
 };
 
-const instrumentByIdSelector = (instruments: IAppState['instruments'], { id }: { id: IInstrument['id'] }) => {
+const instrumentByIdSelector = (instruments: TAppState['instruments'], { id }: { id: TInstrument['id'] }) => {
     const instrument = findInstrumentById(instruments, id);
 
     if (instrument === undefined) {
@@ -16,14 +16,14 @@ const instrumentByIdSelector = (instruments: IAppState['instruments'], { id }: {
     return instrument;
 };
 
-const instrumentsSelector = (state: IAppState) => state.instruments;
+const instrumentsSelector = (state: TAppState) => state.instruments;
 
-export const createInstrumentByIdSelector = (store: Observable<IAppState>, id: IInstrument['id']) => store
+export const createInstrumentByIdSelector = (store: Observable<TAppState>, id: TInstrument['id']) => store
     .pipe(
         select(createSelector(instrumentsSelector, instrumentByIdSelector), { id })
     );
 
-export const createInstrumentsSelector = (store: Observable<IAppState>) => store
+export const createInstrumentsSelector = (store: Observable<TAppState>) => store
     .pipe(
         select(instrumentsSelector)
     );
