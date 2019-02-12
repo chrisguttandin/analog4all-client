@@ -20,7 +20,7 @@ import { appReducer } from './store';
         ]),
         (environment.production)
             ? [ ]
-            : StoreDevtoolsModule.instrument({ maxAge: 5 })
+            : StoreDevtoolsModule.instrument({ maxAge: 50 })
     ],
     providers: [
         InstrumentService,
