@@ -27,26 +27,26 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
 
     private _checkForFileOnFocus: boolean;
 
-    private _filenameChanges$: BehaviorSubject<null | string>;
+    private _filenameChangesSubject: BehaviorSubject<null | string>;
 
     private _onChange: (_: any) => void;
 
     private _onTouched: () => void;
 
-    private _stateChanges$: BehaviorSubject<string>;
+    private _stateChangesSubject: BehaviorSubject<string>;
 
-    private _valueChanges$: BehaviorSubject<any>; // @todo BehaviorSubject<MidiJson>
+    private _valueChangesSubject: BehaviorSubject<any>; // @todo BehaviorSubject<MidiJson>
 
     private _valueChangesSubscription: null | Subscription;
 
     constructor () {
         this._checkForFileOnFocus = false;
         this.isDraggedOver = false;
-        this._filenameChanges$ = new BehaviorSubject<null | string>(null);
+        this._filenameChangesSubject = new BehaviorSubject<null | string>(null);
         this._onChange = (_: any) => {}; // tslint:disable-line:no-empty
         this._onTouched = () => {}; // tslint:disable-line:no-empty
-        this._stateChanges$ = new BehaviorSubject('empty');
-        this._valueChanges$ = new BehaviorSubject(null);
+        this._stateChangesSubject = new BehaviorSubject('empty');
+        this._valueChangesSubject = new BehaviorSubject(null);
         this._valueChangesSubscription = null;
     }
 
@@ -57,16 +57,16 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
     }
 
     public ngOnInit (): void {
-        this.filename$ = this._filenameChanges$.asObservable();
+        this.filename$ = this._filenameChangesSubject.asObservable();
 
-        this.state$ = this._stateChanges$.asObservable();
+        this.state$ = this._stateChangesSubject.asObservable();
 
-        this._valueChangesSubscription = this._valueChanges$
+        this._valueChangesSubscription = this._valueChangesSubject
             .pipe(
                 switchMap((file) => {
                     if (file === null) {
-                        this._filenameChanges$.next(null);
-                        this._stateChanges$.next('empty');
+                        this._filenameChangesSubject.next(null);
+                        this._stateChangesSubject.next('empty');
 
                         return of(null);
                     }
@@ -74,19 +74,19 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
                     return new Observable((observer: Observer<null | { filename: string; midiJson: IMidiFile }>) => {
                         const fileReader = new FileReader();
 
-                        this._filenameChanges$.next((<File> file).name);
-                        this._stateChanges$.next('parsing');
+                        this._filenameChangesSubject.next((<File> file).name);
+                        this._stateChangesSubject.next('parsing');
 
                         fileReader.addEventListener('load', () => {
                             if (fileReader.result instanceof ArrayBuffer) {
                                 parseArrayBuffer(fileReader.result)
                                     .then((midiJson) => {
-                                        this._stateChanges$.next('filled');
+                                        this._stateChangesSubject.next('filled');
 
                                         observer.next({ filename: (<File> file).name, midiJson });
                                     })
                                     .catch(() => {
-                                        this._stateChanges$.next('failed');
+                                        this._stateChangesSubject.next('failed');
 
                                         observer.next(null);
                                     })
@@ -104,7 +104,7 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
     }
 
     public onChanged (file: File): void {
-        this._valueChanges$.next((file === undefined) ? null : file);
+        this._valueChangesSubject.next((file === undefined) ? null : file);
     }
 
     public onClick (): void {
@@ -161,7 +161,7 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
     // @todo public setDisabledState (isDisabled: boolean): void { }
 
     public writeValue (value: any): void {
-        this._valueChanges$.next(value);
+        this._valueChangesSubject.next(value);
     }
 
 }

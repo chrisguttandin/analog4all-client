@@ -36,7 +36,7 @@ describe('InstrumentResolver', () => {
         });
 
         it('should dispatch an action of type FETCH_INSTRUMENT with the id given by the params', () => {
-            instrumentResolver.resolve(activatedRouteSnapshot);
+            instrumentResolver.resolve(activatedRouteSnapshot); // tslint:disable-line:rxjs-no-ignored-observable
 
             expect(store.dispatch).toHaveBeenCalledWith({ payload: activatedRouteSnapshot.params.id, type: 'FETCH_INSTRUMENT' });
         });

@@ -16,7 +16,7 @@ export class WaitingService {
         return new Observable((observer: Observer<void>) => {
             let isPending = true;
 
-            const waitingChannel = dataChannelSubject.mask({ type: 'waiting' });
+            const waitingChannelSubject = dataChannelSubject.mask({ type: 'waiting' });
 
             dataChannelSubject
                 .mask({ type: 'ready' })
@@ -43,7 +43,7 @@ export class WaitingService {
                     }
                 });
 
-            const waitingChannelSubscription = waitingChannel
+            const waitingChannelSubscription = waitingChannelSubject
                 .subscribe({
                     complete (): void {
                         if (isPending) {
@@ -59,11 +59,11 @@ export class WaitingService {
                     },
                     next (): void {
                         waitingChannelSubscription.unsubscribe();
-                        waitingChannel.next(undefined);
+                        waitingChannelSubject.next(undefined);
                     }
                 });
 
-            waitingChannel.next(undefined);
+            waitingChannelSubject.next(undefined);
         });
     }
 
