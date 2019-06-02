@@ -36,17 +36,14 @@ export class RenderingService {
                 map(({ dataChannel, generator }) => ({ dataChannelSubject: wrap(dataChannel), generator })),
                 mergeMap<
                     { dataChannelSubject: any; generator: any },
-                    { dataChannelSubject: any; generator: any }
+                    Observable<{ dataChannelSubject: any; generator: any }>
                 >(({ dataChannelSubject, generator }) => this._waitingService
                     .wait(dataChannelSubject)
                     .pipe(
                         map(() => ({ dataChannelSubject, generator }))
                     )
                 ),
-                mergeMap<
-                    { dataChannelSubject: any; generator: any },
-                    { dataChannelSubject: any; generator: any; midiFile: any }
-                >(({ dataChannelSubject, generator }) => this._midiJsonEncodingService
+                mergeMap(({ dataChannelSubject, generator }) => this._midiJsonEncodingService
                     .encode(midiJson, bpm)
                     .pipe(
                         map((midiFile) => ({ dataChannelSubject, generator, midiFile }))
