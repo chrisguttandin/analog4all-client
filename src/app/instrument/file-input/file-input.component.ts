@@ -43,8 +43,8 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
         this._checkForFileOnFocus = false;
         this.isDraggedOver = false;
         this._filenameChangesSubject = new BehaviorSubject<null | string>(null);
-        this._onChange = (_: any) => {}; // tslint:disable-line:no-empty
-        this._onTouched = () => {}; // tslint:disable-line:no-empty
+        this._onChange = (_: any) => { }; // tslint:disable-line:no-empty
+        this._onTouched = () => { }; // tslint:disable-line:no-empty
         this._stateChangesSubject = new BehaviorSubject('empty');
         this._valueChangesSubject = new BehaviorSubject(null);
         this._valueChangesSubscription = null;

@@ -11,10 +11,10 @@ describe('InstrumentResolver', () => {
     beforeEach(() => {
         actions = new Subject();
         router = {
-            navigate (): void {} // tslint:disable-line:no-empty
+            navigate (): void { } // tslint:disable-line:no-empty
         };
         store = {
-            dispatch (): void {} // tslint:disable-line:no-empty
+            dispatch (): void { } // tslint:disable-line:no-empty
         };
 
         spyOn(router, 'navigate');

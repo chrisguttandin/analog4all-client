@@ -22,7 +22,7 @@ export class GeneratorsService {
     }
 
     public connect ({ socket: { url } }: IGenerator): Observable<IDataChannel> {
-        const webSocketSubject = connect(url);
+        const webSocketSubject = connect(url); // tslint:disable-line:no-null-undefined-union
 
         return this._peerConnectingService
             .connect(webSocketSubject)

@@ -37,7 +37,7 @@ export class PeerConnectingService {
         return false;
     }
 
-    public connect (webSocketSubject: IMaskableSubject<TStringifyableJsonValue>): Observable<IDataChannel> {
+    public connect (webSocketSubject: IMaskableSubject<TStringifyableJsonValue>): Observable<IDataChannel> { // tslint:disable-line:max-line-length no-null-undefined-union
         return new Observable((observer: Observer<IDataChannel>) => {
             const peerConnection = new RTCPeerConnection({
                 iceServers: ICE_SERVERS
