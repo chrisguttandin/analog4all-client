@@ -1,6 +1,6 @@
 module.exports = {
     'runtime': [
-        'build/analog4all-client/runtime.*.js'
+        'build/analog4all-client/runtime-es*.js'
     ],
     'scripts': [
         'build/analog4all-client/!(ngsw-worker).js'
