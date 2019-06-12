@@ -33,6 +33,6 @@ module.exports = {
         cmd: 'ng test --watch false'
     },
     verify: {
-        cmd: "bundle-buddy build/analog4all-client/*.js.map && grep -r build/**/*.map -e '/environments/environment.ts'; test $? -eq 1"
+        cmd: "bundle-buddy build/analog4all-client/*-es2015.*.js.map && bundle-buddy build/analog4all-client/*-es5.*.js.map && grep -r build/**/*.map -e '/environments/environment.ts'; test $? -eq 1"
     }
 };
