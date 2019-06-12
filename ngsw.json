@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1560305207405,
+  "timestamp": 1560306358748,
   "index": "/analog4all-client/index.html",
   "assetGroups": [
     {
@@ -19,8 +19,6 @@
         "/analog4all-client/scripts/main-es5.293b83ce369858ecfcc3.js",
         "/analog4all-client/scripts/polyfills-es2015.d0169f07b6a037884805.js",
         "/analog4all-client/scripts/polyfills-es5.6eb623bb972408419f8b.js",
-        "/analog4all-client/scripts/runtime-es2015.02ef6a7dd46ce60fcd63.js",
-        "/analog4all-client/scripts/runtime-es5.312e6b7bb9aee6673699.js",
         "/analog4all-client/styles/styles.937dfc4e92c4e4572e9a.css"
       ],
       "patterns": []
@@ -52,13 +50,11 @@
     "/analog4all-client/assets/sc-proone.jpg": "2116fcb0987aae57921c0125178fe734732159bd",
     "/analog4all-client/scripts/common-es2015.96a508093e3e395a2478.js": "909005afa8abbbc97909799ea9cd8bdddb869832",
     "/analog4all-client/scripts/common-es5.da674d10f5e0ded098b3.js": "f05990eeb3917c0d279b4fb0849ba49c9e7c777f",
-    "/analog4all-client/index.html": "7764982d2d6ca51f2a4a7346c20893b7d8813c8d",
-    "/analog4all-client/scripts/main-es2015.4f1447e3ed7442bffb67.js": "ca90621c232a65e058cfc95a49527e25867835ed",
-    "/analog4all-client/scripts/main-es5.293b83ce369858ecfcc3.js": "63a4a82953a40082c7a2aeb6cc22c0e2240e75ff",
+    "/analog4all-client/index.html": "ab1eb33a40dc7512866ea3b3272935b584394ebb",
+    "/analog4all-client/scripts/main-es2015.4f1447e3ed7442bffb67.js": "62c0f660c3f52b7707e99cbafe841a290c2772c7",
+    "/analog4all-client/scripts/main-es5.293b83ce369858ecfcc3.js": "e77acadfcc1c07b55fe23257bb29e1177867c017",
     "/analog4all-client/scripts/polyfills-es2015.d0169f07b6a037884805.js": "a6fa1afe5f7ed09782bccc7344a2da3174dcf045",
     "/analog4all-client/scripts/polyfills-es5.6eb623bb972408419f8b.js": "cea815c348157c131750b83f4843473098e92b86",
-    "/analog4all-client/scripts/runtime-es2015.02ef6a7dd46ce60fcd63.js": "17acb0a2ddbbca73f6519da83d9926b37b89ab6e",
-    "/analog4all-client/scripts/runtime-es5.312e6b7bb9aee6673699.js": "51494067c5f84b306df9a210ecad4e29f47900a9",
     "/analog4all-client/styles/styles.937dfc4e92c4e4572e9a.css": "5405c7a4262d0de324f64d02faa5ea5145afbfd2"
   },
   "navigationUrls": [
