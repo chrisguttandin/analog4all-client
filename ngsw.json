@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1560308324787,
+  "timestamp": 1560443866070,
   "index": "/analog4all-client/index.html",
   "assetGroups": [
     {
@@ -50,7 +50,7 @@
     "/analog4all-client/assets/sc-proone.jpg": "2116fcb0987aae57921c0125178fe734732159bd",
     "/analog4all-client/scripts/common-es2015.96a508093e3e395a2478.js": "909005afa8abbbc97909799ea9cd8bdddb869832",
     "/analog4all-client/scripts/common-es5.da674d10f5e0ded098b3.js": "f05990eeb3917c0d279b4fb0849ba49c9e7c777f",
-    "/analog4all-client/index.html": "b2db3b632194c1daf7cadb1e52463e8c97584d8d",
+    "/analog4all-client/index.html": "229b1e74bae81e9ce5ec91541008f43d66a59f13",
     "/analog4all-client/scripts/main-es2015.4f1447e3ed7442bffb67.js": "62c0f660c3f52b7707e99cbafe841a290c2772c7",
     "/analog4all-client/scripts/main-es5.293b83ce369858ecfcc3.js": "e77acadfcc1c07b55fe23257bb29e1177867c017",
     "/analog4all-client/scripts/polyfills-es2015.d0169f07b6a037884805.js": "a6fa1afe5f7ed09782bccc7344a2da3174dcf045",
