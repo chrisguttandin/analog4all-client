@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1560443866070,
+  "timestamp": 1560554276764,
   "index": "/analog4all-client/index.html",
   "assetGroups": [
     {
@@ -8,16 +8,16 @@
       "installMode": "prefetch",
       "updateMode": "prefetch",
       "urls": [
-        "/analog4all-client/scripts/5-es2015.02ebf5eac916ce20bf7f.js",
-        "/analog4all-client/scripts/5-es5.ef2eedf877e7744f6a36.js",
+        "/analog4all-client/scripts/5-es2015.f5eb97a6403ab4345cb2.js",
+        "/analog4all-client/scripts/5-es5.62fc09efe508b97cce0c.js",
         "/analog4all-client/scripts/6-es2015.1bf0ab2a1940b6c065f3.js",
         "/analog4all-client/scripts/6-es5.cacb0aab7a7c06e36ada.js",
         "/analog4all-client/scripts/common-es2015.96a508093e3e395a2478.js",
         "/analog4all-client/scripts/common-es5.da674d10f5e0ded098b3.js",
         "/analog4all-client/index.html",
-        "/analog4all-client/scripts/main-es2015.4f1447e3ed7442bffb67.js",
-        "/analog4all-client/scripts/main-es5.293b83ce369858ecfcc3.js",
-        "/analog4all-client/scripts/polyfills-es2015.d0169f07b6a037884805.js",
+        "/analog4all-client/scripts/main-es2015.3401d25c82ccac26b2ef.js",
+        "/analog4all-client/scripts/main-es5.94c94b8b109e40bcb571.js",
+        "/analog4all-client/scripts/polyfills-es2015.778abc310f255f1e7031.js",
         "/analog4all-client/scripts/polyfills-es5.6eb623bb972408419f8b.js",
         "/analog4all-client/styles/styles.937dfc4e92c4e4572e9a.css"
       ],
@@ -39,8 +39,8 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "/analog4all-client/scripts/5-es2015.02ebf5eac916ce20bf7f.js": "04ba6c1f91a4147f3691175cd240586615de8601",
-    "/analog4all-client/scripts/5-es5.ef2eedf877e7744f6a36.js": "ed7a8f25ee2b4087de9e9b564f3decb0d6c9574c",
+    "/analog4all-client/scripts/5-es2015.f5eb97a6403ab4345cb2.js": "04ba6c1f91a4147f3691175cd240586615de8601",
+    "/analog4all-client/scripts/5-es5.62fc09efe508b97cce0c.js": "ed7a8f25ee2b4087de9e9b564f3decb0d6c9574c",
     "/analog4all-client/scripts/6-es2015.1bf0ab2a1940b6c065f3.js": "d7ba5ece1787efa88c83dccfb83559e7912a9e2a",
     "/analog4all-client/scripts/6-es5.cacb0aab7a7c06e36ada.js": "b06d53468755e895df38d5b16e4055d23331f9e7",
     "/analog4all-client/assets/korg-monopoly.jpg": "74100406fe0aba760c893df92eebf6dc395faf24",
@@ -50,10 +50,10 @@
     "/analog4all-client/assets/sc-proone.jpg": "2116fcb0987aae57921c0125178fe734732159bd",
     "/analog4all-client/scripts/common-es2015.96a508093e3e395a2478.js": "909005afa8abbbc97909799ea9cd8bdddb869832",
     "/analog4all-client/scripts/common-es5.da674d10f5e0ded098b3.js": "f05990eeb3917c0d279b4fb0849ba49c9e7c777f",
-    "/analog4all-client/index.html": "229b1e74bae81e9ce5ec91541008f43d66a59f13",
-    "/analog4all-client/scripts/main-es2015.4f1447e3ed7442bffb67.js": "62c0f660c3f52b7707e99cbafe841a290c2772c7",
-    "/analog4all-client/scripts/main-es5.293b83ce369858ecfcc3.js": "e77acadfcc1c07b55fe23257bb29e1177867c017",
-    "/analog4all-client/scripts/polyfills-es2015.d0169f07b6a037884805.js": "a6fa1afe5f7ed09782bccc7344a2da3174dcf045",
+    "/analog4all-client/index.html": "a69190811f9a7d38c69edc4da1a362045b6bf0eb",
+    "/analog4all-client/scripts/main-es2015.3401d25c82ccac26b2ef.js": "5d6a57cbb246434eb93a89773feb041248ced02c",
+    "/analog4all-client/scripts/main-es5.94c94b8b109e40bcb571.js": "516b775f833384b450b0932690913d5f21ff6153",
+    "/analog4all-client/scripts/polyfills-es2015.778abc310f255f1e7031.js": "8788702b8f87d9e6991f96cac0c252c355113762",
     "/analog4all-client/scripts/polyfills-es5.6eb623bb972408419f8b.js": "cea815c348157c131750b83f4843473098e92b86",
     "/analog4all-client/styles/styles.937dfc4e92c4e4572e9a.css": "5405c7a4262d0de324f64d02faa5ea5145afbfd2"
   },
