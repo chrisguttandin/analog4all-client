@@ -25,6 +25,7 @@ module.exports = {
                 'eslint-config-holy-grail',
                 'grunt-*',
                 'hint',
+                'htmlhint',
                 'husky',
                 'jasmine-core',
                 'karma*',
