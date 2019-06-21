@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1560554276764,
+  "timestamp": 1561115658448,
   "index": "/analog4all-client/index.html",
   "assetGroups": [
     {
@@ -8,17 +8,13 @@
       "installMode": "prefetch",
       "updateMode": "prefetch",
       "urls": [
-        "/analog4all-client/scripts/5-es2015.f5eb97a6403ab4345cb2.js",
-        "/analog4all-client/scripts/5-es5.62fc09efe508b97cce0c.js",
-        "/analog4all-client/scripts/6-es2015.1bf0ab2a1940b6c065f3.js",
-        "/analog4all-client/scripts/6-es5.cacb0aab7a7c06e36ada.js",
-        "/analog4all-client/scripts/common-es2015.96a508093e3e395a2478.js",
-        "/analog4all-client/scripts/common-es5.da674d10f5e0ded098b3.js",
+        "/analog4all-client/scripts/5.cca7f87bc01689d0de23.js",
+        "/analog4all-client/scripts/6.1bf0ab2a1940b6c065f3.js",
+        "/analog4all-client/scripts/common.96a508093e3e395a2478.js",
         "/analog4all-client/index.html",
-        "/analog4all-client/scripts/main-es2015.3401d25c82ccac26b2ef.js",
-        "/analog4all-client/scripts/main-es5.94c94b8b109e40bcb571.js",
-        "/analog4all-client/scripts/polyfills-es2015.778abc310f255f1e7031.js",
-        "/analog4all-client/scripts/polyfills-es5.6eb623bb972408419f8b.js",
+        "/analog4all-client/scripts/main.c647de54782af530c4fb.js",
+        "/analog4all-client/scripts/polyfills.778abc310f255f1e7031.js",
+        "/analog4all-client/scripts/runtime.c0692a85dfadc35f0bd1.js",
         "/analog4all-client/styles/styles.937dfc4e92c4e4572e9a.css"
       ],
       "patterns": []
@@ -39,22 +35,18 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "/analog4all-client/scripts/5-es2015.f5eb97a6403ab4345cb2.js": "04ba6c1f91a4147f3691175cd240586615de8601",
-    "/analog4all-client/scripts/5-es5.62fc09efe508b97cce0c.js": "ed7a8f25ee2b4087de9e9b564f3decb0d6c9574c",
-    "/analog4all-client/scripts/6-es2015.1bf0ab2a1940b6c065f3.js": "d7ba5ece1787efa88c83dccfb83559e7912a9e2a",
-    "/analog4all-client/scripts/6-es5.cacb0aab7a7c06e36ada.js": "b06d53468755e895df38d5b16e4055d23331f9e7",
+    "/analog4all-client/scripts/5.cca7f87bc01689d0de23.js": "04ba6c1f91a4147f3691175cd240586615de8601",
+    "/analog4all-client/scripts/6.1bf0ab2a1940b6c065f3.js": "d7ba5ece1787efa88c83dccfb83559e7912a9e2a",
     "/analog4all-client/assets/korg-monopoly.jpg": "74100406fe0aba760c893df92eebf6dc395faf24",
     "/analog4all-client/assets/moog-minitaur.jpg": "bd7a1cafea9a8a5d962c625a3a48e19c80bde88c",
     "/analog4all-client/assets/roland-juno60.jpg": "170ea1624e7128b50b1b092b701ca6fc0b72e208",
     "/analog4all-client/assets/roland-system1.jpg": "9f8838be8d39f06760b7e436021dbafbe20fafe2",
     "/analog4all-client/assets/sc-proone.jpg": "2116fcb0987aae57921c0125178fe734732159bd",
-    "/analog4all-client/scripts/common-es2015.96a508093e3e395a2478.js": "909005afa8abbbc97909799ea9cd8bdddb869832",
-    "/analog4all-client/scripts/common-es5.da674d10f5e0ded098b3.js": "f05990eeb3917c0d279b4fb0849ba49c9e7c777f",
-    "/analog4all-client/index.html": "a69190811f9a7d38c69edc4da1a362045b6bf0eb",
-    "/analog4all-client/scripts/main-es2015.3401d25c82ccac26b2ef.js": "5d6a57cbb246434eb93a89773feb041248ced02c",
-    "/analog4all-client/scripts/main-es5.94c94b8b109e40bcb571.js": "516b775f833384b450b0932690913d5f21ff6153",
-    "/analog4all-client/scripts/polyfills-es2015.778abc310f255f1e7031.js": "8788702b8f87d9e6991f96cac0c252c355113762",
-    "/analog4all-client/scripts/polyfills-es5.6eb623bb972408419f8b.js": "cea815c348157c131750b83f4843473098e92b86",
+    "/analog4all-client/scripts/common.96a508093e3e395a2478.js": "909005afa8abbbc97909799ea9cd8bdddb869832",
+    "/analog4all-client/index.html": "b7a66317a83a489b48eb83cb37f7d93350005b94",
+    "/analog4all-client/scripts/main.c647de54782af530c4fb.js": "601c56be8a96d161ec8ade76948248454a445b12",
+    "/analog4all-client/scripts/polyfills.778abc310f255f1e7031.js": "8788702b8f87d9e6991f96cac0c252c355113762",
+    "/analog4all-client/scripts/runtime.c0692a85dfadc35f0bd1.js": "b5a7c33889374d90a7dc530cc3a57c0a84f4fb51",
     "/analog4all-client/styles/styles.937dfc4e92c4e4572e9a.css": "5405c7a4262d0de324f64d02faa5ea5145afbfd2"
   },
   "navigationUrls": [
