@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1561123097351,
+  "timestamp": 1561123964995,
   "index": "/analog4all-client/index.html",
   "assetGroups": [
     {
@@ -52,8 +52,8 @@
     "/analog4all-client/assets/3a1c41be.roland-system1.jpg": "9f8838be8d39f06760b7e436021dbafbe20fafe2",
     "/analog4all-client/assets/dae4a7db.sc-proone.jpg": "2116fcb0987aae57921c0125178fe734732159bd",
     "/analog4all-client/scripts/common.96a508093e3e395a2478.js": "909005afa8abbbc97909799ea9cd8bdddb869832",
-    "/analog4all-client/index.html": "e6f3bf5f8cefa13244e38aca14aa801721f885af",
-    "/analog4all-client/scripts/main.c647de54782af530c4fb.js": "601c56be8a96d161ec8ade76948248454a445b12",
+    "/analog4all-client/index.html": "d6b6083b00df66107c9c4fcb43f1f286508268aa",
+    "/analog4all-client/scripts/main.c647de54782af530c4fb.js": "0d945224dff5997bcef63535392b25b08e4be2c6",
     "/analog4all-client/scripts/polyfills.778abc310f255f1e7031.js": "8788702b8f87d9e6991f96cac0c252c355113762",
     "/analog4all-client/styles/styles.937dfc4e92c4e4572e9a.css": "5405c7a4262d0de324f64d02faa5ea5145afbfd2"
   },
