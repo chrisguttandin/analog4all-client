@@ -101,6 +101,21 @@ module.exports = (grunt) => {
                 } ]
             }
         },
+        'images': {
+            files: {
+                './': [
+                    'build/analog4all-client/index.html',
+                    'build/analog4all-client/**/*.css',
+                    'build/analog4all-client/**/*.js'
+                ]
+            },
+            options: {
+                patterns: [ {
+                    match: /assets\/([a-z0-9-]+)\.(ico|jpg|png)/g,
+                    replacement: (_, filename, extension) => grunt.file.expand({ cwd: 'build/analog4all-client' }, `assets/*.${ filename }.${ extension }`)[0]
+                } ]
+            }
+        },
         'manifest': {
             files: {
                 './': [
