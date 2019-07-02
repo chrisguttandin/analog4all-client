@@ -8,7 +8,9 @@ import { ENDPOINT } from './endpoint-token';
 import { PeerConnectingService } from './peer-connecting.service';
 import { ResponseError } from './response-error';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class GeneratorsService {
 
     constructor (

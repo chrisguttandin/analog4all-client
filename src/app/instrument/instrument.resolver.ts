@@ -14,7 +14,9 @@ import {
     fetchInstrument
 } from '../store';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class InstrumentResolver implements Resolve<TInstrument> {
 
     constructor (

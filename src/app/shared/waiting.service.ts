@@ -9,7 +9,9 @@ import { first } from 'rxjs/operators';
  * while it was listening to the socket. It then waits for a ready event to finally resolve the
  * promise.
  */
-@Injectable()
+ @Injectable({
+     providedIn: 'root'
+ })
 export class WaitingService {
 
     public wait (dataChannelSubject: IMaskableSubject<TStringifyableJsonValue>): Observable<void> { // tslint:disable-line:max-line-length no-null-undefined-union

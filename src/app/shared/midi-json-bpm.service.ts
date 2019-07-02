@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { IMidiFile, IMidiSetTempoEvent } from 'midi-json-parser-worker';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class MidiJsonBpmService {
 
     // @todo A very similar function exists in the midi-file-slicer module.

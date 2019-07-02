@@ -4,7 +4,9 @@ import { IMaskableSubject, IStringifyableJsonObject } from 'rxjs-broker';
 
 const CHUNK_SIZE = 1024;
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class FileSendingService {
 
     public send (dataChannelSubject: IMaskableSubject<IStringifyableJsonObject>, file: File): Observable<void> {

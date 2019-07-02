@@ -19,9 +19,6 @@ const routes: Routes = [
     ],
     imports: [
         RouterModule.forChild(routes)
-    ],
-    providers: [
-        InstrumentResolver
     ]
 })
 export class InstrumentRoutingModule { }

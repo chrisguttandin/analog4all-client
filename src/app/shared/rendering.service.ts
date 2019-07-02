@@ -11,7 +11,9 @@ import { GeneratorsService } from './generators.service';
 import { MidiJsonEncodingService } from './midi-json-encoding.service';
 import { WaitingService } from './waiting.service';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class RenderingService {
 
     constructor (

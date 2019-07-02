@@ -7,7 +7,9 @@ import { fetchInstrumentFail, fetchInstrumentSuccess } from '../actions';
 import { IFetchInstrumentFailAction, IFetchInstrumentSuccessAction } from '../interfaces';
 import { TInstrument } from '../types';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class InstrumentService {
 
     constructor (

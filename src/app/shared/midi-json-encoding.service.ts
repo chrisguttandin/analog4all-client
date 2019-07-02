@@ -4,7 +4,9 @@ import { IMidiFile } from 'midi-json-parser-worker';
 import { Observable, Observer } from 'rxjs';
 import { MidiJsonBpmService } from './midi-json-bpm.service';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class MidiJsonEncodingService {
 
     constructor (private _midiJsonBpmService: MidiJsonBpmService) { }

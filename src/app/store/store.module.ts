@@ -6,7 +6,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'; // tslint:disable-li
 import { storeFreeze } from 'ngrx-store-freeze'; // tslint:disable-line:no-implicit-dependencies
 import { environment } from '../../environments/environment';
 import { InstrumentsEffects } from './effects';
-import { InstrumentService, InstrumentsService } from './services';
 import { appReducer } from './store';
 
 @NgModule({
@@ -21,10 +20,6 @@ import { appReducer } from './store';
         (environment.production)
             ? [ ]
             : StoreDevtoolsModule.instrument({ maxAge: 50 })
-    ],
-    providers: [
-        InstrumentService,
-        InstrumentsService
     ]
 })
 export class StoreModule { }

@@ -5,19 +5,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {
-    DownloadingService,
-    ENDPOINT,
-    FileReceivingService,
-    FileSendingService,
-    GeneratorsService,
-    MidiJsonBpmService,
-    MidiJsonEncodingService,
-    PeerConnectingService,
-    RenderingService,
-    WaitingService,
-    WindowService
-} from './shared';
+import { ENDPOINT } from './shared';
 import { StoreModule } from './store';
 
 @NgModule({
@@ -35,17 +23,7 @@ import { StoreModule } from './store';
         StoreModule
     ],
     providers: [
-        DownloadingService,
-        { provide: ENDPOINT, useValue: '://jbnw79pt56.execute-api.eu-west-1.amazonaws.com/dev/' },
-        FileReceivingService,
-        FileSendingService,
-        GeneratorsService,
-        MidiJsonBpmService,
-        MidiJsonEncodingService,
-        PeerConnectingService,
-        RenderingService,
-        WaitingService,
-        WindowService
+        { provide: ENDPOINT, useValue: '://jbnw79pt56.execute-api.eu-west-1.amazonaws.com/dev/' }
     ]
 })
 export class AppModule { }
