@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1562024463463,
+  "timestamp": 1562181274237,
   "index": "/analog4all-client/index.html",
   "assetGroups": [
     {
@@ -8,12 +8,12 @@
       "installMode": "prefetch",
       "updateMode": "prefetch",
       "urls": [
-        "/analog4all-client/scripts/5.1f6aa8d90f974d3874d3.js",
-        "/analog4all-client/scripts/6.1bf0ab2a1940b6c065f3.js",
-        "/analog4all-client/scripts/common.96a508093e3e395a2478.js",
+        "/analog4all-client/scripts/5.f96e2449e68843d3859e.js",
+        "/analog4all-client/scripts/6.7c4e6d9f58d8772e2891.js",
+        "/analog4all-client/scripts/common.e8da23fe4976e958135e.js",
         "/analog4all-client/index.html",
-        "/analog4all-client/scripts/main.c57d758c70ec929c2e77.js",
-        "/analog4all-client/scripts/polyfills.778abc310f255f1e7031.js",
+        "/analog4all-client/scripts/main.616cce7039fba4312216.js",
+        "/analog4all-client/scripts/polyfills.25d37a94b549870c78bc.js",
         "/analog4all-client/styles/styles.937dfc4e92c4e4572e9a.css"
       ],
       "patterns": []
@@ -44,17 +44,17 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "/analog4all-client/scripts/5.1f6aa8d90f974d3874d3.js": "04ba6c1f91a4147f3691175cd240586615de8601",
-    "/analog4all-client/scripts/6.1bf0ab2a1940b6c065f3.js": "d7ba5ece1787efa88c83dccfb83559e7912a9e2a",
+    "/analog4all-client/scripts/5.f96e2449e68843d3859e.js": "8580d0caddee2d98118226949937cd94ba9523e1",
+    "/analog4all-client/scripts/6.7c4e6d9f58d8772e2891.js": "977ff0963ad4bb3852ab014a1755ae6ccf8c647b",
     "/analog4all-client/assets/ae0997f5.korg-monopoly.jpg": "74100406fe0aba760c893df92eebf6dc395faf24",
     "/analog4all-client/assets/d92370e4.moog-minitaur.jpg": "bd7a1cafea9a8a5d962c625a3a48e19c80bde88c",
     "/analog4all-client/assets/4e6ceadc.roland-juno60.jpg": "170ea1624e7128b50b1b092b701ca6fc0b72e208",
     "/analog4all-client/assets/3a1c41be.roland-system1.jpg": "9f8838be8d39f06760b7e436021dbafbe20fafe2",
     "/analog4all-client/assets/dae4a7db.sc-proone.jpg": "2116fcb0987aae57921c0125178fe734732159bd",
-    "/analog4all-client/scripts/common.96a508093e3e395a2478.js": "909005afa8abbbc97909799ea9cd8bdddb869832",
-    "/analog4all-client/index.html": "5ae934963cbc57011eb79c340c9e93a77422af24",
-    "/analog4all-client/scripts/main.c57d758c70ec929c2e77.js": "e62ce7d07ee1fc6c5c6eb76d1554d5dad19f1e24",
-    "/analog4all-client/scripts/polyfills.778abc310f255f1e7031.js": "8788702b8f87d9e6991f96cac0c252c355113762",
+    "/analog4all-client/scripts/common.e8da23fe4976e958135e.js": "909005afa8abbbc97909799ea9cd8bdddb869832",
+    "/analog4all-client/index.html": "0401f11d418f76110cf37a637929a5615bd298b6",
+    "/analog4all-client/scripts/main.616cce7039fba4312216.js": "9c027c615776810a800081116621015de0c54bbe",
+    "/analog4all-client/scripts/polyfills.25d37a94b549870c78bc.js": "a91d879f39225eb03372e6d54c666b17649fa3bf",
     "/analog4all-client/styles/styles.937dfc4e92c4e4572e9a.css": "5405c7a4262d0de324f64d02faa5ea5145afbfd2"
   },
   "navigationUrls": [
