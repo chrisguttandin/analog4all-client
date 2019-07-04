@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1562182199791,
+  "timestamp": 1562268768878,
   "index": "/analog4all-client/index.html",
   "assetGroups": [
     {
@@ -8,7 +8,7 @@
       "installMode": "prefetch",
       "updateMode": "prefetch",
       "urls": [
-        "/analog4all-client/scripts/5.f96e2449e68843d3859e.js",
+        "/analog4all-client/scripts/5.9403abdf524ff2912abe.js",
         "/analog4all-client/scripts/6.7c4e6d9f58d8772e2891.js",
         "/analog4all-client/scripts/common.e8da23fe4976e958135e.js",
         "/analog4all-client/index.html",
@@ -44,7 +44,7 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "/analog4all-client/scripts/5.f96e2449e68843d3859e.js": "8580d0caddee2d98118226949937cd94ba9523e1",
+    "/analog4all-client/scripts/5.9403abdf524ff2912abe.js": "ef5b4e0cbdba8867a6a1fbbb8143601a2ce17cb5",
     "/analog4all-client/scripts/6.7c4e6d9f58d8772e2891.js": "977ff0963ad4bb3852ab014a1755ae6ccf8c647b",
     "/analog4all-client/assets/ae0997f5.korg-monopoly.jpg": "74100406fe0aba760c893df92eebf6dc395faf24",
     "/analog4all-client/assets/d92370e4.moog-minitaur.jpg": "bd7a1cafea9a8a5d962c625a3a48e19c80bde88c",
@@ -52,7 +52,7 @@
     "/analog4all-client/assets/3a1c41be.roland-system1.jpg": "9f8838be8d39f06760b7e436021dbafbe20fafe2",
     "/analog4all-client/assets/dae4a7db.sc-proone.jpg": "2116fcb0987aae57921c0125178fe734732159bd",
     "/analog4all-client/scripts/common.e8da23fe4976e958135e.js": "909005afa8abbbc97909799ea9cd8bdddb869832",
-    "/analog4all-client/index.html": "0401f11d418f76110cf37a637929a5615bd298b6",
+    "/analog4all-client/index.html": "f18e294fff8c69f04478e19ac0b2c3a3328a6780",
     "/analog4all-client/scripts/main.616cce7039fba4312216.js": "9c027c615776810a800081116621015de0c54bbe",
     "/analog4all-client/scripts/polyfills.25d37a94b549870c78bc.js": "a91d879f39225eb03372e6d54c666b17649fa3bf",
     "/analog4all-client/styles/styles.937dfc4e92c4e4572e9a.css": "5405c7a4262d0de324f64d02faa5ea5145afbfd2"
