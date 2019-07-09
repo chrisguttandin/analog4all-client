@@ -25,7 +25,7 @@
     "@angular/service-worker": "~8.1.0",
     "@ngrx/effects": "^7.4.0",
     "@ngrx/store": "^7.4.0",
-    "json-midi-encoder": "^3.2.10",
+    "json-midi-encoder": "^3.2.11",
     "midi-json-parser": "^6.2.10",
     "midi-json-parser-worker": "^6.3.9",
     "rxjs": "~6.5.2",
