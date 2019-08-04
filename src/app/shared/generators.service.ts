@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { IDataChannel, connect, isSupported } from 'rxjs-broker';
@@ -35,14 +35,8 @@ export class GeneratorsService {
     }
 
     public create (generator: { instrument: { id: string } }): Observable<IGenerator> {
-        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
         return this._httpClient
-            .post<IGenerator>(
-                `https${ this._endpoint }instruments/${ generator.instrument.id }/generators`,
-                JSON.stringify(generator),
-                { headers }
-            )
+            .post<IGenerator>(`https${ this._endpoint }instruments/${ generator.instrument.id }/generators`, generator)
             .pipe(
                 map((gnrtr) => ({ ...gnrtr, instrument: { id: generator.instrument.id } })),
                 catchError((response) => throwError(new ResponseError(response)))
