@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
-import { IDataChannel, IMaskableSubject, TStringifyableJsonValue } from 'rxjs-broker';
-import { ICandidateSubjectEvent, IDataChannelEvent, IDescriptionSubjectEvent } from '../interfaces';
+import { IRemoteSubject, mask } from 'rxjs-broker';
+import { ICandidateEvent, ICandidateMessage, IClientEvent, IDataChannelEvent, IDescriptionEvent, IDescriptionMessage } from '../interfaces';
 import { WindowService } from './window.service';
 
 const ICE_SERVERS = [ { urls: [
@@ -39,22 +39,24 @@ export class PeerConnectingService {
         return false;
     }
 
-    public connect (webSocketSubject: IMaskableSubject<TStringifyableJsonValue>): Observable<IDataChannel> { // tslint:disable-line:max-line-length no-null-undefined-union
-        return new Observable((observer: Observer<IDataChannel>) => {
+    public connect (webSocketSubject: IRemoteSubject<IClientEvent['message']>): Observable<RTCDataChannel> { // tslint:disable-line:max-line-length no-null-undefined-union
+        return new Observable((observer: Observer<RTCDataChannel>) => {
             const peerConnection = new RTCPeerConnection({
                 iceServers: ICE_SERVERS
             });
 
-            const candidateSubject = webSocketSubject
-                .mask<ICandidateSubjectEvent>({ type: 'candidate' });
-
-            const descriptionSubject = webSocketSubject
-                .mask<IDescriptionSubjectEvent>({ type: 'description' });
+            const candidateSubject = mask<ICandidateMessage, ICandidateEvent, IClientEvent['message']>(
+                { type: 'candidate' },
+                webSocketSubject
+            );
+            const descriptionSubject = mask<IDescriptionMessage, IDescriptionEvent, IClientEvent['message']>(
+                { type: 'description' },
+                webSocketSubject
+            );
 
             const candidateSubjectSubscription = candidateSubject
                 .subscribe(({ candidate }) => peerConnection
-                    // @todo Remove casting again when possible.
-                    .addIceCandidate(new RTCIceCandidate(<any> candidate))
+                    .addIceCandidate(new RTCIceCandidate(candidate))
                     .catch(() => {
                         // Errors can be ignored.
                     }));
@@ -62,8 +64,7 @@ export class PeerConnectingService {
             const descriptionSubjectSubscription = descriptionSubject
                 .subscribe(({ description }) => {
                     peerConnection
-                        // @todo Remove casting again when possible.
-                        .setRemoteDescription(new RTCSessionDescription(<any> description))
+                        .setRemoteDescription(new RTCSessionDescription(description))
                         .catch(() => {
                             // @todo Handle this error and maybe request another description.
                         });
@@ -78,7 +79,7 @@ export class PeerConnectingService {
                                 });
 
                             // @todo Remove casting again when possible.
-                            descriptionSubject.send(<any> { description: answer });
+                            descriptionSubject.send(<IDescriptionMessage> { description: answer });
                         })
                         .catch(() => {
                             // @todo Handle this error and maybe create another answer.
@@ -94,11 +95,12 @@ export class PeerConnectingService {
 
             peerConnection.addEventListener('icecandidate', ({ candidate }) => {
                 if (candidate !== null) {
-                    candidateSubject.send(<any> { candidate });
+                    candidateSubject.send(<ICandidateMessage> { candidate });
                 }
             });
 
-            webSocketSubject.next({ type: 'request' });
+            // @todo Remove casting again when possible.
+            webSocketSubject.next(<any> { type: 'request' });
         });
     }
 

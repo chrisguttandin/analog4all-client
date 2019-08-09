@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IMaskableSubject, IStringifyableJsonObject } from 'rxjs-broker';
+import { IRemoteSubject, IStringifyableJsonObject } from 'rxjs-broker';
 
 const CHUNK_SIZE = 1024;
 
@@ -9,7 +9,7 @@ const CHUNK_SIZE = 1024;
 })
 export class FileSendingService {
 
-    public send (dataChannelSubject: IMaskableSubject<IStringifyableJsonObject>, file: File): Observable<void> {
+    public send (dataChannelSubject: IRemoteSubject<IStringifyableJsonObject>, file: File): Observable<void> {
         return new Observable((observer) => {
             const fileReader = new FileReader();
 

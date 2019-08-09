@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { IDataChannel, connect, isSupported } from 'rxjs-broker';
+import { connect, isSupported } from 'rxjs-broker';
 import { catchError, first, map, tap } from 'rxjs/operators';
-import { IGenerator } from '../interfaces';
+import { IClientEvent, IGenerator } from '../interfaces';
 import { ENDPOINT } from './endpoint-token';
 import { PeerConnectingService } from './peer-connecting.service';
 import { ResponseError } from './response-error';
@@ -23,8 +23,8 @@ export class GeneratorsService {
         return isSupported;
     }
 
-    public connect ({ socket: { url } }: IGenerator): Observable<IDataChannel> {
-        const webSocketSubject = connect(url); // tslint:disable-line:no-null-undefined-union
+    public connect ({ socket: { url } }: IGenerator): Observable<RTCDataChannel> {
+        const webSocketSubject = connect<IClientEvent['message']>(url); // tslint:disable-line:no-null-undefined-union
 
         return this._peerConnectingService
             .connect(webSocketSubject)

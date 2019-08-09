@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
-import { IMaskableSubject, TStringifyableJsonValue } from 'rxjs-broker';
+import { IRemoteSubject, IStringifyableJsonObject, mask } from 'rxjs-broker';
 import { first } from 'rxjs/operators';
 
 /**
@@ -14,14 +14,13 @@ import { first } from 'rxjs/operators';
  })
 export class WaitingService {
 
-    public wait (dataChannelSubject: IMaskableSubject<TStringifyableJsonValue>): Observable<void> { // tslint:disable-line:max-line-length no-null-undefined-union
+    public wait (dataChannelSubject: IRemoteSubject<IStringifyableJsonObject>): Observable<void> { // tslint:disable-line:max-line-length no-null-undefined-union
         return new Observable((observer: Observer<void>) => {
             let isPending = true;
 
-            const waitingChannelSubject = dataChannelSubject.mask({ type: 'waiting' }); // tslint:disable-line:no-null-undefined-union
+            const waitingChannelSubject = mask({ type: 'waiting' }, dataChannelSubject); // tslint:disable-line:no-null-undefined-union
 
-            dataChannelSubject
-                .mask({ type: 'ready' })
+            mask({ type: 'ready' }, dataChannelSubject)
                 .pipe(
                     first<any>()
                 )

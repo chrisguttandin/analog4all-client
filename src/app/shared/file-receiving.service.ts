@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IMaskableSubject, IStringifyableJsonObject } from 'rxjs-broker';
+import { IRemoteSubject, IStringifyableJsonObject } from 'rxjs-broker';
 
 @Injectable({
     providedIn: 'root'
 })
 export class FileReceivingService {
 
-    public receive (dataChannelSubject: IMaskableSubject<IStringifyableJsonObject>): Observable<ArrayBuffer> {
+    public receive (dataChannelSubject: IRemoteSubject<IStringifyableJsonObject>): Observable<ArrayBuffer> {
         return new Observable((observer) => {
             let buffer: ArrayBuffer;
 
