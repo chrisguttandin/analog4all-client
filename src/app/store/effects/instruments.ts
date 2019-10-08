@@ -3,20 +3,18 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 import {
-    FETCH_INSTRUMENT,
-    FETCH_INSTRUMENTS,
-    FETCH_INSTRUMENTS_FAIL,
-    FETCH_INSTRUMENTS_SUCCESS,
-    FETCH_INSTRUMENT_SUCCESS,
+    fetchInstrument,
+    fetchInstrumentSuccess,
+    fetchInstruments,
+    fetchInstrumentsFail,
+    fetchInstrumentsSuccess,
     setIsFetchingInstruments,
     updateInstruments,
     upsertInstrument
 } from '../actions';
 import {
-    IFetchInstrumentAction,
     IFetchInstrumentFailAction,
     IFetchInstrumentSuccessAction,
-    IFetchInstrumentsAction,
     IFetchInstrumentsFailAction,
     IFetchInstrumentsSuccessAction,
     ISetIsFetchingInstrumentsAction,
@@ -39,7 +37,7 @@ export class InstrumentsEffects {
     @Effect() get fetchInstrument$ (): Observable<IFetchInstrumentFailAction | IFetchInstrumentSuccessAction> {
         return this._actions$
             .pipe(
-                ofType<IFetchInstrumentAction>(FETCH_INSTRUMENT),
+                ofType(fetchInstrument),
                 mergeMap(({ payload: id }) => this._instrumentService.fetch(id))
             );
     }
@@ -47,7 +45,7 @@ export class InstrumentsEffects {
     @Effect() get fetchInstruments$ (): Observable<IFetchInstrumentsFailAction | IFetchInstrumentsSuccessAction> {
         return this._actions$
             .pipe(
-                ofType<IFetchInstrumentsAction>(FETCH_INSTRUMENTS),
+                ofType(fetchInstruments),
                 mergeMap(() => this._instrumentsService.fetch())
             );
     }
@@ -55,7 +53,7 @@ export class InstrumentsEffects {
     @Effect() get setIsFetchingInstrumentsToFalse$ (): Observable<ISetIsFetchingInstrumentsAction> {
         return this._actions$
             .pipe(
-                ofType<IFetchInstrumentsAction>(FETCH_INSTRUMENTS_FAIL, FETCH_INSTRUMENTS_SUCCESS),
+                ofType(fetchInstrumentsFail, fetchInstrumentsSuccess),
                 map(() => setIsFetchingInstruments(false))
             );
     }
@@ -63,7 +61,7 @@ export class InstrumentsEffects {
     @Effect() get setIsFetchingInstrumentsToTrue$ (): Observable<ISetIsFetchingInstrumentsAction> {
         return this._actions$
             .pipe(
-                ofType<IFetchInstrumentsAction>(FETCH_INSTRUMENTS),
+                ofType(fetchInstruments),
                 map(() => setIsFetchingInstruments(true))
             );
     }
@@ -71,7 +69,7 @@ export class InstrumentsEffects {
     @Effect() get updateInstruments$ (): Observable<IUpdateInstrumentsAction> {
         return this._actions$
             .pipe(
-                ofType<IFetchInstrumentsSuccessAction>(FETCH_INSTRUMENTS_SUCCESS),
+                ofType(fetchInstrumentsSuccess),
                 map(({ payload: instruments }) => updateInstruments(instruments))
             );
     }
@@ -79,7 +77,7 @@ export class InstrumentsEffects {
     @Effect() get upsertInstrument$ (): Observable<IUpsertInstrumentAction> {
         return this._actions$
             .pipe(
-                ofType<IFetchInstrumentSuccessAction>(FETCH_INSTRUMENT_SUCCESS),
+                ofType(fetchInstrumentSuccess),
                 map(({ payload: instrument }) => upsertInstrument(instrument))
             );
     }

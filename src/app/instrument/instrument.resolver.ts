@@ -4,15 +4,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { EMPTY, Observable, of } from 'rxjs';
 import { filter, first, mergeMap } from 'rxjs/operators';
-import {
-    FETCH_INSTRUMENT_FAIL,
-    FETCH_INSTRUMENT_SUCCESS,
-    IFetchInstrumentFailAction,
-    IFetchInstrumentSuccessAction,
-    TAppState,
-    TInstrument,
-    fetchInstrument
-} from '../store';
+import { TAppState, TInstrument, fetchInstrument, fetchInstrumentFail, fetchInstrumentSuccess } from '../store';
 
 @Injectable({
     providedIn: 'root'
@@ -32,9 +24,9 @@ export class InstrumentResolver implements Resolve<TInstrument> {
 
         return this._actions
             .pipe(
-                ofType<IFetchInstrumentFailAction | IFetchInstrumentSuccessAction>(FETCH_INSTRUMENT_FAIL, FETCH_INSTRUMENT_SUCCESS),
+                ofType(fetchInstrumentFail, fetchInstrumentSuccess),
                 filter(({ payload, type }) => {
-                    if (type === FETCH_INSTRUMENT_FAIL) {
+                    if (type === fetchInstrumentFail.type) {
                         return (payload === id);
                     }
 
@@ -43,7 +35,7 @@ export class InstrumentResolver implements Resolve<TInstrument> {
                 }),
                 first(), // tslint:disable-line:rxjs-no-unsafe-first
                 mergeMap(({ payload, type }) => {
-                    if (type === FETCH_INSTRUMENT_FAIL) {
+                    if (type === fetchInstrumentFail.type) {
                         this._router.navigate([ '/' ]);
 
                         return EMPTY;

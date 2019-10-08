@@ -1,3 +1,4 @@
+import { createAction } from '@ngrx/store';
 import {
     IFetchInstrumentAction,
     IFetchInstrumentFailAction,
@@ -19,40 +20,20 @@ export const FETCH_INSTRUMENTS_SUCCESS: IFetchInstrumentsSuccessAction['type'] =
 export const UPDATE_INSTRUMENTS: IUpdateInstrumentsAction['type'] = 'UPDATE_INSTRUMENTS';
 export const UPSERT_INSTRUMENT: IUpsertInstrumentAction['type'] = 'UPSERT_INSTRUMENT';
 
-export const fetchInstrument = (id: TInstrument['id']): IFetchInstrumentAction => ({
-    payload: id,
-    type: FETCH_INSTRUMENT
-});
+export const fetchInstrument = createAction(FETCH_INSTRUMENT, (id: TInstrument['id']) => ({ payload: id }));
 
-export const fetchInstrumentFail = (id: TInstrument['id']): IFetchInstrumentFailAction => ({
-    payload: id,
-    type: FETCH_INSTRUMENT_FAIL
-});
+export const fetchInstrumentFail = createAction(FETCH_INSTRUMENT_FAIL, (id: TInstrument['id']) => ({ payload: id }));
 
-export const fetchInstrumentSuccess = (instrument: TInstrument): IFetchInstrumentSuccessAction => ({
-    payload: instrument,
-    type: FETCH_INSTRUMENT_SUCCESS
-});
+export const fetchInstrumentSuccess = createAction(FETCH_INSTRUMENT_SUCCESS, (instrument: TInstrument) => ({ payload: instrument }));
 
-export const fetchInstruments = (): IFetchInstrumentsAction => ({
-    type: FETCH_INSTRUMENTS
-});
+export const fetchInstruments = createAction(FETCH_INSTRUMENTS);
 
-export const fetchInstrumentsFail = (): IFetchInstrumentsFailAction => ({
-    type: FETCH_INSTRUMENTS_FAIL
-});
+export const fetchInstrumentsFail = createAction(FETCH_INSTRUMENTS_FAIL);
 
-export const fetchInstrumentsSuccess = (instruments: readonly TInstrument[]): IFetchInstrumentsSuccessAction => ({
-    payload: instruments,
-    type: FETCH_INSTRUMENTS_SUCCESS
-});
+export const fetchInstrumentsSuccess = createAction(FETCH_INSTRUMENTS_SUCCESS, (instruments: readonly TInstrument[]) => ({
+    payload: instruments
+}));
 
-export const updateInstruments = (instruments: readonly TInstrument[]): IUpdateInstrumentsAction => ({
-    payload: instruments,
-    type: UPDATE_INSTRUMENTS
-});
+export const updateInstruments = createAction(UPDATE_INSTRUMENTS, (instruments: readonly TInstrument[]) => ({ payload: instruments }));
 
-export const upsertInstrument = (instrument: TInstrument): IUpsertInstrumentAction => ({
-    payload: instrument,
-    type: UPSERT_INSTRUMENT
-});
+export const upsertInstrument = createAction(UPSERT_INSTRUMENT, (instrument: TInstrument) => ({ payload: instrument }));
