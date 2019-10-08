@@ -3,7 +3,7 @@ import { TInstrument } from '../../types';
 
 export interface IFetchInstrumentsSuccessAction extends Action {
 
-    readonly payload: TInstrument[];
+    readonly payload: readonly TInstrument[];
 
     type: 'FETCH_INSTRUMENTS_SUCCESS';
 

@@ -42,12 +42,12 @@ export const fetchInstrumentsFail = (): IFetchInstrumentsFailAction => ({
     type: FETCH_INSTRUMENTS_FAIL
 });
 
-export const fetchInstrumentsSuccess = (instruments: TInstrument[]): IFetchInstrumentsSuccessAction => ({
+export const fetchInstrumentsSuccess = (instruments: readonly TInstrument[]): IFetchInstrumentsSuccessAction => ({
     payload: instruments,
     type: FETCH_INSTRUMENTS_SUCCESS
 });
 
-export const updateInstruments = (instruments: TInstrument[]): IUpdateInstrumentsAction => ({
+export const updateInstruments = (instruments: readonly TInstrument[]): IUpdateInstrumentsAction => ({
     payload: instruments,
     type: UPDATE_INSTRUMENTS
 });

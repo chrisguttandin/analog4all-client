@@ -2,7 +2,7 @@ import { TInstrument } from './instrument';
 
 export type TAppState = Readonly<{
 
-    instruments: TInstrument[];
+    instruments: readonly TInstrument[];
 
     isFetchingInstruments: boolean;
 

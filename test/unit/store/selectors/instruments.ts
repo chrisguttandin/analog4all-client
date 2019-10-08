@@ -7,7 +7,7 @@ describe('instruments selectors', () => {
 
     describe('without any instrument', () => {
 
-        let instruments: TInstrument[];
+        let instruments: readonly TInstrument[];
         let store: BehaviorSubject<TAppState>;
 
         beforeEach(() => {
@@ -40,7 +40,7 @@ describe('instruments selectors', () => {
 
     describe('with an instrument', () => {
 
-        let instruments: TInstrument[];
+        let instruments: readonly TInstrument[];
         let store: BehaviorSubject<TAppState>;
 
         beforeEach(() => {

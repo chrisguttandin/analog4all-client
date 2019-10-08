@@ -3,7 +3,7 @@ import { TInstrument } from '../../types';
 
 export interface IUpdateInstrumentsAction extends Action {
 
-    readonly payload: TInstrument[];
+    readonly payload: readonly TInstrument[];
 
     type: 'UPDATE_INSTRUMENTS';
 
