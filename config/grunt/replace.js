@@ -1,6 +1,7 @@
 const cspBuilder = require('content-security-policy-builder');
 const cspProductionConfig = require('../csp/production');
 const crypto = require('crypto');
+const { dirname, relative } = require('path');
 const fs = require('fs');
 
 // eslint-disable-next-line padding-line-between-statements
@@ -30,6 +31,60 @@ const replaceHashInMatch = (grunt, match, prefix, index) => {
 
 module.exports = (grunt) => {
     return {
+        'assets': {
+            files: {
+                './': [
+                    'build/analog4all-client/index.html',
+                    'build/analog4all-client/**/*.css',
+                    'build/analog4all-client/**/*.js'
+                ]
+            },
+            options: {
+                patterns: [ {
+                    match: /(?<filename>[\d\-a-z]+)\.(?<hash>[\da-f]{20})\.(?<extension>ico|jpg|png)/g,
+                    replacement: (_1, filename, hash, extension, _2, _3, _4, source) => {
+                        const cwd = 'build/analog4all-client';
+
+                        if (grunt.file.exists(`${ cwd }/assets/${ filename }.${ extension }`)) {
+                            grunt.file.delete(`${ cwd }/assets/${ filename }.${ extension }`);
+                        }
+
+                        if (source.endsWith('.css')) {
+                            return relative(dirname(source), `${ cwd }/assets/${ filename }.${ hash }.${ extension }`);
+                        }
+
+                        return `assets/${ filename }.${ hash }.${ extension }`;
+                    }
+                }, {
+                    match: /assets\/(?<filename>[\d\-a-z]+)\.(?<extension>ico|jpg|png)/g,
+                    replacement: (_1, filename, extension, _2, _3, _4, source) => {
+                        const cwd = 'build/analog4all-client';
+
+                        if (grunt.file.exists(`${ cwd }/assets/${ filename }.${ extension }`)) {
+                            const hash = computeHashOfFile(`${ cwd }/assets/${ filename }.${ extension }`, 'sha1', 'hex').slice(0, 20);
+
+                            grunt.file.copy(
+                                `${ cwd }/assets/${ filename }.${ extension }`,
+                                `${ cwd }/assets/${ filename }.${ hash }.${ extension }`
+                            );
+                            grunt.file.delete(`${ cwd }/assets/${ filename }.${ extension }`);
+
+                            if (source.endsWith('.css')) {
+                                return relative(dirname(source), `${ cwd }/assets/${ filename }.${ hash }.${ extension }`);
+                            }
+
+                            return `assets/${ filename }.${ hash }.${ extension }`;
+                        }
+
+                        if (source.endsWith('.css')) {
+                            return relative(dirname(source), `${ cwd }/${ grunt.file.expand({ cwd, ext: extension }, `assets/${ filename }.*`)[0] }`);
+                        }
+
+                        return `${ grunt.file.expand({ cwd, ext: extension }, `assets/${ filename }.*`)[0] }`;
+                    }
+                } ]
+            }
+        },
         'bundle': {
             files: {
                 './': [
@@ -112,21 +167,6 @@ module.exports = (grunt) => {
                 } ]
             }
         },
-        'images': {
-            files: {
-                './': [
-                    'build/analog4all-client/index.html',
-                    'build/analog4all-client/**/*.css',
-                    'build/analog4all-client/**/*.js'
-                ]
-            },
-            options: {
-                patterns: [ {
-                    match: /assets\/(?<filename>[\d\-a-z]+)\.(?<extension>ico|jpg|png)/g,
-                    replacement: (_, filename, extension) => grunt.file.expand({ cwd: 'build/analog4all-client' }, `assets/*.${ filename }.${ extension }`)[0]
-                } ]
-            }
-        },
         'manifest': {
             files: {
                 './': [
@@ -136,7 +176,7 @@ module.exports = (grunt) => {
             options: {
                 patterns: [ {
                     match: /assets\/(?<filename>[\d\-a-z]+)\.(?<extension>ico|jpg|png)/g,
-                    replacement: (_, filename, extension) => grunt.file.expand({ cwd: 'build/analog4all-client' }, `assets/*.${ filename }.${ extension }`)[0]
+                    replacement: (_, filename, extension) => grunt.file.expand({ cwd: 'build/analog4all-client', ext: extension }, `assets/${ filename }.*`)[0]
                 }, {
                     match: /\/(?<filename>[\d\-a-z]+\.[\da-z]*\.css)"/g,
                     replacement: (_, filename) => `/styles/${ filename }"`

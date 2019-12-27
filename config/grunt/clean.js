@@ -1,4 +1,9 @@
 module.exports = {
+    'assets': [
+        'build/analog4all-client/**.ico',
+        'build/analog4all-client/**.jpg',
+        'build/analog4all-client/**.png'
+    ],
     'runtime': [
         'build/analog4all-client/runtime*.js'
     ],
