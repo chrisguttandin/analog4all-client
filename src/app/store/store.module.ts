@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule as NgRxStoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'; // tslint:disable-line:no-implicit-dependencies
-import { storeFreeze } from 'ngrx-store-freeze'; // tslint:disable-line:no-implicit-dependencies
 import { environment } from '../../environments/environment';
 import { InstrumentsEffects } from './effects';
 import { appReducer } from './store';
@@ -11,9 +10,14 @@ import { appReducer } from './store';
 @NgModule({
     imports: [
         CommonModule,
-        (environment.production)
-            ? NgRxStoreModule.forRoot(appReducer)
-            : NgRxStoreModule.forRoot(appReducer, { metaReducers: [ storeFreeze ] }),
+        NgRxStoreModule.forRoot(appReducer, {
+            runtimeChecks: {
+                strictActionImmutability: !environment.production,
+                strictActionSerializability: !environment.production,
+                strictStateImmutability: !environment.production,
+                strictStateSerializability: !environment.production
+            }
+        }),
         EffectsModule.forRoot([
             InstrumentsEffects
         ]),
