@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
+import { pluckPayloadOfType } from '../../operators';
 import {
     fetchInstrument,
     fetchInstrumentSuccess,
@@ -37,8 +38,8 @@ export class InstrumentsEffects {
     @Effect() get fetchInstrument$ (): Observable<IFetchInstrumentFailAction | IFetchInstrumentSuccessAction> {
         return this._actions$
             .pipe(
-                ofType(fetchInstrument),
-                mergeMap(({ payload: id }) => this._instrumentService.fetch(id))
+                pluckPayloadOfType(fetchInstrument),
+                mergeMap((id) => this._instrumentService.fetch(id))
             );
     }
 
@@ -69,16 +70,16 @@ export class InstrumentsEffects {
     @Effect() get updateInstruments$ (): Observable<IUpdateInstrumentsAction> {
         return this._actions$
             .pipe(
-                ofType(fetchInstrumentsSuccess),
-                map(({ payload: instruments }) => updateInstruments(instruments))
+                pluckPayloadOfType(fetchInstrumentsSuccess),
+                map((instruments) => updateInstruments(instruments))
             );
     }
 
     @Effect() get upsertInstrument$ (): Observable<IUpsertInstrumentAction> {
         return this._actions$
             .pipe(
-                ofType(fetchInstrumentSuccess),
-                map(({ payload: instrument }) => upsertInstrument(instrument))
+                pluckPayloadOfType(fetchInstrumentSuccess),
+                map((instrument) => upsertInstrument(instrument))
             );
     }
 
