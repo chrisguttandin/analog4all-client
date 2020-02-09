@@ -140,7 +140,6 @@
       "@angular/router",
       "@types/jasmine",
       "@types/jasminewd2",
-      "@types/node",
       "jasmine-core",
       "jasmine-spec-reporter",
       "karma",
