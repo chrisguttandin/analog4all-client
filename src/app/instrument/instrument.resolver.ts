@@ -4,7 +4,9 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { EMPTY, Observable, of } from 'rxjs';
 import { filter, first, mergeMap } from 'rxjs/operators';
-import { TAppState, TInstrument, fetchInstrument, fetchInstrumentFail, fetchInstrumentSuccess } from '../store';
+import { TAppState, TInstrument } from '../store';
+// @todo Import the actions via the barrel file again if it doesn't affect the tree-shaking anymore.
+import { fetchInstrument, fetchInstrumentFail, fetchInstrumentSuccess } from '../store/actions';
 
 @Injectable({
     providedIn: 'root'

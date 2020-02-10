@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { TAppState, TInstrument, createInstrumentsSelector, createIsFetchingInstrumentsSelector, fetchInstruments } from '../store';
+import { TAppState, TInstrument } from '../store';
+// @todo Import the actions via the barrel file again if it doesn't affect the tree-shaking anymore.
+import { fetchInstruments } from '../store/actions';
+// @todo Import the selectors via the barrel file again if it doesn't affect the tree-shaking anymore.
+import { createInstrumentsSelector, createIsFetchingInstrumentsSelector } from '../store/selectors';
 
 @Component({
     styleUrls: [ './remote-registry.component.css' ],
