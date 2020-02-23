@@ -61,7 +61,7 @@ describe('InstrumentResolver', () => {
                             done();
                         },
                         error (err): void {
-                            throw err; // tslint:disable-line:rxjs-throw-error
+                            throw err;
                         },
                         next
                     });
@@ -95,7 +95,7 @@ describe('InstrumentResolver', () => {
                             done();
                         },
                         error (err): void {
-                            throw err; // tslint:disable-line:rxjs-throw-error
+                            throw err;
                         },
                         next
                     });
