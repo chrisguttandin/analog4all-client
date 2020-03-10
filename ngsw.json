@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1583707097373,
+  "timestamp": 1583877843940,
   "index": "/analog4all-client/index.html",
   "assetGroups": [
     {
@@ -11,7 +11,7 @@
         "/analog4all-client/scripts/4.e6f408755c2a151a18e2.js",
         "/analog4all-client/scripts/5.6d7a678f0ec24c1a45ac.js",
         "/analog4all-client/index.html",
-        "/analog4all-client/scripts/main.03ff2c349bc3862d5939.js",
+        "/analog4all-client/scripts/main.be1aa7b22b2f78cbc413.js",
         "/analog4all-client/scripts/polyfills.c0594e7aada16583f4ce.js",
         "/analog4all-client/styles/styles.937dfc4e92c4e4572e9a.css"
       ],
@@ -50,8 +50,8 @@
     "/analog4all-client/assets/roland-juno60.jpg": "170ea1624e7128b50b1b092b701ca6fc0b72e208",
     "/analog4all-client/assets/roland-system1.jpg": "9f8838be8d39f06760b7e436021dbafbe20fafe2",
     "/analog4all-client/assets/sc-proone.jpg": "2116fcb0987aae57921c0125178fe734732159bd",
-    "/analog4all-client/index.html": "5447d450bc9bb7e1613311e5eb51d1ca79dd4145",
-    "/analog4all-client/scripts/main.03ff2c349bc3862d5939.js": "20bbe534d9e17aea17e615c69c60a27e00c2aecc",
+    "/analog4all-client/index.html": "baea362523e648e1fcd7168854c81e7bb0b8cbed",
+    "/analog4all-client/scripts/main.be1aa7b22b2f78cbc413.js": "c017655c2aa85aab088e751de03ddf38f0150727",
     "/analog4all-client/scripts/polyfills.c0594e7aada16583f4ce.js": "fb929778c5522826f6d47a18de7fb1edbdcff3d0",
     "/analog4all-client/styles/styles.937dfc4e92c4e4572e9a.css": "0b7183f54321daf5452bb5b33ff3e6248dfcb9c7"
   },
