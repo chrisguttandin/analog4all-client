@@ -103,8 +103,14 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
             .subscribe((midiJson) => this._onChange(midiJson)); // tslint:disable-line:rxjs-prefer-async-pipe
     }
 
-    public onChanged (file: File): void {
-        this._valueChangesSubject.next((file === undefined) ? null : file);
+    public onChanged (event: Event): void {
+        if (event.target === null) {
+            return;
+        }
+
+        const files = (<HTMLInputElement> event.target).files;
+
+        this._valueChangesSubject.next((files === null) ? null : files[0]);
     }
 
     public onClick (): void {
@@ -130,7 +136,7 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
         this.isDraggedOver = false;
 
         if (event.dataTransfer !== null && event.dataTransfer.files.length > 0) {
-            this.onChanged(event.dataTransfer.files[0]);
+            this._valueChangesSubject.next(event.dataTransfer.files[0]);
         }
     }
 
@@ -140,7 +146,7 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
                 if (this._checkForFileOnFocus) {
                     this._checkForFileOnFocus = false;
 
-                    this.onChanged((<any> event.target).files[0]);
+                    this.onChanged(event);
                 }
             });
         }
