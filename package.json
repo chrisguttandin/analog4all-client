@@ -134,7 +134,6 @@
       "@angular/compiler-cli",
       "@angular/core",
       "@angular/forms",
-      "@angular/language-service",
       "@angular/platform-browser",
       "@angular/platform-browser-dynamic",
       "@angular/router",
