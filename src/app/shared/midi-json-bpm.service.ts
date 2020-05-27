@@ -13,7 +13,7 @@ export class MidiJsonBpmService {
         for (const events of tracks) {
             for (const event of events) {
                 if ('setTempo' in event) {
-                    return (60000000 / (<IMidiSetTempoEvent> event).setTempo.microsecondsPerBeat);
+                    return (60000000 / (<IMidiSetTempoEvent> event).setTempo.microsecondsPerQuarter);
                 }
             }
         }
@@ -22,17 +22,18 @@ export class MidiJsonBpmService {
     }
 
     public write (midiJson: IMidiFile, bpm: number): IMidiFile {
-        const microsecondsPerBeat = (60000000 / bpm);
+        const microsecondsPerQuarter = (60000000 / bpm);
 
         let wroteBpmInfo = false;
 
         const tracks = midiJson.tracks
             .map((events) => events
                 .map((event) => {
+                    // @todo Use a guard
                     if (!wroteBpmInfo && 'setTempo' in event) {
                         wroteBpmInfo = true;
 
-                        return { ...event, setTempo: { ...(<IMidiSetTempoEvent> event).setTempo, microsecondsPerBeat } };
+                        return { ...event, setTempo: { ...(<IMidiSetTempoEvent> event).setTempo, microsecondsPerQuarter } };
                     }
 
                     return event;
@@ -49,7 +50,7 @@ export class MidiJsonBpmService {
                     <IMidiSetTempoEvent> {
                         delta: 0,
                         setTempo: {
-                            microsecondsPerBeat
+                            microsecondsPerQuarter
                         }
                     },
                     ...midiJson.tracks[0]
