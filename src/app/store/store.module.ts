@@ -14,6 +14,7 @@ import { appReducer } from './store';
             runtimeChecks: {
                 strictActionImmutability: !environment.production,
                 strictActionSerializability: !environment.production,
+                strictActionTypeUniqueness: !environment.production,
                 strictStateImmutability: !environment.production,
                 strictStateSerializability: !environment.production
             }
