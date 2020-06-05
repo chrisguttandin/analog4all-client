@@ -186,23 +186,23 @@ module.exports = (grunt) => {
                     match: /\s*"\/analog4all-client(?:\/scripts)?\/runtime(?:-es(?:2015|5))?.[\da-z]*\.js",/g,
                     replacement: ''
                 }, {
-                    match: /\s*"\/analog4all-client(?:\/scripts)?\/runtime(?:-es(?:2015|5))?.[\da-z]*\.js":\s"[\da-z]+",/g,
+                    match: /\s*"\/analog4all-client(?:\/scripts)?\/runtime(?:-es(?:2015|5))?.[\da-z]*\.js":\s*"[\da-z]+",/g,
                     replacement: ''
                 }, {
                     // Replace the hash value inside of the hashTable for "/scripts/*.js" because it may have been modified before.
-                    match: /"\/analog4all-client(?<filename>\/scripts\/(?:\d+|main|scripts)(?:-es(?:2015|5))?.[\da-z]+.js)":\s"[\da-z]+"/g,
+                    match: /"\/analog4all-client(?<filename>\/scripts\/(?:\d+|main|scripts)(?:-es(?:2015|5))?.[\da-z]+.js)":\s*"[\da-z]+"/g,
                     replacement: (_, filename) => {
                         return `"/analog4all-client${ filename }": "${ computeHashOfFile(`build/analog4all-client${ filename }`, 'sha1', 'hex') }"`;
                     }
                 }, {
                     // Replace the hash value inside of the hashTable for "/styles/styles*.css" because it was modified before.
-                    match: /"\/analog4all-client(?<filename>\/styles\/styles\.[\da-z]*\.css)":\s"[\da-z]+"/g,
+                    match: /"\/analog4all-client(?<filename>\/styles\/styles\.[\da-z]*\.css)":\s*"[\da-z]+"/g,
                     replacement: (_, filename) => {
                         return `"/analog4all-client${ filename }": "${ computeHashOfFile(`build/analog4all-client${ filename }`, 'sha1', 'hex') }"`;
                     }
                 }, {
                     // Replace the hash value inside of the hashTable for "/(index|start).html" because it was modified before.
-                    match: /"\/analog4all-client\/(?<filename>index|start)\.html":\s"[\da-z]+"/g,
+                    match: /"\/analog4all-client\/(?<filename>index|start)\.html":\s*"[\da-z]+"/g,
                     replacement: (_, filename) => {
                         return `"/analog4all-client/${ filename }.html": "${ computeHashOfFile(`build/analog4all-client/${ filename }.html`, 'sha1', 'hex') }"`;
                     }
