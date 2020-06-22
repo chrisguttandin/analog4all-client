@@ -9,39 +9,31 @@ import { fetchInstruments } from '../store/actions';
 import { createInstrumentsSelector, createIsFetchingInstrumentsSelector } from '../store/selectors';
 
 @Component({
-    styleUrls: [ './remote-registry.component.css' ],
+    styleUrls: ['./remote-registry.component.css'],
     templateUrl: './remote-registry.component.html'
 })
 export class RemoteRegistryComponent implements OnInit {
-
     public hasAvailableInstruments$!: Observable<boolean>;
 
     public instruments$!: Observable<TInstrument[]>;
 
     public setIsFetchingInstruments$!: Observable<boolean>;
 
-    constructor (
-        private _store: Store<TAppState>
-    ) { }
+    constructor(private _store: Store<TAppState>) {}
 
-    public ngOnInit (): void {
+    public ngOnInit(): void {
         this._store.dispatch(fetchInstruments());
 
-        this.instruments$ = createInstrumentsSelector(this._store)
-            .pipe(
-                map((instruments) => instruments.filter((instrument) => instrument.isAvailable))
-            );
+        this.instruments$ = createInstrumentsSelector(this._store).pipe(
+            map((instruments) => instruments.filter((instrument) => instrument.isAvailable))
+        );
 
-        this.hasAvailableInstruments$ = this.instruments$
-            .pipe(
-                map((instruments) => (instruments.length > 0))
-            );
+        this.hasAvailableInstruments$ = this.instruments$.pipe(map((instruments) => instruments.length > 0));
 
         this.setIsFetchingInstruments$ = createIsFetchingInstrumentsSelector(this._store);
     }
 
-    public refresh (): void {
+    public refresh(): void {
         this._store.dispatch(fetchInstruments());
     }
-
 }

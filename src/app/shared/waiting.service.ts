@@ -9,63 +9,59 @@ import { first } from 'rxjs/operators';
  * while it was listening to the socket. It then waits for a ready event to finally resolve the
  * promise.
  */
- @Injectable({
-     providedIn: 'root'
- })
+@Injectable({
+    providedIn: 'root'
+})
 export class WaitingService {
-
-    public wait (dataChannelSubject: IRemoteSubject<IStringifyableJsonObject>): Observable<void> { // tslint:disable-line:max-line-length no-null-undefined-union
+    public wait(dataChannelSubject: IRemoteSubject<IStringifyableJsonObject>): Observable<void> {
+        // tslint:disable-line:max-line-length no-null-undefined-union
         return new Observable((observer: Observer<void>) => {
             let isPending = true;
 
             const waitingChannelSubject = mask({ type: 'waiting' }, dataChannelSubject); // tslint:disable-line:no-null-undefined-union
 
             mask({ type: 'ready' }, dataChannelSubject)
-                .pipe(
-                    first<any>()
-                )
+                .pipe(first<any>())
                 .subscribe({
-                    complete (): void {
+                    complete(): void {
                         if (isPending) {
                             isPending = false;
                             observer.error(new Error('The underlying channel was closed before any value could be received.'));
                         }
                     },
-                    error (err): void {
+                    error(err): void {
                         if (isPending) {
                             isPending = false;
                             observer.error(err);
                         }
                     },
-                    next (): void {
+                    next(): void {
                         isPending = false;
                         observer.next(undefined);
                         observer.complete();
                     }
                 });
 
-            const waitingChannelSubscription = waitingChannelSubject
-                .subscribe({
-                    complete (): void {
-                        if (isPending) {
-                            isPending = false;
-                            observer.error(new Error('The underlying channel was closed before any value could be received.'));
-                        }
-                    },
-                    error (err): void {
-                        if (isPending) {
-                            isPending = false;
-                            observer.error(err);
-                        }
-                    },
-                    next (): void {
-                        waitingChannelSubscription.unsubscribe();
-                        waitingChannelSubject.next(undefined);
+            const waitingChannelSubscription = waitingChannelSubject.subscribe({
+                complete(): void {
+                    if (isPending) {
+                        isPending = false;
+                        observer.error(new Error('The underlying channel was closed before any value could be received.'));
                     }
-                });
+                },
+                error(err): void {
+                    if (isPending) {
+                        isPending = false;
+                        observer.error(err);
+                    }
+                },
+                next(): void {
+                    waitingChannelSubscription.unsubscribe();
+                    waitingChannelSubject.next(undefined);
+                }
+            });
 
             waitingChannelSubject.next(undefined);
         });
     }
-
 }

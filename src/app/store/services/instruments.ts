@@ -11,19 +11,12 @@ import { TInstrument } from '../types';
     providedIn: 'root'
 })
 export class InstrumentsService {
+    constructor(@Inject(ENDPOINT) private _endpoint: string, private _httpClient: HttpClient) {}
 
-    constructor (
-        @Inject(ENDPOINT) private _endpoint: string,
-        private _httpClient: HttpClient
-    ) { }
-
-    public fetch (): Observable<IFetchInstrumentsFailAction | IFetchInstrumentsSuccessAction> {
-        return this._httpClient
-            .get<TInstrument[]>(`https${ this._endpoint }instruments`)
-            .pipe(
-                map((instruments) => fetchInstrumentsSuccess(instruments)),
-                catchError(() => of(fetchInstrumentsFail()))
-            );
+    public fetch(): Observable<IFetchInstrumentsFailAction | IFetchInstrumentsSuccessAction> {
+        return this._httpClient.get<TInstrument[]>(`https${this._endpoint}instruments`).pipe(
+            map((instruments) => fetchInstrumentsSuccess(instruments)),
+            catchError(() => of(fetchInstrumentsFail()))
+        );
     }
-
 }

@@ -8,10 +8,9 @@ import { MidiJsonBpmService } from './midi-json-bpm.service';
     providedIn: 'root'
 })
 export class MidiJsonEncodingService {
+    constructor(private _midiJsonBpmService: MidiJsonBpmService) {}
 
-    constructor (private _midiJsonBpmService: MidiJsonBpmService) { }
-
-    public encode (midiJson: IMidiFile, bpm: number): Observable<ArrayBuffer> {
+    public encode(midiJson: IMidiFile, bpm: number): Observable<ArrayBuffer> {
         return new Observable((observer: Observer<ArrayBuffer>) => {
             encode(this._midiJsonBpmService.write(midiJson, bpm))
                 .then((midiFile) => {
@@ -21,5 +20,4 @@ export class MidiJsonEncodingService {
                 .catch((err) => observer.error(err));
         });
     }
-
 }

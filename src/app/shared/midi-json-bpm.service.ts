@@ -5,15 +5,14 @@ import { IMidiFile, IMidiSetTempoEvent } from 'midi-json-parser-worker';
     providedIn: 'root'
 })
 export class MidiJsonBpmService {
-
     // @todo A very similar function exists in the midi-file-slicer module.
-    public read (midiJson: IMidiFile): number {
+    public read(midiJson: IMidiFile): number {
         const { tracks } = midiJson;
 
         for (const events of tracks) {
             for (const event of events) {
                 if ('setTempo' in event) {
-                    return (60000000 / (<IMidiSetTempoEvent> event).setTempo.microsecondsPerQuarter);
+                    return 60000000 / (<IMidiSetTempoEvent>event).setTempo.microsecondsPerQuarter;
                 }
             }
         }
@@ -21,23 +20,23 @@ export class MidiJsonBpmService {
         return 120;
     }
 
-    public write (midiJson: IMidiFile, bpm: number): IMidiFile {
-        const microsecondsPerQuarter = (60000000 / bpm);
+    public write(midiJson: IMidiFile, bpm: number): IMidiFile {
+        const microsecondsPerQuarter = 60000000 / bpm;
 
         let wroteBpmInfo = false;
 
-        const tracks = midiJson.tracks
-            .map((events) => events
-                .map((event) => {
-                    // @todo Use a guard
-                    if (!wroteBpmInfo && 'setTempo' in event) {
-                        wroteBpmInfo = true;
+        const tracks = midiJson.tracks.map((events) =>
+            events.map((event) => {
+                // @todo Use a guard
+                if (!wroteBpmInfo && 'setTempo' in event) {
+                    wroteBpmInfo = true;
 
-                        return { ...event, setTempo: { ...(<IMidiSetTempoEvent> event).setTempo, microsecondsPerQuarter } };
-                    }
+                    return { ...event, setTempo: { ...(<IMidiSetTempoEvent>event).setTempo, microsecondsPerQuarter } };
+                }
 
-                    return event;
-                }));
+                return event;
+            })
+        );
 
         if (wroteBpmInfo) {
             return { ...midiJson, tracks };
@@ -47,7 +46,7 @@ export class MidiJsonBpmService {
             ...midiJson,
             tracks: [
                 [
-                    <IMidiSetTempoEvent> {
+                    <IMidiSetTempoEvent>{
                         delta: 0,
                         setTempo: {
                             microsecondsPerQuarter
@@ -59,5 +58,4 @@ export class MidiJsonBpmService {
             ]
         };
     }
-
 }

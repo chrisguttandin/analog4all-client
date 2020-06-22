@@ -6,14 +6,7 @@ import { InstrumentRoutingModule } from './instrument-routing.module';
 import { InstrumentComponent } from './instrument.component';
 
 @NgModule({
-    declarations: [
-        FileInputComponent,
-        InstrumentComponent
-    ],
-    imports: [
-        CommonModule,
-        InstrumentRoutingModule,
-        ReactiveFormsModule
-    ]
+    declarations: [FileInputComponent, InstrumentComponent],
+    imports: [CommonModule, InstrumentRoutingModule, ReactiveFormsModule]
 })
-export class InstrumentModule { }
+export class InstrumentModule {}

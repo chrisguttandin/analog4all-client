@@ -4,8 +4,7 @@ import { Injectable } from '@angular/core';
     providedIn: 'root'
 })
 export class DownloadingService {
-
-    public download (fileName: string, ...arrayBuffers: ArrayBuffer[]): void {
+    public download(fileName: string, ...arrayBuffers: ArrayBuffer[]): void {
         const file = new File(arrayBuffers, fileName, { type: 'audio/wav' });
 
         const $link = document.createElement('a');
@@ -17,5 +16,4 @@ export class DownloadingService {
         $link.click();
         document.body.removeChild($link);
     }
-
 }

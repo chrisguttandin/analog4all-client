@@ -8,8 +8,7 @@ const CHUNK_SIZE = 1024;
     providedIn: 'root'
 })
 export class FileSendingService {
-
-    public send (dataChannelSubject: IRemoteSubject<IStringifyableJsonObject>, file: File): Observable<void> {
+    public send(dataChannelSubject: IRemoteSubject<IStringifyableJsonObject>, file: File): Observable<void> {
         return new Observable((observer) => {
             const fileReader = new FileReader();
 
@@ -32,7 +31,7 @@ export class FileSendingService {
                                 const slice = buffer.slice(byteIndex, byteIndex + CHUNK_SIZE);
 
                                 promise.then(() => {
-                                    dataChannelSubject.send(<any> btoa(String.fromCharCode.apply(null, Array.from(new Uint8Array(slice)))));
+                                    dataChannelSubject.send(<any>btoa(String.fromCharCode.apply(null, Array.from(new Uint8Array(slice)))));
                                 });
 
                                 byteIndex += CHUNK_SIZE;
@@ -42,7 +41,7 @@ export class FileSendingService {
                                 const slice = buffer.slice(byteIndex);
 
                                 promise.then(() => {
-                                    dataChannelSubject.send(<any> btoa(String.fromCharCode.apply(null, Array.from(new Uint8Array(slice)))));
+                                    dataChannelSubject.send(<any>btoa(String.fromCharCode.apply(null, Array.from(new Uint8Array(slice)))));
                                 });
                             }
 
@@ -61,5 +60,4 @@ export class FileSendingService {
             fileReader.readAsArrayBuffer(file);
         });
     }
-
 }

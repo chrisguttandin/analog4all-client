@@ -2,7 +2,6 @@ import { browser, logging } from 'protractor';
 import { HomePage } from './home.po';
 
 describe('/', () => {
-
     let page: HomePage;
 
     afterEach(async () => {
@@ -10,9 +9,11 @@ describe('/', () => {
             // Assert that there are no errors emitted from the browser
             const logs = await browser.manage().logs().get(logging.Type.BROWSER);
 
-            expect(logs).not.toContain(jasmine.objectContaining(<Partial<logging.Entry>> {
-                level: logging.Level.SEVERE
-            }));
+            expect(logs).not.toContain(
+                jasmine.objectContaining(<Partial<logging.Entry>>{
+                    level: logging.Level.SEVERE
+                })
+            );
         } catch (err) {
             // @todo The driver for Safari does not support to retrieve the logs.
             if (err.name === 'UnsupportedOperationError') {
@@ -32,5 +33,4 @@ describe('/', () => {
 
         expect(page.getHeadline()).toEqual('Analog4All Client');
     });
-
 });

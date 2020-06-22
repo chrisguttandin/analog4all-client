@@ -6,14 +6,7 @@ import { RemoteRegistryComponent } from './remote-registry.component';
 import { SoundCloudLinkComponent } from './sound-cloud-link/sound-cloud-link.component';
 
 @NgModule({
-    declarations: [
-        GearogsLinkComponent,
-        RemoteRegistryComponent,
-        SoundCloudLinkComponent
-    ],
-    imports: [
-        CommonModule,
-        RemoteRegistryRoutingModule
-    ]
+    declarations: [GearogsLinkComponent, RemoteRegistryComponent, SoundCloudLinkComponent],
+    imports: [CommonModule, RemoteRegistryRoutingModule]
 })
-export class RemoteRegistryModule { }
+export class RemoteRegistryModule {}

@@ -14,11 +14,10 @@ import { switchMap } from 'rxjs/operators';
         }
     ],
     selector: 'anc-file-input',
-    styleUrls: [ './file-input.component.css' ],
+    styleUrls: ['./file-input.component.css'],
     templateUrl: './file-input.component.html'
 })
 export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnInit {
-
     public filename$!: Observable<null | string>;
 
     public isDraggedOver: boolean;
@@ -39,24 +38,24 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
 
     private _valueChangesSubscription: null | Subscription;
 
-    constructor () {
+    constructor() {
         this._checkForFileOnFocus = false;
         this.isDraggedOver = false;
         this._filenameChangesSubject = new BehaviorSubject<null | string>(null);
-        this._onChange = (_: any) => { }; // tslint:disable-line:no-empty
-        this._onTouched = () => { }; // tslint:disable-line:no-empty
+        this._onChange = (_: any) => {}; // tslint:disable-line:no-empty
+        this._onTouched = () => {}; // tslint:disable-line:no-empty
         this._stateChangesSubject = new BehaviorSubject('empty');
         this._valueChangesSubject = new BehaviorSubject(null);
         this._valueChangesSubscription = null;
     }
 
-    public ngOnDestroy (): void {
+    public ngOnDestroy(): void {
         if (this._valueChangesSubscription !== null) {
             this._valueChangesSubscription.unsubscribe();
         }
     }
 
-    public ngOnInit (): void {
+    public ngOnInit(): void {
         this.filename$ = this._filenameChangesSubject.asObservable();
 
         this.state$ = this._stateChangesSubject.asObservable();
@@ -74,7 +73,7 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
                     return new Observable((observer: Observer<null | { filename: string; midiJson: IMidiFile }>) => {
                         const fileReader = new FileReader();
 
-                        this._filenameChangesSubject.next((<File> file).name);
+                        this._filenameChangesSubject.next((<File>file).name);
                         this._stateChangesSubject.next('parsing');
 
                         fileReader.addEventListener('load', () => {
@@ -83,7 +82,7 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
                                     .then((midiJson) => {
                                         this._stateChangesSubject.next('filled');
 
-                                        observer.next({ filename: (<File> file).name, midiJson });
+                                        observer.next({ filename: (<File>file).name, midiJson });
                                     })
                                     .catch(() => {
                                         this._stateChangesSubject.next('failed');
@@ -96,40 +95,40 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
                             }
                         });
 
-                        fileReader.readAsArrayBuffer((<File> file));
+                        fileReader.readAsArrayBuffer(<File>file);
                     });
                 })
             )
             .subscribe((midiJson) => this._onChange(midiJson)); // tslint:disable-line:rxjs-prefer-async-pipe
     }
 
-    public onChanged (event: Event): void {
+    public onChanged(event: Event): void {
         if (event.target === null) {
             return;
         }
 
-        const files = (<HTMLInputElement> event.target).files;
+        const files = (<HTMLInputElement>event.target).files;
 
-        this._valueChangesSubject.next((files === null) ? null : files[0]);
+        this._valueChangesSubject.next(files === null ? null : files[0]);
     }
 
-    public onClick (): void {
+    public onClick(): void {
         this._checkForFileOnFocus = true;
     }
 
-    public onDragEnter (): void {
+    public onDragEnter(): void {
         this.isDraggedOver = true;
     }
 
-    public onDragLeave (): void {
+    public onDragLeave(): void {
         this.isDraggedOver = false;
     }
 
-    public onDragover (event: DragEvent): void {
+    public onDragover(event: DragEvent): void {
         event.preventDefault();
     }
 
-    public onDrop (event: DragEvent): void {
+    public onDrop(event: DragEvent): void {
         event.preventDefault();
 
         this._checkForFileOnFocus = false;
@@ -140,7 +139,7 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
         }
     }
 
-    public onFocus (event: FocusEvent): void {
+    public onFocus(event: FocusEvent): void {
         if (this._checkForFileOnFocus) {
             setTimeout(() => {
                 if (this._checkForFileOnFocus) {
@@ -152,22 +151,21 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
         }
     }
 
-    public onTouched (): void {
+    public onTouched(): void {
         this._onTouched();
     }
 
-    public registerOnChange (fn: (_: any) => void): void {
+    public registerOnChange(fn: (_: any) => void): void {
         this._onChange = fn;
     }
 
-    public registerOnTouched (fn: () => void): void {
+    public registerOnTouched(fn: () => void): void {
         this._onTouched = fn;
     }
 
     // @todo public setDisabledState (isDisabled: boolean): void { }
 
-    public writeValue (value: any): void {
+    public writeValue(value: any): void {
         this._valueChangesSubject.next(value);
     }
-
 }

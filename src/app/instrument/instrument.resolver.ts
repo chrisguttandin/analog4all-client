@@ -12,41 +12,34 @@ import { fetchInstrument, fetchInstrumentFail, fetchInstrumentSuccess } from '..
     providedIn: 'root'
 })
 export class InstrumentResolver implements Resolve<TInstrument> {
+    constructor(private _actions: Actions, private _router: Router, private _store: Store<TAppState>) {}
 
-    constructor (
-        private _actions: Actions,
-        private _router: Router,
-        private _store: Store<TAppState>
-    ) { }
-
-    public resolve (activatedRoute: ActivatedRouteSnapshot): Observable<TInstrument> {
+    public resolve(activatedRoute: ActivatedRouteSnapshot): Observable<TInstrument> {
         const id = activatedRoute.params.id;
 
         this._store.dispatch(fetchInstrument(id));
 
-        return this._actions
-            .pipe(
-                ofType(fetchInstrumentFail, fetchInstrumentSuccess),
-                filter(({ payload, type }) => {
-                    if (type === fetchInstrumentFail.type) {
-                        return (payload === id);
-                    }
+        return this._actions.pipe(
+            ofType(fetchInstrumentFail, fetchInstrumentSuccess),
+            filter(({ payload, type }) => {
+                if (type === fetchInstrumentFail.type) {
+                    return payload === id;
+                }
 
-                    // @todo TypeScript needs to be convinced that payload is of type TInstrument.
-                    return (<TInstrument> payload).id === id;
-                }),
-                first(), // tslint:disable-line:rxjs-no-unsafe-first
-                mergeMap(({ payload, type }) => {
-                    if (type === fetchInstrumentFail.type) {
-                        this._router.navigate([ '/' ]);
+                // @todo TypeScript needs to be convinced that payload is of type TInstrument.
+                return (<TInstrument>payload).id === id;
+            }),
+            first(), // tslint:disable-line:rxjs-no-unsafe-first
+            mergeMap(({ payload, type }) => {
+                if (type === fetchInstrumentFail.type) {
+                    this._router.navigate(['/']);
 
-                        return EMPTY;
-                    }
+                    return EMPTY;
+                }
 
-                    // @todo TypeScript needs to be convinced that payload is of type TInstrument.
-                    return of(<TInstrument> payload);
-                })
-            );
+                // @todo TypeScript needs to be convinced that payload is of type TInstrument.
+                return of(<TInstrument>payload);
+            })
+        );
     }
-
 }

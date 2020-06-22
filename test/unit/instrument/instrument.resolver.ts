@@ -2,7 +2,6 @@ import { Subject } from 'rxjs';
 import { InstrumentResolver } from '../../../src/app/instrument/instrument.resolver';
 
 describe('InstrumentResolver', () => {
-
     let actions: any;
     let instrumentResolver: InstrumentResolver;
     let router: any;
@@ -11,10 +10,10 @@ describe('InstrumentResolver', () => {
     beforeEach(() => {
         actions = new Subject();
         router = {
-            navigate (): void { } // tslint:disable-line:no-empty
+            navigate(): void {} // tslint:disable-line:no-empty
         };
         store = {
-            dispatch (): void { } // tslint:disable-line:no-empty
+            dispatch(): void {} // tslint:disable-line:no-empty
         };
 
         spyOn(router, 'navigate');
@@ -24,7 +23,6 @@ describe('InstrumentResolver', () => {
     });
 
     describe('resolve()', () => {
-
         let activatedRouteSnapshot: any;
 
         beforeEach(() => {
@@ -42,7 +40,6 @@ describe('InstrumentResolver', () => {
         });
 
         describe('with an existing instument', () => {
-
             let instrument: any;
 
             beforeEach(() => {
@@ -52,59 +49,48 @@ describe('InstrumentResolver', () => {
             it('should return an observable of the instument', (done) => {
                 const next = jasmine.createSpy('next');
 
-                instrumentResolver
-                    .resolve(activatedRouteSnapshot)
-                    .subscribe({
-                        complete (): void {
-                            expect(next).toHaveBeenCalledWith(instrument);
+                instrumentResolver.resolve(activatedRouteSnapshot).subscribe({
+                    complete(): void {
+                        expect(next).toHaveBeenCalledWith(instrument);
 
-                            done();
-                        },
-                        error (err): void {
-                            throw err;
-                        },
-                        next
-                    });
+                        done();
+                    },
+                    error(err): void {
+                        throw err;
+                    },
+                    next
+                });
 
-                actions.next(({ payload: instrument, type: 'FETCH_INSTRUMENT_SUCCESS' }));
+                actions.next({ payload: instrument, type: 'FETCH_INSTRUMENT_SUCCESS' });
             });
-
         });
 
         describe('without an existing instument', () => {
-
             it('should navigate to the / URL', () => {
-                instrumentResolver
-                    .resolve(activatedRouteSnapshot)
-                    .subscribe();
+                instrumentResolver.resolve(activatedRouteSnapshot).subscribe();
 
-                actions.next(({ payload: activatedRouteSnapshot.params.id, type: 'FETCH_INSTRUMENT_FAIL' }));
+                actions.next({ payload: activatedRouteSnapshot.params.id, type: 'FETCH_INSTRUMENT_FAIL' });
 
-                expect(router.navigate).toHaveBeenCalledWith([ '/' ]);
+                expect(router.navigate).toHaveBeenCalledWith(['/']);
             });
 
             it('should return an empty observable', (done) => {
                 const next = jasmine.createSpy('next');
 
-                instrumentResolver
-                    .resolve(activatedRouteSnapshot)
-                    .subscribe({
-                        complete (): void {
-                            expect(next).not.toHaveBeenCalled();
+                instrumentResolver.resolve(activatedRouteSnapshot).subscribe({
+                    complete(): void {
+                        expect(next).not.toHaveBeenCalled();
 
-                            done();
-                        },
-                        error (err): void {
-                            throw err;
-                        },
-                        next
-                    });
+                        done();
+                    },
+                    error(err): void {
+                        throw err;
+                    },
+                    next
+                });
 
-                actions.next(({ payload: activatedRouteSnapshot.params.id, type: 'FETCH_INSTRUMENT_FAIL' }));
+                actions.next({ payload: activatedRouteSnapshot.params.id, type: 'FETCH_INSTRUMENT_FAIL' });
             });
-
         });
-
     });
-
 });

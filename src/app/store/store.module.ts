@@ -19,12 +19,8 @@ import { appReducer } from './store';
                 strictStateSerializability: !environment.production
             }
         }),
-        EffectsModule.forRoot([
-            InstrumentsEffects
-        ]),
-        (environment.production)
-            ? [ ]
-            : StoreDevtoolsModule.instrument({ maxAge: 50 })
+        EffectsModule.forRoot([InstrumentsEffects]),
+        environment.production ? [] : StoreDevtoolsModule.instrument({ maxAge: 50 })
     ]
 })
-export class StoreModule { }
+export class StoreModule {}

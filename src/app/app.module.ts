@@ -9,12 +9,8 @@ import { ENDPOINT } from './shared';
 import { StoreModule } from './store';
 
 @NgModule({
-    bootstrap: [
-        AppComponent
-    ],
-    declarations: [
-        AppComponent
-    ],
+    bootstrap: [AppComponent],
+    declarations: [AppComponent],
     imports: [
         AppRoutingModule,
         BrowserModule,
@@ -22,8 +18,6 @@ import { StoreModule } from './store';
         ServiceWorkerModule.register('/ngsw-worker.js', { enabled: !!environment.production }),
         StoreModule
     ],
-    providers: [
-        { provide: ENDPOINT, useValue: '://jbnw79pt56.execute-api.eu-west-1.amazonaws.com/dev/' }
-    ]
+    providers: [{ provide: ENDPOINT, useValue: '://jbnw79pt56.execute-api.eu-west-1.amazonaws.com/dev/' }]
 })
-export class AppModule { }
+export class AppModule {}

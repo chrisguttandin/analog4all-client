@@ -10,11 +10,10 @@ import { TAppState, TInstrument } from '../store';
 import { createInstrumentByIdSelector } from '../store/selectors';
 
 @Component({
-    styleUrls: [ './instrument.component.css' ],
+    styleUrls: ['./instrument.component.css'],
     templateUrl: './instrument.component.html'
 })
 export class InstrumentComponent implements OnDestroy, OnInit {
-
     public hasMidiJson$!: Observable<boolean>;
 
     public instrument$!: Observable<null | TInstrument>;
@@ -27,7 +26,7 @@ export class InstrumentComponent implements OnDestroy, OnInit {
 
     private _bpmDisabledSubscription: null | Subscription;
 
-    constructor (
+    constructor(
         private _activatedRoute: ActivatedRoute,
         @Inject(ENDPOINT) private _endpoint: string,
         private _formBuilder: FormBuilder,
@@ -38,26 +37,22 @@ export class InstrumentComponent implements OnDestroy, OnInit {
         this._bpmDisabledSubscription = null;
     }
 
-    public ngOnDestroy (): void {
+    public ngOnDestroy(): void {
         if (this._bpmDisabledSubscription !== null) {
             this._bpmDisabledSubscription.unsubscribe();
         }
     }
 
-    public ngOnInit (): void {
-        this.instrument$ = this._activatedRoute.data
-            .pipe(
-                switchMap(({ instrument: { id } }) => createInstrumentByIdSelector(this._store, id))
-            );
+    public ngOnInit(): void {
+        this.instrument$ = this._activatedRoute.data.pipe(
+            switchMap(({ instrument: { id } }) => createInstrumentByIdSelector(this._store, id))
+        );
 
-        this.instrumentName$ = this.instrument$
-            .pipe(
-                map((instrument) => (instrument === null) ? null : instrument.name)
-            );
+        this.instrumentName$ = this.instrument$.pipe(map((instrument) => (instrument === null ? null : instrument.name)));
 
         this.renderForm = this._formBuilder.group({
             bpm: { disabled: true, value: 120 },
-            file: [ null ]
+            file: [null]
         });
 
         const fileFormControl = this.renderForm.get('file');
@@ -65,41 +60,37 @@ export class InstrumentComponent implements OnDestroy, OnInit {
         if (fileFormControl !== null) {
             const midiJsonAndFilename$ = fileFormControl.valueChanges;
 
-            this.hasMidiJson$ = midiJsonAndFilename$
-                .pipe(
-                    map((value) => (value === null) ? false : true)
-                );
+            this.hasMidiJson$ = midiJsonAndFilename$.pipe(map((value) => (value === null ? false : true)));
 
-            this._bpmDisabledSubscription = midiJsonAndFilename$
-                .subscribe((midiJsonAndFilename) => { // tslint:disable-line:rxjs-prefer-async-pipe
-                    const bpmFormControl = this.renderForm.get('bpm');
+            this._bpmDisabledSubscription = midiJsonAndFilename$.subscribe((midiJsonAndFilename) => {
+                // tslint:disable-line:rxjs-prefer-async-pipe
+                const bpmFormControl = this.renderForm.get('bpm');
 
-                    if (bpmFormControl !== null) {
-                        if (midiJsonAndFilename) {
-                            const { midiJson } = midiJsonAndFilename;
+                if (bpmFormControl !== null) {
+                    if (midiJsonAndFilename) {
+                        const { midiJson } = midiJsonAndFilename;
 
-                            bpmFormControl.setValue(this._midiJsonBpmService.read(midiJson));
-                            bpmFormControl.enable();
-                        } else {
-                            bpmFormControl.reset({ disabled: true, value: 120 });
-                        }
+                        bpmFormControl.setValue(this._midiJsonBpmService.read(midiJson));
+                        bpmFormControl.enable();
+                    } else {
+                        bpmFormControl.reset({ disabled: true, value: 120 });
                     }
-                });
+                }
+            });
         }
 
-        this.sampleUrl$ = this.instrument$
-            .pipe(
-                map((instrument) => {
-                    if (instrument !== null && instrument.sample !== undefined) {
-                        return `https${ this._endpoint }samples/${ instrument.sample.id }.wav`;
-                    }
+        this.sampleUrl$ = this.instrument$.pipe(
+            map((instrument) => {
+                if (instrument !== null && instrument.sample !== undefined) {
+                    return `https${this._endpoint}samples/${instrument.sample.id}.wav`;
+                }
 
-                    return null;
-                })
-            );
+                return null;
+            })
+        );
     }
 
-    public render (): void {
+    public render(): void {
         const bpmFormControl = this.renderForm.get('bpm');
         const fileFormControl = this.renderForm.get('file');
 
@@ -110,13 +101,13 @@ export class InstrumentComponent implements OnDestroy, OnInit {
             this.instrument$
                 .pipe(
                     first(),
-                    filter((instrument): instrument is TInstrument => (instrument !== null)),
+                    filter((instrument): instrument is TInstrument => instrument !== null),
                     mergeMap((instrument) => this._renderingService.render(instrument, bpm, filename, midiJson))
                 )
-                .subscribe(() => { // tslint:disable-line:rxjs-prefer-async-pipe
+                .subscribe(() => {
+                    // tslint:disable-line:rxjs-prefer-async-pipe
                     // @todo
                 });
         }
     }
-
 }

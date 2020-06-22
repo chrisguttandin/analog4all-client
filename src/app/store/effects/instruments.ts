@@ -28,59 +28,51 @@ import { InstrumentService, InstrumentsService } from '../services';
     providedIn: 'root'
 })
 export class InstrumentsEffects {
-
-    constructor (
+    constructor(
         private _actions$: Actions,
         private _instrumentService: InstrumentService,
         private _instrumentsService: InstrumentsService
-    ) { }
+    ) {}
 
-    @Effect() get fetchInstrument$ (): Observable<IFetchInstrumentFailAction | IFetchInstrumentSuccessAction> {
-        return this._actions$
-            .pipe(
-                pluckPayloadOfType(fetchInstrument),
-                mergeMap((id) => this._instrumentService.fetch(id))
-            );
+    @Effect() get fetchInstrument$(): Observable<IFetchInstrumentFailAction | IFetchInstrumentSuccessAction> {
+        return this._actions$.pipe(
+            pluckPayloadOfType(fetchInstrument),
+            mergeMap((id) => this._instrumentService.fetch(id))
+        );
     }
 
-    @Effect() get fetchInstruments$ (): Observable<IFetchInstrumentsFailAction | IFetchInstrumentsSuccessAction> {
-        return this._actions$
-            .pipe(
-                ofType(fetchInstruments),
-                mergeMap(() => this._instrumentsService.fetch())
-            );
+    @Effect() get fetchInstruments$(): Observable<IFetchInstrumentsFailAction | IFetchInstrumentsSuccessAction> {
+        return this._actions$.pipe(
+            ofType(fetchInstruments),
+            mergeMap(() => this._instrumentsService.fetch())
+        );
     }
 
-    @Effect() get setIsFetchingInstrumentsToFalse$ (): Observable<ISetIsFetchingInstrumentsAction> {
-        return this._actions$
-            .pipe(
-                ofType(fetchInstrumentsFail, fetchInstrumentsSuccess),
-                map(() => setIsFetchingInstruments(false))
-            );
+    @Effect() get setIsFetchingInstrumentsToFalse$(): Observable<ISetIsFetchingInstrumentsAction> {
+        return this._actions$.pipe(
+            ofType(fetchInstrumentsFail, fetchInstrumentsSuccess),
+            map(() => setIsFetchingInstruments(false))
+        );
     }
 
-    @Effect() get setIsFetchingInstrumentsToTrue$ (): Observable<ISetIsFetchingInstrumentsAction> {
-        return this._actions$
-            .pipe(
-                ofType(fetchInstruments),
-                map(() => setIsFetchingInstruments(true))
-            );
+    @Effect() get setIsFetchingInstrumentsToTrue$(): Observable<ISetIsFetchingInstrumentsAction> {
+        return this._actions$.pipe(
+            ofType(fetchInstruments),
+            map(() => setIsFetchingInstruments(true))
+        );
     }
 
-    @Effect() get updateInstruments$ (): Observable<IUpdateInstrumentsAction> {
-        return this._actions$
-            .pipe(
-                pluckPayloadOfType(fetchInstrumentsSuccess),
-                map((instruments) => updateInstruments(instruments))
-            );
+    @Effect() get updateInstruments$(): Observable<IUpdateInstrumentsAction> {
+        return this._actions$.pipe(
+            pluckPayloadOfType(fetchInstrumentsSuccess),
+            map((instruments) => updateInstruments(instruments))
+        );
     }
 
-    @Effect() get upsertInstrument$ (): Observable<IUpsertInstrumentAction> {
-        return this._actions$
-            .pipe(
-                pluckPayloadOfType(fetchInstrumentSuccess),
-                map((instrument) => upsertInstrument(instrument))
-            );
+    @Effect() get upsertInstrument$(): Observable<IUpsertInstrumentAction> {
+        return this._actions$.pipe(
+            pluckPayloadOfType(fetchInstrumentSuccess),
+            map((instrument) => upsertInstrument(instrument))
+        );
     }
-
 }

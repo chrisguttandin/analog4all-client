@@ -1,5 +1,4 @@
 export type TInstrument = Readonly<{
-
     created: number;
 
     description?: string;
@@ -15,11 +14,8 @@ export type TInstrument = Readonly<{
     name: string;
 
     sample?: Readonly<{
-
         id: string;
-
     }>;
 
     soundCloudUsername?: string;
-
 }>;
