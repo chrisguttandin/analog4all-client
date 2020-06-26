@@ -1,7 +1,5 @@
+import deepFreeze from 'deep-freeze-strict';
 import { isFetchingInstrumentsReducer } from '../../../../src/app/store/reducers';
-
-// @todo 'deep-freeze-strict' can't be imported as module.
-const deepFreeze = require('deep-freeze-strict'); // tslint:disable-line:no-var-requires no-require-imports
 
 describe('isFetchingInstruments reducer', () => {
     describe('with an undefined state', () => {
