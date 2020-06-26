@@ -1,11 +1,12 @@
 import deepFreeze from 'deep-freeze-strict';
 import { isFetchingInstrumentsReducer } from '../../../../src/app/store/reducers';
+import { TStoreAction } from '../../../../src/app/store/types';
 
 describe('isFetchingInstruments reducer', () => {
     describe('with an undefined state', () => {
         describe('with an empty action', () => {
             it('should return the default state', () => {
-                const state = isFetchingInstrumentsReducer(undefined, <any>deepFreeze({}));
+                const state = isFetchingInstrumentsReducer(undefined, deepFreeze(<TStoreAction>{}));
 
                 expect(state).toEqual(false);
             });
@@ -36,7 +37,7 @@ describe('isFetchingInstruments reducer', () => {
 
         describe('with an empty action', () => {
             it('should return the previous state', () => {
-                const state = isFetchingInstrumentsReducer(previousState, <any>deepFreeze({}));
+                const state = isFetchingInstrumentsReducer(previousState, deepFreeze(<TStoreAction>{}));
 
                 expect(state).toEqual(previousState);
             });

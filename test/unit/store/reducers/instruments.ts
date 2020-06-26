@@ -1,12 +1,12 @@
 import deepFreeze from 'deep-freeze-strict';
 import { instrumentsReducer } from '../../../../src/app/store/reducers';
-import { TInstrument } from '../../../../src/app/store/types';
+import { TInstrument, TStoreAction } from '../../../../src/app/store/types';
 
 describe('instruments reducer', () => {
     describe('with an undefined state', () => {
         describe('with an empty action', () => {
             it('should return the default state', () => {
-                const state = instrumentsReducer(undefined, <any>deepFreeze({}));
+                const state = instrumentsReducer(undefined, deepFreeze(<TStoreAction>{}));
 
                 expect(state).toEqual([]);
             });
@@ -15,7 +15,7 @@ describe('instruments reducer', () => {
         describe('with an action of type FETCH_INSTRUMENT', () => {
             it('should return the default state', () => {
                 const id = 'a fake id';
-                const state = instrumentsReducer(undefined, <any>deepFreeze({ payload: id, type: 'FETCH_INSTRUMENT' }));
+                const state = instrumentsReducer(undefined, deepFreeze({ payload: id, type: 'FETCH_INSTRUMENT' }));
 
                 expect(state).toEqual([]);
             });
@@ -24,7 +24,7 @@ describe('instruments reducer', () => {
         describe('with an action of type FETCH_INSTRUMENT_FAIL', () => {
             it('should return the default state', () => {
                 const id = 'a fake id';
-                const state = instrumentsReducer(undefined, <any>deepFreeze({ payload: id, type: 'FETCH_INSTRUMENT_FAIL' }));
+                const state = instrumentsReducer(undefined, deepFreeze({ payload: id, type: 'FETCH_INSTRUMENT_FAIL' }));
 
                 expect(state).toEqual([]);
             });
@@ -39,7 +39,7 @@ describe('instruments reducer', () => {
                     modified: 1518284684850,
                     name: 'a fake name'
                 };
-                const state = instrumentsReducer(undefined, <any>deepFreeze({ payload: instrument, type: 'FETCH_INSTRUMENT_SUCCESS' }));
+                const state = instrumentsReducer(undefined, deepFreeze({ payload: instrument, type: 'FETCH_INSTRUMENT_SUCCESS' }));
 
                 expect(state).toEqual([]);
             });
@@ -47,7 +47,7 @@ describe('instruments reducer', () => {
 
         describe('with an action of type FETCH_INSTRUMENTS', () => {
             it('should return the default state', () => {
-                const state = instrumentsReducer(undefined, <any>deepFreeze({ type: 'FETCH_INSTRUMENTS' }));
+                const state = instrumentsReducer(undefined, deepFreeze({ type: 'FETCH_INSTRUMENTS' }));
 
                 expect(state).toEqual([]);
             });
@@ -55,7 +55,7 @@ describe('instruments reducer', () => {
 
         describe('with an action of type FETCH_INSTRUMENTS_FAIL', () => {
             it('should return the default state', () => {
-                const state = instrumentsReducer(undefined, <any>deepFreeze({ type: 'FETCH_INSTRUMENTS_FAIL' }));
+                const state = instrumentsReducer(undefined, deepFreeze({ type: 'FETCH_INSTRUMENTS_FAIL' }));
 
                 expect(state).toEqual([]);
             });
@@ -72,7 +72,7 @@ describe('instruments reducer', () => {
                         name: 'a fake name'
                     }
                 ];
-                const state = instrumentsReducer(undefined, <any>deepFreeze({ payload: instruments, type: 'FETCH_INSTRUMENTS_SUCCESS' }));
+                const state = instrumentsReducer(undefined, deepFreeze({ payload: instruments, type: 'FETCH_INSTRUMENTS_SUCCESS' }));
 
                 expect(state).toEqual([]);
             });
@@ -128,7 +128,7 @@ describe('instruments reducer', () => {
 
         describe('with an empty action', () => {
             it('should return the previous state', () => {
-                const state = instrumentsReducer(previousState, <any>deepFreeze({}));
+                const state = instrumentsReducer(previousState, deepFreeze(<TStoreAction>{}));
 
                 expect(state).toEqual(previousState);
             });
@@ -137,7 +137,7 @@ describe('instruments reducer', () => {
         describe('with an action of type FETCH_INSTRUMENT', () => {
             it('should return the previous state', () => {
                 const id = 'a fake id';
-                const state = instrumentsReducer(previousState, <any>deepFreeze({ payload: id, type: 'FETCH_INSTRUMENT' }));
+                const state = instrumentsReducer(previousState, deepFreeze({ payload: id, type: 'FETCH_INSTRUMENT' }));
 
                 expect(state).toEqual(previousState);
             });
@@ -146,7 +146,7 @@ describe('instruments reducer', () => {
         describe('with an action of type FETCH_INSTRUMENT_FAIL', () => {
             it('should return the previous state', () => {
                 const id = 'a fake id';
-                const state = instrumentsReducer(previousState, <any>deepFreeze({ payload: id, type: 'FETCH_INSTRUMENT_FAIL' }));
+                const state = instrumentsReducer(previousState, deepFreeze({ payload: id, type: 'FETCH_INSTRUMENT_FAIL' }));
 
                 expect(state).toEqual(previousState);
             });
@@ -163,7 +163,7 @@ describe('instruments reducer', () => {
                 };
                 const state = instrumentsReducer(
                     previousState,
-                    <any>deepFreeze({
+                    deepFreeze({
                         payload: instrument,
                         type: 'FETCH_INSTRUMENT_SUCCESS'
                     })
@@ -175,7 +175,7 @@ describe('instruments reducer', () => {
 
         describe('with an action of type FETCH_INSTRUMENTS', () => {
             it('should return the previous state', () => {
-                const state = instrumentsReducer(previousState, <any>deepFreeze({ type: 'FETCH_INSTRUMENTS' }));
+                const state = instrumentsReducer(previousState, deepFreeze({ type: 'FETCH_INSTRUMENTS' }));
 
                 expect(state).toEqual(previousState);
             });
@@ -185,7 +185,7 @@ describe('instruments reducer', () => {
             it('should return the previous state', () => {
                 const state = instrumentsReducer(
                     previousState,
-                    <any>deepFreeze({
+                    deepFreeze({
                         type: 'FETCH_INSTRUMENTS_FAIL'
                     })
                 );
@@ -207,7 +207,7 @@ describe('instruments reducer', () => {
                 ];
                 const state = instrumentsReducer(
                     previousState,
-                    <any>deepFreeze({
+                    deepFreeze({
                         payload: instruments,
                         type: 'FETCH_INSTRUMENTS_SUCCESS'
                     })
