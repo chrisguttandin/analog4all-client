@@ -5,9 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { filter, first, map, mergeMap, switchMap } from 'rxjs/operators';
 import { ENDPOINT, MidiJsonBpmService, RenderingService } from '../shared';
-import { TAppState, TInstrument } from '../store';
-// @todo Import the selectors via the barrel file again if it doesn't affect the tree-shaking anymore.
-import { createInstrumentByIdSelector } from '../store/selectors';
+import { TAppState, TInstrument, createInstrumentByIdSelector } from '../store';
 
 @Component({
     styleUrls: ['./instrument.component.css'],
