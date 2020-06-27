@@ -1,2 +1,2 @@
-export * from './instruments';
-export * from './is-fetching-instruments';
+export { instrumentsReducer } from './instruments';
+export { isFetchingInstrumentsReducer } from './is-fetching-instruments';

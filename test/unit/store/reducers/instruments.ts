@@ -1,37 +1,37 @@
 import deepFreeze from 'deep-freeze-strict';
-import { instrumentsReducer } from '../../../../src/app/store/reducers';
+import { INITIAL_STATE, instrumentsReducer } from '../../../../src/app/store/reducers/instruments';
 import { TInstrument, TStoreAction } from '../../../../src/app/store/types';
 
 describe('instruments reducer', () => {
     describe('with an undefined state', () => {
         describe('with an empty action', () => {
-            it('should return the default state', () => {
+            it('should return the initial state', () => {
                 const state = instrumentsReducer(undefined, deepFreeze(<TStoreAction>{}));
 
-                expect(state).toEqual([]);
+                expect(state).toEqual(INITIAL_STATE);
             });
         });
 
         describe('with an action of type FETCH_INSTRUMENT', () => {
-            it('should return the default state', () => {
+            it('should return the initial state', () => {
                 const id = 'a fake id';
                 const state = instrumentsReducer(undefined, deepFreeze({ payload: id, type: 'FETCH_INSTRUMENT' }));
 
-                expect(state).toEqual([]);
+                expect(state).toEqual(INITIAL_STATE);
             });
         });
 
         describe('with an action of type FETCH_INSTRUMENT_FAIL', () => {
-            it('should return the default state', () => {
+            it('should return the initial state', () => {
                 const id = 'a fake id';
                 const state = instrumentsReducer(undefined, deepFreeze({ payload: id, type: 'FETCH_INSTRUMENT_FAIL' }));
 
-                expect(state).toEqual([]);
+                expect(state).toEqual(INITIAL_STATE);
             });
         });
 
         describe('with an action of type FETCH_INSTRUMENT_SUCCESS', () => {
-            it('should return the default state', () => {
+            it('should return the initial state', () => {
                 const instrument = {
                     created: 1518284684850,
                     id: 'a fake id',
@@ -41,28 +41,28 @@ describe('instruments reducer', () => {
                 };
                 const state = instrumentsReducer(undefined, deepFreeze({ payload: instrument, type: 'FETCH_INSTRUMENT_SUCCESS' }));
 
-                expect(state).toEqual([]);
+                expect(state).toEqual(INITIAL_STATE);
             });
         });
 
         describe('with an action of type FETCH_INSTRUMENTS', () => {
-            it('should return the default state', () => {
+            it('should return the initial state', () => {
                 const state = instrumentsReducer(undefined, deepFreeze({ type: 'FETCH_INSTRUMENTS' }));
 
-                expect(state).toEqual([]);
+                expect(state).toEqual(INITIAL_STATE);
             });
         });
 
         describe('with an action of type FETCH_INSTRUMENTS_FAIL', () => {
-            it('should return the default state', () => {
+            it('should return the initial state', () => {
                 const state = instrumentsReducer(undefined, deepFreeze({ type: 'FETCH_INSTRUMENTS_FAIL' }));
 
-                expect(state).toEqual([]);
+                expect(state).toEqual(INITIAL_STATE);
             });
         });
 
         describe('with an action of type FETCH_INSTRUMENTS_SUCCESS', () => {
-            it('should return the default state', () => {
+            it('should return the initial state', () => {
                 const instruments = [
                     {
                         created: 1518284684850,
@@ -74,7 +74,7 @@ describe('instruments reducer', () => {
                 ];
                 const state = instrumentsReducer(undefined, deepFreeze({ payload: instruments, type: 'FETCH_INSTRUMENTS_SUCCESS' }));
 
-                expect(state).toEqual([]);
+                expect(state).toEqual(INITIAL_STATE);
             });
         });
 
