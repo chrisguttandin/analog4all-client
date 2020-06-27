@@ -4,7 +4,7 @@ import { TStoreAction } from '../../../../src/app/store/types';
 
 describe('isFetchingInstruments reducer', () => {
     describe('with an undefined state', () => {
-        describe('with an empty action', () => {
+        describe('with an unknown action', () => {
             it('should return the initial state', () => {
                 const state = isFetchingInstrumentsReducer(undefined, deepFreeze(<TStoreAction>{}));
 
@@ -35,7 +35,7 @@ describe('isFetchingInstruments reducer', () => {
             previousState = deepFreeze(true);
         });
 
-        describe('with an empty action', () => {
+        describe('with an unknown action', () => {
             it('should return the previous state', () => {
                 const state = isFetchingInstrumentsReducer(previousState, deepFreeze(<TStoreAction>{}));
 
