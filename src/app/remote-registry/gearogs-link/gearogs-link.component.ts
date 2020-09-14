@@ -7,5 +7,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
     templateUrl: './gearogs-link.component.html'
 })
 export class GearogsLinkComponent {
-    @Input() public readonly gearogsSlug: string | undefined;
+    @Input() public gearogsSlug: string | undefined;
 }
