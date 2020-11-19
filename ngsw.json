@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1605746115303,
+  "timestamp": 1605800275554,
   "index": "/analog4all-client/index.html",
   "assetGroups": [
     {
@@ -59,7 +59,7 @@
     "/analog4all-client/assets/roland-juno60.jpg": "170ea1624e7128b50b1b092b701ca6fc0b72e208",
     "/analog4all-client/assets/roland-system1.jpg": "9f8838be8d39f06760b7e436021dbafbe20fafe2",
     "/analog4all-client/assets/sc-proone.jpg": "2116fcb0987aae57921c0125178fe734732159bd",
-    "/analog4all-client/index.html": "729bc77e031d37b72d882ed42135110bfa6716d6",
+    "/analog4all-client/index.html": "eb94b514fc8847d50cd393d855ff2487cd0392a5",
     "/analog4all-client/scripts/main.feb5263985b2fe2edc5e.js": "515020c016478c0fc5c5415dfcd28f52f51f9086",
     "/analog4all-client/scripts/polyfills.8e269b83f8a07f1625d0.js": "763cd3b34dfa4600ebb9d9588ec7116988e98920",
     "/analog4all-client/styles/styles.937dfc4e92c4e4572e9a.css": "0b7183f54321daf5452bb5b33ff3e6248dfcb9c7"
