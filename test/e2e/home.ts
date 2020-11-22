@@ -28,9 +28,9 @@ describe('/', () => {
         page = new HomePage();
     });
 
-    it('should display the correct headline', () => {
-        page.navigateTo();
+    it('should display the correct headline', async () => {
+        await page.navigateTo();
 
-        expect(page.getHeadline()).toEqual('Analog4All Client');
+        expect(await page.getHeadline()).toEqual('Analog4All Client');
     });
 });
