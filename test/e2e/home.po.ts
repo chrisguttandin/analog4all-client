@@ -1,4 +1,3 @@
-import { env } from 'process';
 import { browser, by, element } from 'protractor';
 
 export class HomePage {
@@ -7,6 +6,6 @@ export class HomePage {
     }
 
     public async navigateTo(): Promise<unknown> {
-        return browser.get(env.IS_SMOKE_TEST === 'true' ? '/analog4all-client' : '/');
+        return browser.get(browser.baseUrl);
     }
 }
