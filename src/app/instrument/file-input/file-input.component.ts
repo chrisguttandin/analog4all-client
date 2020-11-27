@@ -50,9 +50,7 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
     }
 
     public ngOnDestroy(): void {
-        if (this._valueChangesSubscription !== null) {
-            this._valueChangesSubscription.unsubscribe();
-        }
+        this._valueChangesSubscription?.unsubscribe();
     }
 
     public ngOnInit(): void {

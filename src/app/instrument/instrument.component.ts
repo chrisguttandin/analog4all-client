@@ -36,9 +36,7 @@ export class InstrumentComponent implements OnDestroy, OnInit {
     }
 
     public ngOnDestroy(): void {
-        if (this._bpmDisabledSubscription !== null) {
-            this._bpmDisabledSubscription.unsubscribe();
-        }
+        this._bpmDisabledSubscription?.unsubscribe();
     }
 
     public ngOnInit(): void {
