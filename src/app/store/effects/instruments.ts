@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
+import { map, mapTo, mergeMap } from 'rxjs/operators';
 import { pluckPayloadOfType } from '../../operators';
 import {
     fetchInstrument,
@@ -49,17 +49,11 @@ export class InstrumentsEffects {
     }
 
     @Effect() get setIsFetchingInstrumentsToFalse$(): Observable<ISetIsFetchingInstrumentsAction> {
-        return this._actions$.pipe(
-            ofType(fetchInstrumentsFail, fetchInstrumentsSuccess),
-            map(() => setIsFetchingInstruments(false))
-        );
+        return this._actions$.pipe(ofType(fetchInstrumentsFail, fetchInstrumentsSuccess), mapTo(setIsFetchingInstruments(false)));
     }
 
     @Effect() get setIsFetchingInstrumentsToTrue$(): Observable<ISetIsFetchingInstrumentsAction> {
-        return this._actions$.pipe(
-            ofType(fetchInstruments),
-            map(() => setIsFetchingInstruments(true))
-        );
+        return this._actions$.pipe(ofType(fetchInstruments), mapTo(setIsFetchingInstruments(true)));
     }
 
     @Effect() get updateInstruments$(): Observable<IUpdateInstrumentsAction> {

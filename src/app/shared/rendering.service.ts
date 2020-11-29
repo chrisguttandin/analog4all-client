@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IMidiFile } from 'midi-json-parser-worker';
 import { Observable } from 'rxjs';
 import { wrap } from 'rxjs-broker';
-import { map, mergeMap, tap } from 'rxjs/operators';
+import { map, mapTo, mergeMap, tap } from 'rxjs/operators';
 import { TInstrument } from '../store';
 import { DownloadingService } from './downloading.service';
 import { FileReceivingService } from './file-receiving.service';
@@ -30,7 +30,7 @@ export class RenderingService {
             map(({ dataChannel, generator }) => ({ dataChannelSubject: wrap(dataChannel), generator })),
             mergeMap<{ dataChannelSubject: any; generator: any }, Observable<{ dataChannelSubject: any; generator: any }>>(
                 ({ dataChannelSubject, generator }) =>
-                    this._waitingService.wait(dataChannelSubject).pipe(map(() => ({ dataChannelSubject, generator })))
+                    this._waitingService.wait(dataChannelSubject).pipe(mapTo({ dataChannelSubject, generator }))
             ),
             mergeMap(({ dataChannelSubject, generator }) =>
                 this._midiJsonEncodingService.encode(midiJson, bpm).pipe(map((midiFile) => ({ dataChannelSubject, generator, midiFile })))
@@ -38,13 +38,13 @@ export class RenderingService {
             mergeMap(({ dataChannelSubject, generator, midiFile }) =>
                 this._fileSendingService
                     .send(dataChannelSubject, new File([midiFile], filename, { type: 'audio/midi' }))
-                    .pipe(map(() => ({ dataChannelSubject, generator })))
+                    .pipe(mapTo({ dataChannelSubject, generator }))
             ),
             mergeMap(({ dataChannelSubject, generator }) =>
                 this._fileReceivingService.receive(<any>dataChannelSubject).pipe(map((arrayBuffer) => ({ arrayBuffer, generator })))
             ),
             tap(({ arrayBuffer }) => this._downloadingService.download(filename.replace(/\.[a-z][a-z0-9]+$/i, '.wav'), arrayBuffer)),
-            mergeMap(({ generator }) => this._generatorsService.delete(generator).pipe(map(() => null)))
+            mergeMap(({ generator }) => this._generatorsService.delete(generator).pipe(mapTo(null)))
         );
     }
 }
