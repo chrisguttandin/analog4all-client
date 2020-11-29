@@ -57,16 +57,10 @@ export class InstrumentsEffects {
     }
 
     @Effect() get updateInstruments$(): Observable<IUpdateInstrumentsAction> {
-        return this._actions$.pipe(
-            pluckPayloadOfType(fetchInstrumentsSuccess),
-            map((instruments) => updateInstruments(instruments))
-        );
+        return this._actions$.pipe(pluckPayloadOfType(fetchInstrumentsSuccess), map(updateInstruments));
     }
 
     @Effect() get upsertInstrument$(): Observable<IUpsertInstrumentAction> {
-        return this._actions$.pipe(
-            pluckPayloadOfType(fetchInstrumentSuccess),
-            map((instrument) => upsertInstrument(instrument))
-        );
+        return this._actions$.pipe(pluckPayloadOfType(fetchInstrumentSuccess), map(upsertInstrument));
     }
 }

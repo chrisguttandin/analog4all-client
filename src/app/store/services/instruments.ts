@@ -15,7 +15,7 @@ export class InstrumentsService {
 
     public fetch(): Observable<IFetchInstrumentsFailAction | IFetchInstrumentsSuccessAction> {
         return this._httpClient.get<TInstrument[]>(`https${this._endpoint}instruments`).pipe(
-            map((instruments) => fetchInstrumentsSuccess(instruments)),
+            map(fetchInstrumentsSuccess),
             catchError(() => of(fetchInstrumentsFail()))
         );
     }
