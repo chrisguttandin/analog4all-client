@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { setIsFetchingInstruments } from '../actions';
-import { TStoreAction } from '../types';
+import { TAppState, TStoreAction } from '../types';
 
 export const INITIAL_STATE = false;
 
@@ -10,6 +10,6 @@ const reducer = createReducer(
 );
 
 // @todo Defining this as a function was necessary to enable AoT with TypeScript 2.0.X.
-export function isFetchingInstrumentsReducer(state = INITIAL_STATE, action: TStoreAction): boolean {
+export function isFetchingInstrumentsReducer(state = INITIAL_STATE, action: TStoreAction): TAppState['isFetchingInstruments'] {
     return reducer(state, action);
 }
