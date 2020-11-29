@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { connect, isSupported } from 'rxjs-broker';
-import { catchError, first, map, tap } from 'rxjs/operators';
+import { catchError, first, map, mapTo, tap } from 'rxjs/operators';
 import { IClientEvent, IGenerator } from '../interfaces';
 import { ENDPOINT } from './endpoint-token';
 import { PeerConnectingService } from './peer-connecting.service';
@@ -40,7 +40,7 @@ export class GeneratorsService {
 
     public delete(generator: IGenerator): Observable<null> {
         return this._httpClient.delete(`https${this._endpoint}instruments/${generator.instrument.id}/generators/${generator.id}`).pipe(
-            map(() => null),
+            mapTo(null),
             catchError((response) => throwError(new ResponseError(response)))
         );
     }
