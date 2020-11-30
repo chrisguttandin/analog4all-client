@@ -1,22 +1,4 @@
-import {
-    IFetchInstrumentAction,
-    IFetchInstrumentFailAction,
-    IFetchInstrumentSuccessAction,
-    IFetchInstrumentsAction,
-    IFetchInstrumentsFailAction,
-    IFetchInstrumentsSuccessAction,
-    ISetIsFetchingInstrumentsAction,
-    IUpdateInstrumentsAction,
-    IUpsertInstrumentAction
-} from '../interfaces';
+import { ActionType, INIT } from '@ngrx/store';
+import * as actions from '../actions';
 
-export type TStoreAction =
-    | IFetchInstrumentAction
-    | IFetchInstrumentFailAction
-    | IFetchInstrumentSuccessAction
-    | IFetchInstrumentsAction
-    | IFetchInstrumentsFailAction
-    | IFetchInstrumentsSuccessAction
-    | ISetIsFetchingInstrumentsAction
-    | IUpdateInstrumentsAction
-    | IUpsertInstrumentAction;
+export type TStoreAction = ActionType<typeof actions[keyof typeof actions]> | Readonly<{ readonly type: typeof INIT }>;

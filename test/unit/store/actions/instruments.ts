@@ -1,12 +1,4 @@
 import {
-    FETCH_INSTRUMENT,
-    FETCH_INSTRUMENTS,
-    FETCH_INSTRUMENTS_FAIL,
-    FETCH_INSTRUMENTS_SUCCESS,
-    FETCH_INSTRUMENT_FAIL,
-    FETCH_INSTRUMENT_SUCCESS,
-    UPDATE_INSTRUMENTS,
-    UPSERT_INSTRUMENT,
     fetchInstrument,
     fetchInstrumentFail,
     fetchInstrumentSuccess,
@@ -23,7 +15,7 @@ describe('instruments actions', () => {
             const id = 'a fake id';
             const action = fetchInstrument(id);
 
-            expect(action).toEqual({ payload: id, type: FETCH_INSTRUMENT });
+            expect(action).toEqual({ payload: id, type: 'FETCH_INSTRUMENT' });
         });
     });
 
@@ -32,7 +24,7 @@ describe('instruments actions', () => {
             const id = 'a fake id';
             const action = fetchInstrumentFail(id);
 
-            expect(action).toEqual({ payload: id, type: FETCH_INSTRUMENT_FAIL });
+            expect(action).toEqual({ payload: id, type: 'FETCH_INSTRUMENT_FAIL' });
         });
     });
 
@@ -47,7 +39,7 @@ describe('instruments actions', () => {
             };
             const action = fetchInstrumentSuccess(instrument);
 
-            expect(action).toEqual({ payload: instrument, type: FETCH_INSTRUMENT_SUCCESS });
+            expect(action).toEqual({ payload: instrument, type: 'FETCH_INSTRUMENT_SUCCESS' });
         });
     });
 
@@ -55,7 +47,7 @@ describe('instruments actions', () => {
         it('should create an action', () => {
             const action = fetchInstruments();
 
-            expect(action).toEqual({ type: FETCH_INSTRUMENTS });
+            expect(action).toEqual({ type: 'FETCH_INSTRUMENTS' });
         });
     });
 
@@ -63,7 +55,7 @@ describe('instruments actions', () => {
         it('should create an action', () => {
             const action = fetchInstrumentsFail();
 
-            expect(action).toEqual({ type: FETCH_INSTRUMENTS_FAIL });
+            expect(action).toEqual({ type: 'FETCH_INSTRUMENTS_FAIL' });
         });
     });
 
@@ -80,7 +72,7 @@ describe('instruments actions', () => {
             ];
             const action = fetchInstrumentsSuccess(instruments);
 
-            expect(action).toEqual({ payload: instruments, type: FETCH_INSTRUMENTS_SUCCESS });
+            expect(action).toEqual({ payload: instruments, type: 'FETCH_INSTRUMENTS_SUCCESS' });
         });
     });
 
@@ -97,7 +89,7 @@ describe('instruments actions', () => {
             ];
             const action = updateInstruments(instruments);
 
-            expect(action).toEqual({ payload: instruments, type: UPDATE_INSTRUMENTS });
+            expect(action).toEqual({ payload: instruments, type: 'UPDATE_INSTRUMENTS' });
         });
     });
 
@@ -112,7 +104,7 @@ describe('instruments actions', () => {
             };
             const action = upsertInstrument(instrument);
 
-            expect(action).toEqual({ payload: instrument, type: UPSERT_INSTRUMENT });
+            expect(action).toEqual({ payload: instrument, type: 'UPSERT_INSTRUMENT' });
         });
     });
 });

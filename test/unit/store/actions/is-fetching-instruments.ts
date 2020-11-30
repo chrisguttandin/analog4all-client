@@ -1,4 +1,4 @@
-import { SET_IS_FETCHING_INSTRUMENTS, setIsFetchingInstruments } from '../../../../src/app/store/actions';
+import { setIsFetchingInstruments } from '../../../../src/app/store/actions';
 
 describe('isFetchingInstruments actions', () => {
     describe('setIsFetchingInstruments()', () => {
@@ -6,7 +6,7 @@ describe('isFetchingInstruments actions', () => {
             const isFetchingInstruments = true;
             const action = setIsFetchingInstruments(isFetchingInstruments);
 
-            expect(action).toEqual({ payload: isFetchingInstruments, type: SET_IS_FETCHING_INSTRUMENTS });
+            expect(action).toEqual({ payload: isFetchingInstruments, type: 'SET_IS_FETCHING_INSTRUMENTS' });
         });
     });
 });
