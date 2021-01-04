@@ -68,5 +68,7 @@ jobs:
                   GIT_HUB_ACCESS_TOKEN: ${{ secrets.GIT_HUB_ACCESS_TOKEN }}
                   GIT_HUB_USER_EMAIL: ${{ secrets.GIT_HUB_USER_EMAIL }}
                   GIT_HUB_USER_NAME: ${{ secrets.GIT_HUB_USER_NAME }}
+                  SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+                  SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
               name: Deploy website
               run: grunt deploy
