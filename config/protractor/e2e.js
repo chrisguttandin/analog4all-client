@@ -32,7 +32,7 @@ exports.config = {
         ? 'https://chrisguttandin.github.io/analog4all-client'
         : `http://localhost:${projects[defaultProject].architect.serve.options.port}`,
 
-    directConnect: !!env.TRAVIS,
+    directConnect: !!env.CI,
 
     framework: 'jasmine',
 
@@ -42,7 +42,7 @@ exports.config = {
         showColors: true
     },
 
-    multiCapabilities: env.TRAVIS ? [chromeCapabilities] : [chromeCapabilities, { browserName: 'safari' }],
+    multiCapabilities: env.CI ? [chromeCapabilities] : [chromeCapabilities, { browserName: 'safari' }],
 
     onPrepare() {
         // @ts-ignore
