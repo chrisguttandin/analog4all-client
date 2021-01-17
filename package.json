@@ -27,7 +27,7 @@
         "@ngrx/store": "^10.1.2",
         "json-midi-encoder": "^5.0.20",
         "midi-json-parser": "^8.0.21",
-        "midi-json-parser-worker": "^8.0.18",
+        "midi-json-parser-worker": "^8.0.19",
         "midi-player": "^7.0.12",
         "rxjs": "~6.6.3",
         "rxjs-broker": "^6.0.27",
