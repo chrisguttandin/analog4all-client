@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1613321663158,
+  "timestamp": 1613470132608,
   "index": "/analog4all-client/index.html",
   "assetGroups": [
     {
@@ -11,10 +11,10 @@
         "ignoreVary": true
       },
       "urls": [
-        "/analog4all-client/scripts/4.c635c93f9ec1a565d9f8.js",
+        "/analog4all-client/scripts/4.4f8ce293b4c85534f0d1.js",
         "/analog4all-client/scripts/5.fcd5e969a07833a6221b.js",
         "/analog4all-client/index.html",
-        "/analog4all-client/scripts/main.1f44a7a59dfa089ec6ad.js",
+        "/analog4all-client/scripts/main.b4c9946527f657fd9a3e.js",
         "/analog4all-client/scripts/polyfills.90a39fd891e0da3007f7.js",
         "/analog4all-client/styles/styles.937dfc4e92c4e4572e9a.css"
       ],
@@ -52,15 +52,15 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "/analog4all-client/scripts/4.c635c93f9ec1a565d9f8.js": "9be155bbfb02cbb17a8bb966333cfb65cdbe60e0",
+    "/analog4all-client/scripts/4.4f8ce293b4c85534f0d1.js": "8ab46967a76720aafcd809fbb8c084c5ae6fffa3",
     "/analog4all-client/scripts/5.fcd5e969a07833a6221b.js": "dde655035371227289626b5c99bac354e8e9c433",
     "/analog4all-client/assets/korg-monopoly.c2e0ac0a7f7bd37f0b44.jpg": "74100406fe0aba760c893df92eebf6dc395faf24",
     "/analog4all-client/assets/moog-minitaur.jpg": "bd7a1cafea9a8a5d962c625a3a48e19c80bde88c",
     "/analog4all-client/assets/roland-juno60.jpg": "170ea1624e7128b50b1b092b701ca6fc0b72e208",
     "/analog4all-client/assets/roland-system1.jpg": "9f8838be8d39f06760b7e436021dbafbe20fafe2",
     "/analog4all-client/assets/sc-proone.jpg": "2116fcb0987aae57921c0125178fe734732159bd",
-    "/analog4all-client/index.html": "253796ea42d6d218180ffb25bd42b1389edfe5dd",
-    "/analog4all-client/scripts/main.1f44a7a59dfa089ec6ad.js": "1fe9d08db9116cb10553e53bb9c73e92303867e4",
+    "/analog4all-client/index.html": "14f5d2541b355240c033d40401684265ea454764",
+    "/analog4all-client/scripts/main.b4c9946527f657fd9a3e.js": "f6b955c984f2cb06a63ef2e24d9c8cbbd3b44b52",
     "/analog4all-client/scripts/polyfills.90a39fd891e0da3007f7.js": "f888b31e000d9b05c8c3fef19c325d813f2b7e1b",
     "/analog4all-client/styles/styles.937dfc4e92c4e4572e9a.css": "0b7183f54321daf5452bb5b33ff3e6248dfcb9c7"
   },
