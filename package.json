@@ -28,7 +28,7 @@
         "json-midi-encoder": "^5.0.37",
         "midi-json-parser": "^8.0.38",
         "midi-json-parser-worker": "^8.0.33",
-        "midi-player": "^7.0.30",
+        "midi-player": "^7.0.31",
         "rxjs": "~6.6.7",
         "rxjs-broker": "^6.0.38",
         "tslib": "^2.2.0",
