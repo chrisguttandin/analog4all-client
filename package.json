@@ -127,12 +127,6 @@
         "webpack-bundle-analyzer": "^4.4.2"
     },
     "homepage": "https://chrisguttandin.github.io/analog4all-client",
-    "husky": {
-        "hooks": {
-            "commit-msg": "commitlint --edit --extends @commitlint/config-angular",
-            "pre-commit": "pretty-quick --config config/prettier/config.json --staged && grunt lint"
-        }
-    },
     "license": "AGPL-3.0-or-later",
     "main": "src/index.html",
     "name": "analog4all-client",
@@ -142,6 +136,7 @@
         "url": "https://github.com/chrisguttandin/analog4all-client.git"
     },
     "scripts": {
+        "prepare": "husky install",
         "test": "grunt lint && grunt test"
     },
     "version": "3.2.44"
