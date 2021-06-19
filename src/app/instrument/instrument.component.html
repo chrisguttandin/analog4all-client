@@ -1,6 +1,6 @@
 <h2>{{ instrumentName$ | async }}</h2>
 <audio controls *ngIf="sampleUrl$ | async">
-    <source [src]="sampleUrl$ | async" type="audio/wav">
+    <source [src]="sampleUrl$ | async" type="audio/wav" />
 </audio>
 <p *ngIf="sampleUrl$ | async">Listen to a prerecorded sample of this instrument. It's a recording of a middle c (#60/C3).</p>
 
@@ -8,10 +8,10 @@
     <anc-file-input formControlName="file"></anc-file-input>
     <div>
         <label for="bpm">BPM</label>
-        <input formControlName="bpm" id="bpm" type="number">
+        <input formControlName="bpm" id="bpm" type="number" />
         <span>(you can modify the BPM of the given MIDI file)</span>
     </div>
     <button (click)="render()" [disabled]="(hasMidiJson$ | async) === false" type="submit">render</button>
 </form>
 
-<a [routerLink]="[ '/' ]">&laquo; go back to the list of all instruments</a>
+<a [routerLink]="['/']">&laquo; go back to the list of all instruments</a>

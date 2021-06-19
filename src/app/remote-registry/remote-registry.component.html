@@ -3,9 +3,9 @@
 <button (click)="refresh()" [disabled]="setIsFetchingInstruments$ | async" type="button">refresh</button>
 <ul>
     <li *ngFor="let instrument of instruments$ | async">
-        <img alt="icon of {{ instrument.name }}" src="assets/korg-monopoly.jpg">
-        <a [routerLink]="[ '/', instrument.id ]">{{ instrument.name }}</a>
-        <p *ngIf="instrument.description" >{{ instrument.description }}</p>
+        <img alt="icon of {{ instrument.name }}" src="assets/korg-monopoly.jpg" />
+        <a [routerLink]="['/', instrument.id]">{{ instrument.name }}</a>
+        <p *ngIf="instrument.description">{{ instrument.description }}</p>
         <anc-sound-cloud-link [soundCloudUsername]="instrument.soundCloudUsername"></anc-sound-cloud-link>
         <anc-gearogs-link [gearogsSlug]="instrument.gearogsSlug"></anc-gearogs-link>
     </li>
