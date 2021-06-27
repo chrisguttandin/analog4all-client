@@ -14,7 +14,7 @@ import { StoreModule } from './store';
         AppRoutingModule,
         BrowserModule,
         HttpClientModule,
-        ServiceWorkerModule.register('/ngsw-worker.js', { enabled: !ngDevMode }),
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: !ngDevMode }),
         StoreModule
     ],
     providers: [{ provide: ENDPOINT, useValue: '://jbnw79pt56.execute-api.eu-west-1.amazonaws.com/dev/' }]
