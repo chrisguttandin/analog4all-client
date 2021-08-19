@@ -8,6 +8,7 @@ const CHUNK_SIZE = 1024;
     providedIn: 'root'
 })
 export class FileSendingService {
+    // eslint-disable-next-line class-methods-use-this
     public send(dataChannelSubject: IRemoteSubject<IStringifyableJsonObject>, file: File): Observable<void> {
         return new Observable((observer) => {
             const fileReader = new FileReader();

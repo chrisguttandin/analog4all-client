@@ -43,7 +43,7 @@ export class RenderingService {
             mergeMap(({ dataChannelSubject, generator }) =>
                 this._fileReceivingService.receive(<any>dataChannelSubject).pipe(map((arrayBuffer) => ({ arrayBuffer, generator })))
             ),
-            tap(({ arrayBuffer }) => this._downloadingService.download(filename.replace(/\.[a-z][a-z0-9]+$/i, '.wav'), arrayBuffer)),
+            tap(({ arrayBuffer }) => this._downloadingService.download(filename.replace(/\.[a-z][\da-z]+$/i, '.wav'), arrayBuffer)),
             mergeMap(({ generator }) => this._generatorsService.delete(generator).pipe(mapTo(null)))
         );
     }

@@ -19,32 +19,38 @@ import { InstrumentService, InstrumentsService } from '../services';
 })
 export class InstrumentsEffects {
     public fetchInstrument$ = createEffect(() =>
+        // eslint-disable-next-line no-invalid-this
         this._actions$.pipe(
             pluckPayloadOfType(fetchInstrument),
-            mergeMap((id) => this._instrumentService.fetch(id))
+            mergeMap((id) => this._instrumentService.fetch(id)) // eslint-disable-line no-invalid-this
         )
     );
 
     public fetchInstruments$ = createEffect(() =>
+        // eslint-disable-next-line no-invalid-this
         this._actions$.pipe(
             ofType(fetchInstruments),
-            mergeMap(() => this._instrumentsService.fetch())
+            mergeMap(() => this._instrumentsService.fetch()) // eslint-disable-line no-invalid-this
         )
     );
 
-    public setIsFetchingInstrumentsToFalse$ = createEffect(() =>
-        this._actions$.pipe(ofType(fetchInstrumentsFail, fetchInstrumentsSuccess), mapTo(setIsFetchingInstruments(false)))
+    public setIsFetchingInstrumentsToFalse$ = createEffect(
+        // eslint-disable-next-line no-invalid-this
+        () => this._actions$.pipe(ofType(fetchInstrumentsFail, fetchInstrumentsSuccess), mapTo(setIsFetchingInstruments(false)))
     );
 
-    public setIsFetchingInstrumentsToTrue$ = createEffect(() =>
-        this._actions$.pipe(ofType(fetchInstruments), mapTo(setIsFetchingInstruments(true)))
+    public setIsFetchingInstrumentsToTrue$ = createEffect(
+        () => this._actions$.pipe(ofType(fetchInstruments), mapTo(setIsFetchingInstruments(true))) // eslint-disable-line no-invalid-this
     );
 
-    public updateInstruments$ = createEffect(() =>
-        this._actions$.pipe(pluckPayloadOfType(fetchInstrumentsSuccess), map(updateInstruments))
+    public updateInstruments$ = createEffect(
+        // eslint-disable-next-line no-invalid-this
+        () => this._actions$.pipe(pluckPayloadOfType(fetchInstrumentsSuccess), map(updateInstruments))
     );
 
+    // eslint-disable-next-line no-invalid-this
     public upsertInstrument$ = createEffect(() => this._actions$.pipe(pluckPayloadOfType(fetchInstrumentSuccess), map(upsertInstrument)));
+
     constructor(
         private _actions$: Actions,
         private _instrumentService: InstrumentService,

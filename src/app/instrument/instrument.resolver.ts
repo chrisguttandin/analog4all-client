@@ -27,7 +27,7 @@ export class InstrumentResolver implements Resolve<TInstrument> {
                 // @todo TypeScript needs to be convinced that payload is of type TInstrument.
                 return (<TInstrument>payload).id === id;
             }),
-            first(), // tslint:disable-line:rxjs-no-unsafe-first
+            first(), // eslint-disable-line rxjs/no-unsafe-first
             mergeMap(({ payload, type }) => {
                 if (type === fetchInstrumentFail.type) {
                     this._router.navigate(['/']);

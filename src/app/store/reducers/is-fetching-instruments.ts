@@ -10,6 +10,9 @@ const reducer = createReducer(
 );
 
 // @todo Defining this as a function was necessary to enable AoT with TypeScript 2.0.X.
-export function isFetchingInstrumentsReducer(state = INITIAL_STATE, action: TStoreAction): TAppState['isFetchingInstruments'] {
+export function isFetchingInstrumentsReducer(
+    state: undefined | TAppState['isFetchingInstruments'],
+    action: TStoreAction
+): TAppState['isFetchingInstruments'] {
     return reducer(state, action);
 }

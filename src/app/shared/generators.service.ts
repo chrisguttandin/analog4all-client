@@ -18,12 +18,13 @@ export class GeneratorsService {
         private _peerConnectingService: PeerConnectingService
     ) {}
 
-    get isSupported(): boolean {
+    // eslint-disable-next-line class-methods-use-this
+    public get isSupported(): boolean {
         return isSupported;
     }
 
     public connect({ socket: { url } }: IGenerator): Observable<RTCDataChannel> {
-        const webSocketSubject = connect<IClientEvent['message']>(url); // tslint:disable-line:no-null-undefined-union
+        const webSocketSubject = connect<IClientEvent['message']>(url);
 
         return this._peerConnectingService.connect(webSocketSubject).pipe(
             first(),

@@ -20,7 +20,7 @@ export class PeerConnectingService {
      * This property is true if the browser supports all the required APIs to use the
      * PeerConnectingService.
      */
-    get isSupported(): boolean {
+    public get isSupported(): boolean {
         if (this._window !== null && 'RTCPeerConnection' in this._window) {
             const peerConnection = new RTCPeerConnection({
                 iceServers: [{ urls: 'stun:0' }]
@@ -32,13 +32,12 @@ export class PeerConnectingService {
         return false;
     }
 
+    // eslint-disable-next-line class-methods-use-this
     public connect(webSocketSubject: IRemoteSubject<IClientEvent['message']>): Observable<RTCDataChannel> {
-        // tslint:disable-line:max-line-length no-null-undefined-union
         return new Observable((observer: Observer<RTCDataChannel>) => {
             const peerConnection = new RTCPeerConnection({
                 iceServers: ICE_SERVERS
             });
-
             const candidateSubject = mask<ICandidateMessage, ICandidateEvent, IClientEvent['message']>(
                 { type: 'candidate' },
                 webSocketSubject
@@ -47,13 +46,11 @@ export class PeerConnectingService {
                 { type: 'description' },
                 webSocketSubject
             );
-
             const candidateSubjectSubscription = candidateSubject.subscribe(({ candidate }) =>
                 peerConnection.addIceCandidate(new RTCIceCandidate(candidate)).catch(() => {
                     // Errors can be ignored.
                 })
             );
-
             const descriptionSubjectSubscription = descriptionSubject.subscribe(({ description }) => {
                 peerConnection.setRemoteDescription(new RTCSessionDescription(description)).catch(() => {
                     // @todo Handle this error and maybe request another description.

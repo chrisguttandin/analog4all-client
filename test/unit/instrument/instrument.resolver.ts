@@ -10,10 +10,10 @@ describe('InstrumentResolver', () => {
     beforeEach(() => {
         actions = new Subject();
         router = {
-            navigate(): void {} // tslint:disable-line:no-empty
+            navigate(): void {} // eslint-disable-line @typescript-eslint/no-empty-function, no-empty-function
         };
         store = {
-            dispatch(): void {} // tslint:disable-line:no-empty
+            dispatch(): void {} // eslint-disable-line @typescript-eslint/no-empty-function, no-empty-function
         };
 
         spyOn(router, 'navigate');
@@ -34,7 +34,7 @@ describe('InstrumentResolver', () => {
         });
 
         it('should dispatch an action of type FETCH_INSTRUMENT with the id given by the params', () => {
-            instrumentResolver.resolve(activatedRouteSnapshot); // tslint:disable-line:rxjs-no-ignored-observable
+            instrumentResolver.resolve(activatedRouteSnapshot); // eslint-disable-line rxjs/no-ignored-observable
 
             expect(store.dispatch).toHaveBeenCalledWith({ payload: activatedRouteSnapshot.params.id, type: 'FETCH_INSTRUMENT' });
         });

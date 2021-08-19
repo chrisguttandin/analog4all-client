@@ -1,11 +1,13 @@
-import { browser, by, element } from 'protractor';
+import { browser, by, element, promise } from 'protractor';
 
 export class HomePage {
-    public async getHeadline(): Promise<string> {
+    // eslint-disable-next-line class-methods-use-this
+    public getHeadline(): promise.Promise<string> {
         return element(by.css('anc-app h1')).getText();
     }
 
-    public async navigateTo(): Promise<unknown> {
+    // eslint-disable-next-line class-methods-use-this
+    public navigateTo(): promise.Promise<unknown> {
         return browser.get(browser.baseUrl);
     }
 }

@@ -6,10 +6,10 @@ import { IRemoteSubject, IStringifyableJsonObject } from 'rxjs-broker';
     providedIn: 'root'
 })
 export class FileReceivingService {
+    // eslint-disable-next-line class-methods-use-this
     public receive(dataChannelSubject: IRemoteSubject<IStringifyableJsonObject>): Observable<ArrayBuffer> {
         return new Observable((observer) => {
             let buffer: ArrayBuffer;
-
             let byteIndex = 0;
 
             const dataChannelSubscription = dataChannelSubject.subscribe({
@@ -31,9 +31,7 @@ export class FileReceivingService {
                         observer.complete();
                     } else {
                         const destination = new Uint8Array(buffer);
-
                         const source = atob(<any>message);
-
                         const length = byteIndex + source.length;
 
                         for (let i = byteIndex; i < length; i += 1) {

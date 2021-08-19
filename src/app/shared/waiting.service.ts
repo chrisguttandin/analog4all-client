@@ -13,12 +13,12 @@ import { first } from 'rxjs/operators';
     providedIn: 'root'
 })
 export class WaitingService {
+    // eslint-disable-next-line class-methods-use-this
     public wait(dataChannelSubject: IRemoteSubject<IStringifyableJsonObject>): Observable<void> {
-        // tslint:disable-line:max-line-length no-null-undefined-union
         return new Observable((observer: Observer<void>) => {
             let isPending = true;
 
-            const waitingChannelSubject = mask({ type: 'waiting' }, dataChannelSubject); // tslint:disable-line:no-null-undefined-union
+            const waitingChannelSubject = mask({ type: 'waiting' }, dataChannelSubject);
 
             mask({ type: 'ready' }, dataChannelSubject)
                 .pipe(first<any>())

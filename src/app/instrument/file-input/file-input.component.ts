@@ -10,7 +10,7 @@ import { switchMap } from 'rxjs/operators';
         {
             multi: true,
             provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => FileInputComponent) // tslint:disable-line:no-forward-ref
+            useExisting: forwardRef(() => FileInputComponent) // eslint-disable-line @angular-eslint/no-forward-ref
         }
     ],
     selector: 'anc-file-input',
@@ -34,7 +34,7 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
 
     private _stateChangesSubject: BehaviorSubject<string>;
 
-    private _valueChangesSubject: BehaviorSubject<any>; // @todo BehaviorSubject<MidiJson>
+    private _valueChangesSubject: BehaviorSubject<any>;
 
     private _valueChangesSubscription: null | Subscription;
 
@@ -42,8 +42,8 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
         this._checkForFileOnFocus = false;
         this.isDraggedOver = false;
         this._filenameChangesSubject = new BehaviorSubject<null | string>(null);
-        this._onChange = (_: any) => {}; // tslint:disable-line:no-empty
-        this._onTouched = () => {}; // tslint:disable-line:no-empty
+        this._onChange = (_: any) => {}; // eslint-disable-line @typescript-eslint/no-empty-function, no-empty-function, no-unused-vars
+        this._onTouched = () => {}; // eslint-disable-line @typescript-eslint/no-empty-function, no-empty-function
         this._stateChangesSubject = new BehaviorSubject('empty');
         this._valueChangesSubject = new BehaviorSubject(null);
         this._valueChangesSubscription = null;
@@ -97,7 +97,7 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
                     });
                 })
             )
-            .subscribe((midiJson) => this._onChange(midiJson)); // tslint:disable-line:rxjs-prefer-async-pipe
+            .subscribe((midiJson) => this._onChange(midiJson)); // eslint-disable-line rxjs-angular/prefer-async-pipe
     }
 
     public onChanged(event: Event): void {
@@ -122,6 +122,7 @@ export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnIn
         this.isDraggedOver = false;
     }
 
+    // eslint-disable-next-line class-methods-use-this
     public onDragover(event: DragEvent): void {
         event.preventDefault();
     }

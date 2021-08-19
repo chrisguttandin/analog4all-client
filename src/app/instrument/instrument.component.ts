@@ -58,12 +58,12 @@ export class InstrumentComponent implements OnDestroy, OnInit {
 
             this.hasMidiJson$ = midiJsonAndFilename$.pipe(map((value) => (value === null ? false : true)));
 
+            // eslint-disable-next-line rxjs-angular/prefer-async-pipe
             this._bpmDisabledSubscription = midiJsonAndFilename$.subscribe((midiJsonAndFilename) => {
-                // tslint:disable-line:rxjs-prefer-async-pipe
                 const bpmFormControl = this.renderForm.get('bpm');
 
                 if (bpmFormControl !== null) {
-                    if (midiJsonAndFilename) {
+                    if (midiJsonAndFilename !== null) {
                         const { midiJson } = midiJsonAndFilename;
 
                         bpmFormControl.setValue(this._midiJsonBpmService.read(midiJson));
@@ -100,8 +100,8 @@ export class InstrumentComponent implements OnDestroy, OnInit {
                     filter((instrument): instrument is TInstrument => instrument !== null),
                     mergeMap((instrument) => this._renderingService.render(instrument, bpm, filename, midiJson))
                 )
+                // eslint-disable-next-line rxjs-angular/prefer-async-pipe
                 .subscribe(() => {
-                    // tslint:disable-line:rxjs-prefer-async-pipe
                     // @todo
                 });
         }

@@ -6,6 +6,7 @@ import { IMidiFile, IMidiSetTempoEvent } from 'midi-json-parser-worker';
 })
 export class MidiJsonBpmService {
     // @todo A very similar function exists in the midi-file-slicer module.
+    // eslint-disable-next-line class-methods-use-this
     public read(midiJson: IMidiFile): number {
         const { tracks } = midiJson;
 
@@ -20,6 +21,7 @@ export class MidiJsonBpmService {
         return 120;
     }
 
+    // eslint-disable-next-line class-methods-use-this
     public write(midiJson: IMidiFile, bpm: number): IMidiFile {
         const microsecondsPerQuarter = 60000000 / bpm;
 
