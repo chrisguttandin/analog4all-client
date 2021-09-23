@@ -3,11 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
     {
-        loadChildren: () => import('./remote-registry').then((mdl) => mdl.RemoteRegistryModule),
+        loadChildren: () => import('./remote-registry').then(({ RemoteRegistryModule }) => RemoteRegistryModule),
         path: ''
     },
     {
-        loadChildren: () => import('./instrument').then((mdl) => mdl.InstrumentModule),
+        loadChildren: () => import('./instrument').then(({ InstrumentModule }) => InstrumentModule),
         path: ''
     },
     {
