@@ -1,5 +1,4 @@
-import { readFirst } from '@nrwl/angular/testing';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, firstValueFrom } from 'rxjs';
 import { createIsFetchingInstrumentsSelector } from '../../../../src/app/store/selectors';
 import { TAppState } from '../../../../src/app/store/types';
 
@@ -14,7 +13,7 @@ describe('isFetchingInstruments selectors', () => {
         });
 
         it('should select the value of isFetchingInstruments', async () => {
-            const slice = await readFirst(createIsFetchingInstrumentsSelector(store));
+            const slice = await firstValueFrom(createIsFetchingInstrumentsSelector(store));
 
             expect(slice).toEqual(isFetchingInstruments);
         });
