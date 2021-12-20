@@ -2,8 +2,7 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
-import { filter, first, map, mergeMap, switchMap } from 'rxjs/operators';
+import { Observable, Subscription, filter, first, map, mergeMap, switchMap } from 'rxjs';
 import { ENDPOINT, MidiJsonBpmService, RenderingService } from '../shared';
 import { TAppState, TInstrument, createInstrumentByIdSelector } from '../store';
 

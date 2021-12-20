@@ -2,8 +2,7 @@ import { Component, OnDestroy, OnInit, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { parseArrayBuffer } from 'midi-json-parser';
 import { IMidiFile } from 'midi-json-parser-worker';
-import { BehaviorSubject, Observable, Observer, Subscription, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Observer, Subscription, of, switchMap } from 'rxjs';
 
 @Component({
     providers: [

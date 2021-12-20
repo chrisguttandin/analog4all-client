@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IMidiFile } from 'midi-json-parser-worker';
-import { Observable } from 'rxjs';
+import { Observable, map, mapTo, mergeMap, tap } from 'rxjs';
 import { wrap } from 'rxjs-broker';
-import { map, mapTo, mergeMap, tap } from 'rxjs/operators';
 import { TInstrument } from '../store';
 import { DownloadingService } from './downloading.service';
 import { FileReceivingService } from './file-receiving.service';

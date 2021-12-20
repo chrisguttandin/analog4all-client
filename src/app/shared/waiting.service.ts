@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, Observer } from 'rxjs';
+import { Observable, Observer, first } from 'rxjs';
 import { IRemoteSubject, IStringifyableJsonObject, mask } from 'rxjs-broker';
-import { first } from 'rxjs/operators';
 
 /**
  * This service sends a waiting message to the data channel. It waits for the data channel to emit a

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, mapTo, mergeMap } from 'rxjs/operators';
+import { map, mapTo, mergeMap } from 'rxjs';
 import { pluckPayloadOfType } from '../../operators';
 import {
     fetchInstrument,

@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { ActionType } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Observable, catchError, map, of } from 'rxjs';
 import { ENDPOINT } from '../../shared/endpoint-token';
 import { fetchInstrumentFail, fetchInstrumentSuccess } from '../actions';
 import { TInstrument } from '../types';

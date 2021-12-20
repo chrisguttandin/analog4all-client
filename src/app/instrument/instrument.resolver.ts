@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { EMPTY, Observable, of } from 'rxjs';
-import { filter, first, mergeMap } from 'rxjs/operators';
+import { EMPTY, Observable, filter, first, mergeMap, of } from 'rxjs';
 import { TAppState, TInstrument, fetchInstrument, fetchInstrumentFail, fetchInstrumentSuccess } from '../store';
 
 @Injectable({

@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable, catchError, first, map, mapTo, tap, throwError } from 'rxjs';
 import { connect, isSupported } from 'rxjs-broker';
-import { catchError, first, map, mapTo, tap } from 'rxjs/operators';
 import { IClientEvent, IGenerator } from '../interfaces';
 import { ENDPOINT } from './endpoint-token';
 import { PeerConnectingService } from './peer-connecting.service';
