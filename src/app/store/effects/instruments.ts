@@ -18,37 +18,38 @@ import { InstrumentService, InstrumentsService } from '../services';
     providedIn: 'root'
 })
 export class InstrumentsEffects {
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     public fetchInstrument$ = createEffect(() =>
-        // eslint-disable-next-line no-invalid-this
         this._actions$.pipe(
             pluckPayloadOfType(fetchInstrument),
-            mergeMap((id) => this._instrumentService.fetch(id)) // eslint-disable-line no-invalid-this
+            mergeMap((id) => this._instrumentService.fetch(id))
         )
     );
 
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     public fetchInstruments$ = createEffect(() =>
-        // eslint-disable-next-line no-invalid-this
         this._actions$.pipe(
             ofType(fetchInstruments),
-            mergeMap(() => this._instrumentsService.fetch()) // eslint-disable-line no-invalid-this
+            mergeMap(() => this._instrumentsService.fetch())
         )
     );
 
     public setIsFetchingInstrumentsToFalse$ = createEffect(
-        // eslint-disable-next-line no-invalid-this
+        // eslint-disable-next-line unicorn/consistent-function-scoping
         () => this._actions$.pipe(ofType(fetchInstrumentsFail, fetchInstrumentsSuccess), mapTo(setIsFetchingInstruments(false)))
     );
 
     public setIsFetchingInstrumentsToTrue$ = createEffect(
-        () => this._actions$.pipe(ofType(fetchInstruments), mapTo(setIsFetchingInstruments(true))) // eslint-disable-line no-invalid-this
+        // eslint-disable-next-line unicorn/consistent-function-scoping
+        () => this._actions$.pipe(ofType(fetchInstruments), mapTo(setIsFetchingInstruments(true)))
     );
 
     public updateInstruments$ = createEffect(
-        // eslint-disable-next-line no-invalid-this
+        // eslint-disable-next-line unicorn/consistent-function-scoping
         () => this._actions$.pipe(pluckPayloadOfType(fetchInstrumentsSuccess), map(updateInstruments))
     );
 
-    // eslint-disable-next-line no-invalid-this
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     public upsertInstrument$ = createEffect(() => this._actions$.pipe(pluckPayloadOfType(fetchInstrumentSuccess), map(upsertInstrument)));
 
     constructor(

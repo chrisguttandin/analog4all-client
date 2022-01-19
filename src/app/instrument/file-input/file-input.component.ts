@@ -4,6 +4,7 @@ import { parseArrayBuffer } from 'midi-json-parser';
 import { IMidiFile } from 'midi-json-parser-worker';
 import { BehaviorSubject, Observable, Observer, Subscription, of, switchMap } from 'rxjs';
 
+// eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection
 @Component({
     providers: [
         {

@@ -6,6 +6,7 @@ import { Observable, Subscription, filter, first, map, mergeMap, switchMap } fro
 import { ENDPOINT, MidiJsonBpmService, RenderingService } from '../shared';
 import { TAppState, TInstrument, createInstrumentByIdSelector } from '../store';
 
+// eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection
 @Component({
     styleUrls: ['./instrument.component.css'],
     templateUrl: './instrument.component.html'

@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { TAppState, TInstrument, createInstrumentsSelector, createIsFetchingInstrumentsSelector, fetchInstruments } from '../store';
 
+// eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection
 @Component({
     styleUrls: ['./remote-registry.component.css'],
     templateUrl: './remote-registry.component.html'

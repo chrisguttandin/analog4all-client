@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { GeneratorsService, PeerConnectingService } from './shared';
 
+// eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection
 @Component({
     selector: 'anc-app',
     styleUrls: ['./app.component.css'],
