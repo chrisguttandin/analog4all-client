@@ -11,20 +11,14 @@ li {
     padding: 10px 0;
 }
 
-img {
-    float: left;
-    height: 30px;
-    width: 30px;
-}
-
 a {
     display: block;
-    margin: 0 0 0 40px;
+    margin: 0;
 }
 
 p {
     font-size: 12px;
     line-height: 2em;
-    margin: 5px 0 0 40px;
+    margin: 5px 0;
     max-width: 700px;
 }
