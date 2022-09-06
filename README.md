@@ -2,4 +2,4 @@
 
 **This is the client for analog4all.**
 
-To view the side just navigate to: [https://chrisguttandin.github.io/analog4all-client](https://chrisguttandin.github.io/analog4all-client).
+To view the side navigate to: [https://chrisguttandin.github.io/analog4all-client](https://chrisguttandin.github.io/analog4all-client).
