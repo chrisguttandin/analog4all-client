@@ -1,36 +1,40 @@
-import { browser, logging } from 'protractor';
-import { HomePage } from './home.po';
+import { test, expect, ConsoleMessage } from '@playwright/test';
+import { Home } from './home.po';
 
-describe('/', () => {
-    let page: HomePage;
+let home: Home;
+let removeListener: () => ConsoleMessage[];
 
-    afterEach(async () => {
-        try {
-            // Assert that there are no errors emitted from the browser
-            const logs = await browser.manage().logs().get(logging.Type.BROWSER);
+test.afterEach(() => {
+    const consoleMessages = removeListener();
+    const severeConsoleMessages = consoleMessages.filter((consoleMessage) => !['info', 'log', 'warning'].includes(consoleMessage.type()));
 
-            expect(logs).not.toContain(
-                jasmine.objectContaining(<Partial<logging.Entry>>{
-                    level: logging.Level.SEVERE
-                })
-            );
-        } catch (err) {
-            // @todo The driver for Safari does not support to retrieve the logs.
-            if (err.name === 'UnsupportedOperationError') {
-                console.warn('The driver for Safari does not support to retrieve the logs.'); // eslint-disable-line no-console
-            } else {
-                throw err;
-            }
-        }
-    });
+    // eslint-disable-next-line no-console
+    severeConsoleMessages.forEach((consoleMessage) => console.log(`${consoleMessage.type()}: ${consoleMessage.text()}`));
 
-    beforeEach(() => {
-        page = new HomePage();
-    });
+    expect(severeConsoleMessages).toEqual([]);
+});
 
-    it('should display the correct headline', async () => {
-        await page.navigateTo();
+test.beforeEach(async ({ page }) => {
+    const consoleMessages: ConsoleMessage[] = [];
+    const listener = (consoleMessage) => consoleMessages.push(consoleMessage);
 
-        expect(await page.getHeadline()).toEqual('Analog4All Client');
-    });
+    page.addListener('console', listener);
+
+    removeListener = () => {
+        page.addListener('console', listener);
+
+        return consoleMessages;
+    };
+
+    home = new Home(page);
+
+    await home.navigateTo();
+});
+
+test('should display the correct headline', async () => {
+    await expect(home.getHeadline()).toHaveText('Analog4All Client');
+});
+
+test('should go to the home page', async ({ page }) => {
+    await expect(page).toHaveURL(/\/$/);
 });

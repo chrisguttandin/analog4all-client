@@ -1,13 +1,13 @@
-import { browser, by, element, promise } from 'protractor';
+import { Locator, Page, Response } from '@playwright/test';
 
-export class HomePage {
-    // eslint-disable-next-line class-methods-use-this
-    public getHeadline(): promise.Promise<string> {
-        return element(by.css('anc-app h1')).getText();
+export class Home {
+    constructor(private _page: Page) {}
+
+    public getHeadline(): Locator {
+        return this._page.locator('anc-app h1');
     }
 
-    // eslint-disable-next-line class-methods-use-this
-    public navigateTo(): promise.Promise<unknown> {
-        return browser.get(browser.baseUrl);
+    public navigateTo(): Promise<null | Response> {
+        return this._page.goto('./');
     }
 }
