@@ -56,19 +56,6 @@ module.exports = (grunt) => {
                 ]
             }
         },
-        'bundle': {
-            files: {
-                './': ['build/analog4all-client/main*.js']
-            },
-            options: {
-                patterns: [
-                    {
-                        match: /"\/ngsw-worker\.js"/g,
-                        replacement: '"/analog4all-client/ngsw-worker.js"'
-                    }
-                ]
-            }
-        },
         'csp-production': {
             files: {
                 'build/analog4all-client/index.html': ['build/analog4all-client/index.html']
