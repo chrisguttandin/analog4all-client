@@ -12,7 +12,8 @@ export class InstrumentResolver implements Resolve<TInstrument> {
     constructor(private _actions: Actions, private _router: Router, private _store: Store<TAppState>) {}
 
     public resolve(activatedRoute: ActivatedRouteSnapshot): Observable<TInstrument> {
-        const id = activatedRoute.params.id;
+        // eslint-disable-next-line dot-notation
+        const id = activatedRoute.params['id'];
 
         this._store.dispatch(fetchInstrument(id));
 

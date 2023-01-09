@@ -23,7 +23,8 @@ export class FileReceivingService {
                     const { type } = message;
 
                     if (type === 'bof') {
-                        buffer = new ArrayBuffer(<number>message.byteLength);
+                        // eslint-disable-next-line dot-notation
+                        buffer = new ArrayBuffer(<number>message['byteLength']);
                     } else if (type === 'eof') {
                         dataChannelSubscription.unsubscribe();
 
