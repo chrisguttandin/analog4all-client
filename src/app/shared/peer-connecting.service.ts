@@ -46,11 +46,11 @@ export class PeerConnectingService {
                 { type: 'description' },
                 webSocketSubject
             );
-            const candidateSubjectSubscription = candidateSubject.subscribe(({ candidate }) =>
+            const candidateSubjectSubscription = candidateSubject.subscribe(({ candidate }) => {
                 peerConnection.addIceCandidate(new RTCIceCandidate(candidate)).catch(() => {
                     // Errors can be ignored.
-                })
-            );
+                });
+            });
             const descriptionSubjectSubscription = descriptionSubject.subscribe(({ description }) => {
                 peerConnection.setRemoteDescription(new RTCSessionDescription(description)).catch(() => {
                     // @todo Handle this error and maybe request another description.
