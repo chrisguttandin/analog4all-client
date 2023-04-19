@@ -112,7 +112,7 @@
         "puppeteer": "^19.9.1",
         "stylelint": "^15.5.0",
         "stylelint-config-holy-grail": "^11.0.0",
-        "tsconfig-holy-grail": "^12.0.4",
+        "tsconfig-holy-grail": "^13.0.0",
         "typescript": "~4.9.5",
         "webpack-bundle-analyzer": "^4.8.0"
     },
