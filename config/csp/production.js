@@ -4,7 +4,7 @@ module.exports = {
         'child-src': 'blob:',
         'connect-src': ["'self'", 'https://jbnw79pt56.execute-api.eu-west-1.amazonaws.com', 'wss://sock.cat'],
         'default-src': "'none'",
-        'font-src': 'https://fonts.gstatic.com',
+        'font-src': "'self'",
         'img-src': "'self'",
         'media-src': [
             'https://analog4all-samples.s3.eu-west-1.amazonaws.com',
@@ -12,7 +12,7 @@ module.exports = {
             'https://jbnw79pt56.execute-api.eu-west-1.amazonaws.com'
         ],
         'script-src': ["'self'", "'unsafe-eval'"],
-        'style-src': ['https://fonts.googleapis.com', "'self'", "'unsafe-inline'"],
+        'style-src': ["'self'", "'unsafe-inline'"],
         'worker-src': ['blob:', "'self'"]
     }
 };
