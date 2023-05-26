@@ -5,7 +5,7 @@ import { TAppState, TInstrument, createInstrumentsSelector, createIsFetchingInst
 
 // eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection
 @Component({
-    styleUrls: ['./remote-registry.component.css'],
+    styleUrls: ['./remote-registry.component.scss'],
     templateUrl: './remote-registry.component.html'
 })
 export class RemoteRegistryComponent implements OnInit {

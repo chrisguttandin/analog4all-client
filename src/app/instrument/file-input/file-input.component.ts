@@ -14,7 +14,7 @@ import { BehaviorSubject, Observable, Observer, Subscription, of, switchMap } fr
         }
     ],
     selector: 'anc-file-input',
-    styleUrls: ['./file-input.component.css'],
+    styleUrls: ['./file-input.component.scss'],
     templateUrl: './file-input.component.html'
 })
 export class FileInputComponent implements ControlValueAccessor, OnDestroy, OnInit {

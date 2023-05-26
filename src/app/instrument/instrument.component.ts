@@ -8,7 +8,7 @@ import { TAppState, TInstrument, createInstrumentByIdSelector } from '../store';
 
 // eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection
 @Component({
-    styleUrls: ['./instrument.component.css'],
+    styleUrls: ['./instrument.component.scss'],
     templateUrl: './instrument.component.html'
 })
 export class InstrumentComponent implements OnDestroy, OnInit {
