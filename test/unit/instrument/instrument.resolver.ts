@@ -36,17 +36,18 @@ describe('resolveInstrument', () => {
 
         beforeEach(() => {
             activatedRouteSnapshot = {
-                params: {
-                    id: 'a fake id'
-                }
+                paramMap: new Map([['id', 'a fake id']])
             };
         });
 
-        it('should dispatch an action of type FETCH_INSTRUMENT with the id given by the params', () => {
+        it('should dispatch an action of type FETCH_INSTRUMENT with the id given by the paramMap', () => {
             TestBed.runInInjectionContext(() => {
                 resolveInstrument(activatedRouteSnapshot); // eslint-disable-line rxjs/no-ignored-observable
 
-                expect(store.dispatch).toHaveBeenCalledWith({ payload: activatedRouteSnapshot.params.id, type: 'FETCH_INSTRUMENT' });
+                expect(store.dispatch).toHaveBeenCalledWith({
+                    payload: activatedRouteSnapshot.paramMap.get('id'),
+                    type: 'FETCH_INSTRUMENT'
+                });
             });
         });
 
@@ -54,7 +55,7 @@ describe('resolveInstrument', () => {
             let instrument: any;
 
             beforeEach(() => {
-                instrument = { id: activatedRouteSnapshot.params.id };
+                instrument = { id: activatedRouteSnapshot.paramMap.get('id') };
             });
 
             it('should return an observable of the instument', (done) => {
@@ -83,7 +84,7 @@ describe('resolveInstrument', () => {
                 TestBed.runInInjectionContext(() => {
                     resolveInstrument(activatedRouteSnapshot).subscribe();
 
-                    actions.next({ payload: activatedRouteSnapshot.params.id, type: 'FETCH_INSTRUMENT_FAIL' });
+                    actions.next({ payload: activatedRouteSnapshot.paramMap.get('id'), type: 'FETCH_INSTRUMENT_FAIL' });
 
                     expect(router.navigate).toHaveBeenCalledWith(['/']);
                 });
@@ -105,7 +106,7 @@ describe('resolveInstrument', () => {
                         next
                     });
 
-                    actions.next({ payload: activatedRouteSnapshot.params.id, type: 'FETCH_INSTRUMENT_FAIL' });
+                    actions.next({ payload: activatedRouteSnapshot.paramMap.get('id'), type: 'FETCH_INSTRUMENT_FAIL' });
                 });
             });
         });
