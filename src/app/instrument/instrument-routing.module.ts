@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { InstrumentComponent } from './instrument.component';
-import { InstrumentResolver } from './instrument.resolver';
+import { resolveInstrument } from './instrument.resolver';
 
 const routes: Routes = [
     {
         component: InstrumentComponent,
         path: ':id',
         resolve: {
-            instrument: InstrumentResolver
+            instrument: resolveInstrument
         }
     }
 ];
