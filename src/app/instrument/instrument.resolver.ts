@@ -30,8 +30,7 @@ export const resolveInstrument = (activatedRouteSnapshot: ActivatedRouteSnapshot
                 return payload === id;
             }
 
-            // @todo TypeScript needs to be convinced that payload is of type TInstrument.
-            return (<TInstrument>payload).id === id;
+            return payload.id === id;
         }),
         first(), // eslint-disable-line rxjs/no-unsafe-first
         mergeMap(({ payload, type }) => {
@@ -39,8 +38,7 @@ export const resolveInstrument = (activatedRouteSnapshot: ActivatedRouteSnapshot
                 return redirect(router);
             }
 
-            // @todo TypeScript needs to be convinced that payload is of type TInstrument.
-            return of(<TInstrument>payload);
+            return of(payload);
         })
     );
 };
