@@ -5,12 +5,21 @@ import { Store } from '@ngrx/store';
 import { EMPTY, Observable, filter, first, mergeMap, of } from 'rxjs';
 import { TAppState, TInstrument, fetchInstrument, fetchInstrumentFail, fetchInstrumentSuccess } from '../store';
 
-export const resolveInstrument = (activatedRoute: ActivatedRouteSnapshot): Observable<TInstrument> => {
+const redirect = (router: Router): Observable<never> => {
+    router.navigate(['/']);
+
+    return EMPTY;
+};
+
+export const resolveInstrument = (activatedRouteSnapshot: ActivatedRouteSnapshot): Observable<TInstrument> => {
     const actions = inject(Actions);
     const router = inject(Router);
     const store = inject(Store<TAppState>);
-    // eslint-disable-next-line dot-notation
-    const id = activatedRoute.params['id'];
+    const id = activatedRouteSnapshot.paramMap.get('id');
+
+    if (id === null) {
+        return redirect(router);
+    }
 
     store.dispatch(fetchInstrument(id));
 
@@ -27,9 +36,7 @@ export const resolveInstrument = (activatedRoute: ActivatedRouteSnapshot): Obser
         first(), // eslint-disable-line rxjs/no-unsafe-first
         mergeMap(({ payload, type }) => {
             if (type === fetchInstrumentFail.type) {
-                router.navigate(['/']);
-
-                return EMPTY;
+                return redirect(router);
             }
 
             // @todo TypeScript needs to be convinced that payload is of type TInstrument.
