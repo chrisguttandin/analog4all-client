@@ -26,7 +26,7 @@
         "@fontsource/roboto": "^5.0.1",
         "@ngrx/effects": "^16.0.0",
         "@ngrx/store": "^16.0.0",
-        "json-midi-encoder": "^5.1.22",
+        "json-midi-encoder": "^5.1.23",
         "midi-json-parser": "^8.1.24",
         "midi-json-parser-worker": "^8.1.21",
         "midi-player": "^7.1.4",
