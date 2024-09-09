@@ -127,7 +127,7 @@
         "url": "https://github.com/chrisguttandin/analog4all-client.git"
     },
     "scripts": {
-        "prepare": "husky install",
+        "prepare": "husky",
         "test": "grunt lint && grunt test"
     },
     "version": "3.2.143"
