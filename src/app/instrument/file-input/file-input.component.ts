@@ -14,6 +14,7 @@ import { BehaviorSubject, Observable, Observer, Subscription, of, switchMap } fr
         }
     ],
     selector: 'anc-file-input',
+    standalone: false,
     styleUrls: ['./file-input.component.scss'],
     templateUrl: './file-input.component.html'
 })

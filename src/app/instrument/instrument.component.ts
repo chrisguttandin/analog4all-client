@@ -8,6 +8,7 @@ import { TAppState, TInstrument, createInstrumentByIdSelector } from '../store';
 
 // eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection
 @Component({
+    standalone: false,
     styleUrls: ['./instrument.component.scss'],
     templateUrl: './instrument.component.html'
 })
