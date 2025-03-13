@@ -11,11 +11,11 @@ import { appReducer } from './store';
         CommonModule,
         NgRxStoreModule.forRoot(appReducer, {
             runtimeChecks: {
-                strictActionImmutability: ngDevMode,
-                strictActionSerializability: ngDevMode,
-                strictActionTypeUniqueness: ngDevMode,
-                strictStateImmutability: ngDevMode,
-                strictStateSerializability: ngDevMode
+                strictActionImmutability: !!ngDevMode,
+                strictActionSerializability: !!ngDevMode,
+                strictActionTypeUniqueness: !!ngDevMode,
+                strictStateImmutability: !!ngDevMode,
+                strictStateSerializability: !!ngDevMode
             }
         }),
         EffectsModule.forRoot([InstrumentsEffects]),

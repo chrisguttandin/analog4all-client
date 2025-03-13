@@ -16,7 +16,7 @@
         "noPropertyAccessFromIndexSignature": true,
         "outDir": "../../out-tsc/spec",
         "target": "es2022",
-        "types": ["deep-freeze-strict", "jasmine", "../../src/ng-dev-mode"],
+        "types": ["deep-freeze-strict", "jasmine"],
         "useDefineForClassFields": false,
         "useUnknownInCatchVariables": true
     },
