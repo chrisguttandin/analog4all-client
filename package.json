@@ -80,7 +80,7 @@
         "@hint/parser-javascript": "^3.1.25",
         "@hint/parser-manifest": "^2.3.20",
         "@ngrx/store-devtools": "^19.2.1",
-        "@playwright/test": "^1.53.2",
+        "@playwright/test": "^1.54.1",
         "@types/deep-freeze-strict": "^1.1.2",
         "@types/jasmine": "~5.1.8",
         "axe-core": "^4.10.3",
