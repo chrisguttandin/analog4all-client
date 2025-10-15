@@ -82,7 +82,7 @@
         "@ngrx/store-devtools": "^20.0.1",
         "@playwright/test": "^1.56.0",
         "@types/deep-freeze-strict": "^1.1.2",
-        "@types/jasmine": "~5.1.9",
+        "@types/jasmine": "~5.1.10",
         "axe-core": "^4.10.3",
         "bundle-buddy": "^0.2.2",
         "commitizen": "^4.3.1",
