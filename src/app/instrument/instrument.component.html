@@ -1,8 +1,11 @@
 <h2>{{ instrumentName$ | async }}</h2>
-<audio controls *ngIf="sampleUrl$ | async">
-    <source [src]="sampleUrl$ | async" type="audio/wav" />
-</audio>
-<p *ngIf="sampleUrl$ | async">Listen to a prerecorded sample of this instrument. It's a recording of a middle c (#60/C3).</p>
+
+@if (sampleUrl$ | async) {
+    <audio controls>
+        <source [src]="sampleUrl$ | async" type="audio/wav" />
+    </audio>
+    <p>Listen to a prerecorded sample of this instrument. It's a recording of a middle c (#60/C3).</p>
+}
 
 <form [formGroup]="renderForm">
     <anc-file-input formControlName="file"></anc-file-input>

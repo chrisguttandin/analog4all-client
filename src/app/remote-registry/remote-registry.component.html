@@ -1,11 +1,19 @@
-<h2 *ngIf="false === (hasAvailableInstruments$ | async)">Sorry, there is currently no instrument available</h2>
-<h2 *ngIf="hasAvailableInstruments$ | async">Currently available instruments</h2>
+@if (hasAvailableInstruments$ | async) {
+    <h2>Currently available instruments</h2>
+} @else {
+    <h2>Sorry, there is currently no instrument available</h2>
+}
+
 <button (click)="refresh()" [disabled]="setIsFetchingInstruments$ | async" type="button">refresh</button>
 <ul>
-    <li *ngFor="let instrument of instruments$ | async">
-        <a [routerLink]="['/', instrument.id]">{{ instrument.name }}</a>
-        <p *ngIf="instrument.description">{{ instrument.description }}</p>
-        <anc-sound-cloud-link [soundCloudUsername]="instrument.soundCloudUsername"></anc-sound-cloud-link>
-        <anc-gearogs-link [gearogsSlug]="instrument.gearogsSlug"></anc-gearogs-link>
-    </li>
+    @for (instrument of instruments$ | async; track instrument) {
+        <li>
+            <a [routerLink]="['/', instrument.id]">{{ instrument.name }}</a>
+            @if (instrument.description) {
+                <p>{{ instrument.description }}</p>
+            }
+            <anc-sound-cloud-link [soundCloudUsername]="instrument.soundCloudUsername"></anc-sound-cloud-link>
+            <anc-gearogs-link [gearogsSlug]="instrument.gearogsSlug"></anc-gearogs-link>
+        </li>
+    }
 </ul>

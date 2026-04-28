@@ -1,1 +1,3 @@
-<a *ngIf="soundCloudUsername" href="https://soundcloud.com/{{ soundCloudUsername }}" target="_blank">SoundCloud: {{ soundCloudUsername }}</a>
+@if (soundCloudUsername) {
+    <a href="https://soundcloud.com/{{ soundCloudUsername }}" target="_blank">SoundCloud: {{ soundCloudUsername }}</a>
+}

@@ -3,6 +3,9 @@
     <hr />
 </header>
 <main>
-    <router-outlet *ngIf="isSupported"></router-outlet>
-    <p *ngIf="!isSupported">Sorry, your browser is not supported. :-(</p>
+    @if (isSupported) {
+        <router-outlet></router-outlet>
+    } @else {
+        <p>Sorry, your browser is not supported. :-(</p>
+    }
 </main>
