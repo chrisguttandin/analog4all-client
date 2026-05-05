@@ -83,6 +83,7 @@
         "@playwright/test": "^1.59.1",
         "@types/deep-freeze-strict": "^1.1.2",
         "@types/jasmine": "~6.0.0",
+        "@vitest/browser-webdriverio": "^4.1.5",
         "axe-core": "^4.11.3",
         "bundle-buddy": "^0.2.2",
         "commitizen": "^4.3.1",
