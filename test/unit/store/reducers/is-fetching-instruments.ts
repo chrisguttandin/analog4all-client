@@ -1,4 +1,5 @@
 import deepFreeze from 'deep-freeze-strict';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { INITIAL_STATE, isFetchingInstrumentsReducer } from '../../../../src/app/store/reducers/is-fetching-instruments';
 import { TStoreAction } from '../../../../src/app/store/types';
 

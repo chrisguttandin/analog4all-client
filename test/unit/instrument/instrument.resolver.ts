@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { Actions } from '@ngrx/effects';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { resolveInstrument } from '../../../src/app/instrument/instrument.resolver';
 
 describe('resolveInstrument', () => {
@@ -13,10 +14,10 @@ describe('resolveInstrument', () => {
     beforeEach(() => {
         actions = new Subject();
         router = {
-            navigate(): void {} // eslint-disable-line @typescript-eslint/no-empty-function, no-empty-function
+            navigate: vi.fn()
         };
         store = {
-            dispatch(): void {} // eslint-disable-line @typescript-eslint/no-empty-function, no-empty-function
+            dispatch: vi.fn()
         };
 
         TestBed.configureTestingModule({
@@ -26,9 +27,6 @@ describe('resolveInstrument', () => {
                 { provide: Store, useValue: store }
             ]
         });
-
-        spyOn(router, 'navigate');
-        spyOn(store, 'dispatch');
     });
 
     describe('resolve()', () => {
@@ -58,23 +56,25 @@ describe('resolveInstrument', () => {
                 instrument = { id: activatedRouteSnapshot.paramMap.get('id') };
             });
 
-            it('should return an observable of the instument', (done) => {
-                const next = jasmine.createSpy('next');
+            it('should return an observable of the instument', () => {
+                const next = vi.fn();
 
-                TestBed.runInInjectionContext(() => {
-                    resolveInstrument(activatedRouteSnapshot).subscribe({
-                        complete(): void {
-                            expect(next).toHaveBeenCalledWith(instrument);
+                return new Promise<void>((resolve, reject) => {
+                    TestBed.runInInjectionContext(() => {
+                        resolveInstrument(activatedRouteSnapshot).subscribe({
+                            complete(): void {
+                                expect(next).toHaveBeenCalledWith(instrument);
 
-                            done();
-                        },
-                        error(err): void {
-                            throw err;
-                        },
-                        next
+                                resolve();
+                            },
+                            error(err): void {
+                                reject(err);
+                            },
+                            next
+                        });
+
+                        actions.next({ payload: instrument, type: 'FETCH_INSTRUMENT_SUCCESS' });
                     });
-
-                    actions.next({ payload: instrument, type: 'FETCH_INSTRUMENT_SUCCESS' });
                 });
             });
         });
@@ -90,23 +90,25 @@ describe('resolveInstrument', () => {
                 });
             });
 
-            it('should return an empty observable', (done) => {
-                const next = jasmine.createSpy('next');
+            it('should return an empty observable', () => {
+                const next = vi.fn();
 
-                TestBed.runInInjectionContext(() => {
-                    resolveInstrument(activatedRouteSnapshot).subscribe({
-                        complete(): void {
-                            expect(next).not.toHaveBeenCalled();
+                return new Promise<void>((resolve, reject) => {
+                    TestBed.runInInjectionContext(() => {
+                        resolveInstrument(activatedRouteSnapshot).subscribe({
+                            complete(): void {
+                                expect(next).not.toHaveBeenCalled();
 
-                            done();
-                        },
-                        error(err): void {
-                            throw err;
-                        },
-                        next
+                                resolve();
+                            },
+                            error(err): void {
+                                reject(err);
+                            },
+                            next
+                        });
+
+                        actions.next({ payload: activatedRouteSnapshot.paramMap.get('id'), type: 'FETCH_INSTRUMENT_FAIL' });
                     });
-
-                    actions.next({ payload: activatedRouteSnapshot.paramMap.get('id'), type: 'FETCH_INSTRUMENT_FAIL' });
                 });
             });
         });

@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { setIsFetchingInstruments } from '../../../../src/app/store/actions';
 
 describe('isFetchingInstruments actions', () => {
