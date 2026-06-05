@@ -32,6 +32,7 @@ export class FileSendingService {
                                 const slice = buffer.slice(byteIndex, byteIndex + CHUNK_SIZE);
 
                                 promise.then(() => {
+                                    // eslint-disable-next-line unicorn/prefer-code-point
                                     dataChannelSubject.send(<any>btoa(String.fromCharCode.apply(null, Array.from(new Uint8Array(slice)))));
                                 });
 
@@ -42,6 +43,7 @@ export class FileSendingService {
                                 const slice = buffer.slice(byteIndex);
 
                                 promise.then(() => {
+                                    // eslint-disable-next-line unicorn/prefer-code-point
                                     dataChannelSubject.send(<any>btoa(String.fromCharCode.apply(null, Array.from(new Uint8Array(slice)))));
                                 });
                             }

@@ -18,7 +18,6 @@ import { InstrumentService, InstrumentsService } from '../services';
     providedIn: 'root'
 })
 export class InstrumentsEffects {
-    // eslint-disable-next-line unicorn/consistent-function-scoping
     public fetchInstrument$ = createEffect(() =>
         this._actions$.pipe(
             pluckPayloadOfType(fetchInstrument),
@@ -26,7 +25,6 @@ export class InstrumentsEffects {
         )
     );
 
-    // eslint-disable-next-line unicorn/consistent-function-scoping
     public fetchInstruments$ = createEffect(() =>
         this._actions$.pipe(
             ofType(fetchInstruments),
@@ -34,22 +32,18 @@ export class InstrumentsEffects {
         )
     );
 
-    public setIsFetchingInstrumentsToFalse$ = createEffect(
-        // eslint-disable-next-line unicorn/consistent-function-scoping
-        () => this._actions$.pipe(ofType(fetchInstrumentsFail, fetchInstrumentsSuccess), mapTo(setIsFetchingInstruments(false)))
+    public setIsFetchingInstrumentsToFalse$ = createEffect(() =>
+        this._actions$.pipe(ofType(fetchInstrumentsFail, fetchInstrumentsSuccess), mapTo(setIsFetchingInstruments(false)))
     );
 
-    public setIsFetchingInstrumentsToTrue$ = createEffect(
-        // eslint-disable-next-line unicorn/consistent-function-scoping
-        () => this._actions$.pipe(ofType(fetchInstruments), mapTo(setIsFetchingInstruments(true)))
+    public setIsFetchingInstrumentsToTrue$ = createEffect(() =>
+        this._actions$.pipe(ofType(fetchInstruments), mapTo(setIsFetchingInstruments(true)))
     );
 
-    public updateInstruments$ = createEffect(
-        // eslint-disable-next-line unicorn/consistent-function-scoping
-        () => this._actions$.pipe(pluckPayloadOfType(fetchInstrumentsSuccess), map(updateInstruments))
+    public updateInstruments$ = createEffect(() =>
+        this._actions$.pipe(pluckPayloadOfType(fetchInstrumentsSuccess), map(updateInstruments))
     );
 
-    // eslint-disable-next-line unicorn/consistent-function-scoping
     public upsertInstrument$ = createEffect(() => this._actions$.pipe(pluckPayloadOfType(fetchInstrumentSuccess), map(upsertInstrument)));
 
     constructor(
