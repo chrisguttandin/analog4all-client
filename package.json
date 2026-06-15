@@ -81,7 +81,7 @@
         "@ngrx/store-devtools": "^21.1.1",
         "@playwright/test": "^1.60.0",
         "@types/deep-freeze-strict": "^1.1.2",
-        "@vitest/browser-webdriverio": "^4.1.7",
+        "@vitest/browser-webdriverio": "^4.1.8",
         "angular-eslint": "^21.4.0",
         "axe-core": "^4.11.4",
         "bundle-buddy": "^0.2.2",
