@@ -117,6 +117,7 @@
     "license": "AGPL-3.0-or-later",
     "main": "src/index.html",
     "name": "analog4all-client",
+    "packageManager": "npm@12",
     "private": true,
     "repository": {
         "type": "git",
